@@ -16,18 +16,18 @@
       padding: 0;
       overflow-x: hidden;
       position: relative;
-      z-index: 1;
     }
 
-    .background-overlay {
+    /* Semi-transparent overlay for fade effect */
+    body::before {
+      content: "";
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8); /* Adjust this alpha for stronger/lighter fade */
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5); /* Increase this for more fade */
       z-index: 0;
-      pointer-events: none;
     }
 
     .logo {
@@ -37,6 +37,13 @@
       width: 200px;
       height: 200px;
       z-index: 1000;
+    }
+
+    h1, h2 {
+      font-family: 'Cinzel', serif;
+      color: #ffffff;
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
@@ -57,11 +64,14 @@
       list-style-type: none;
       padding: 0;
       margin: 10px 0 30px;
+      position: relative;
+      z-index: 1;
     }
 
     li {
       font-size: 1.2rem;
       margin: 8px 0;
+      color: #f8f8f8;
     }
 
     a {
@@ -81,6 +91,8 @@
       background-color: rgba(255, 255, 255, 0.9);
       color: black;
       display: none;
+      position: relative;
+      z-index: 1;
     }
 
     .drop-zone-table th, .drop-zone-table td {
@@ -99,6 +111,8 @@
       margin-top: 40px;
       padding-bottom: 30px;
       color: #ccc;
+      position: relative;
+      z-index: 1;
     }
 
     .modal {
@@ -208,8 +222,6 @@
   </script>
 </head>
 <body>
-  <div class="background-overlay"></div>
-
   <div class="logo">
     <img src="logo.png" alt="Pour Decisions Pourcast Logo" style="width:100%; height:100%;">
   </div>
