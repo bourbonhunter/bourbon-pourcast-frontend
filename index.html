@@ -27,12 +27,14 @@
     .logo {
       position: fixed;
       top: 10px;
-      left: 10px;
+      /* left: 10px; */  /* original left position - commented out */
+      left: 50%;
+      transform: translateX(-50%);
       width: 200px;
       height: 200px;
       z-index: 1000;
     }
-
+    
     h1, h2 {
       font-family: 'Cinzel', serif;
       color: #ffffff;
