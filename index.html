@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pour Decisions</title>
+  <title>Pourcast</title>
   <style>
     html, body {
       height: 100%;
@@ -20,18 +20,16 @@
     }
 
     .logo {
-      position: fixed;
-      top: 10px;
-      left: 10px;
+      margin: 20px auto 10px;
       width: 250px;
       height: 250px;
-      z-index: 1000;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-top: 280px;
-      margin-bottom: 10px;
+    .tagline {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-top: 8px;
+      color: #ffd700;
     }
 
     h2 {
@@ -45,12 +43,16 @@
     ul {
       list-style-type: none;
       padding: 0;
-      margin: 20px 0 40px; /* extra space per your request */
+      margin: 20px 0 40px;
     }
 
     li {
       font-size: 1.2rem;
-      margin: 14px 0; /* a bit more breathing room */
+      margin: 14px 0;
+    }
+
+    li.extra-space {
+      margin-top: 28px; /* extra space above */
     }
 
     a {
@@ -62,131 +64,42 @@
       text-decoration: underline;
     }
 
-    /* Drop Zone table (commented section uses this) */
-    .drop-zone-table {
-      margin: 20px auto;
-      border-collapse: collapse;
-      width: 90%;
-      max-width: 800px;
-      background-color: rgba(255, 255, 255, 0.9);
-      color: black;
-      display: none;
-    }
-
-    .drop-zone-table th, .drop-zone-table td {
-      border: 1px solid #999;
-      padding: 10px;
-      font-size: 1rem;
-    }
-
-    .drop-zone-table th {
-      background-color: #f0f0f0;
-      font-weight: bold;
-    }
-
     .footer {
       font-size: 0.8rem;
       margin-top: 40px;
       padding-bottom: 30px;
       color: #ccc;
     }
-
-    @media (max-width: 768px) {
-      .logo {
-        width: 150px;
-        height: 150px;
-      }
-      h1 {
-        margin-top: 170px;
-      }
-    }
   </style>
-
-  <script>
-    // (Temporarily disabled) Password gate for Drop Alerts
-    /*
-    function promptForPassword() {
-      const password = prompt("Enter password to view Recent Drops:");
-      if (password === "pourcast") {
-        fetch('drop_alert_pointer.txt')
-          .then(response => {
-            if (!response.ok) {
-              throw new Error("Pointer file not found.");
-            }
-            return response.text();
-          })
-          .then(filename => {
-            window.location.href = filename.trim();
-          })
-          .catch(error => {
-            alert("Unable to load Drop Alert: " + error.message);
-          });
-      } else {
-        alert("Incorrect password.");
-      }
-    }
-    */
-
-    // (Temporarily disabled) Drop Zone toggle
-    /*
-    function toggleDropZone() {
-      const table = document.getElementById("dropZoneTable");
-      table.style.display = table.style.display === "none" ? "table" : "none";
-    }
-    */
-  </script>
 </head>
 <body>
+
+  <!-- Centered logo -->
   <div class="logo">
-    <img src="logo.png" alt="Pour Decisions Pourcast Logo" style="width:100%; height:100%;">
+    <img src="logo.png" alt="Pourcast Logo" style="width:100%; height:100%;">
   </div>
 
-  <h1>Pour Decisions</h1>
+  <!-- Tagline -->
+  <div class="tagline">We find the good stuff for you!</div>
 
   <h2>Current Pourcasts</h2>
   <ul>
-    <!-- Wake County Daily Allocations Report (spaced further down) -->
+    <!-- Wake County Daily Allocations Report -->
     <li><a href="search_results.html">Wake County Daily Allocations Report</a></li>
 
-    <!-- <<li><a href="https://www.cumberlandabc.com/_files/ugd/d739c5_1b3d2944fef8468bb60ab94ae7dcc451.pdf" target="_blank">Cumberland County Drops</a></li> -->
-
     <!-- New: Durham County Drop Alerts -->
-    <li>
-    <a href="https://www.durhamabc.com/news" target="_blank">
-    Durham County Drop Alerts (Coming Soon)
-    </a>
-    </li>
-    
-    <!-- (Commented out) SMS Alerts -->
-    <!-- <li><a href="sms.html">SMS Alerts</a></li> -->
+    <li><a href="https://www.durhamabc.com/news" target="_blank">Durham County Drop Alerts</a></li>
 
-    <!-- (Commented out) Wake County Drop Alerts -->
-    <!-- <li><a href="#" onclick="promptForPassword()">Wake County Drop Alerts!</a></li> -->
+    <!-- Restored Tastings link as How it Works with extra spacing -->
+    <li class="extra-space"><a href="tastings.html">How it Works</a></li>
+
+    <!-- Facebook link -->
+    <li><a href="https://www.facebook.com/share/15xXdx5pHg/" target="_blank">Follow us on Facebook</a></li>
   </ul>
 
-  <!-- (Commented out) The Drop Zone section -->
-  <!--
-  <h2>The Drop Zone</h2>
-  <p><a href="#" onclick="toggleDropZone()">Drop Days</a></p>
-  <table id="dropZoneTable" class="drop-zone-table">
-    <thead>
-      <tr>
-        <th>Store Location</th>
-        <th>Typical Drop Day</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Wake Forest Hwy, Durham</td><td>Wednesday</td></tr>
-      <tr><td>Duraleigh Rd., Raleigh</td><td>Friday</td></tr>
-      <tr><td>Waverly Place, Cary</td><td>Thursday</td></tr>
-      <tr><td>Creedmoor Rd., Raleigh</td><td>Saturday</td></tr>
-      <tr><td>SW Cary Parkway, Cary</td><td>Monday</td></tr>
-    </tbody>
-  </table>
-  -->
-
   <div class="footer">
-    &copy; 2025 Pour Decisions. All rights reserved.
+    &copy; 2025 Bourbon Pourcast LLC. All rights reserved.
   </div>
+
 </body>
 </html>
