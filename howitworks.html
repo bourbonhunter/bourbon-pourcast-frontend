@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How it Works • Bourbon Pourcast</title>
+  <style>
+    html, body { height: 100%; }
+    body {
+      font-family: Georgia, serif;
+      background: url('background.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Shared look with index */
+    .logo {
+      margin: 20px auto 6px;
+      width: 220px;
+      height: 220px;
+    }
+    .tagline {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #ffd700;
+      margin-bottom: 10px;
+    }
+
+    /* Content card for readability */
+    .card {
+      max-width: 860px;
+      margin: 18px auto 40px;
+      padding: 20px 22px;
+      background: rgba(0,0,0,0.55);
+      border-radius: 12px;
+      backdrop-filter: saturate(120%) blur(2px);
+      text-align: left;
+    }
+
+    /* Section title bars (gold, like your site) */
+    .titlebar {
+      background-color: #DAA520;  /* dark gold */
+      color: #000;
+      font-weight: 700;
+      text-align: center;
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin: 22px auto 12px;
+      max-width: 640px;
+    }
+
+    h2, h3 {
+      margin: 12px 0 6px;
+    }
+    p {
+      margin: 10px 0 14px;
+      line-height: 1.6;
+      color: #f3f3f3;
+      font-size: 1.05rem;
+    }
+    ul, ol {
+      margin: 6px 0 16px 22px;
+      padding: 0;
+      color: #f3f3f3;
+      font-size: 1.03rem;
+    }
+    li { margin: 6px 0; }
+
+    a { color: #ffd700; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Top nav row */
+    .topnav {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 10px 0 0;
+      align-items: center;
+    }
+    .fb-icon {
+      width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;
+    }
+
+    /* Footer */
+    .footer {
+      font-size: 0.85rem;
+      color: #ccc;
+      margin: 26px 0 30px;
+    }
+
+    @media (max-width: 768px) {
+      .logo { width: 160px; height: 160px; }
+      .card { margin: 14px 12px 30px; padding: 16px; }
+      .titlebar { margin: 18px auto 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo + tagline (matches index) -->
+  <div class="logo">
+    <img src="logo.png" alt="Bourbon Pourcast Logo" style="width:100%; height:100%;">
+  </div>
+  <div class="tagline">We find the good stuff for you!</div>
+
+  <!-- Tiny top nav: Home + Facebook -->
+  <div class="topnav">
+    <a href="index.html">← Back to Home</a>
+    <span>•</span>
+    <a href="https://www.facebook.com/BourbonPourcast" target="_blank" title="Facebook">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg" class="fb-icon" alt="Facebook">
+      Follow us on Facebook
+    </a>
+  </div>
+
+  <!-- Content card -->
+  <div class="card">
+    <div class="titlebar">How It Works</div>
+    <p>
+      Bourbon Pourcast tracks inventory changes across NC ABC stores and highlights
+      <em>new allocations</em>—the moments a sought-after bottle appears in stock. Each morning,
+      we compile a snapshot of what dropped and where, plus a pourcast of the most likely
+      drop days ahead (based on each store’s typical pattern).
+    </p>
+
+    <div class="titlebar">Daily Flow</div>
+    <ol>
+      <li><strong>We scan inventories</strong> for your target brands and formats.</li>
+      <li><strong>We detect new allocations</strong> and log them to our history.</li>
+      <li><strong>We generate a daily report</strong> and a pourcast (next likely drop days).</li>
+      <li><strong>We email subscribers</strong> a clean summary with a downloadable report.</li>
+    </ol>
+
+    <div class="titlebar">What You’ll See</div>
+    <ul>
+      <li><strong>Today’s Allocations:</strong> all stores that received new stock today.</li>
+      <li><strong>Pourcast:</strong> stores grouped by their typical drop day (Mon–Fri), starting with the next business day.</li>
+      <li><strong>Daily PDF:</strong> a full inventory snapshot for your records.</li>
+    </ul>
+
+    <div class="titlebar">Get Access</div>
+    <p>
+      Want the daily email and PDF in your inbox?
+      Email <a href="mailto:support@bourbonpourcast.com">support@bourbonpourcast.com</a>
+      with your name and the counties/brands you care about. We’ll get you set up.
+    </p>
+
+    <div class="titlebar">Notes & Opt-Out</div>
+    <ul>
+      <li>We focus on accuracy and timing; availability can change quickly in-store.</li>
+      <li>You can unsubscribe anytime via the link in the email footer or by emailing
+        <a href="mailto:support@bourbonpourcast.com">support@bourbonpourcast.com</a>.
+      </li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Bourbon Pourcast LLC. All rights reserved.
+  </div>
+
+</body>
+</html>
