@@ -63,12 +63,19 @@
       background: transparent; border: none; color: #fff; font-size: 1.4rem; cursor: pointer;
     }
     .acc-content img { width: 100%; height: auto; display: block; border-radius: 8px; }
-    .acc-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 10px; }
-    .acc-actions a, .acc-actions button {
+
+    /* Removed PDF button; keep only Close, centered */
+    .acc-actions {
+      display: flex; justify-content: center; margin-top: 10px;
+    }
+    .acc-actions button {
       background:#fff; border:none; border-radius:8px; padding:8px 12px; cursor:pointer; color:#111;
-      text-decoration:none; font-weight:600;
+      font-weight:600;
     }
     .acc-note { font-size: .8rem; color: #aaa; margin-top: 6px; text-align: left; }
+
+    /* Hide any stray canvas that could render a blank ring */
+    .acc-content canvas { display: none !important; }
 
     /* Small-screen tweaks */
     @media (max-width: 820px) {
@@ -93,7 +100,7 @@
   <ul>
     <!-- Wake County Daily Allocations Report -->
     <li><a href="search_results.html">Wake County Daily Allocations Report</a></li>
-    
+
     <!-- Show the bourbon chalkboard in a modal -->
     <li>
       <button class="btn-accuracy" onclick="document.getElementById('acc-modal').style.display='flex'">
@@ -126,7 +133,6 @@
       <!-- Fast-loading image (exported by your workflow) -->
       <img src="weekly_accuracy_chalkboard.png" alt="Weekly Accuracy Chalkboard">
       <div class="acc-actions">
-        <a href="weekly_accuracy_chalkboard.pdf" target="_blank" rel="noopener">Open PDF</a>
         <button onclick="document.getElementById('acc-modal').style.display='none'">Close</button>
       </div>
       <div class="acc-note">Tip: Tap anywhere outside the chalkboard to close.</div>
