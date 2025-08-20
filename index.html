@@ -38,7 +38,7 @@
     .footer { font-size: 0.8rem; margin-top: 40px; padding-bottom: 30px; color: #ccc; }
     .fb-icon { width: 20px; height: 20px; vertical-align: middle; margin-right: 6px; }
 
-    /* Accuracy Modal */
+    /* (kept CSS; harmless even when modal is disabled) */
     .btn-accuracy {
       background:#111; color:#fff; border:none; padding:10px 14px; border-radius:10px;
       font-weight:600; box-shadow:0 4px 12px rgba(0,0,0,.15); cursor:pointer;
@@ -64,16 +64,12 @@
     }
     .acc-content img { width: 100%; height: auto; display: block; border-radius: 8px; }
 
-    /* Only a centered Close button (no PDF link, no extra note) */
-    .acc-actions {
-      display: flex; justify-content: center; margin-top: 10px;
-    }
+    .acc-actions { display: flex; justify-content: center; margin-top: 10px; }
     .acc-actions button {
       background:#fff; border:none; border-radius:8px; padding:8px 12px; cursor:pointer; color:#111;
       font-weight:600;
     }
 
-    /* Small-screen tweaks */
     @media (max-width: 820px) {
       .logo { width: 200px; height: 200px; }
       li { font-size: 1.05rem; }
@@ -97,12 +93,13 @@
     <li><a href="search_results.html">Wake County Daily Allocations Report</a></li>
     <li><a href="drop_day_tracker.pdf">Wake County Drop Days Tracker</a></li>
 
-    <!-- Show the bourbon chalkboard in a modal -->
+    <!--
     <li>
       <button class="btn-accuracy" onclick="document.getElementById('acc-modal').style.display='flex'">
         View Weekly Accuracy Chalkboard
       </button>
     </li>
+    -->
 
     <!-- Durham link -->
     <li><a href="https://www.durhamabc.com/news" target="_blank">Durham County Drop Alerts</a></li>
@@ -119,7 +116,7 @@
     </li>
   </ul>
 
-  <!-- Accuracy Modal -->
+  <!--
   <div id="acc-modal" class="acc-modal" aria-hidden="true" onclick="if(event.target===this) this.style.display='none'">
     <div class="acc-content" role="dialog" aria-modal="true" aria-label="Weekly Accuracy Chalkboard">
       <div class="acc-header">
@@ -132,12 +129,13 @@
       </div>
     </div>
   </div>
+  -->
 
   <div class="footer">
     &copy; 2025 Bourbon Pourcast LLC. All rights reserved.
   </div>
 
-  <!-- Close modal with Escape -->
+  <!--
   <script>
     (function(){
       const modal = document.getElementById('acc-modal');
@@ -148,5 +146,6 @@
       });
     })();
   </script>
+  -->
 </body>
 </html>
