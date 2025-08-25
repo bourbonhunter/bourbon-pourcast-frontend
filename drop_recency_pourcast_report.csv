@@ -1,10 +1,8 @@
 StoreName,Days Since Last Drop,Pourcast Date
-"200 New Rand Road, Garner, NC 27529",70,"Monday, 2025-07-14"
 "11360 Capital Blvd., Wake Forest, NC 27587",33,"Wednesday, 2025-08-20"
 "1793 West Williams St., Apex, NC 27502",33,"Wednesday, 2025-08-20"
 "6809 Davis Circle, Raleigh, NC 27612",33,"Wednesday, 2025-08-20"
 "1420 N Ardendell Dr., Zebulon, NC 27597",32,"Thursday, 2025-08-21"
-"1415 E. Williams St., Apex, NC 27617",31,"Friday, 2025-08-22"
 "1601-61 Cross Link Rd., Raleigh, NC 27610",13,"Tuesday, 2025-09-09"
 "7911 ACC Blvd., Raleigh, NC 27617",13,"Tuesday, 2025-09-09"
 "100 Village Walk Dr, Holly Springs, NC 27540",12,"Wednesday, 2025-09-10"
@@ -18,3 +16,5 @@ StoreName,Days Since Last Drop,Pourcast Date
 "1505 Banyon Pl., Wendell, NC 27571",10,"Friday, 2025-09-12"
 "1222 New Bern Ave., Raleigh, NC 27401",6,"Tuesday, 2025-09-16"
 "6494 Tryon Rd., Cary, NC 27511",3,"Friday, 2025-09-19"
+"1415 E. Williams St., Apex, NC 27617",0,"Monday, 2025-09-22"
+"200 New Rand Road, Garner, NC 27529",0,"Monday, 2025-09-22"
