@@ -1,0 +1,3211 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<title>Drop History Dashboard – Bourbon Pourcast</title>
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: #111;
+  color: #f5f5f5;
+  padding: 16px 20px;
+}
+header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+.container {
+  max-width: 1100px;
+  margin: 20px auto 40px auto;
+  padding: 0 16px;
+}
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.card {
+  flex: 1;
+  min-width: 180px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.card-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #666;
+}
+.card-value {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.card-subtext {
+  font-size: 11px;
+  color: #777;
+  margin-top: 2px;
+}
+.filters {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
+}
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.filters label {
+  font-size: 12px;
+  color: #444;
+  display: block;
+  margin-bottom: 4px;
+}
+.filters input[type="text"],
+.filters select {
+  padding: 6px 8px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 180px;
+}
+.summary-line {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #555;
+}
+.table-wrapper {
+  margin-top: 16px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  padding: 12px;
+  overflow-x: auto;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+th, td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  vertical-align: middle;
+}
+th {
+  background: #C19A32;
+  color: #000;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+.qty-cell {
+  text-align: right;
+  white-space: nowrap;
+}
+footer {
+  text-align: center;
+  font-size: 11px;
+  color: #777;
+  margin: 22px 0 10px 0;
+}
+</style>
+
+</head>
+<body>
+<header>
+<h1>Drop History Dashboard – Bourbon Pourcast</h1>
+</header>
+<div class='container'>
+<div class='card-row'>
+
+  <div class="card">
+    <div class="card-label">Total Drop Events</div>
+    <div class="card-value">418</div>
+    <div class="card-subtext">All time in drop_history.csv</div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-label">Distinct Stores</div>
+    <div class="card-value">27</div>
+    <div class="card-subtext">Across all recorded drops</div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-label">Distinct Brands</div>
+    <div class="card-value">19</div>
+    <div class="card-subtext">Across all recorded drops</div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-label">Last 90 Days</div>
+    <div class="card-value">320</div>
+    <div class="card-subtext">27 stores &bull; 19 brands</div>
+  </div>
+
+</div>
+
+<div class="filters">
+  <div class="filters-row">
+    <div>
+      <label for="brandFilter">Brand contains</label>
+      <input type="text" id="brandFilter" placeholder="e.g. Weller, Blanton's..." />
+    </div>
+    <div>
+      <label for="storeFilter">Store / address contains</label>
+      <input type="text" id="storeFilter" placeholder="e.g. Raleigh, Village, New Bern..." />
+    </div>
+    <div>
+      <label for="daysFilter">Time window</label>
+      <select id="daysFilter">
+        <option value="all">All time</option>
+        <option value="30">Last 30 days</option>
+        <option value="90" selected>Last 90 days</option>
+        <option value="365">Last 365 days</option>
+      </select>
+    </div>
+  </div>
+  <div class="summary-line">
+    Showing <span id="visibleCount">0</span> of <span id="totalCount">0</span> drop events.
+  </div>
+</div>
+
+<div class='table-wrapper'>
+<table id='historyTable'>
+<thead><tr>
+<th>Store</th>
+<th>Brand</th>
+<th>Drop Date</th>
+<th>Days Since Drop</th>
+<th>Qty</th>
+</tr></thead>
+<tbody>
+<tr data-brand="eagle rare 10y" data-store="200 new rand road, garner, nc 27529" data-days="171">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-06-16</td>
+<td>171</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1222 new bern ave., raleigh, nc 27401" data-days="135">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-07-22</td>
+<td>135</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="6809 davis circle, raleigh, nc 27612" data-days="134">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-07-23</td>
+<td>134</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="1793 west williams st., apex, nc 27502" data-days="134">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-07-23</td>
+<td>134</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="4009 davis dr., morrisville, nc 27560" data-days="134">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-07-23</td>
+<td>134</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="11360 capital blvd., wake forest, nc 27587" data-days="134">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-07-23</td>
+<td>134</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="7911 acc blvd., raleigh, nc 27617" data-days="134">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-07-23</td>
+<td>134</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="133">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-07-24</td>
+<td>133</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1415 e. williams st., apex, nc 27617" data-days="132">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-07-25</td>
+<td>132</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6494 tryon rd., cary, nc 27511" data-days="132">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-07-25</td>
+<td>132</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="1505 banyon pl., wendell, nc 27571" data-days="120">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-06</td>
+<td>120</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="4009 davis dr., morrisville, nc 27560" data-days="120">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-06</td>
+<td>120</td>
+<td class='qty-cell'>2</td>
+</tr>
+<tr data-brand="weller full proof" data-store="7911 acc blvd., raleigh, nc 27617" data-days="114">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-12</td>
+<td>114</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="7911 acc blvd., raleigh, nc 27617" data-days="114">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-12</td>
+<td>114</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="7911 acc blvd., raleigh, nc 27617" data-days="114">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-12</td>
+<td>114</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="114">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-12</td>
+<td>114</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="7911 acc blvd., raleigh, nc 27617" data-days="114">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-12</td>
+<td>114</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="114">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-12</td>
+<td>114</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7911 acc blvd., raleigh, nc 27617" data-days="114">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-12</td>
+<td>114</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="weller full proof" data-store="665 cary towne blvd., cary, nc 27511" data-days="113">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="weller full proof" data-store="100 village walk dr, holly springs, nc 27540" data-days="113">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="weller full proof" data-store="4009 davis dr., morrisville, nc 27560" data-days="113">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="weller full proof" data-store="420 woodburn rd., raleigh, nc 27605" data-days="113">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="weller full proof" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="113">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="665 cary towne blvd., cary, nc 27511" data-days="113">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>11</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="100 village walk dr, holly springs, nc 27540" data-days="113">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="4009 davis dr., morrisville, nc 27560" data-days="113">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="420 woodburn rd., raleigh, nc 27605" data-days="113">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="113">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="665 cary towne blvd., cary, nc 27511" data-days="113">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="100 village walk dr, holly springs, nc 27540" data-days="113">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="4009 davis dr., morrisville, nc 27560" data-days="113">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="420 woodburn rd., raleigh, nc 27605" data-days="113">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="113">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="665 cary towne blvd., cary, nc 27511" data-days="113">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="100 village walk dr, holly springs, nc 27540" data-days="113">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="4009 davis dr., morrisville, nc 27560" data-days="113">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="113">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="420 woodburn rd., raleigh, nc 27605" data-days="113">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="113">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="665 cary towne blvd., cary, nc 27511" data-days="113">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="100 village walk dr, holly springs, nc 27540" data-days="113">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>22</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4009 davis dr., morrisville, nc 27560" data-days="113">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="113">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="420 woodburn rd., raleigh, nc 27605" data-days="113">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="113">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-13</td>
+<td>113</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="2645 appliance ct., raleigh, nc 27604" data-days="112">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-14</td>
+<td>112</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6301 town center dr., raleigh, nc 27614" data-days="112">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-14</td>
+<td>112</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1505 banyon pl., wendell, nc 27571" data-days="111">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-15</td>
+<td>111</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1222 new bern ave., raleigh, nc 27401" data-days="107">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-19</td>
+<td>107</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1222 new bern ave., raleigh, nc 27401" data-days="107">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-19</td>
+<td>107</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1222 new bern ave., raleigh, nc 27401" data-days="107">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-19</td>
+<td>107</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="weller full proof" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="weller full proof" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6494 tryon rd., cary, nc 27511" data-days="104">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-22</td>
+<td>104</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="weller full proof" data-store="200 new rand road, garner, nc 27529" data-days="101">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-25</td>
+<td>101</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="200 new rand road, garner, nc 27529" data-days="101">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-25</td>
+<td>101</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="200 new rand road, garner, nc 27529" data-days="101">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-25</td>
+<td>101</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="200 new rand road, garner, nc 27529" data-days="101">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-25</td>
+<td>101</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1415 e. williams st., apex, nc 27617" data-days="101">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-25</td>
+<td>101</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="200 new rand road, garner, nc 27529" data-days="101">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-25</td>
+<td>101</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1415 e. williams st., apex, nc 27617" data-days="101">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-25</td>
+<td>101</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="200 new rand road, garner, nc 27529" data-days="101">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-25</td>
+<td>101</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1415 e. williams st., apex, nc 27617" data-days="101">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-25</td>
+<td>101</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="200 new rand road, garner, nc 27529" data-days="99">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-27</td>
+<td>99</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="weller full proof" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="98">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="weller full proof" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="98">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="98">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="98">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="98">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="98">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="98">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="98">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="98">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>22</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="98">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="98">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>48</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="98">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>48</td>
+</tr>
+<tr data-brand="weller full proof" data-store="6809 davis circle, raleigh, nc 27612" data-days="98">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="3320 olympia dr., raleigh, nc 27603" data-days="98">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="6809 davis circle, raleigh, nc 27612" data-days="98">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="6809 davis circle, raleigh, nc 27612" data-days="98">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="3320 olympia dr., raleigh, nc 27603" data-days="98">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="4501 vineyrd pine ln., rolesville, nc 27571" data-days="98">
+<td>4501 Vineyrd Pine Ln., Rolesville, NC 27571</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="6809 davis circle, raleigh, nc 27612" data-days="98">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3320 olympia dr., raleigh, nc 27603" data-days="98">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4501 vineyrd pine ln., rolesville, nc 27571" data-days="98">
+<td>4501 Vineyrd Pine Ln., Rolesville, NC 27571</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6809 davis circle, raleigh, nc 27612" data-days="98">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="3320 olympia dr., raleigh, nc 27603" data-days="98">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="4501 vineyrd pine ln., rolesville, nc 27571" data-days="98">
+<td>4501 Vineyrd Pine Ln., Rolesville, NC 27571</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6809 davis circle, raleigh, nc 27612" data-days="98">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-08-28</td>
+<td>98</td>
+<td class='qty-cell'>48</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1793 west williams st., apex, nc 27502" data-days="92">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-03</td>
+<td>92</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="3615 sw cary parkway , cary, nc 27513" data-days="90">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-09-05</td>
+<td>90</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="3615 sw cary parkway , cary, nc 27513" data-days="90">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-05</td>
+<td>90</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3615 sw cary parkway , cary, nc 27513" data-days="90">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-05</td>
+<td>90</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="3615 sw cary parkway , cary, nc 27513" data-days="90">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-05</td>
+<td>90</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="86">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-09</td>
+<td>86</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="86">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-09</td>
+<td>86</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="86">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-09</td>
+<td>86</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="86">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-09</td>
+<td>86</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="84">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="100 village walk dr, holly springs, nc 27540" data-days="84">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="84">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="weller millennium" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>WELLER MILLENNIUM</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="weller special reserve (btb)" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>WELLER SPECIAL RESERVE (BTB)</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>120</td>
+</tr>
+<tr data-brand="weller full proof" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>WELLER FULL PROOF</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="w.l. weller 12y" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>W.L. WELLER 12Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="84">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. barrel proof" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>E.H. TAYLOR JR. BARREL PROOF</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="84">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="100 village walk dr, holly springs, nc 27540" data-days="84">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="84">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>18</td>
+</tr>
+<tr data-brand="stagg bourbon" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>STAGG BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="84">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>21</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="100 village walk dr, holly springs, nc 27540" data-days="84">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>22</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="84">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="209 s salisbury st, raleigh, nc 27601" data-days="84">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="84">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>48</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="100 village walk dr, holly springs, nc 27540" data-days="84">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="84">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="2645 appliance ct., raleigh, nc 27604" data-days="84">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="1793 west williams st., apex, nc 27502" data-days="84">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="6301 town center dr., raleigh, nc 27614" data-days="84">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="704 money ct., knightdale, nc 27545" data-days="84">
+<td>704 Money Ct., Knightdale, NC 27545</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="420 woodburn rd., raleigh, nc 27605" data-days="84">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="84">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="1793 west williams st., apex, nc 27502" data-days="84">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="420 woodburn rd., raleigh, nc 27605" data-days="84">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="84">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="2645 appliance ct., raleigh, nc 27604" data-days="84">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1793 west williams st., apex, nc 27502" data-days="84">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="6301 town center dr., raleigh, nc 27614" data-days="84">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="704 money ct., knightdale, nc 27545" data-days="84">
+<td>704 Money Ct., Knightdale, NC 27545</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="420 woodburn rd., raleigh, nc 27605" data-days="84">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="84">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="2645 appliance ct., raleigh, nc 27604" data-days="84">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1793 west williams st., apex, nc 27502" data-days="84">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>20</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6301 town center dr., raleigh, nc 27614" data-days="84">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="704 money ct., knightdale, nc 27545" data-days="84">
+<td>704 Money Ct., Knightdale, NC 27545</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="420 woodburn rd., raleigh, nc 27605" data-days="84">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="84">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="2645 appliance ct., raleigh, nc 27604" data-days="84">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1793 west williams st., apex, nc 27502" data-days="84">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>48</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6301 town center dr., raleigh, nc 27614" data-days="84">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="704 money ct., knightdale, nc 27545" data-days="84">
+<td>704 Money Ct., Knightdale, NC 27545</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="420 woodburn rd., raleigh, nc 27605" data-days="84">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>48</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="84">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-11</td>
+<td>84</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="3320 olympia dr., raleigh, nc 27603" data-days="83">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>2</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="83">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="6809 davis circle, raleigh, nc 27612" data-days="83">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="6809 davis circle, raleigh, nc 27612" data-days="83">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="3320 olympia dr., raleigh, nc 27603" data-days="83">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="83">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="6809 davis circle, raleigh, nc 27612" data-days="83">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3320 olympia dr., raleigh, nc 27603" data-days="83">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>20</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="83">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6809 davis circle, raleigh, nc 27612" data-days="83">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="3320 olympia dr., raleigh, nc 27603" data-days="83">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="83">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6809 davis circle, raleigh, nc 27612" data-days="83">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-12</td>
+<td>83</td>
+<td class='qty-cell'>48</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3615 sw cary parkway , cary, nc 27513" data-days="80">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-15</td>
+<td>80</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="7911 acc blvd., raleigh, nc 27617" data-days="79">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-16</td>
+<td>79</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="1222 new bern ave., raleigh, nc 27401" data-days="79">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-16</td>
+<td>79</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="7911 acc blvd., raleigh, nc 27617" data-days="79">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-16</td>
+<td>79</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1222 new bern ave., raleigh, nc 27401" data-days="79">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-16</td>
+<td>79</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7911 acc blvd., raleigh, nc 27617" data-days="79">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-16</td>
+<td>79</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3615 sw cary parkway , cary, nc 27513" data-days="79">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-16</td>
+<td>79</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1222 new bern ave., raleigh, nc 27401" data-days="79">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-16</td>
+<td>79</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="7911 acc blvd., raleigh, nc 27617" data-days="79">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-16</td>
+<td>79</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1222 new bern ave., raleigh, nc 27401" data-days="79">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-16</td>
+<td>79</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="11360 capital blvd., wake forest, nc 27587" data-days="77">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="665 cary towne blvd., cary, nc 27511" data-days="77">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="200 new rand road, garner, nc 27529" data-days="77">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="3615 sw cary parkway , cary, nc 27513" data-days="77">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="11360 capital blvd., wake forest, nc 27587" data-days="77">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="200 new rand road, garner, nc 27529" data-days="77">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="3615 sw cary parkway , cary, nc 27513" data-days="77">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="11360 capital blvd., wake forest, nc 27587" data-days="77">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="665 cary towne blvd., cary, nc 27511" data-days="77">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="200 new rand road, garner, nc 27529" data-days="77">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="11360 capital blvd., wake forest, nc 27587" data-days="77">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="665 cary towne blvd., cary, nc 27511" data-days="77">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="200 new rand road, garner, nc 27529" data-days="77">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="11360 capital blvd., wake forest, nc 27587" data-days="77">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>48</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="665 cary towne blvd., cary, nc 27511" data-days="77">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="200 new rand road, garner, nc 27529" data-days="77">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="3615 sw cary parkway , cary, nc 27513" data-days="77">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-18</td>
+<td>77</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="4009 davis dr., morrisville, nc 27560" data-days="76">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-19</td>
+<td>76</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="4009 davis dr., morrisville, nc 27560" data-days="76">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-19</td>
+<td>76</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="76">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-19</td>
+<td>76</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4009 davis dr., morrisville, nc 27560" data-days="76">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-19</td>
+<td>76</td>
+<td class='qty-cell'>22</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="4009 davis dr., morrisville, nc 27560" data-days="76">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-19</td>
+<td>76</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="6494 tryon rd., cary, nc 27511" data-days="75">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="1415 e. williams st., apex, nc 27617" data-days="75">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="1505 banyon pl., wendell, nc 27571" data-days="75">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="1505 banyon pl., wendell, nc 27571" data-days="75">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="6494 tryon rd., cary, nc 27511" data-days="75">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1415 e. williams st., apex, nc 27617" data-days="75">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1505 banyon pl., wendell, nc 27571" data-days="75">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6494 tryon rd., cary, nc 27511" data-days="75">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1415 e. williams st., apex, nc 27617" data-days="75">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1505 banyon pl., wendell, nc 27571" data-days="75">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6494 tryon rd., cary, nc 27511" data-days="75">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1415 e. williams st., apex, nc 27617" data-days="75">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1505 banyon pl., wendell, nc 27571" data-days="75">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-20</td>
+<td>75</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="2645 appliance ct., raleigh, nc 27604" data-days="73">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-22</td>
+<td>73</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="2645 appliance ct., raleigh, nc 27604" data-days="73">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-22</td>
+<td>73</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="bomberger&#x27;s declaration ksb" data-store="11360 capital blvd., wake forest, nc 27587" data-days="73">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>BOMBERGER'S DECLARATION KSB</td>
+<td>2025-09-22</td>
+<td>73</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="bomberger&#x27;s declaration ksb" data-store="209 s salisbury st, raleigh, nc 27601" data-days="73">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>BOMBERGER'S DECLARATION KSB</td>
+<td>2025-09-22</td>
+<td>73</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="old forester president&#x27;s choice" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="73">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>OLD FORESTER PRESIDENT'S CHOICE</td>
+<td>2025-09-22</td>
+<td>73</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="old forester president&#x27;s choice" data-store="11360 capital blvd., wake forest, nc 27587" data-days="73">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>OLD FORESTER PRESIDENT'S CHOICE</td>
+<td>2025-09-22</td>
+<td>73</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="old forester president&#x27;s choice rye" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="73">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>OLD FORESTER PRESIDENT'S CHOICE RYE</td>
+<td>2025-09-22</td>
+<td>73</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="old forester president&#x27;s choice rye" data-store="11360 capital blvd., wake forest, nc 27587" data-days="73">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>OLD FORESTER PRESIDENT'S CHOICE RYE</td>
+<td>2025-09-22</td>
+<td>73</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="bomberger&#x27;s declaration ksb" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="70">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>BOMBERGER'S DECLARATION KSB</td>
+<td>2025-09-25</td>
+<td>70</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="old forester president&#x27;s choice rye" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="70">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>OLD FORESTER PRESIDENT'S CHOICE RYE</td>
+<td>2025-09-25</td>
+<td>70</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="70">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-25</td>
+<td>70</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="70">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-09-25</td>
+<td>70</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="70">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-09-25</td>
+<td>70</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="70">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-09-25</td>
+<td>70</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="70">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-09-25</td>
+<td>70</td>
+<td class='qty-cell'>48</td>
+</tr>
+<tr data-brand="old forester president&#x27;s choice" data-store="209 s salisbury st, raleigh, nc 27601" data-days="68">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>OLD FORESTER PRESIDENT'S CHOICE</td>
+<td>2025-09-27</td>
+<td>68</td>
+<td class='qty-cell'>18</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="209 s salisbury st, raleigh, nc 27601" data-days="68">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-09-27</td>
+<td>68</td>
+<td class='qty-cell'>15</td>
+</tr>
+<tr data-brand="bomberger&#x27;s declaration ksb" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="63">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>BOMBERGER'S DECLARATION KSB</td>
+<td>2025-10-02</td>
+<td>63</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="bomberger&#x27;s declaration ksb" data-store="3320 olympia dr., raleigh, nc 27603" data-days="63">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>BOMBERGER'S DECLARATION KSB</td>
+<td>2025-10-02</td>
+<td>63</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="shenk&#x27;s sour mash whiskey" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="63">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>SHENK'S SOUR MASH WHISKEY</td>
+<td>2025-10-02</td>
+<td>63</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="weller millennium" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="55">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>WELLER MILLENNIUM</td>
+<td>2025-10-10</td>
+<td>55</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="weller millennium" data-store="3615 sw cary parkway , cary, nc 27513" data-days="55">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>WELLER MILLENNIUM</td>
+<td>2025-10-10</td>
+<td>55</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="weller millennium" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="50">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>WELLER MILLENNIUM</td>
+<td>2025-10-15</td>
+<td>50</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="weller millennium" data-store="3615 sw cary parkway , cary, nc 27513" data-days="50">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>WELLER MILLENNIUM</td>
+<td>2025-10-15</td>
+<td>50</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="weller millennium" data-store="209 s salisbury st, raleigh, nc 27601" data-days="50">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>WELLER MILLENNIUM</td>
+<td>2025-10-15</td>
+<td>50</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="6301 town center dr., raleigh, nc 27614" data-days="48">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-10-17</td>
+<td>48</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="48">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-10-17</td>
+<td>48</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="2645 appliance ct., raleigh, nc 27604" data-days="48">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-17</td>
+<td>48</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6301 town center dr., raleigh, nc 27614" data-days="48">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-17</td>
+<td>48</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="48">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-17</td>
+<td>48</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="2645 appliance ct., raleigh, nc 27604" data-days="48">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-17</td>
+<td>48</td>
+<td class='qty-cell'>34</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6301 town center dr., raleigh, nc 27614" data-days="48">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-17</td>
+<td>48</td>
+<td class='qty-cell'>11</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="48">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-17</td>
+<td>48</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="6494 tryon rd., cary, nc 27511" data-days="47">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-10-18</td>
+<td>47</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1415 e. williams st., apex, nc 27617" data-days="47">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-10-18</td>
+<td>47</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6494 tryon rd., cary, nc 27511" data-days="47">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-18</td>
+<td>47</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1415 e. williams st., apex, nc 27617" data-days="47">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-18</td>
+<td>47</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6494 tryon rd., cary, nc 27511" data-days="47">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-18</td>
+<td>47</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1415 e. williams st., apex, nc 27617" data-days="47">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-18</td>
+<td>47</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="7911 acc blvd., raleigh, nc 27617" data-days="43">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-10-22</td>
+<td>43</td>
+<td class='qty-cell'>2</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="43">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-22</td>
+<td>43</td>
+<td class='qty-cell'>16</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7911 acc blvd., raleigh, nc 27617" data-days="43">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-22</td>
+<td>43</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="43">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-22</td>
+<td>43</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="7911 acc blvd., raleigh, nc 27617" data-days="43">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-22</td>
+<td>43</td>
+<td class='qty-cell'>8</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="200 new rand road, garner, nc 27529" data-days="42">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-10-23</td>
+<td>42</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="200 new rand road, garner, nc 27529" data-days="42">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-23</td>
+<td>42</td>
+<td class='qty-cell'>17</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="100 village walk dr, holly springs, nc 27540" data-days="42">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-23</td>
+<td>42</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="42">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-23</td>
+<td>42</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="200 new rand road, garner, nc 27529" data-days="42">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-23</td>
+<td>42</td>
+<td class='qty-cell'>27</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="100 village walk dr, holly springs, nc 27540" data-days="42">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-23</td>
+<td>42</td>
+<td class='qty-cell'>14</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="42">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-23</td>
+<td>42</td>
+<td class='qty-cell'>34</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="4009 davis dr., morrisville, nc 27560" data-days="35">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-10-30</td>
+<td>35</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4009 davis dr., morrisville, nc 27560" data-days="35">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-30</td>
+<td>35</td>
+<td class='qty-cell'>10</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1222 new bern ave., raleigh, nc 27401" data-days="35">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-30</td>
+<td>35</td>
+<td class='qty-cell'>16</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="4009 davis dr., morrisville, nc 27560" data-days="35">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-30</td>
+<td>35</td>
+<td class='qty-cell'>26</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1222 new bern ave., raleigh, nc 27401" data-days="35">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-30</td>
+<td>35</td>
+<td class='qty-cell'>34</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="665 cary towne blvd., cary, nc 27511" data-days="34">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-10-31</td>
+<td>34</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1793 west williams st., apex, nc 27502" data-days="34">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-31</td>
+<td>34</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="665 cary towne blvd., cary, nc 27511" data-days="34">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-31</td>
+<td>34</td>
+<td class='qty-cell'>18</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1505 banyon pl., wendell, nc 27571" data-days="34">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-10-31</td>
+<td>34</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1793 west williams st., apex, nc 27502" data-days="34">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-31</td>
+<td>34</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="665 cary towne blvd., cary, nc 27511" data-days="34">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-31</td>
+<td>34</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1505 banyon pl., wendell, nc 27571" data-days="34">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-10-31</td>
+<td>34</td>
+<td class='qty-cell'>9</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="3320 olympia dr., raleigh, nc 27603" data-days="33">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="33">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="33">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="209 s salisbury st, raleigh, nc 27601" data-days="33">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3320 olympia dr., raleigh, nc 27603" data-days="33">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="33">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>21</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="33">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="209 s salisbury st, raleigh, nc 27601" data-days="33">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="3320 olympia dr., raleigh, nc 27603" data-days="33">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="33">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="33">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="209 s salisbury st, raleigh, nc 27601" data-days="33">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-01</td>
+<td>33</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="420 woodburn rd., raleigh, nc 27605" data-days="27">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-07</td>
+<td>27</td>
+<td class='qty-cell'>2</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="420 woodburn rd., raleigh, nc 27605" data-days="27">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-07</td>
+<td>27</td>
+<td class='qty-cell'>32</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="26">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-11-08</td>
+<td>26</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="11360 capital blvd., wake forest, nc 27587" data-days="26">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-11-08</td>
+<td>26</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="26">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-08</td>
+<td>26</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="11360 capital blvd., wake forest, nc 27587" data-days="26">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-08</td>
+<td>26</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="26">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-08</td>
+<td>26</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="11360 capital blvd., wake forest, nc 27587" data-days="26">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-08</td>
+<td>26</td>
+<td class='qty-cell'>36</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="21">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-13</td>
+<td>21</td>
+<td class='qty-cell'>10</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="21">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-13</td>
+<td>21</td>
+<td class='qty-cell'>28</td>
+</tr>
+<tr data-brand="blanton&#x27;s bourbon" data-store="3615 sw cary parkway , cary, nc 27513" data-days="20">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>BLANTON'S BOURBON</td>
+<td>2025-11-14</td>
+<td>20</td>
+<td class='qty-cell'>2</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3615 sw cary parkway , cary, nc 27513" data-days="20">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-14</td>
+<td>20</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6809 davis circle, raleigh, nc 27612" data-days="20">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-14</td>
+<td>20</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="3615 sw cary parkway , cary, nc 27513" data-days="20">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-14</td>
+<td>20</td>
+<td class='qty-cell'>25</td>
+</tr>
+<tr data-brand="old fitzgerald 7y bib" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="19">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>OLD FITZGERALD 7Y BIB</td>
+<td>2025-11-15</td>
+<td>19</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="19">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-11-15</td>
+<td>19</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. barrel proof" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="19">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>E.H. TAYLOR JR. BARREL PROOF</td>
+<td>2025-11-15</td>
+<td>19</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="19">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-15</td>
+<td>19</td>
+<td class='qty-cell'>22</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="19">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-15</td>
+<td>19</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="old fitzgerald 7y bib" data-store="209 s salisbury st, raleigh, nc 27601" data-days="13">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>OLD FITZGERALD 7Y BIB</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="209 s salisbury st, raleigh, nc 27601" data-days="13">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="2645 appliance ct., raleigh, nc 27604" data-days="13">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6301 town center dr., raleigh, nc 27614" data-days="13">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7911 acc blvd., raleigh, nc 27617" data-days="13">
+<td>7911 ACC Blvd., Raleigh, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>11</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="100 village walk dr, holly springs, nc 27540" data-days="13">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>2</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="209 s salisbury st, raleigh, nc 27601" data-days="13">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="13">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>7</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="2645 appliance ct., raleigh, nc 27604" data-days="13">
+<td>2645 Appliance Ct., Raleigh, NC 27604</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="100 village walk dr, holly springs, nc 27540" data-days="13">
+<td>100 Village Walk Dr, Holly Springs, NC 27540</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="209 s salisbury st, raleigh, nc 27601" data-days="13">
+<td>209 S Salisbury St, Raleigh, NC 27601</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="13">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-21</td>
+<td>13</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1793 west williams st., apex, nc 27502" data-days="12">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>23</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4501 vineyrd pine ln., rolesville, nc 27571" data-days="12">
+<td>4501 Vineyrd Pine Ln., Rolesville, NC 27571</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4009 davis dr., morrisville, nc 27560" data-days="12">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="12">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="420 woodburn rd., raleigh, nc 27605" data-days="12">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>8</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1793 west williams st., apex, nc 27502" data-days="12">
+<td>1793 West Williams St., Apex, NC 27502</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="4501 vineyrd pine ln., rolesville, nc 27571" data-days="12">
+<td>4501 Vineyrd Pine Ln., Rolesville, NC 27571</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="4009 davis dr., morrisville, nc 27560" data-days="12">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1420 n ardendell dr., zebulon, nc 27597" data-days="12">
+<td>1420 N Ardendell Dr., Zebulon, NC 27597</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="420 woodburn rd., raleigh, nc 27605" data-days="12">
+<td>420 Woodburn Rd., Raleigh, NC 27605</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-22</td>
+<td>12</td>
+<td class='qty-cell'>18</td>
+</tr>
+<tr data-brand="e.h. taylor jr. barrel proof" data-store="665 cary towne blvd., cary, nc 27511" data-days="8">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>E.H. TAYLOR JR. BARREL PROOF</td>
+<td>2025-11-26</td>
+<td>8</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="665 cary towne blvd., cary, nc 27511" data-days="8">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-26</td>
+<td>8</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1505 banyon pl., wendell, nc 27571" data-days="8">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-26</td>
+<td>8</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3615 sw cary parkway , cary, nc 27513" data-days="8">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-26</td>
+<td>8</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1222 new bern ave., raleigh, nc 27401" data-days="8">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-26</td>
+<td>8</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="665 cary towne blvd., cary, nc 27511" data-days="8">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-26</td>
+<td>8</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1505 banyon pl., wendell, nc 27571" data-days="8">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-26</td>
+<td>8</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="3615 sw cary parkway , cary, nc 27513" data-days="8">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-26</td>
+<td>8</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1222 new bern ave., raleigh, nc 27401" data-days="8">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-26</td>
+<td>8</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="704 money ct., knightdale, nc 27545" data-days="7">
+<td>704 Money Ct., Knightdale, NC 27545</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-27</td>
+<td>7</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6301 town center dr., raleigh, nc 27614" data-days="7">
+<td>6301 Town Center Dr., Raleigh, NC 27614</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-27</td>
+<td>7</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="704 money ct., knightdale, nc 27545" data-days="7">
+<td>704 Money Ct., Knightdale, NC 27545</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-27</td>
+<td>7</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="old fitzgerald 7y bib" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>OLD FITZGERALD 7Y BIB</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="old fitzgerald 7y bib" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>OLD FITZGERALD 7Y BIB</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. barrel proof" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>E.H. TAYLOR JR. BARREL PROOF</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3320 olympia dr., raleigh, nc 27603" data-days="5">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>16</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>21</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6494 tryon rd., cary, nc 27511" data-days="5">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1415 e. williams st., apex, nc 27617" data-days="5">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="3320 olympia dr., raleigh, nc 27603" data-days="5">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>19</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6494 tryon rd., cary, nc 27511" data-days="5">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1415 e. williams st., apex, nc 27617" data-days="5">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="old fitzgerald 7y bib" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>OLD FITZGERALD 7Y BIB</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="old fitzgerald 7y bib" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>OLD FITZGERALD 7Y BIB</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. barrel proof" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>E.H. TAYLOR JR. BARREL PROOF</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="3320 olympia dr., raleigh, nc 27603" data-days="5">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>16</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>21</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6494 tryon rd., cary, nc 27511" data-days="5">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1415 e. williams st., apex, nc 27617" data-days="5">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="3320 olympia dr., raleigh, nc 27603" data-days="5">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>19</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6494 tryon rd., cary, nc 27511" data-days="5">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1415 e. williams st., apex, nc 27617" data-days="5">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="woodford reserve masters coll. sweet oak" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="5">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>WOODFORD RESERVE MASTERS COLL. SWEET OAK</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="woodford reserve masters coll. sweet oak" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>WOODFORD RESERVE MASTERS COLL. SWEET OAK</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="woodford reserve masters coll. sweet oak" data-store="200 new rand road, garner, nc 27529" data-days="5">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>WOODFORD RESERVE MASTERS COLL. SWEET OAK</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="woodford reserve masters coll. sweet oak" data-store="704 money ct., knightdale, nc 27545" data-days="5">
+<td>704 Money Ct., Knightdale, NC 27545</td>
+<td>WOODFORD RESERVE MASTERS COLL. SWEET OAK</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="woodford reserve masters coll. sweet oak" data-store="1415 e. williams st., apex, nc 27617" data-days="5">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>WOODFORD RESERVE MASTERS COLL. SWEET OAK</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="woodford reserve masters coll. sweet oak" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>WOODFORD RESERVE MASTERS COLL. SWEET OAK</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="1792 full proof barr sel (btb)" data-store="1505 banyon pl., wendell, nc 27571" data-days="5">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>1792 FULL PROOF BARR SEL (BTB)</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>2</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="7200 sandy fork rd., raleigh, nc 27609" data-days="5">
+<td>7200 Sandy Fork Rd., Raleigh, NC 27609</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="3320 olympia dr., raleigh, nc 27603" data-days="5">
+<td>3320 Olympia Dr., Raleigh, NC 27603</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>11</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="665 cary towne blvd., cary, nc 27511" data-days="5">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>9</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="200 new rand road, garner, nc 27529" data-days="5">
+<td>200 New Rand Road, Garner, NC 27529</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="6494 tryon rd., cary, nc 27511" data-days="5">
+<td>6494 Tryon Rd., Cary, NC 27511</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="704 money ct., knightdale, nc 27545" data-days="5">
+<td>704 Money Ct., Knightdale, NC 27545</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="1415 e. williams st., apex, nc 27617" data-days="5">
+<td>1415 E. Williams St., Apex, NC 27617</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="1505 banyon pl., wendell, nc 27571" data-days="5">
+<td>1505 Banyon Pl., Wendell, NC 27571</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>2</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="4009 davis dr., morrisville, nc 27560" data-days="5">
+<td>4009 Davis Dr., Morrisville, NC 27560</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="3615 sw cary parkway , cary, nc 27513" data-days="5">
+<td>3615 SW Cary Parkway , Cary, NC 27513</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="1222 new bern ave., raleigh, nc 27401" data-days="5">
+<td>1222 New Bern Ave., Raleigh, NC 27401</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>11</td>
+</tr>
+<tr data-brand="elijah craig 18y" data-store="1940 cinema dr., fuquay varina, nc 27526" data-days="5">
+<td>1940 Cinema Dr., Fuquay Varina, NC 27526</td>
+<td>ELIJAH CRAIG 18Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="elijah craig 18y" data-store="4215 the circle at north hills rd, raleigh, nc 27609" data-days="5">
+<td>4215 The Circle at North Hills Rd, Raleigh, NC 27609</td>
+<td>ELIJAH CRAIG 18Y</td>
+<td>2025-11-29</td>
+<td>5</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="woodford reserve masters coll. sweet oak" data-store="11360 capital blvd., wake forest, nc 27587" data-days="2">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>WOODFORD RESERVE MASTERS COLL. SWEET OAK</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="woodford reserve masters coll. sweet oak" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="2">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>WOODFORD RESERVE MASTERS COLL. SWEET OAK</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="woodford reserve masters coll. sweet oak" data-store="6809 davis circle, raleigh, nc 27612" data-days="2">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>WOODFORD RESERVE MASTERS COLL. SWEET OAK</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>5</td>
+</tr>
+<tr data-brand="old fitzgerald 7y bib" data-store="11360 capital blvd., wake forest, nc 27587" data-days="2">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>OLD FITZGERALD 7Y BIB</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="old fitzgerald 7y bib" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="2">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>OLD FITZGERALD 7Y BIB</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="11360 capital blvd., wake forest, nc 27587" data-days="2">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. small batch" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="2">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>E.H. TAYLOR JR. SMALL BATCH</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>6</td>
+</tr>
+<tr data-brand="e.h. taylor jr. barrel proof" data-store="11360 capital blvd., wake forest, nc 27587" data-days="2">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>E.H. TAYLOR JR. BARREL PROOF</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>4</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="11360 capital blvd., wake forest, nc 27587" data-days="2">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="2">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="2">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="eagle rare 10y" data-store="6809 davis circle, raleigh, nc 27612" data-days="2">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>EAGLE RARE 10Y</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>8</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="11360 capital blvd., wake forest, nc 27587" data-days="2">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="2">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="2">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="6809 davis circle, raleigh, nc 27612" data-days="2">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>12</td>
+</tr>
+<tr data-brand="elijah craig 18y" data-store="11360 capital blvd., wake forest, nc 27587" data-days="2">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>ELIJAH CRAIG 18Y</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="elijah craig 18y" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="2">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>ELIJAH CRAIG 18Y</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>3</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="11360 capital blvd., wake forest, nc 27587" data-days="2">
+<td>11360 Capital Blvd., Wake Forest, NC 27587</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="1601-61 cross link rd., raleigh, nc 27610" data-days="2">
+<td>1601-61 Cross Link Rd., Raleigh, NC 27610</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="7336 creedmoor rd., raleigh, nc 27613" data-days="2">
+<td>7336 Creedmoor Rd., Raleigh, NC 27613</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="6809 davis circle, raleigh, nc 27612" data-days="2">
+<td>6809 Davis Circle, Raleigh, NC 27612</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>24</td>
+</tr>
+<tr data-brand="buffalo trace bourbon whiskey" data-store="665 cary towne blvd., cary, nc 27511" data-days="2">
+<td>665 Cary Towne Blvd., Cary, NC 27511</td>
+<td>BUFFALO TRACE BOURBON WHISKEY</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>1</td>
+</tr>
+<tr data-brand="jack daniel&#x27;s single barrel heritage" data-store="2109-106 avent ferry rd., raleigh, nc 27606" data-days="2">
+<td>2109-106 Avent Ferry Rd., Raleigh, NC 27606</td>
+<td>JACK DANIEL'S SINGLE BARREL HERITAGE</td>
+<td>2025-12-02</td>
+<td>2</td>
+<td class='qty-cell'>6</td>
+</tr>
+</tbody></table>
+</div>
+<footer>
+Use the filters above to narrow by brand, store, or time window. For example, type <em>Weller</em> and pick <strong>Last 90 days</strong> to see where it has dropped recently.
+<br/>Generated by Bourbon Pourcast.
+</footer>
+
+<script>
+(function() {
+  var brandInput = document.getElementById('brandFilter');
+  var storeInput = document.getElementById('storeFilter');
+  var daysSelect = document.getElementById('daysFilter');
+  var table = document.getElementById('historyTable');
+  if (!table) { return; }
+  var tbody = table.getElementsByTagName('tbody')[0];
+  var rows = tbody ? tbody.getElementsByTagName('tr') : [];
+  var visibleCountEl = document.getElementById('visibleCount');
+  var totalCountEl = document.getElementById('totalCount');
+
+  if (totalCountEl) {
+    totalCountEl.textContent = rows.length.toString();
+  }
+
+  function applyFilters() {
+    var brandFilter = brandInput.value.toLowerCase().trim();
+    var storeFilter = storeInput.value.toLowerCase().trim();
+    var daysValue = daysSelect.value;
+    var maxDays = (daysValue === 'all') ? null : parseInt(daysValue, 10);
+
+    var visibleCount = 0;
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+
+      var brandAttr = row.getAttribute('data-brand') || '';
+      var storeAttr = row.getAttribute('data-store') || '';
+      var daysStr = row.getAttribute('data-days') || '';
+      var days = daysStr ? parseInt(daysStr, 10) : null;
+
+      brandAttr = brandAttr.toLowerCase();
+      storeAttr = storeAttr.toLowerCase();
+
+      var ok = true;
+
+      if (brandFilter && brandAttr.indexOf(brandFilter) === -1) {
+        ok = false;
+      }
+      if (ok && storeFilter && storeAttr.indexOf(storeFilter) === -1) {
+        ok = false;
+      }
+      if (ok && maxDays !== null && days !== null && days > maxDays) {
+        ok = false;
+      }
+
+      row.style.display = ok ? '' : 'none';
+      if (ok) { visibleCount++; }
+    }
+
+    if (visibleCountEl) {
+      visibleCountEl.textContent = visibleCount.toString();
+    }
+  }
+
+  if (brandInput) {
+    brandInput.addEventListener('input', applyFilters, false);
+    brandInput.addEventListener('keyup', applyFilters, false);
+  }
+  if (storeInput) {
+    storeInput.addEventListener('input', applyFilters, false);
+    storeInput.addEventListener('keyup', applyFilters, false);
+  }
+  if (daysSelect) {
+    daysSelect.addEventListener('change', applyFilters, false);
+  }
+
+  applyFilters();
+})();
+</script>
+
+</div>
+</body></html>
