@@ -116,20 +116,20 @@ tr.hide-row {
 <div class="summary-row">
   <div class="summary-card">
     <h3>Total Logged Drops</h3>
-    <div class="value">419</div>
+    <div class="value" id="totalDropsValue">419</div>
   </div>
   <div class="summary-card">
     <h3>Unique Stores</h3>
-    <div class="value">27</div>
+    <div class="value" id="uniqueStoresValue">27</div>
   </div>
   <div class="summary-card">
     <h3>Unique Brands</h3>
-    <div class="value">19</div>
+    <div class="value" id="uniqueBrandsValue">19</div>
   </div>
   <div class="summary-card">
     <h3>Last Updated</h3>
     <div class="value" style="font-size:14px;">
-      2025-12-11 10:40 ET
+      2025-12-11 12:18 ET
     </div>
   </div>
 </div>
@@ -601,25 +601,30 @@ tr.hide-row {
 
 <script>
 (function() {
-  const brandInput   = document.getElementById('brandFilter');
-  const storeInput   = document.getElementById('storeFilter');
-  const weekdaySelect= document.getElementById('weekdayFilter');
-  const daysBackInput= document.getElementById('daysBackFilter');
-  const tbody        = document.querySelector('#historyTable tbody');
+  const brandInput    = document.getElementById('brandFilter');
+  const storeInput    = document.getElementById('storeFilter');
+  const weekdaySelect = document.getElementById('weekdayFilter');
+  const daysBackInput = document.getElementById('daysBackFilter');
+  const tbody         = document.querySelector('#historyTable tbody');
+  const totalDropsEl  = document.getElementById('totalDropsValue');
+  const uniqueStoresEl= document.getElementById('uniqueStoresValue');
+  const uniqueBrandsEl= document.getElementById('uniqueBrandsValue');
 
   if (!tbody) return;
+
+  const rows = Array.from(tbody.querySelectorAll('tr'));
 
   const today = new Date();
   today.setHours(0,0,0,0);
 
   function matchesFilter(row) {
-    const brandFilter = (brandInput.value || "").toLowerCase();
-    const storeFilter = (storeInput.value || "").toLowerCase();
+    const brandFilter   = (brandInput.value || "").toLowerCase();
+    const storeFilter   = (storeInput.value || "").toLowerCase();
     const weekdayFilter = weekdaySelect.value || "";
-    const daysBack = parseInt(daysBackInput.value || "0", 10);
+    const daysBack      = parseInt(daysBackInput.value || "0", 10);
 
-    const brand = (row.getAttribute('data-brand') || "").toLowerCase();
-    const store = (row.getAttribute('data-store') || "").toLowerCase();
+    const brand   = (row.getAttribute('data-brand') || "").toLowerCase();
+    const store   = (row.getAttribute('data-store') || "").toLowerCase();
     const weekday = row.getAttribute('data-weekday') || "";
     const dateStr = row.getAttribute('data-date') || "";
 
@@ -630,7 +635,7 @@ tr.hide-row {
     if (daysBack > 0 && dateStr) {
       const d = new Date(dateStr + "T00:00:00");
       d.setHours(0,0,0,0);
-      const diffMs = today - d;
+      const diffMs   = today - d;
       const diffDays = diffMs / (1000 * 60 * 60 * 24);
       if (diffDays > daysBack) return false;
     }
@@ -639,18 +644,36 @@ tr.hide-row {
   }
 
   function applyFilters() {
-    const rows = tbody.querySelectorAll('tr');
+    const matched = [];
+
     rows.forEach(row => {
       if (matchesFilter(row)) {
         row.classList.remove('hide-row');
+        matched.push(row);
       } else {
         row.classList.add('hide-row');
       }
     });
+
+    // Recompute summary stats based on matched rows
+    const dropsCount = matched.length;
+    const storeSet   = new Set();
+    const brandSet   = new Set();
+
+    matched.forEach(row => {
+      const s = (row.getAttribute('data-store') || "").trim();
+      const b = (row.getAttribute('data-brand') || "").trim();
+      if (s) storeSet.add(s);
+      if (b) brandSet.add(b);
+    });
+
+    if (totalDropsEl)   totalDropsEl.textContent   = dropsCount;
+    if (uniqueStoresEl) uniqueStoresEl.textContent = storeSet.size;
+    if (uniqueBrandsEl) uniqueBrandsEl.textContent = brandSet.size;
   }
 
-  brandInput.addEventListener('input', applyFilters);
-  storeInput.addEventListener('input', applyFilters);
+  brandInput.addEventListener('input',  applyFilters);
+  storeInput.addEventListener('input',  applyFilters);
   weekdaySelect.addEventListener('change', applyFilters);
   daysBackInput.addEventListener('input', applyFilters);
 
