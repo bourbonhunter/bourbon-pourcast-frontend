@@ -116,20 +116,20 @@ tr.hide-row {
 <div class="summary-row">
   <div class="summary-card">
     <h3>Total Logged Drops</h3>
-    <div class="value" id="totalDropsValue">429</div>
+    <div class="value" id="summaryTotalDrops">429</div>
   </div>
   <div class="summary-card">
     <h3>Unique Stores</h3>
-    <div class="value" id="uniqueStoresValue">27</div>
+    <div class="value" id="summaryUniqueStores">27</div>
   </div>
   <div class="summary-card">
     <h3>Unique Brands</h3>
-    <div class="value" id="uniqueBrandsValue">20</div>
+    <div class="value" id="summaryUniqueBrands">20</div>
   </div>
   <div class="summary-card">
     <h3>Last Updated</h3>
     <div class="value" style="font-size:14px;">
-      2025-12-12 08:42 ET
+      2025-12-12 11:09 ET
     </div>
   </div>
 </div>
@@ -616,13 +616,12 @@ tr.hide-row {
   const weekdaySelect = document.getElementById('weekdayFilter');
   const daysBackInput = document.getElementById('daysBackFilter');
   const tbody         = document.querySelector('#historyTable tbody');
-  const totalDropsEl  = document.getElementById('totalDropsValue');
-  const uniqueStoresEl= document.getElementById('uniqueStoresValue');
-  const uniqueBrandsEl= document.getElementById('uniqueBrandsValue');
+
+  const summaryTotal  = document.getElementById('summaryTotalDrops');
+  const summaryStores = document.getElementById('summaryUniqueStores');
+  const summaryBrands = document.getElementById('summaryUniqueBrands');
 
   if (!tbody) return;
-
-  const rows = Array.from(tbody.querySelectorAll('tr'));
 
   const today = new Date();
   today.setHours(0,0,0,0);
@@ -654,36 +653,34 @@ tr.hide-row {
   }
 
   function applyFilters() {
-    const matched = [];
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    let visibleCount  = 0;
+    const storeSet    = new Set();
+    const brandSet    = new Set();
 
     rows.forEach(row => {
       if (matchesFilter(row)) {
         row.classList.remove('hide-row');
-        matched.push(row);
+        visibleCount += 1;
+
+        const store = row.getAttribute('data-store') || "";
+        const brand = row.getAttribute('data-brand') || "";
+        if (store) storeSet.add(store);
+        if (brand) brandSet.add(brand);
       } else {
         row.classList.add('hide-row');
       }
     });
 
-    // Recompute summary stats based on matched rows
-    const dropsCount = matched.length;
-    const storeSet   = new Set();
-    const brandSet   = new Set();
-
-    matched.forEach(row => {
-      const s = (row.getAttribute('data-store') || "").trim();
-      const b = (row.getAttribute('data-brand') || "").trim();
-      if (s) storeSet.add(s);
-      if (b) brandSet.add(b);
-    });
-
-    if (totalDropsEl)   totalDropsEl.textContent   = dropsCount;
-    if (uniqueStoresEl) uniqueStoresEl.textContent = storeSet.size;
-    if (uniqueBrandsEl) uniqueBrandsEl.textContent = brandSet.size;
+    // Update the summary cards based on CURRENT filter view
+    if (summaryTotal)  summaryTotal.textContent  = visibleCount.toString();
+    if (summaryStores) summaryStores.textContent = storeSet.size.toString();
+    if (summaryBrands) summaryBrands.textContent = brandSet.size.toString();
   }
 
-  brandInput.addEventListener('input',  applyFilters);
-  storeInput.addEventListener('input',  applyFilters);
+  brandInput.addEventListener('input', applyFilters);
+  storeInput.addEventListener('input', applyFilters);
   weekdaySelect.addEventListener('change', applyFilters);
   daysBackInput.addEventListener('input', applyFilters);
 
