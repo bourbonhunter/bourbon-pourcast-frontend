@@ -4,7 +4,7 @@
   <!-- Privacy-friendly analytics by Plausible -->
 <script async src="https://plausible.io/js/pa-mecvJ_1-2ATM-vr5t1xML.js"></script>
 <script>
-  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}}; 
   plausible.init()
 </script>
 
@@ -101,20 +101,21 @@
     <li><a href="drop_day_tracker.pdf">Wake County Drop Days Tracker</a></li>
     <li><a href="ncabc_inventory_report.html">NC ABC Inventory Tracker</a></li>
 
-    <!--
-    <li>
-      <button class="btn-accuracy" onclick="document.getElementById('acc-modal').style.display='flex'">
-        View Weekly Accuracy Chalkboard
-      </button>
-    </li>
-    -->
     <!-- News link -->
-    <li class="extra-space"><a href="dashboard.html">New Dashboard Reporting!</a></li>  
+    <li class="extra-space">
+      <a href="dashboard.html">New Dashboard Reporting!</a>
+      <span style="margin-left:8px; padding:3px 7px; font-size:0.7rem; background:#C19A32; color:#000; border-radius:6px; font-weight:700;">
+        Pourcast+ (Early Access)
+      </span>
+    </li>  
     
     <!-- New Pourcast Protected link -->
-    <li class="extra-space"><a href="todays_pourcast.html">Today's Pourcast</a></li>
-
-    <!-- <li><a href="https://www.durhamabc.com/news" target="_blank">Durham County Drop Alerts</a></li>
+    <li class="extra-space">
+      <a href="todays_pourcast.html">Today's Pourcast</a>
+      <span style="margin-left:8px; padding:3px 7px; font-size:0.7rem; background:#C19A32; color:#000; border-radius:6px; font-weight:700;">
+        Pourcast+ (Early Access)
+      </span>
+    </li>
 
     <!-- How it Works -->
     <li class="extra-space"><a href="howitworks.html">How it Works</a></li>
@@ -128,36 +129,9 @@
     </li>
   </ul>
 
-  <!--
-  <div id="acc-modal" class="acc-modal" aria-hidden="true" onclick="if(event.target===this) this.style.display='none'">
-    <div class="acc-content" role="dialog" aria-modal="true" aria-label="Weekly Accuracy Chalkboard">
-      <div class="acc-header">
-        <div class="acc-title">Weekly Accuracy — Chalkboard</div>
-        <button class="acc-close" aria-label="Close" onclick="document.getElementById('acc-modal').style.display='none'">✕</button>
-      </div>
-      <img src="weekly_accuracy_chalkboard.png" alt="Weekly Accuracy Chalkboard">
-      <div class="acc-actions">
-        <button onclick="document.getElementById('acc-modal').style.display='none'">Close</button>
-      </div>
-    </div>
-  </div>
-  -->
-
   <div class="footer">
     &copy; 2025 Bourbon Pourcast LLC. All rights reserved.
   </div>
 
-  <!--
-  <script>
-    (function(){
-      const modal = document.getElementById('acc-modal');
-      document.addEventListener('keydown', function(e){
-        if(e.key === 'Escape' && modal.style.display === 'flex'){
-          modal.style.display = 'none';
-        }
-      });
-    })();
-  </script>
-  -->
 </body>
 </html>
