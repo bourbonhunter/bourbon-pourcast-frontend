@@ -130,11 +130,10 @@
       overflow: hidden;
     }
 
-    /* The embedded pourcast.html */
     iframe {
       width: 100%;
       border: 0;
-      min-height: 1600px; /* safe default; can adjust */
+      min-height: 1600px;
       background: #fff;
     }
 
@@ -160,9 +159,30 @@
     }
     .links a:hover { text-decoration: underline; }
 
+    /* Yesterday table styling */
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: #fff;
+    }
+    thead tr { background: #f3ead2; }
+    th, td {
+      border: 1px solid rgba(0,0,0,0.10);
+      padding: 8px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th:last-child, td:last-child { text-align: center; width: 140px; }
+    tr:nth-child(even) { background: #fdf8ef; }
+    .result-hit { color: #1a7f37; font-weight: 800; }
+    .result-miss { color: #b42318; font-weight: 800; }
+
     @media (max-width: 860px) {
       .grid { grid-template-columns: 1fr; }
       iframe { min-height: 1900px; }
+      th:last-child, td:last-child { width: 120px; }
     }
   </style>
 </head>
@@ -190,7 +210,6 @@
     <div class="card">
       <h2>How to interpret confidence (high-level)</h2>
       <div class="grid">
-
         <div class="mini">
           <div class="pill">Low</div>
           <h3>Possible, but not yet consistent</h3>
@@ -217,17 +236,45 @@
             Not guaranteed—just the best probability bucket.
           </p>
         </div>
-
       </div>
+
       <div class="divider"></div>
       <p style="margin:10px 0 0 0; font-size:13px; color:#555;">
         We intentionally keep the “how” simple here while we continue tuning accuracy.
       </p>
     </div>
 
+    <!-- NEW: Yesterday’s Allocations table -->
+    <div class="card" id="yesterdaySummaryCard">
+      <h2>Yesterday’s Allocations (Summary)</h2>
+
+      <div class="table-wrap">
+        <table aria-label="Yesterday Allocations Summary">
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Store</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody id="yesterdayTableBody">
+            <tr>
+              <td colspan="3" style="text-align:center; color:#777; padding:12px;">
+                Loading yesterday’s allocations…
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:10px;font-size:13px;color:#555;">
+        Green = correctly predicted · Red = surprise drop
+      </p>
+    </div>
+
     <div class="card embed-wrap">
-      <!-- This stays current automatically because your flow overwrites pourcast.html -->
-      <iframe src="pourcast.html" title="Daily Pourcast (embedded)"></iframe>
+      <!-- stays current automatically because your flow overwrites pourcast.html -->
+      <iframe id="pourcastFrame" src="pourcast.html" title="Daily Pourcast (embedded)"></iframe>
     </div>
 
     <div class="footer">
@@ -235,5 +282,96 @@
     </div>
 
   </div>
+
+  <script>
+  (function () {
+    const iframe = document.getElementById("pourcastFrame");
+    const tbody = document.getElementById("yesterdayTableBody");
+    const summaryCard = document.getElementById("yesterdaySummaryCard");
+    if (!iframe || !tbody) return;
+
+    function esc(s) {
+      return String(s || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    iframe.addEventListener("load", () => {
+      try {
+        const doc = iframe.contentDocument;
+        if (!doc) throw new Error("No iframe document");
+
+        // Clear existing rows
+        tbody.innerHTML = "";
+
+        // Find the "Yesterday's Allocations" section marker (it’s inside a gold pill div)
+        const allDivs = Array.from(doc.querySelectorAll("div"));
+        const yMarker = allDivs.find(d =>
+          (d.textContent || "").trim() === "Yesterday's Allocations"
+        );
+
+        if (!yMarker) {
+          tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;color:#777;padding:12px;'>Could not locate Yesterday’s Allocations in pourcast.html.</td></tr>";
+          return;
+        }
+
+        // Walk forward collecting Brand H3 + UL list items until we hit "Today's Pourcast"
+        let currentBrand = "";
+        let el = yMarker.parentElement ? yMarker.parentElement.nextElementSibling : yMarker.nextElementSibling;
+
+        let rowCount = 0;
+
+        while (el) {
+          const text = (el.textContent || "").trim();
+
+          // Stop when we hit the Today's Pourcast pill
+          if (text === "Today's Pourcast") break;
+
+          if (el.tagName === "H3") {
+            currentBrand = (el.textContent || "").trim();
+          }
+
+          if (el.tagName === "UL") {
+            const lis = Array.from(el.querySelectorAll("li"));
+            lis.forEach(li => {
+              const store = (li.textContent || "").trim();
+              const color = (li.style && li.style.color) ? li.style.color.toLowerCase() : "";
+
+              const isHit = (color === "#1a7f37");     // predicted (green)
+              const isMiss = (color === "#b42318");    // surprise (red)
+
+              const cls = isHit ? "result-hit" : (isMiss ? "result-miss" : "");
+              const label = isHit ? "✔︎ Predicted" : (isMiss ? "✖︎ Surprise" : "—");
+
+              tbody.insertAdjacentHTML("beforeend", `
+                <tr>
+                  <td>${esc(currentBrand)}</td>
+                  <td>${esc(store)}</td>
+                  <td class="${cls}">${esc(label)}</td>
+                </tr>
+              `);
+              rowCount++;
+            });
+          }
+
+          el = el.nextElementSibling;
+        }
+
+        if (rowCount === 0) {
+          tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;color:#777;padding:12px;'>No New Drops Detected.</td></tr>";
+        }
+
+      } catch (e) {
+        console.warn("Could not build Yesterday’s table:", e);
+        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;color:#777;padding:12px;'>Could not render table (see console).</td></tr>";
+        // If you prefer, you can hide the summary card on failure:
+        // summaryCard.style.display = "none";
+      }
+    });
+  })();
+  </script>
 </body>
 </html>
