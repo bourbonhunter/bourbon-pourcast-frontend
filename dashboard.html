@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Access – Bourbon Pourcast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script
+    async
+    crossorigin="anonymous"
+    data-clerk-publishable-key="pk_test_XXXXXXXXXXXX"
+    src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js">
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      margin: 0;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .card {
+      max-width: 480px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h2>Dashboard Access</h2>
+    <div id="sign-in"></div>
+    <p style="margin-top:16px; font-size:14px; color:#bbb;">
+      Sign in to view Bourbon Pourcast dashboard reports.
+    </p>
+  </div>
+
+  <script>
+    window.addEventListener("load", async () => {
+      await Clerk.load();
+
+      // If already signed in, go straight to the generated dashboard
+      if (Clerk.user) {
+        window.location.replace("drop_history_dashboard.html");
+        return;
+      }
+
+      // Otherwise show sign-in
+      Clerk.mountSignIn(document.getElementById("sign-in"), {
+        redirectUrl: window.location.origin + window.location.pathname
+      });
+    });
+  </script>
+</body>
+</html>
