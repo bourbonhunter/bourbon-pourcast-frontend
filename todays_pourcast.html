@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Today's Pourcast – Bourbon Pourcast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script
+    async
+    crossorigin="anonymous"
+    data-clerk-publishable-key="pk_test_REPLACE_WITH_YOUR_KEY"
+    src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js">
+  </script>
+
+  <style>
+    body { font-family: Arial, sans-serif; background:#0f0f0f; color:#fff; margin:0; padding:40px 20px; text-align:center; }
+    .card { max-width:520px; margin:0 auto; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:12px; padding:24px; }
+    a { color:#ffd700; text-decoration:none; }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h2 style="margin-top:0;">Today's Pourcast</h2>
+    <div id="sign-in"></div>
+    <p style="margin-top:16px; font-size:14px; color:#bbb;">
+      Sign in to view Today's Pourcast.
+    </p>
+    <p style="margin-top:10px; font-size:13px;">
+      <a href="index.html">← Back to Home</a>
+    </p>
+  </div>
+
+  <script>
+    window.addEventListener("load", async () => {
+      await Clerk.load();
+
+      // If already signed in, go straight to the generated Today’s Pourcast page
+      if (Clerk.user) {
+        window.location.replace("pourcast.html");
+        return;
+      }
+
+      // Otherwise show sign-in
+      Clerk.mountSignIn(document.getElementById("sign-in"), {
+        redirectUrl: window.location.origin + window.location.pathname
+      });
+    });
+  </script>
+</body>
+</html>
