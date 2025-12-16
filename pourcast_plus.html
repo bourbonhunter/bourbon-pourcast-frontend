@@ -244,7 +244,7 @@
       </p>
     </div>
 
-    <!-- NEW: Yesterday’s Allocations table -->
+    <!-- Yesterday’s Allocations table -->
     <div class="card" id="yesterdaySummaryCard">
       <h2>Yesterday’s Allocations (Summary)</h2>
 
@@ -287,7 +287,6 @@
   (function () {
     const iframe = document.getElementById("pourcastFrame");
     const tbody = document.getElementById("yesterdayTableBody");
-    const summaryCard = document.getElementById("yesterdaySummaryCard");
     if (!iframe || !tbody) return;
 
     function esc(s) {
@@ -299,49 +298,58 @@
         .replaceAll("'", "&#039;");
     }
 
+    function setMessage(msg) {
+      tbody.innerHTML =
+        "<tr><td colspan='3' style='text-align:center; color:#777; padding:12px;'>" +
+        esc(msg) +
+        "</td></tr>";
+    }
+
     iframe.addEventListener("load", () => {
       try {
         const doc = iframe.contentDocument;
-        if (!doc) throw new Error("No iframe document");
+        if (!doc || !doc.body) throw new Error("No iframe document/body");
 
-        // Clear existing rows
+        // reset
         tbody.innerHTML = "";
 
-        // Find the "Yesterday's Allocations" section marker (it’s inside a gold pill div)
-        const allDivs = Array.from(doc.querySelectorAll("div"));
-        const yMarker = allDivs.find(d =>
-          (d.textContent || "").trim() === "Yesterday's Allocations"
-        );
+        // Work with direct children of pourcast.html body (matches your generator layout)
+        const kids = Array.from(doc.body.children);
 
-        if (!yMarker) {
-          tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;color:#777;padding:12px;'>Could not locate Yesterday’s Allocations in pourcast.html.</td></tr>";
+        const isYesterdayPill = (el) =>
+          (el.textContent || "").includes("Yesterday's Allocations");
+
+        const isTodayPill = (el) =>
+          (el.textContent || "").includes("Today's Pourcast");
+
+        const yIdx = kids.findIndex(isYesterdayPill);
+        if (yIdx === -1) {
+          setMessage("Could not locate Yesterday’s Allocations in pourcast.html.");
           return;
         }
 
-        // Walk forward collecting Brand H3 + UL list items until we hit "Today's Pourcast"
         let currentBrand = "";
-        let el = yMarker.parentElement ? yMarker.parentElement.nextElementSibling : yMarker.nextElementSibling;
-
         let rowCount = 0;
 
-        while (el) {
-          const text = (el.textContent || "").trim();
+        for (let i = yIdx + 1; i < kids.length; i++) {
+          const el = kids[i];
 
-          // Stop when we hit the Today's Pourcast pill
-          if (text === "Today's Pourcast") break;
+          if (isTodayPill(el)) break;
 
           if (el.tagName === "H3") {
             currentBrand = (el.textContent || "").trim();
+            continue;
           }
 
           if (el.tagName === "UL") {
             const lis = Array.from(el.querySelectorAll("li"));
-            lis.forEach(li => {
+            for (const li of lis) {
               const store = (li.textContent || "").trim();
-              const color = (li.style && li.style.color) ? li.style.color.toLowerCase() : "";
 
-              const isHit = (color === "#1a7f37");     // predicted (green)
-              const isMiss = (color === "#b42318");    // surprise (red)
+              // Inline styles in pourcast.html look like: "color:#1a7f37; font-weight:700;"
+              const styleAttr = (li.getAttribute("style") || "").toLowerCase();
+              const isHit = styleAttr.includes("#1a7f37");
+              const isMiss = styleAttr.includes("#b42318");
 
               const cls = isHit ? "result-hit" : (isMiss ? "result-miss" : "");
               const label = isHit ? "✔︎ Predicted" : (isMiss ? "✖︎ Surprise" : "—");
@@ -353,22 +361,19 @@
                   <td class="${cls}">${esc(label)}</td>
                 </tr>
               `);
-              rowCount++;
-            });
-          }
 
-          el = el.nextElementSibling;
+              rowCount++;
+            }
+          }
         }
 
         if (rowCount === 0) {
-          tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;color:#777;padding:12px;'>No New Drops Detected.</td></tr>";
+          setMessage("No New Drops Detected.");
         }
 
       } catch (e) {
         console.warn("Could not build Yesterday’s table:", e);
-        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;color:#777;padding:12px;'>Could not render table (see console).</td></tr>";
-        // If you prefer, you can hide the summary card on failure:
-        // summaryCard.style.display = "none";
+        setMessage("Could not render table (see console).");
       }
     });
   })();
