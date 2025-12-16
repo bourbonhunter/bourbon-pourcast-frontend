@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pourcast+ – Bourbon Pourcast</title>
+
+  <style>
+    :root{
+      --gold: #C19A32;
+      --ink: #111;
+      --muted: #666;
+      --bg: #f7f7f7;
+      --card: #fff;
+      --border: rgba(0,0,0,0.10);
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 14px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    .shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 22px 14px 40px 14px;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 140px;
+      height: 140px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #fff;
+      display: grid;
+      place-items: center;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(193,154,50,0.14);
+      border: 1px solid rgba(193,154,50,0.35);
+      color: #5b3b00;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .card h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .mini {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .mini .pill {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.06);
+      margin-bottom: 8px;
+    }
+
+    .mini h3 {
+      margin: 0 0 6px 0;
+      font-size: 15px;
+    }
+
+    .mini p {
+      margin: 0;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(0,0,0,0.08);
+      margin: 12px 0 0 0;
+    }
+
+    .embed-wrap {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    /* The embedded pourcast.html */
+    iframe {
+      width: 100%;
+      border: 0;
+      min-height: 1600px; /* safe default; can adjust */
+      background: #fff;
+    }
+
+    .footer {
+      text-align: center;
+      color: #888;
+      font-size: 12px;
+      margin-top: 16px;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .links a {
+      color: #6a4a00;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .links a:hover { text-decoration: underline; }
+
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      iframe { min-height: 1900px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+
+    <div class="header">
+      <div class="logo">
+        <img src="logo.png" alt="Bourbon Pourcast Logo">
+      </div>
+
+      <div class="badge">Pourcast+ (Early Access)</div>
+      <p class="subtitle">
+        A cleaner web view of Today’s Pourcast + Yesterday’s Allocations for context.
+      </p>
+
+      <div class="links">
+        <a href="index.html">← Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="drop_day_tracker.pdf">Drop Days Tracker (PDF)</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>How to interpret confidence (high-level)</h2>
+      <div class="grid">
+
+        <div class="mini">
+          <div class="pill">Low</div>
+          <h3>Possible, but not yet consistent</h3>
+          <p>
+            The store’s drop pattern is still forming or has been irregular recently.
+            Treat as “keep an eye on it,” not a lock.
+          </p>
+        </div>
+
+        <div class="mini">
+          <div class="pill">Medium</div>
+          <h3>Good signal from recent history</h3>
+          <p>
+            Recent drops suggest today is a reasonable candidate.
+            Expect some misses—this tier is where surprises still happen.
+          </p>
+        </div>
+
+        <div class="mini">
+          <div class="pill">High</div>
+          <h3>Strong pattern alignment</h3>
+          <p>
+            The store has a reliable cadence and a strong day-of-week signal.
+            Not guaranteed—just the best probability bucket.
+          </p>
+        </div>
+
+      </div>
+      <div class="divider"></div>
+      <p style="margin:10px 0 0 0; font-size:13px; color:#555;">
+        We intentionally keep the “how” simple here while we continue tuning accuracy.
+      </p>
+    </div>
+
+    <div class="card embed-wrap">
+      <!-- This stays current automatically because your flow overwrites pourcast.html -->
+      <iframe src="pourcast.html" title="Daily Pourcast (embedded)"></iframe>
+    </div>
+
+    <div class="footer">
+      © 2025 Bourbon Pourcast LLC — Pourcast+ is in early access while accuracy continues improving.
+    </div>
+
+  </div>
+</body>
+</html>
