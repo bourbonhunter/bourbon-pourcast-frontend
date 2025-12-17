@@ -133,7 +133,7 @@
     iframe {
       width: 100%;
       border: 0;
-      min-height: 1600px;
+      min-height: 1500px;
       background: #fff;
     }
 
@@ -159,7 +159,7 @@
     }
     .links a:hover { text-decoration: underline; }
 
-    /* Yesterday table styling */
+    /* Table styling */
     .table-wrap { overflow-x: auto; }
     table {
       width: 100%;
@@ -174,15 +174,15 @@
       vertical-align: top;
       text-align: left;
     }
-    th:last-child, td:last-child { text-align: center; width: 140px; }
+    th:last-child, td:last-child { text-align: center; width: 170px; }
     tr:nth-child(even) { background: #fdf8ef; }
     .result-hit { color: #1a7f37; font-weight: 800; }
     .result-miss { color: #b42318; font-weight: 800; }
 
     @media (max-width: 860px) {
       .grid { grid-template-columns: 1fr; }
-      iframe { min-height: 1900px; }
-      th:last-child, td:last-child { width: 120px; }
+      iframe { min-height: 1850px; }
+      th:last-child, td:last-child { width: 140px; }
     }
   </style>
 </head>
@@ -244,6 +244,33 @@
       </p>
     </div>
 
+    <!-- Today's Pourcast table -->
+    <div class="card" id="todaySummaryCard">
+      <h2>Today’s Pourcast (Summary)</h2>
+
+      <div class="table-wrap">
+        <table aria-label="Today Pourcast Summary">
+          <thead>
+            <tr>
+              <th>Store</th>
+              <th>Signal</th>
+            </tr>
+          </thead>
+          <tbody id="todayTableBody">
+            <tr>
+              <td colspan="2" style="text-align:center; color:#777; padding:12px;">
+                Loading today’s pourcast…
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:10px;font-size:13px;color:#555;">
+        “Signal” is a high-level indicator only (we don’t expose internal weighting).
+      </p>
+    </div>
+
     <!-- Yesterday’s Allocations table -->
     <div class="card" id="yesterdaySummaryCard">
       <h2>Yesterday’s Allocations (Summary)</h2>
@@ -286,8 +313,9 @@
   <script>
   (function () {
     const iframe = document.getElementById("pourcastFrame");
-    const tbody = document.getElementById("yesterdayTableBody");
-    if (!iframe || !tbody) return;
+    const yTbody = document.getElementById("yesterdayTableBody");
+    const tTbody = document.getElementById("todayTableBody");
+    if (!iframe || !yTbody || !tTbody) return;
 
     function esc(s) {
       return String(s || "")
@@ -298,11 +326,27 @@
         .replaceAll("'", "&#039;");
     }
 
-    function setMessage(msg) {
+    function setMessage(tbody, msg, colspan) {
       tbody.innerHTML =
-        "<tr><td colspan='3' style='text-align:center; color:#777; padding:12px;'>" +
+        "<tr><td colspan='" + colspan + "' style='text-align:center; color:#777; padding:12px;'>" +
         esc(msg) +
         "</td></tr>";
+    }
+
+    function hideYesterdaySectionInsideIframe(doc) {
+      // Hide everything from the "Yesterday's Allocations" pill up to (but not including) the "Today's Pourcast" pill.
+      const kids = Array.from(doc.body.children);
+      const isYesterdayPill = (el) => (el.textContent || "").includes("Yesterday's Allocations");
+      const isTodayPill = (el) => (el.textContent || "").includes("Today's Pourcast");
+
+      const yIdx = kids.findIndex(isYesterdayPill);
+      if (yIdx === -1) return;
+
+      for (let i = yIdx; i < kids.length; i++) {
+        const el = kids[i];
+        if (isTodayPill(el)) break;
+        el.style.display = "none";
+      }
     }
 
     iframe.addEventListener("load", () => {
@@ -310,70 +354,119 @@
         const doc = iframe.contentDocument;
         if (!doc || !doc.body) throw new Error("No iframe document/body");
 
-        // reset
-        tbody.innerHTML = "";
-
-        // Work with direct children of pourcast.html body (matches your generator layout)
         const kids = Array.from(doc.body.children);
 
-        const isYesterdayPill = (el) =>
-          (el.textContent || "").includes("Yesterday's Allocations");
-
-        const isTodayPill = (el) =>
-          (el.textContent || "").includes("Today's Pourcast");
+        const isYesterdayPill = (el) => (el.textContent || "").includes("Yesterday's Allocations");
+        const isTodayPill = (el) => (el.textContent || "").includes("Today's Pourcast");
 
         const yIdx = kids.findIndex(isYesterdayPill);
-        if (yIdx === -1) {
-          setMessage("Could not locate Yesterday’s Allocations in pourcast.html.");
-          return;
-        }
+        const tIdx = kids.findIndex(isTodayPill);
 
-        let currentBrand = "";
-        let rowCount = 0;
+        // ---- Build TODAY table ----
+        tTbody.innerHTML = "";
+        if (tIdx === -1) {
+          setMessage(tTbody, "Could not locate Today’s Pourcast in pourcast.html.", 2);
+        } else {
+          let rowCount = 0;
 
-        for (let i = yIdx + 1; i < kids.length; i++) {
-          const el = kids[i];
+          // Find the UL of stores after the Today's Pourcast pill
+          for (let i = tIdx + 1; i < kids.length; i++) {
+            const el = kids[i];
 
-          if (isTodayPill(el)) break;
+            // stop if we hit the footer divider / end
+            // (your generator uses <hr> before footer)
+            if (el.tagName === "HR") break;
 
-          if (el.tagName === "H3") {
-            currentBrand = (el.textContent || "").trim();
-            continue;
-          }
+            // If it's a message paragraph (no stores today / weekend paused), show it
+            if (el.tagName === "P" && rowCount === 0) {
+              const msg = (el.textContent || "").trim();
+              if (msg) {
+                setMessage(tTbody, msg, 2);
+                rowCount = -999; // prevents "No drops" overwrite below
+                break;
+              }
+            }
 
-          if (el.tagName === "UL") {
-            const lis = Array.from(el.querySelectorAll("li"));
-            for (const li of lis) {
-              const store = (li.textContent || "").trim();
+            if (el.tagName === "UL") {
+              const lis = Array.from(el.querySelectorAll("li"));
+              if (!lis.length) continue;
 
-              // Inline styles in pourcast.html look like: "color:#1a7f37; font-weight:700;"
-              const styleAttr = (li.getAttribute("style") || "").toLowerCase();
-              const isHit = styleAttr.includes("#1a7f37");
-              const isMiss = styleAttr.includes("#b42318");
+              for (const li of lis) {
+                const store = (li.textContent || "").trim();
+                // We keep "Signal" intentionally vague.
+                const signal = "Active";
 
-              const cls = isHit ? "result-hit" : (isMiss ? "result-miss" : "");
-              const label = isHit ? "✔︎ Predicted" : (isMiss ? "✖︎ Surprise" : "—");
-
-              tbody.insertAdjacentHTML("beforeend", `
-                <tr>
-                  <td>${esc(currentBrand)}</td>
-                  <td>${esc(store)}</td>
-                  <td class="${cls}">${esc(label)}</td>
-                </tr>
-              `);
-
-              rowCount++;
+                tTbody.insertAdjacentHTML("beforeend", `
+                  <tr>
+                    <td>${esc(store)}</td>
+                    <td style="text-align:center; font-weight:800; color:#6a4a00;">${esc(signal)}</td>
+                  </tr>
+                `);
+                rowCount++;
+              }
+              break; // first UL under Today's is the store list
             }
           }
+
+          if (rowCount === 0) {
+            setMessage(tTbody, "No drops in the Pourcast for today. Please check back tomorrow.", 2);
+          }
         }
 
-        if (rowCount === 0) {
-          setMessage("No New Drops Detected.");
+        // ---- Build YESTERDAY table ----
+        yTbody.innerHTML = "";
+        if (yIdx === -1) {
+          setMessage(yTbody, "Could not locate Yesterday’s Allocations in pourcast.html.", 3);
+        } else {
+          let currentBrand = "";
+          let rowCount = 0;
+
+          for (let i = yIdx + 1; i < kids.length; i++) {
+            const el = kids[i];
+
+            if (isTodayPill(el)) break;
+
+            if (el.tagName === "H3") {
+              currentBrand = (el.textContent || "").trim();
+              continue;
+            }
+
+            if (el.tagName === "UL") {
+              const lis = Array.from(el.querySelectorAll("li"));
+              for (const li of lis) {
+                const store = (li.textContent || "").trim();
+                const styleAttr = (li.getAttribute("style") || "").toLowerCase();
+                const isHit = styleAttr.includes("#1a7f37");
+                const isMiss = styleAttr.includes("#b42318");
+
+                const cls = isHit ? "result-hit" : (isMiss ? "result-miss" : "");
+                const label = isHit ? "✔︎ Predicted" : (isMiss ? "✖︎ Surprise" : "—");
+
+                yTbody.insertAdjacentHTML("beforeend", `
+                  <tr>
+                    <td>${esc(currentBrand)}</td>
+                    <td>${esc(store)}</td>
+                    <td class="${cls}">${esc(label)}</td>
+                  </tr>
+                `);
+
+                rowCount++;
+              }
+            }
+          }
+
+          if (rowCount === 0) {
+            setMessage(yTbody, "No New Drops Detected.", 3);
+          }
         }
+
+        // ---- Hide duplicate Yesterday section inside the embedded page ----
+        hideYesterdaySectionInsideIframe(doc);
 
       } catch (e) {
-        console.warn("Could not build Yesterday’s table:", e);
-        setMessage("Could not render table (see console).");
+        console.warn("Pourcast+ tables failed:", e);
+        setMessage(tTbody, "Could not render (see console).", 2);
+        setMessage(yTbody, "Could not render (see console).", 3);
       }
     });
   })();
