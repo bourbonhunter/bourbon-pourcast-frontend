@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-mecvJ_1-2ATM-vr5t1xML.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}}; 
+  plausible.init()
+</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pourcast</title>
+  <style>
+    html, body { height: 100%; }
+    body {
+      font-family: Georgia, serif;
+      text-align: center;
+      background: url('background.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .logo { margin: 20px auto 10px; width: 250px; height: 250px; }
+    .tagline { font-size: 1.2rem; font-style: italic; margin-top: 8px; color: #ffd700; }
+
+    h2 {
+      font-size: 1.8rem;
+      margin: 40px 0 10px;
+      border-bottom: 2px solid #ccc;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    ul { list-style-type: none; padding: 0; margin: 20px 0 40px; }
+    li { font-size: 1.2rem; margin: 14px 0; }
+    li.extra-space { margin-top: 28px; }
+
+    a { color: #ffd700; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .footer { font-size: 0.8rem; margin-top: 40px; padding-bottom: 30px; color: #ccc; }
+    .fb-icon { width: 20px; height: 20px; vertical-align: middle; margin-right: 6px; }
+
+    /* (kept CSS; harmless even when modal is disabled) */
+    .btn-accuracy {
+      background:#111; color:#fff; border:none; padding:10px 14px; border-radius:10px;
+      font-weight:600; box-shadow:0 4px 12px rgba(0,0,0,.15); cursor:pointer;
+      margin-top: 10px;
+    }
+    .btn-accuracy:hover { opacity:.9; }
+
+    .acc-modal {
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.55); z-index: 9999; padding: 16px;
+    }
+    .acc-content {
+      width: min(900px, 95vw); max-height: 90vh; background: #111; border-radius: 14px; overflow: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4); padding: 12px; border: 1px solid rgba(255,255,255,.12);
+    }
+    .acc-header {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px;
+      padding: 2px 6px 6px 6px; border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .acc-title { font-size: 1.1rem; font-weight: 700; color: #ffd166; }
+    .acc-close {
+      background: transparent; border: none; color: #fff; font-size: 1.4rem; cursor: pointer;
+    }
+    .acc-content img { width: 100%; height: auto; display: block; border-radius: 8px; }
+
+    .acc-actions { display: flex; justify-content: center; margin-top: 10px; }
+    .acc-actions button {
+      background:#fff; border:none; border-radius:8px; padding:8px 12px; cursor:pointer; color:#111;
+      font-weight:600;
+    }
+
+    @media (max-width: 820px) {
+      .logo { width: 200px; height: 200px; }
+      li { font-size: 1.05rem; }
+      .btn-accuracy { padding: 9px 12px; }
+      .acc-title { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Centered logo -->
+  <div class="logo">
+    <img src="logo.png" alt="Pourcast Logo" style="width:100%; height:100%;">
+  </div>
+
+  <!-- Tagline -->
+  <div class="tagline">We find the good stuff for you!</div>
+
+  <h2>Current Pourcasts</h2>
+  <ul>
+    <li><a href="search_results.html">Wake County Daily Allocations Report</a></li>
+    <li><a href="drop_day_tracker.pdf">Wake County Drop Days Tracker</a></li>
+    <li><a href="ncabc_inventory_report.html">NC ABC Inventory Tracker</a></li>
+
+    <!-- News link -->
+    <li class="extra-space">
+      <a href="dashboard.html">New Dashboard Reporting!</a>
+      <span style="margin-left:8px; padding:3px 7px; font-size:0.7rem; background:#C19A32; color:#000; border-radius:6px; font-weight:700;">
+        Pourcast+ (Early Access)
+      </span>
+    </li>  
+    
+    <!-- New Pourcast Protected link -->
+    <li class="extra-space">
+      <a href="todays_pourcast.html">Today's Pourcast</a>
+      <span style="margin-left:8px; padding:3px 7px; font-size:0.7rem; background:#C19A32; color:#000; border-radius:6px; font-weight:700;">
+        Pourcast+ (Early Access)
+      </span>
+    </li>
+
+    <!-- Durham Drop Alerts (Free) -->
+    <li>
+      <a href="durham_drop_alerts.html">Durham Drop Alerts</a>
+      <span style="margin-left:8px; padding:3px 7px; font-size:0.7rem; background:#9BE564; color:#000; border-radius:6px; font-weight:700;">
+        Free
+      </span>
+    </li>
+
+
+    <!-- How it Works -->
+    <li class="extra-space"><a href="howitworks.html">How it Works</a></li>
+
+    <!-- Facebook link -->
+    <li>
+      <a href="https://www.facebook.com/BourbonPourcast" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg" alt="Facebook" class="fb-icon">
+        Follow us on Facebook
+      </a>
+    </li>
+  </ul>
+
+  <div class="footer">
+    &copy; 2025 Bourbon Pourcast LLC. All rights reserved.
+  </div>
+
+</body>
+</html>
