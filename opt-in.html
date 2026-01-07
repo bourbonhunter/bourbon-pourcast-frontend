@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bourbon Pourcast SMS Opt-In</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; background:#f7f7f7; margin:0; color:#111; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 22px 16px 40px; }
+    .card { background:#fff; border:1px solid #eee; border-radius:16px; padding:18px; box-shadow:0 0 12px rgba(0,0,0,0.04); }
+    h1 { margin:0 0 6px 0; font-size: 22px; }
+    .sub { color:#666; margin: 0 0 14px 0; font-size: 13px; line-height:1.4; }
+    label { display:block; font-weight:700; margin-top: 12px; }
+    input[type="tel"] { width: 100%; padding: 12px; border-radius: 10px; border:1px solid #ddd; font-size: 16px; box-sizing:border-box; margin-top:6px; }
+    .chk { margin-top: 12px; display:flex; gap:10px; align-items:flex-start; }
+    .chk input { margin-top: 3px; }
+    .fine { color:#555; font-size: 12px; line-height:1.45; margin-top:10px; }
+    .links a { color:#C19A32; text-decoration:none; font-weight:700; }
+    .btn { margin-top: 14px; width:100%; padding: 12px 14px; border-radius: 12px; border:none; background:#111; color:#fff; font-weight:800; cursor:pointer; font-size: 15px; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .err { color:#b00020; font-size: 13px; margin-top: 10px; display:none; }
+    .ok { background:#f3f8ef; border:1px solid #d8e8cf; color:#1b5e20; padding:12px; border-radius:12px; margin-top: 12px; display:none; }
+    .foot { text-align:center; color:#777; font-size: 12px; margin-top: 14px; }
+    .pill { display:inline-block; padding: 4px 10px; border-radius:999px; background:#FFF7E0; border:1px solid #F3E1B0; font-size:12px; font-weight:800; color:#333; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:12px;">
+      <div class="pill">Bourbon Pourcast</div>
+    </div>
+
+    <div class="card">
+      <h1>SMS Drop Alerts (Opt-In)</h1>
+      <p class="sub">
+        Get a text when Durham ABC posts a bourbon allocation / drop announcement.
+        <br><strong>Informational alerts only</strong> (not promotional marketing).
+      </p>
+
+      <form id="optinForm" novalidate>
+        <label for="phone">Mobile phone number</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          inputmode="tel"
+          placeholder="+1 919 555 1234"
+          autocomplete="tel"
+          required
+        />
+
+        <div class="chk">
+          <input id="consent" type="checkbox" />
+          <div>
+            <div style="font-weight:800;">SMS consent</div>
+            <div class="fine">
+              By providing your phone number, you agree to receive <strong>recurring SMS alerts</strong> from Bourbon Pourcast about bourbon drop announcements.
+              <strong>Message &amp; data rates may apply.</strong> <strong>Message frequency varies.</strong>
+              Reply <strong>STOP</strong> to opt out, <strong>HELP</strong> for help.
+              Consent is not a condition of purchase.
+            </div>
+          </div>
+        </div>
+
+        <div class="chk">
+          <input id="age" type="checkbox" />
+          <div>
+            <div style="font-weight:800;">Age confirmation</div>
+            <div class="fine">I confirm I am at least <strong>18 years old</strong>.</div>
+          </div>
+        </div>
+
+        <div class="links fine" style="margin-top:10px;">
+          By opting in, you agree to our
+          <a href="/terms.html" target="_blank" rel="noopener">Terms</a>
+          and acknowledge our
+          <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+        </div>
+
+        <button class="btn" id="submitBtn" type="submit">Request SMS Alerts</button>
+
+        <div class="err" id="err"></div>
+
+        <div class="ok" id="ok">
+          ✅ Thanks! Your request was received on this device.
+          <div style="margin-top:6px;color:#2e5a2f;font-size:12px;line-height:1.45;">
+            <strong>Note:</strong> This is a starter opt-in page. We’ll enable live enrollment once SMS is fully turned on.
+            Until then, no texts will be sent unless you’re added as an internal tester.
+          </div>
+        </div>
+      </form>
+
+      <div class="foot">Powered by Bourbon Pourcast</div>
+    </div>
+  </div>
+
+  <script>
+    function normalizePhone(raw) {
+      const s = (raw || "").trim();
+      // very light normalization: allow + and digits only
+      return s.replace(/[^\d+]/g, "");
+    }
+
+    document.getElementById("optinForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const phoneRaw = document.getElementById("phone").value;
+      const phone = normalizePhone(phoneRaw);
+      const consent = document.getElementById("consent").checked;
+      const age = document.getElementById("age").checked;
+
+      const err = document.getElementById("err");
+      const ok = document.getElementById("ok");
+
+      err.style.display = "none";
+      ok.style.display = "none";
+      err.textContent = "";
+
+      // Basic E.164-ish check for US numbers:
+      // +1 followed by 10 digits => length 12, or +xxxxxxxxxxx for other.
+      const looksValid =
+        phone.startsWith("+") && phone.length >= 11 && phone.length <= 16;
+
+      if (!looksValid) {
+        err.textContent = "Please enter a valid phone number in international format (example: +19195551234).";
+        err.style.display = "block";
+        return;
+      }
+
+      if (!consent) {
+        err.textContent = "Please check the SMS consent box to opt in.";
+        err.style.display = "block";
+        return;
+      }
+
+      if (!age) {
+        err.textContent = "Please confirm you are at least 18 years old.";
+        err.style.display = "block";
+        return;
+      }
+
+      // No backend yet — store locally so you can demonstrate a flow if needed.
+      const payload = {
+        phone,
+        consent: true,
+        age18: true,
+        ts: new Date().toISOString()
+      };
+      try {
+        localStorage.setItem("bourbonpourcast_sms_optin", JSON.stringify(payload));
+      } catch (e) {}
+
+      ok.style.display = "block";
+      document.getElementById("submitBtn").disabled = true;
+    });
+  </script>
+</body>
+</html>
