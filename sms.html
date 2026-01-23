@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bourbon Pourcast SMS Alerts</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f7f7f7;margin:0;padding:24px;color:#111}
+    .card{max-width:760px;margin:0 auto;background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 18px rgba(0,0,0,.06)}
+    h1{margin:0 0 8px 0;color:#c58f01}
+    .muted{color:#555;font-size:14px;line-height:1.45}
+    label{display:block;margin-top:12px;font-weight:700}
+    input[type="text"],input[type="tel"],input[type="email"]{width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;margin-top:6px}
+    .checkbox{margin-top:14px;padding:12px;border:1px solid #eee;border-radius:12px;background:#fcfcfc}
+    .checkbox label{font-weight:400;margin:0}
+    .btn{margin-top:14px;display:inline-block;background:#C19A32;color:#000;text-decoration:none;border:0;padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer}
+    .links{margin-top:14px;font-size:14px}
+    .links a{color:#c58f01;text-decoration:none;font-weight:700}
+    .fineprint{margin-top:14px;color:#666;font-size:12px;line-height:1.4}
+    .box{margin-top:14px;padding:12px;border-radius:12px;background:#fff7e0;border:1px solid #f3e1b0}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="/logo.png" alt="Bourbon Pourcast" style="max-width:220px;display:block;margin:0 auto 10px auto;">
+    <h1>SMS Drop Alerts</h1>
+    <div class="muted">
+      Subscribe to Bourbon Pourcast SMS alerts for Durham ABC “Drop Available Now” notifications.
+    </div>
+
+    <!-- NOTE: This is a static example form.
+         If you're collecting signups via Google Form or another provider,
+         keep this page as the public CTA/verification page and link the button to your real form. -->
+    <div class="box">
+      <strong>How to subscribe</strong>
+      <div class="muted" style="margin-top:6px;">
+        Enter your phone number and agree to the consent statement below.
+      </div>
+    </div>
+
+    <!-- If you use Google Forms: replace action with your form URL and turn the inputs into a link/button -->
+    <form action="#" method="post" onsubmit="alert('Demo page: wire this to your real signup flow (Google Form / backend).'); return false;">
+      <label for="phone">Mobile Number</label>
+      <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" required />
+
+      <div class="checkbox">
+        <input id="consent" name="consent" type="checkbox" required />
+        <label for="consent">
+          I agree to receive recurring automated SMS alerts from <strong>Bourbon Pourcast</strong> about Durham ABC drop notifications.
+          <strong>Msg frequency varies</strong> (up to 4 msgs/day). <strong>Msg &amp; data rates may apply.</strong>
+          Reply <strong>STOP</strong> to opt out, <strong>HELP</strong> for help.
+          <span class="links">
+            <a href="/terms">Terms</a> &nbsp;|&nbsp; <a href="/privacy">Privacy Policy</a>
+          </span>
+        </label>
+      </div>
+
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
+
+    <div class="fineprint">
+      You can opt out at any time by replying STOP. For help, reply HELP.
+      This program is operated by Bourbon Pourcast.
+    </div>
+  </div>
+</body>
+</html>
