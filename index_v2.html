@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Plausible (keep if you like) -->
+  <script async src="https://plausible.io/js/pa-mecvJ_1-2ATM-vr5t1xML.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)};
+  </script>
+
+  <title>Bourbon Pourcast — NC Drop Intelligence</title>
+
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --card:#121212;
+      --card2:#0f0f0f;
+      --text:#f4f4f4;
+      --muted:#b7b7b7;
+      --gold:#C19A32;
+      --gold2:#ffd166;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(193,154,50,.22), transparent 55%),
+                  radial-gradient(900px 600px at 80% 20%, rgba(255,209,102,.13), transparent 55%),
+                  linear-gradient(180deg, #070707, #0b0b0b 30%, #070707);
+      color: var(--text);
+      overflow-x:hidden;
+    }
+
+    a{ color: var(--gold2); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{ max-width:1120px; margin:0 auto; padding: 26px 18px 60px; }
+
+    /* Top bar */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding: 10px 0 18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .brand img{
+      width:44px; height:44px; border-radius:12px; object-fit:contain;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      background:#111;
+      border:1px solid var(--line);
+      padding:6px;
+    }
+    .brand .name{
+      display:flex; flex-direction:column; line-height:1.1;
+    }
+    .brand .name strong{ font-size:15px; letter-spacing:.2px; }
+    .brand .name span{ font-size:12px; color:var(--muted); }
+
+    .nav{
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:13px;
+    }
+    .nav a{
+      color: var(--muted);
+      padding: 8px 10px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+    }
+    .nav a:hover{
+      color: var(--text);
+      border-color: var(--line);
+      text-decoration:none;
+      background: rgba(255,255,255,.03);
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      margin-top: 8px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-left{ padding: 22px 22px 18px; }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; color: var(--muted);
+      padding: 6px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(0,0,0,.25);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--gold);
+      box-shadow: 0 0 18px rgba(193,154,50,.55);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: 34px;
+      letter-spacing: -.6px;
+      line-height: 1.12;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.5;
+      max-width: 58ch;
+      margin-bottom: 16px;
+    }
+
+    .cta-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin: 14px 0 10px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      font-size: 14px;
+      cursor:pointer;
+      text-decoration:none;
+      transition: transform .05s ease, opacity .2s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); text-decoration:none; }
+    .btn-primary{
+      background: var(--gold);
+      color:#0b0b0b;
+      border-color: rgba(193,154,50,.55);
+    }
+    .btn-primary:hover{ opacity:.95; }
+    .btn-secondary{
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+    }
+
+    .micro{
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height:1.35;
+    }
+    .micro a{ color: var(--gold2); }
+
+    /* Right rail */
+    .hero-right{ padding: 18px; }
+    .panel-title{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; margin-bottom: 10px;
+    }
+    .panel-title strong{ font-size: 14px; }
+    .pill{
+      font-size: 12px;
+      color:#0b0b0b;
+      background: var(--gold2);
+      border-radius:999px;
+      padding: 4px 10px;
+      font-weight: 800;
+    }
+
+    .signal-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .stat{
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 10px;
+    }
+    .stat .label{
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+    .stat .value{
+      font-weight: 800;
+      font-size: 13.5px;
+      line-height:1.25;
+    }
+
+    .small-note{
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 12px;
+      line-height:1.35;
+    }
+
+    /* Sections */
+    .section{
+      margin-top: 18px;
+      padding: 18px;
+    }
+    .section h2{
+      margin:0 0 8px;
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    .section p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height:1.55;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top: 12px;
+    }
+    .mini{
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 14px;
+      min-height: 120px;
+    }
+    .mini strong{
+      display:block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .mini .desc{ color: var(--muted); font-size: 13px; line-height:1.45; }
+
+    /* Free vs Premium */
+    .compare{
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1.25fr .85fr .9fr;
+      gap:0;
+    }
+    .row > div{
+      padding: 12px 12px;
+      border-top: 1px solid var(--line);
+      font-size: 13.5px;
+    }
+    .row.head > div{
+      border-top:none;
+      background: rgba(255,255,255,.03);
+      font-weight: 800;
+      color: var(--text);
+    }
+    .row .feat{ color: var(--text); }
+    .yes{ color: #9BE564; font-weight: 800; }
+    .no{ color: rgba(255,255,255,.35); font-weight: 800; }
+    .plus{
+      color: var(--gold2);
+      font-weight: 900;
+    }
+
+    .pricebox{
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 12px;
+      padding: 12px;
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: linear-gradient(135deg, rgba(193,154,50,.18), rgba(255,255,255,.03));
+    }
+    .pricebox .price{
+      font-size: 15px;
+      font-weight: 900;
+    }
+    .pricebox .price span{
+      color: var(--gold2);
+    }
+
+    /* Links block */
+    .link-cards{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:12px;
+      margin-top: 12px;
+    }
+    .link-card{
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 14px;
+    }
+    .link-card .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      margin-bottom: 6px;
+    }
+    .badge{
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius:999px;
+      font-weight: 900;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.35);
+      color: var(--gold2);
+      white-space:nowrap;
+    }
+    .badge.free{ color:#9BE564; }
+    .link-card a{
+      font-weight: 900;
+      color: var(--text);
+      text-decoration:none;
+    }
+    .link-card a:hover{ text-decoration:underline; }
+    .link-card .meta{
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height:1.45;
+      margin-top: 6px;
+    }
+
+    /* Sponsor / Ads */
+    .sponsor{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:12px;
+    }
+    .sponsor .slot{
+      background: rgba(255,255,255,.03);
+      border: 1px dashed rgba(255,255,255,.25);
+      border-radius: var(--radius2);
+      padding: 14px;
+      min-height: 120px;
+    }
+    .sponsor .slot strong{ display:block; margin-bottom:6px; }
+    .sponsor .slot .meta{ color:var(--muted); font-size: 12.5px; line-height:1.45; }
+
+    /* Footer */
+    .footer{
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12.5px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .footer .links{ display:flex; gap:12px; flex-wrap:wrap; }
+    .footer a{ color: var(--muted); }
+    .footer a:hover{ color: var(--text); text-decoration:none; }
+
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+      .signal-grid{ grid-template-columns: 1fr 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .link-cards{ grid-template-columns: 1fr; }
+      .sponsor{ grid-template-columns: 1fr; }
+      h1{ font-size: 30px; }
+    }
+    @media (max-width: 520px){
+      .signal-grid{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Top Bar -->
+    <div class="topbar">
+      <div class="brand">
+        <img src="logo.png" alt="Bourbon Pourcast"/>
+        <div class="name">
+          <strong>Bourbon Pourcast</strong>
+          <span>NC drop intelligence • dashboard-first</span>
+        </div>
+      </div>
+
+      <div class="nav">
+        <a href="howitworks.html">How it works</a>
+        <a href="durham_tiles.html">Durham drops</a>
+        <a href="sms.html">SMS alerts</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="card hero-left">
+        <div class="kicker"><span class="dot"></span> Live monitoring • Wake + Durham + NC signals</div>
+
+        <h1>North Carolina bourbon drops — surfaced fast, with data.</h1>
+        <div class="sub">
+          We track allocations, drop posts, and patterns so you spend less time refreshing and more time finding the good stuff.
+          <br/><br/>
+          <strong>Free</strong> gets you the daily email. <span class="plus">Pourcast+</span> unlocks the complete dashboard, reports, and the option to opt in to SMS alerts.
+        </div>
+
+        <div class="cta-row">
+          <!-- TODO: Set these URLs -->
+          <a class="btn btn-primary" href="#free-email">📧 Free Daily Email</a>
+          <a class="btn btn-secondary" href="#pourcast-plus">⭐ Complete Pourcast and Alerts</a>
+        </div>
+
+        <div class="micro">
+          Free email: 1/day. <span class="plus">Pourcast+</span>: $4.99/month, cancel anytime. SMS opt-in is available to subscribers (never required).
+          <br/>
+          By subscribing you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.
+        </div>
+      </div>
+
+      <div class="card hero-right">
+        <div class="panel-title">
+          <strong>Live Signal</strong>
+          <span class="pill">Updated</span>
+        </div>
+
+        <!-- These can be driven later by a small JSON file (see note below) -->
+        <div class="signal-grid">
+          <div class="stat">
+            <div class="label">Last update (ET)</div>
+            <div class="value" id="sig-updated">—</div>
+          </div>
+          <div class="stat">
+            <div class="label">Drops detected (7d)</div>
+            <div class="value" id="sig-drops7">—</div>
+          </div>
+          <div class="stat">
+            <div class="label">Latest Durham signal</div>
+            <div class="value" id="sig-durham">—</div>
+          </div>
+          <div class="stat">
+            <div class="label">Most active store (30d)</div>
+            <div class="value" id="sig-store">—</div>
+          </div>
+        </div>
+
+        <div class="small-note">
+          Want the full picture? <a href="#pourcast-plus">Pourcast+</a> unlocks Today’s Pourcast, dashboard reporting, drop-day history, and subscriber-only opt-in SMS alerts.
+        </div>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <div class="card section" id="how">
+      <h2>How Bourbon Pourcast works</h2>
+      <p>We monitor public sources, normalize signals, and deliver the parts that matter — with less noise and more reliability.</p>
+
+      <div class="grid-3">
+        <div class="mini">
+          <strong>1) Monitor</strong>
+          <div class="desc">Wake allocations, Durham drop posts, and statewide inventory signals — continuously.</div>
+        </div>
+        <div class="mini">
+          <strong>2) Detect</strong>
+          <div class="desc">New posts, new store locations, and pattern shifts — captured and time-stamped.</div>
+        </div>
+        <div class="mini">
+          <strong>3) Alert</strong>
+          <div class="desc">Free daily email for everyone. <span class="plus">Pourcast+</span> adds the dashboard, reports, and optional SMS opt-in.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Free vs Premium -->
+    <div class="card section" id="pourcast-plus">
+      <h2>Free Daily Email vs Pourcast+</h2>
+      <p>One simple subscription: free gets you the daily email. Everything else is <span class="plus">Pourcast+</span>.</p>
+
+      <div class="compare" role="table" aria-label="Free vs Pourcast+">
+        <div class="row head" role="row">
+          <div role="columnheader">Feature</div>
+          <div role="columnheader">Free Daily Email</div>
+          <div role="columnheader"><span class="plus">Pourcast+</span></div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Daily email summary (1/day)</div>
+          <div class="yes" role="cell">YES</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Today’s Pourcast + full dashboard reporting</div>
+          <div class="no" role="cell">NO</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Wake allocations + drop-day tracker access</div>
+          <div class="no" role="cell">NO</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Subscriber Alerts Center + optional SMS opt-in</div>
+          <div class="no" role="cell">NO</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Durham Drop Alerts tiles page (public)</div>
+          <div class="yes" role="cell">YES</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+      </div>
+
+      <div class="pricebox">
+        <div class="price"><span>Pourcast+</span> — $4.99/month • cancel anytime</div>
+        <!-- TODO: replace with Stripe checkout link when ready -->
+        <a class="btn btn-primary" href="#" onclick="alert('Pourcast+ checkout is coming soon. For now, join the free daily email list below.'); return false;">
+          ⭐ Subscribe (coming soon)
+        </a>
+      </div>
+    </div>
+
+    <!-- Links / Access -->
+    <div class="card section" id="reports">
+      <h2>Reports & Alerts</h2>
+      <p>Quick links. Some are public previews. <span class="plus">Pourcast+</span> unlocks the complete set.</p>
+
+      <div class="link-cards">
+        <div class="link-card">
+          <div class="top">
+            <a href="search_results.html">Wake County Daily Allocations Report</a>
+            <span class="badge">Pourcast+</span>
+          </div>
+          <div class="meta">Full report access is part of <span class="plus">Pourcast+</span>. (Public teaser can remain if you want.)</div>
+        </div>
+
+        <div class="link-card">
+          <div class="top">
+            <a href="drop_day_tracker.pdf">Wake County Drop Days Tracker</a>
+            <span class="badge">Pourcast+</span>
+          </div>
+          <div class="meta">Drop-day patterns and reference tracker. Included with <span class="plus">Pourcast+</span>.</div>
+        </div>
+
+        <div class="link-card">
+          <div class="top">
+            <a href="dashboard.html">Dashboard Reporting</a>
+            <span class="badge">Pourcast+</span>
+          </div>
+          <div class="meta">Your dashboard hub. Clean view, less noise. Included with <span class="plus">Pourcast+</span>.</div>
+        </div>
+
+        <div class="link-card">
+          <div class="top">
+            <a href="sms.html">Register for SMS Drop Alerts</a>
+            <span class="badge">Pourcast+</span>
+          </div>
+          <div class="meta">Subscribers may opt in to SMS alerts (never required). STOP/HELP supported.</div>
+        </div>
+
+        <div class="link-card">
+          <div class="top">
+            <a href="durham_tiles.html">Durham Drop Alerts</a>
+            <span class="badge free">Free preview</span>
+          </div>
+          <div class="meta">Public tiles dashboard of most recent Durham drops. SMS alerts are subscriber opt-in.</div>
+        </div>
+
+        <div class="link-card">
+          <div class="top">
+            <a href="ncabc_inventory_report.html">NC ABC Inventory Tracker</a>
+            <span class="badge free">Free preview</span>
+          </div>
+          <div class="meta">Statewide signals. This can remain public or become <span class="plus">Pourcast+</span> later.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Free Daily Email -->
+    <div class="card section" id="free-email">
+      <h2>Free Daily Email</h2>
+      <p>We’re setting up a simple, low-friction email signup. One email per day. No marketing spam.</p>
+
+      <div class="pricebox" style="margin-top:12px;">
+        <div style="max-width: 70ch;">
+          <div style="font-weight:900;">Launch mode: choose the simplest path</div>
+          <div style="color:var(--muted); font-size:12.5px; margin-top:4px; line-height:1.45;">
+            If you want “simpler than Clerk,” the fastest options are: a Google Form, Mailchimp/ConvertKit hosted form, or Formspree.
+            When you pick one, you’ll paste the URL below.
+          </div>
+        </div>
+
+        <!-- TODO: Set this to your signup URL (Google Form / Mailchimp / ConvertKit / Clerk link) -->
+        <a class="btn btn-primary" href="#" onclick="alert('Free Daily Email signup link not set yet. Add your signup URL in index.html (search for FREE_EMAIL_SIGNUP_URL).'); return false;">
+          📧 Join the free list (coming soon)
+        </a>
+      </div>
+
+      <div class="small-note" style="margin-top:12px;">
+        Already live: <a href="sms.html">SMS page</a>, <a href="privacy.html">Privacy</a>, <a href="terms.html">Terms</a>.
+      </div>
+    </div>
+
+    <!-- Sponsor / Ads -->
+    <div class="card section" id="sponsor">
+      <h2>Sponsor / Ads (clean + non-intrusive)</h2>
+      <p>We’ll keep ads tasteful and below the fold. Sponsor tiles and (later) a single ad slot similar to Buffalo Trace Daily.</p>
+
+      <div class="sponsor">
+        <div class="slot">
+          <strong>Sponsored by (placeholder)</strong>
+          <div class="meta">
+            This is where a single sponsor tile can live (local business, event, club, etc.). Clean, no popups, no autoplay.
+            <br/><br/>
+            <em>Future:</em> swap this block for AdSense (or another network) with a single responsive slot.
+          </div>
+        </div>
+
+        <div class="slot">
+          <strong>Advertise with Bourbon Pourcast</strong>
+          <div class="meta">
+            Want this audience? Email <a href="mailto:support@bourbonpourcast.com">support@bourbonpourcast.com</a>.
+            <br/><br/>
+            We’ll offer: sponsor tiles, newsletter sponsorships, and one non-intrusive display slot.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div>© 2026 Bourbon Pourcast LLC. Independent project. Not affiliated with NC ABC.</div>
+      <div class="links">
+        <a href="howitworks.html">How it works</a>
+        <a href="sms.html">SMS</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="https://www.facebook.com/BourbonPourcast" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // OPTIONAL: Live Signal via JSON (drop in later)
+    // If you create /site_status.json via GitHub Actions, this will auto-populate the Live Signal strip.
+    // Example JSON:
+    // {
+    //   "updated_et": "2026-01-25 08:12 ET",
+    //   "drops_7d": "7",
+    //   "latest_durham": "Store #3 @ 12:14 PM",
+    //   "most_active_30d": "Wake #241"
+    // }
+    (function(){
+      fetch("site_status.json", {cache
