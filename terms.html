@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bourbon Pourcast Terms</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f7f7f7;margin:0;padding:24px;color:#111}
+    .card{max-width:860px;margin:0 auto;background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 18px rgba(0,0,0,.06)}
+    h1{margin:0 0 8px 0;color:#c58f01}
+    h2{margin-top:18px}
+    a{color:#c58f01;text-decoration:none;font-weight:700}
+    .muted{color:#555;font-size:14px;line-height:1.5}
+    ul{line-height:1.6}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Terms of Service</h1>
+    <div class="muted">Last updated: <span id="d"></span></div>
+
+    <h2>Service</h2>
+    <p>
+      Bourbon Pourcast provides informational content and alerts related to bourbon inventory drops. Information may be delayed, incomplete, or inaccurate.
+    </p>
+
+    <h2>SMS program terms</h2>
+    <ul>
+      <li>By opting in, you agree to receive recurring automated SMS messages from Bourbon Pourcast.</li>
+      <li>Message frequency varies (drop-dependent).</li>
+      <li>Message and data rates may apply.</li>
+      <li>Reply <strong>STOP</strong> to cancel at any time.</li>
+      <li>Reply <strong>HELP</strong> for help.</li>
+    </ul>
+
+    <h2>No guarantee</h2>
+    <p>
+      Alerts are informational and do not guarantee product availability. Always verify in-store availability and local rules.
+    </p>
+
+    <h2>Acceptable use</h2>
+    <p>
+      You agree not to misuse the service (e.g., attempt to disrupt the site, abuse messaging channels, or violate laws).
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions: <a href="mailto:support@bourbonpourcast.com">support@bourbonpourcast.com</a>
+    </p>
+
+    <p class="muted">
+      Return to <a href="/sms">SMS opt-in</a> · <a href="/privacy">Privacy</a>
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("d").textContent = new Date().toISOString().slice(0,10);
+  </script>
+</body>
+</html>
