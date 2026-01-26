@@ -1,0 +1,944 @@
+<!-- index_v3.html  — Bourbon Pourcast go-live homepage (DurhamABC-inspired header/nav + FULL-WIDTH sections)
+     Updates per your request:
+     - Main “overview + Free/Paid buttons” section now spans full width.
+     - Live Feed section moved BELOW main section and spans full width.
+     - Latest Finds section moved BELOW Live Feed.
+     - Sponsor/Ads section moved to the bottom.
+     - Added stronger visual separation between sections (DurhamABC-like spacing + dividers + section headers).
+     - Fixes SMS link markup (your old index had a broken <a> tag).
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-mecvJ_1-2ATM-vr5t1xML.js"></script>
+  <script>
+    window.plausible = window.plausible || function(){(plausible.q = plausible.q || []).push(arguments)};
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bourbon Pourcast — NC Drop Intelligence</title>
+
+  <style>
+    :root{
+      --gold:#C19A32;
+      --gold2:#ffd700;
+      --ink:#0b0b0b;
+      --muted: rgba(255,255,255,.78);
+      --line: rgba(255,255,255,.12);
+      --line2: rgba(255,255,255,.18);
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 14px;
+      --glass: rgba(10,10,10,.66);
+      --glass2: rgba(10,10,10,.56);
+      --divider: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.25) 18%, rgba(193,154,50,.35) 50%, rgba(255,255,255,.25) 82%, rgba(255,255,255,0) 100%);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Georgia, serif;
+      text-align: left;
+      background: url('background.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-x:hidden;
+    }
+
+    a{ color: var(--gold2); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    /* ---------- DurhamABC-inspired header ---------- */
+    .topbar{
+      background: rgba(7,7,7,.78);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(6px);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .topbar-inner{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      text-decoration:none;
+      color:#fff;
+      min-width: 240px;
+    }
+    .brand img{
+      width: 88px;
+      height: 88px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
+    }
+    .brand-text{ display:flex; flex-direction:column; line-height:1.1; }
+    .brand-name{
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+    .brand-tagline{
+      margin-top: 6px;
+      font-style: italic;
+      font-size: 13px;
+      color: rgba(255,255,255,.80);
+    }
+
+    /* Large, DurhamABC-like headings across top */
+    .nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 18px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .nav a{
+      color:#fff;
+      text-decoration:none;
+      font-weight: 900;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      font-size: 14.5px;
+      padding: 12px 6px;
+      border-bottom: 2px solid transparent;
+      opacity: .92;
+      white-space: nowrap;
+    }
+    .nav a:hover{
+      border-bottom-color: var(--gold);
+      opacity: 1;
+      text-decoration:none;
+    }
+
+    /* ---------- Wrapper ---------- */
+    .wrap{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 18px 64px;
+    }
+
+    /* ---------- Section separation (DurhamABC-like) ---------- */
+    .section-sep{
+      height: 2px;
+      background: var(--divider);
+      margin: 22px 0;
+      border-radius: 999px;
+      opacity: .9;
+    }
+    .section-title{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .section-title .note{
+      color: rgba(255,255,255,.70);
+      font-size: 12.5px;
+      letter-spacing: .4px;
+    }
+
+    /* ---------- Cards ---------- */
+    .card{
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .pad{ padding: 20px; }
+
+    /* ---------- Main overview ---------- */
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,.80);
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(0,0,0,.25);
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .dot{
+      width: 9px; height: 9px; border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 18px rgba(193,154,50,.55);
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      font-size: 34px;
+      letter-spacing: -.2px;
+      line-height: 1.15;
+    }
+    .sub{
+      color: rgba(255,255,255,.82);
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 92ch;
+      margin: 0 0 16px 0;
+    }
+    .sub strong{ color:#fff; }
+
+    .cta-row{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 12px 0 10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line2);
+      font-weight: 900;
+      letter-spacing: .2px;
+      font-size: 14px;
+      cursor:pointer;
+      text-decoration:none;
+      white-space:nowrap;
+      user-select:none;
+      transition: transform .06s ease, opacity .2s ease, border-color .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); text-decoration:none; }
+    .btn-primary{
+      background: var(--gold);
+      color: #000;
+      border-color: rgba(193,154,50,.65);
+    }
+    .btn-primary:hover{ opacity:.95; }
+    .btn-secondary{
+      background: rgba(255,255,255,.08);
+      color: #fff;
+    }
+    .btn-secondary:hover{ border-color: var(--gold); }
+
+    .micro{
+      margin-top: 10px;
+      color: rgba(255,255,255,.72);
+      font-size: 12.8px;
+      line-height: 1.45;
+    }
+    .plus{ color: var(--gold2); font-weight: 900; }
+
+    /* Quick links */
+    .quicklinks{
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    .quicklinks h3{
+      margin: 0 0 10px;
+      font-size: 15px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .quicklinks ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 16px;
+    }
+    .quicklinks li{
+      margin: 0;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.18);
+    }
+    .quicklinks a{
+      color: var(--gold2);
+      font-weight: 900;
+      text-decoration:none;
+    }
+    .quicklinks a:hover{ text-decoration:underline; }
+    .ql-meta{
+      margin-top: 6px;
+      color: rgba(255,255,255,.74);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
+
+    .pill{
+      display:inline-block;
+      margin-left: 8px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .5px;
+      border: 1px solid rgba(0,0,0,.25);
+      vertical-align: middle;
+    }
+    .pill.free{ background:#9BE564; color:#000; }
+    .pill.premium{ background: var(--gold); color:#000; }
+    .pill.new{ background: #ffd166; color:#000; }
+
+    /* ---------- Live Feed (full width) ---------- */
+    .panel{
+      background: var(--glass2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .panel.pad{ padding: 18px; }
+
+    .signal-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .stat{
+      background: rgba(0,0,0,.18);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 12px;
+      min-height: 86px;
+    }
+    .stat .label{
+      color: rgba(255,255,255,.70);
+      font-size: 11px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .stat .value{
+      font-weight: 900;
+      font-size: 13.5px;
+      line-height: 1.25;
+    }
+
+    /* ---------- Latest Finds (full width) ---------- */
+    .latest-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .media-placeholder{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,.25);
+      background: rgba(0,0,0,.18);
+      height: 270px;
+      text-align:center;
+      padding: 14px;
+      color: rgba(255,255,255,.82);
+      font-weight: 900;
+      letter-spacing: .6px;
+    }
+    .media-tips{
+      background: rgba(0,0,0,.18);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      color: rgba(255,255,255,.82);
+      line-height: 1.5;
+      font-size: 13px;
+    }
+    .media-tips strong{
+      display:block;
+      margin-bottom: 8px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      font-size: 13px;
+      color:#fff;
+    }
+
+    /* ---------- “How it works” and other blocks ---------- */
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .mini{
+      background: rgba(0,0,0,.18);
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 14px;
+      min-height: 116px;
+    }
+    .mini strong{
+      display:block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      letter-spacing: .9px;
+      text-transform: uppercase;
+    }
+    .mini .desc{
+      color: rgba(255,255,255,.78);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    /* Compare table */
+    .compare{
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1.2fr .85fr .9fr;
+    }
+    .row > div{
+      padding: 12px 12px;
+      border-top: 1px solid var(--line);
+      font-size: 13.5px;
+    }
+    .row.head > div{
+      border-top:none;
+      background: rgba(255,255,255,.04);
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,.90);
+    }
+    .feat{ color: #fff; }
+    .yes{ color:#9BE564; font-weight: 900; }
+    .no{ color: rgba(255,255,255,.40); font-weight: 900; }
+
+    .pricebox{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background: linear-gradient(135deg, rgba(193,154,50,.16), rgba(0,0,0,.12));
+    }
+    .pricebox .price{
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .3px;
+    }
+    .pricebox .price span{ color: var(--gold2); }
+
+    /* Link cards */
+    .link-cards{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .link-card{
+      background: rgba(0,0,0,.18);
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 14px;
+    }
+    .link-card .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .link-card a{
+      font-weight: 900;
+      color: #fff;
+      text-decoration:none;
+    }
+    .link-card a:hover{ text-decoration:underline; }
+    .badge{
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      letter-spacing: .6px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.30);
+      color: var(--gold2);
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .badge.free{ color:#9BE564; }
+    .link-card .meta{
+      color: rgba(255,255,255,.78);
+      font-size: 12.5px;
+      line-height: 1.45;
+      margin-top: 6px;
+    }
+
+    /* Sponsor */
+    .ad-box{
+      border-radius: 14px;
+      padding: 16px;
+      background: rgba(0,0,0,.18);
+      border: 1px dashed rgba(255,255,255,.22);
+      color: rgba(255,255,255,.84);
+      line-height: 1.45;
+      font-size: 13px;
+    }
+
+    /* Footer */
+    .footer{
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: rgba(255,255,255,.72);
+      font-size: 12.5px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .footer .links{
+      display:flex;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .footer a{ color: rgba(255,255,255,.72); }
+    .footer a:hover{ color: #fff; text-decoration:none; }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .quicklinks ul{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .link-cards{ grid-template-columns: 1fr; }
+      .signal-grid{ grid-template-columns: 1fr 1fr; }
+      .latest-grid{ grid-template-columns: 1fr; }
+      h1{ font-size: 30px; }
+      .brand img{ width:72px; height:72px; }
+    }
+    @media (max-width: 560px){
+      .nav{ display:none; }
+      .signal-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- DurhamABC-inspired header -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Bourbon Pourcast Home">
+        <img src="logo.png" alt="Bourbon Pourcast logo">
+        <div class="brand-text">
+          <div class="brand-name">Bourbon Pourcast</div>
+          <div class="brand-tagline">We find the good stuff for you!</div>
+        </div>
+      </a>
+
+      <!-- Top headings (larger, DurhamABC-like) -->
+      <nav class="nav" aria-label="Primary">
+        <a href="#reports">Reports</a>
+        <a href="#alerts">Alerts</a>
+        <a href="#pourcast-plus">Pourcast+</a>
+        <a href="#free-email">Free Email</a>
+        <a href="#latest-finds">Latest Finds</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <!-- MAIN OVERVIEW (FULL WIDTH) -->
+    <section class="card pad" id="top">
+      <div class="kicker"><span class="dot"></span> Live monitoring • Wake + Durham + NC signals</div>
+
+      <h1>North Carolina bourbon drops — surfaced fast, with data.</h1>
+
+      <p class="sub">
+        We track allocations, drop posts, and patterns so you spend less time refreshing and more time finding the good stuff.
+        <br><br>
+        <strong>Free</strong> gets you the daily email. <span class="plus">Pourcast+</span> unlocks the complete dashboard, reports, and the option to opt in to SMS alerts.
+      </p>
+
+      <div class="cta-row">
+        <!-- TODO: When you have a real email signup, set this link -->
+        <a class="btn btn-primary" href="#free-email">📧 Free Daily Email</a>
+
+        <!-- TODO: Swap href to Stripe checkout when ready -->
+        <a class="btn btn-secondary" href="#pourcast-plus">⭐ Complete Pourcast and Alerts</a>
+      </div>
+
+      <div class="micro">
+        Free email: 1/day. <span class="plus">Pourcast+</span>: $4.99/month, cancel anytime. SMS opt-in is available to subscribers (never required).
+        <br>
+        By using this site you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.
+      </div>
+
+      <div class="quicklinks" id="reports">
+        <h3>Quick links</h3>
+        <ul>
+          <li>
+            <a href="search_results.html">Wake County Daily Allocations Report</a>
+            <span class="pill premium">Pourcast+</span>
+            <div class="ql-meta">Daily allocations & deeper reporting as part of Pourcast+.</div>
+          </li>
+          <li>
+            <a href="drop_day_tracker.pdf">Wake County Drop Days Tracker</a>
+            <span class="pill premium">Pourcast+</span>
+            <div class="ql-meta">Drop-day patterns and reference tracker included with Pourcast+.</div>
+          </li>
+          <li>
+            <a href="dashboard.html">Dashboard Reporting</a>
+            <span class="pill premium">Pourcast+</span>
+            <div class="ql-meta">Insider dashboards & tools (Early Access).</div>
+          </li>
+          <li>
+            <a href="sms.html">Register for SMS Drop Alerts</a>
+            <span class="pill premium">Pourcast+</span>
+            <div class="ql-meta">Subscriber-only optional SMS opt-in (STOP/HELP supported).</div>
+          </li>
+          <li>
+            <a href="durham_tiles.html">Durham Drop Alerts</a>
+            <span class="pill free">Free</span>
+            <div class="ql-meta">Public tiles dashboard of the latest Durham drops.</div>
+          </li>
+          <li>
+            <a href="howitworks.html">How it Works</a>
+            <span class="pill new">Read</span>
+            <div class="ql-meta">What we track, how alerts work, and what’s included.</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- LIVE FEED (FULL WIDTH) -->
+    <section class="panel pad" id="live-feed">
+      <div class="section-title">
+        <h2>Live Feed</h2>
+        <div class="note">auto-fill (optional) • day-one friendly</div>
+      </div>
+
+      <div class="signal-grid">
+        <div class="stat">
+          <div class="label">Last update (ET)</div>
+          <div class="value" id="sig-updated">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">Drops detected (7d)</div>
+          <div class="value" id="sig-drops7">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">Latest Durham signal</div>
+          <div class="value" id="sig-durham">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">Most active store (30d)</div>
+          <div class="value" id="sig-store">—</div>
+        </div>
+      </div>
+
+      <div class="micro" style="margin-top:12px;">
+        Want the full picture? <a href="#pourcast-plus">Pourcast+</a> unlocks Today’s Pourcast, dashboard tools, reports, and subscriber-only SMS opt-in.
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- LATEST FINDS (FULL WIDTH) -->
+    <section class="panel pad" id="latest-finds">
+      <div class="section-title">
+        <h2>Latest Finds</h2>
+        <div class="note">photos / short clips • never autoplay</div>
+      </div>
+
+      <div class="latest-grid">
+        <!-- If you add an image file, use it here:
+             <img class="media-img" src="latest-finds-placeholder.jpg" alt="Latest Finds">
+             For now: placeholder so it still looks polished without an asset.
+        -->
+        <div class="media-placeholder">
+          Add a featured bottle photo or a 15–30s clip here.<br>
+          (High-interest, high-conversion section.)
+        </div>
+
+        <div class="media-tips">
+          <strong>What works best</strong>
+          • 1 hero photo (clean background)<br>
+          • 2–4 bullet notes (where found, day/time, “blink and you miss it”)<br>
+          • Occasional short clip (no autoplay)<br>
+          • Keep it tasteful—no “in your face” marketing<br><br>
+          Tip: rotate weekly so it always feels fresh.
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- HOW IT WORKS -->
+    <section class="card pad" id="how">
+      <div class="section-title">
+        <h2>How Bourbon Pourcast works</h2>
+        <div class="note">monitor • detect • alert</div>
+      </div>
+
+      <div class="micro" style="margin-top:-6px;">
+        We monitor public sources, normalize signals, and deliver the parts that matter — with less noise and more reliability.
+      </div>
+
+      <div class="grid-3">
+        <div class="mini">
+          <strong>1) Monitor</strong>
+          <div class="desc">Wake allocations, Durham drop posts, and statewide inventory signals — continuously.</div>
+        </div>
+        <div class="mini">
+          <strong>2) Detect</strong>
+          <div class="desc">New posts, new store locations, and pattern shifts — captured and time-stamped.</div>
+        </div>
+        <div class="mini">
+          <strong>3) Alert</strong>
+          <div class="desc">Free daily email for everyone. <span class="plus">Pourcast+</span> adds the dashboard, reports, and optional SMS opt-in.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- FREE VS PREMIUM -->
+    <section class="card pad" id="pourcast-plus">
+      <div class="section-title">
+        <h2>Free Daily Email vs Pourcast+</h2>
+        <div class="note">$4.99/month • cancel anytime</div>
+      </div>
+
+      <div class="micro" style="margin-top:-6px;">
+        One simple subscription: free gets you the daily email. Everything else is <span class="plus">Pourcast+</span>.
+      </div>
+
+      <div class="compare" role="table" aria-label="Free vs Pourcast+">
+        <div class="row head" role="row">
+          <div role="columnheader">Feature</div>
+          <div role="columnheader">Free Daily Email</div>
+          <div role="columnheader"><span class="plus">Pourcast+</span></div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Daily email summary (1/day)</div>
+          <div class="yes" role="cell">YES</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Today’s Pourcast + full dashboard reporting</div>
+          <div class="no" role="cell">NO</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Wake allocations + drop-day tracker access</div>
+          <div class="no" role="cell">NO</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Subscriber Alerts Center + optional SMS opt-in</div>
+          <div class="no" role="cell">NO</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+
+        <div class="row" role="row">
+          <div class="feat" role="cell">Durham Drop Alerts tiles page (public)</div>
+          <div class="yes" role="cell">YES</div>
+          <div class="yes" role="cell">YES</div>
+        </div>
+      </div>
+
+      <div class="pricebox">
+        <div class="price"><span>Pourcast+</span> — $4.99/month • cancel anytime</div>
+        <!-- TODO: Replace with Stripe checkout link -->
+        <a class="btn btn-primary" href="#" onclick="alert('Pourcast+ checkout is coming soon. For now, join the free daily email list below.'); return false;">
+          ⭐ Subscribe (coming soon)
+        </a>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ALERTS CENTER -->
+    <section class="card pad" id="alerts">
+      <div class="section-title">
+        <h2>Alerts Center</h2>
+        <div class="note">operational • not hype</div>
+      </div>
+
+      <div class="micro" style="margin-top:-6px;">
+        Operational alerts, not hype. Subscriber opt-in SMS is available (never required).
+      </div>
+
+      <div class="link-cards" style="margin-top:14px;">
+        <div class="link-card">
+          <div class="top">
+            <a href="durham_tiles.html">Durham Drop Alerts</a>
+            <span class="badge free">Free preview</span>
+          </div>
+          <div class="meta">Public dashboard view of most recent Durham drops. Subscriber SMS opt-in via <a href="sms.html">sms.html</a>.</div>
+        </div>
+
+        <div class="link-card">
+          <div class="top">
+            <a href="sms.html">SMS Drop Alerts Opt-In</a>
+            <span class="badge">Pourcast+</span>
+          </div>
+          <div class="meta">Subscribers can opt in to SMS alerts. STOP to opt out, HELP for help (carrier-compliant).</div>
+        </div>
+
+        <div class="link-card">
+          <div class="top">
+            <a href="search_results.html">Wake Allocations Signals</a>
+            <span class="badge">Pourcast+</span>
+          </div>
+          <div class="meta">Daily allocations + deeper signal reporting included with Pourcast+.</div>
+        </div>
+
+        <div class="link-card">
+          <div class="top">
+            <a href="ncabc_inventory_report.html">NC ABC Inventory Signals</a>
+            <span class="badge free">Free preview</span>
+          </div>
+          <div class="meta">Statewide signals. You can keep this public or move it to Pourcast+ later.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- FREE DAILY EMAIL -->
+    <section class="card pad" id="free-email">
+      <div class="section-title">
+        <h2>Free Daily Email</h2>
+        <div class="note">one email/day • no spam</div>
+      </div>
+
+      <div class="micro" style="margin-top:-6px;">
+        We’re setting up a simple, low-friction email signup. One email per day. No marketing spam.
+      </div>
+
+      <div class="pricebox">
+        <div style="max-width: 70ch;">
+          <div style="font-weight:900; letter-spacing:.3px;">Launch mode: simplest path wins</div>
+          <div style="color: rgba(255,255,255,.78); font-size:12.5px; margin-top:6px; line-height:1.45;">
+            Recommended: a public Google Form or a hosted signup form (Mailchimp / ConvertKit). Once you choose, wire the button below to that URL.
+          </div>
+        </div>
+
+        <a class="btn btn-primary" href="#" onclick="alert('Free Daily Email signup link not set yet. When ready, point this button to your signup URL.'); return false;">
+          📧 Join the free list (coming soon)
+        </a>
+      </div>
+
+      <div class="micro" style="margin-top:12px;">
+        Already live: <a href="sms.html">SMS page</a>, <a href="privacy.html">Privacy</a>, <a href="terms.html">Terms</a>.
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- SPONSOR / ADS (BOTTOM) -->
+    <section class="panel pad" id="sponsor">
+      <div class="section-title">
+        <h2>Sponsor</h2>
+        <div class="note">clean • never intrusive</div>
+      </div>
+
+      <div class="ad-box">
+        <strong>Sponsored by (placeholder)</strong><br>
+        This slot is reserved for a single tasteful sponsor tile (local business, event, club, etc.).
+        <br><br>
+        <em>Later:</em> swap this for one responsive ad slot (BTD-style), below the fold, never annoying.
+      </div>
+
+      <div class="micro" style="margin-top:10px;">
+        Advertise: <a href="mailto:support@bourbonpourcast.com">support@bourbonpourcast.com</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div>© 2026 Bourbon Pourcast LLC. Independent project. Not affiliated with NC ABC.</div>
+      <div class="links">
+        <a href="howitworks.html">How it works</a>
+        <a href="sms.html">SMS</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="https://www.facebook.com/BourbonPourcast" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // OPTIONAL: Live Feed via JSON (drop in later)
+    // If you create /site_status.json via GitHub Actions, this will auto-populate Live Feed.
+    // Example JSON:
+    // {
+    //   "updated_et": "2026-01-25 08:12 ET",
+    //   "drops_7d": "7",
+    //   "latest_durham": "Store #3 @ 12:14 PM",
+    //   "most_active_30d": "Wake #241"
+    // }
+    (function(){
+      fetch("site_status.json", {cache:"no-store"})
+        .then(r => r.ok ? r.json() : null)
+        .then(j => {
+          if(!j) return;
+          const set = (id, v) => { const el=document.getElementById(id); if(el && v) el.textContent=v; };
+          set("sig-updated", j.updated_et);
+          set("sig-drops7", j.drops_7d);
+          set("sig-durham", j.latest_durham);
+          set("sig-store", j.most_active_30d);
+        })
+        .catch(()=>{ /* ignore */ });
+
+      // Nice-looking defaults day 1
+      const fallback = (id, v) => {
+        const el = document.getElementById(id);
+        if(el && (el.textContent === "—" || !el.textContent)) el.textContent = v;
+      };
+      fallback("sig-updated", "See dashboard");
+      fallback("sig-drops7", "Live");
+      fallback("sig-durham", "Durham tiles →");
+      fallback("sig-store", "Wake focus");
+    })();
+  </script>
+
+</body>
+</html>
