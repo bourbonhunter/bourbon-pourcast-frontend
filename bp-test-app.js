@@ -274,7 +274,7 @@ function renderHome() {
   const recent = allocationRows
     .filter(r => withinDays(r.date, 30))
     .sort((a, b) => (b.date?.getTime() || 0) - (a.date?.getTime() || 0))
-    .slice(0, 6);
+    .slice(0, 5);
   $('homeRecentAllocations').innerHTML = recent.length
     ? recent.map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.brand || 'Unknown Brand')}</strong><small>${escapeHtml(r.store || 'Unknown Store')}</small></div><span>${fmtDate(r.date)}</span></div>`).join('')
     : `<div class="empty">Allocation history data is not loaded yet.</div>`;
