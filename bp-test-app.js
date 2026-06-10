@@ -1,18 +1,33 @@
 const DATA_CANDIDATES = {
   allocations: ['drop_history.csv'],
-  shipments: ['ncabc_inventory_report.html', 'stock_shipped.html', 'nc_shipment_radar.csv', 'ncabc_inventory_report.csv', 'stock_shipped.csv']
+  shipments: ['ncabc_inventory_report.html']
 };
 
 let allocationRows = [];
 let shipmentRows = [];
-let filteredShipmentRows = [];
-let shipmentMeta = { file: null, shippedSince: null, lastUpdated: '', coverageDays: null, isInventoryReport: false };
+let shipmentMeta = {
+  file: null,
+  shippedSince: null,
+  lastUpdated: '',
+  generated: '',
+  coverageDays: null,
+  isInventoryReport: false
+};
 
 const $ = (id) => document.getElementById(id);
 
-function normalizeKey(key) { return String(key || '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
-function escapeHtml(value) { return String(value ?? '').replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s])); }
-function uniqueSorted(values) { return [...new Set(values.map(v => String(v || '').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)); }
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>\"]/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[s]));
+}
+
+function normalizeKey(key) {
+  return String(key || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+function uniqueSorted(values) {
+  return [...new Set(values.map(v => String(v || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+}
+
 function asDate(value) {
   if (!value) return null;
   const cleaned = String(value).trim();
@@ -24,10 +39,27 @@ function asDate(value) {
   const parsed = new Date(word ? word[0] : cleaned);
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
-function fmtDate(date) { return date ? date.toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' }) : '—'; }
+
+function fmtDate(date) {
+  return date ? date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+}
+
+function shipmentSinceText() {
+  return shipmentMeta.shippedSince ? `Shipped Since: ${fmtDate(shipmentMeta.shippedSince)}` : 'Shipped Since: Report window unavailable';
+}
+
+function withinDays(rowDate, days) {
+  if (days === 'all') return true;
+  if (!rowDate) return true;
+  const cutoff = new Date();
+  cutoff.setHours(0, 0, 0, 0);
+  cutoff.setDate(cutoff.getDate() - Number(days));
+  return rowDate >= cutoff;
+}
 
 function scoreKey(key, candidates) {
-  const norm = normalizeKey(key); let best = 0;
+  const norm = normalizeKey(key);
+  let best = 0;
   for (const candidate of candidates) {
     const target = normalizeKey(candidate);
     if (norm === target) best = Math.max(best, 100);
@@ -36,6 +68,7 @@ function scoreKey(key, candidates) {
   }
   return best;
 }
+
 function pick(row, candidates) {
   let best = null;
   for (const key of Object.keys(row || {})) {
@@ -48,10 +81,11 @@ function pick(row, candidates) {
 }
 
 function parseCSV(text) {
-  const rows = []; let row = [], cell = '', inQuotes = false;
+  const rows = [];
+  let row = [], cell = '', inQuotes = false;
   text = String(text || '').replace(/^\uFEFF/, '');
   for (let i = 0; i < text.length; i++) {
-    const char = text[i], next = text[i+1];
+    const char = text[i], next = text[i + 1];
     if (char === '"' && inQuotes && next === '"') { cell += '"'; i++; }
     else if (char === '"') inQuotes = !inQuotes;
     else if (char === ',' && !inQuotes) { row.push(cell); cell = ''; }
@@ -66,92 +100,71 @@ function parseCSV(text) {
   if (row.some(v => String(v).trim())) rows.push(row);
   if (!rows.length) return [];
   const headers = rows.shift().map(h => h.trim());
-  return rows.map(values => Object.fromEntries(headers.map((h,i)=>[h || `Column ${i+1}`, (values[i] || '').trim()])));
+  return rows.map(values => Object.fromEntries(headers.map((h, i) => [h || `Column ${i + 1}`, (values[i] || '').trim()])));
 }
 
-function parseInventoryReportHTML(text, fileName='ncabc_inventory_report.html') {
+function parseInventoryReportHTML(text, fileName = 'ncabc_inventory_report.html') {
   const doc = new DOMParser().parseFromString(String(text || ''), 'text/html');
-  const brandBlocks = [...doc.querySelectorAll('tbody.brand-block')];
-  if (!brandBlocks.length) return null;
+  const bodyText = doc.body ? doc.body.textContent.replace(/\s+/g, ' ').trim() : '';
 
-  const bodyText = doc.body?.textContent || '';
-  const shippedSinceText = bodyText.match(/Allocated brands shipped since:\s*([^\n]+)/i)?.[1]?.trim() || '';
-  const lastUpdatedText = bodyText.match(/Last updated on NC ABC:\s*([^\n]+)/i)?.[1]?.trim() || '';
-  const coverageDays = Number(bodyText.match(/Coverage window:\s*(\d+)\s*days/i)?.[1] || '') || null;
-  const shippedSince = asDate(shippedSinceText);
-  shipmentMeta = { file: fileName, shippedSince, lastUpdated: lastUpdatedText, coverageDays, isInventoryReport: true };
+  const sinceMatch = bodyText.match(/Allocated brands shipped since:\s*([A-Za-z]+\s+\d{1,2},\s+20\d{2})/i);
+  const updatedMatch = bodyText.match(/Last updated on NC ABC:\s*([^\n]+?\d{1,2}:\d{2}\s*[AP]M)/i);
+  const generatedMatch = bodyText.match(/Report generated:\s*([^\n]+?\))/i);
+  const coverageMatch = bodyText.match(/Coverage window:\s*(\d+)\s*days?/i);
+
+  shipmentMeta = {
+    file: fileName,
+    shippedSince: sinceMatch ? asDate(sinceMatch[1]) : null,
+    lastUpdated: updatedMatch ? updatedMatch[1].trim() : '',
+    generated: generatedMatch ? generatedMatch[1].trim() : '',
+    coverageDays: coverageMatch ? Number(coverageMatch[1]) : null,
+    isInventoryReport: true
+  };
 
   const rows = [];
-  brandBlocks.forEach(block => {
-    const totalRow = block.querySelector('tr.total');
-    if (!totalRow) return;
-    const target = totalRow.getAttribute('data-target');
-    const product = totalRow.querySelector('td.brand strong')?.textContent?.trim() || totalRow.children[1]?.textContent?.trim() || '';
-    const totalBottles = totalRow.querySelector('td.total-bottles strong')?.textContent?.trim() || '';
-    const detail = target ? doc.getElementById(target) : block.nextElementSibling;
-    const detailRows = detail ? [...detail.querySelectorAll('tr')] : [];
-    detailRows.forEach(tr => {
-      const board = tr.querySelector('td.board')?.textContent?.trim() || tr.children[1]?.textContent?.trim() || '';
-      const qty = tr.querySelector('td.bottles')?.textContent?.trim() || tr.children[2]?.textContent?.trim() || '';
-      if (product && board) rows.push({ date: shippedSince, dateRaw: shippedSinceText, product, board, qty, code: '', totalBottles, raw: {} });
+  const productBlocks = [...doc.querySelectorAll('tbody.brand-block tr.total')];
+  productBlocks.forEach((tr, index) => {
+    const product = tr.querySelector('.brand strong, .brand')?.textContent.trim() || '';
+    const totalQty = Number((tr.querySelector('.total-bottles strong')?.textContent || '').replace(/[^0-9.-]/g, '')) || 0;
+    const target = tr.getAttribute('data-target') || `d${index + 1}`;
+    const detailBody = doc.getElementById(target);
+    if (!product || !detailBody) return;
+
+    [...detailBody.querySelectorAll('tr')].forEach(detail => {
+      const board = detail.querySelector('.board')?.textContent.trim() || '';
+      const qty = Number((detail.querySelector('.bottles')?.textContent || '').replace(/[^0-9.-]/g, '')) || 0;
+      if (!board) return;
+      rows.push({
+        product,
+        board,
+        qty,
+        totalQty,
+        shippedSince: shipmentMeta.shippedSince
+      });
     });
   });
   return rows;
 }
 
-function parseGenericHTMLTable(text) {
-  const doc = new DOMParser().parseFromString(String(text || ''), 'text/html');
-  const table = doc.querySelector('table');
-  if (!table) return [];
-  const trs = [...table.querySelectorAll('tr')].map(tr => [...tr.children].map(td => td.textContent.trim())).filter(r => r.some(Boolean));
-  if (!trs.length) return [];
-  const headers = trs[0].map((h,i)=>h || `Column ${i+1}`);
-  return trs.slice(1).map(values => Object.fromEntries(headers.map((h,i)=>[h, values[i] || ''])));
-}
-
-function parseDataFile(text, fileName='') {
-  if (/\.html?$/i.test(fileName) || /^\s*</.test(String(text || ''))) {
-    const inventoryRows = parseInventoryReportHTML(text, fileName);
-    if (inventoryRows) return { rows: inventoryRows, alreadyNormalized: true };
-    return { rows: parseGenericHTMLTable(text), alreadyNormalized: false };
-  }
-  shipmentMeta = { file: fileName, shippedSince: null, lastUpdated: '', coverageDays: null, isInventoryReport: false };
-  return { rows: parseCSV(text), alreadyNormalized: false };
-}
-
-async function loadFirstAvailable(files) {
+async function loadFirstAvailable(files, parser) {
   for (const file of files) {
     try {
       const response = await fetch(file, { cache: 'no-store' });
-      if (response.ok) {
-        const parsed = parseDataFile(await response.text(), file);
-        return { file, ...parsed };
-      }
+      if (response.ok) return { file, rows: parser(await response.text(), file) };
     } catch (err) {}
   }
-  return { file: null, rows: [], alreadyNormalized: false };
+  return { file: null, rows: [] };
 }
 
 function normalizedAllocationRows(rows) {
   return rows.map(row => {
-    const dateRaw = pick(row, ['date','drop_date','effective_date','seen_date','timestamp']);
-    const store = pick(row, ['store','store_name','abc_store','location']);
-    const brand = pick(row, ['brand','product','product_name','item','description']);
-    const board = pick(row, ['board','county','abc_board']);
-    return { dateRaw, date: asDate(dateRaw), store, brand, board, raw: row };
+    const dateRaw = pick(row, ['date', 'drop_date', 'effective_date', 'seen_date', 'timestamp']);
+    const store = pick(row, ['store', 'store_name', 'abc_store', 'location']);
+    const brand = pick(row, ['brand', 'product', 'product_name', 'item', 'description']);
+    const board = pick(row, ['board', 'county', 'abc_board']);
+    const date = asDate(dateRaw);
+    return { dateRaw, date, store, brand, board, raw: row };
   }).filter(r => r.store || r.brand);
-}
-
-function normalizedShipmentRows(rows, alreadyNormalized=false) {
-  if (alreadyNormalized) return rows.filter(r => r.product && r.board);
-  return rows.map(row => {
-    const dateRaw = pick(row, ['date','shipdate','shipmentdate','reportdate','lastupdated','lastseen','timestamp']);
-    const product = pick(row, ['product','productname','brand','itemname','item','description','productdescription']);
-    const board = pick(row, ['board','abcboard','boardname','county','countyname','shipto','localboard','destination']);
-    const qty = pick(row, ['qty','quantity','bottles','cases','units','shipped','stock','onhand']);
-    const code = pick(row, ['code','itemcode','productcode','nccode','sku']);
-    return { dateRaw, date: asDate(dateRaw), product, board, qty, code, raw: row };
-  }).filter(r => r.product && r.board);
 }
 
 function fillSelect(select, values, allLabel) {
@@ -161,135 +174,185 @@ function fillSelect(select, values, allLabel) {
   if (values.includes(current)) select.value = current;
 }
 
-function withinDays(rowDate, days) {
-  if (days === 'all' || days === 'report') return true;
-  if (!rowDate) return true;
-  const cutoff = new Date(); cutoff.setHours(0,0,0,0); cutoff.setDate(cutoff.getDate() - Number(days));
-  return rowDate >= cutoff;
-}
-
-function shipmentInWindow(row, days) {
-  if (days === 'report' || days === 'all') return true;
-  if (shipmentMeta.isInventoryReport && shipmentMeta.coverageDays) return shipmentMeta.coverageDays <= Number(days);
-  return withinDays(row.date, days);
+function groupedShipments(rows) {
+  const groups = new Map();
+  rows.forEach(r => {
+    const product = r.product || 'Unknown Product';
+    if (!groups.has(product)) groups.set(product, { product, boards: new Map(), totalQty: 0 });
+    const g = groups.get(product);
+    const current = g.boards.get(r.board) || 0;
+    g.boards.set(r.board, current + (Number(r.qty) || 0));
+  });
+  groups.forEach(g => {
+    g.totalQty = [...g.boards.values()].reduce((sum, qty) => sum + qty, 0);
+  });
+  return [...groups.values()].sort((a, b) => (b.totalQty || 0) - (a.totalQty || 0) || a.product.localeCompare(b.product));
 }
 
 function renderAllocation() {
-  const store = $('storeFilter').value, brand = $('brandFilter').value, days = $('allocationDays').value;
-  const rows = allocationRows.filter(r => (!store || r.store === store) && (!brand || r.brand === brand) && withinDays(r.date, days))
-    .sort((a,b)=>(b.date?.getTime()||0)-(a.date?.getTime()||0));
+  const store = $('storeFilter').value;
+  const brand = $('brandFilter').value;
+  const days = $('allocationDays').value;
+  const rows = allocationRows
+    .filter(r => (!store || r.store === store) && (!brand || r.brand === brand) && withinDays(r.date, days))
+    .sort((a, b) => (b.date?.getTime() || 0) - (a.date?.getTime() || 0));
+
   $('allocationCount').textContent = `${rows.length} result${rows.length === 1 ? '' : 's'}`;
   $('statStores').textContent = uniqueSorted(rows.map(r => r.store)).length;
   $('statBrands').textContent = uniqueSorted(rows.map(r => r.brand)).length;
   $('statLatest').textContent = fmtDate(rows[0]?.date);
-  $('allocationTable').innerHTML = rows.length ? `<table><thead><tr><th>Date</th><th>Store</th><th>Brand / Product</th><th>Board</th></tr></thead><tbody>${rows.map(r => `<tr><td>${fmtDate(r.date)}</td><td>${escapeHtml(r.store||'—')}</td><td>${escapeHtml(r.brand||'—')}</td><td>${escapeHtml(r.board||'—')}</td></tr>`).join('')}</tbody></table>` : `<div class="empty">No allocation records found for the selected filters.</div>`;
-}
 
-function groupedShipments(rows) {
-  const groups = new Map();
-  rows.forEach(r => {
-    if (!groups.has(r.product)) groups.set(r.product, { product: r.product, boards: new Map(), count: 0, totalQty: 0, latest: null });
-    const g = groups.get(r.product);
-    const boardQty = Number(String(r.qty || '').replace(/[^0-9.-]/g,'')) || 0;
-    g.boards.set(r.board, (g.boards.get(r.board) || 0) + boardQty);
-    g.totalQty += boardQty;
-    g.count++;
-    if (r.date && (!g.latest || r.date > g.latest)) g.latest = r.date;
-  });
-  return [...groups.values()].sort((a,b)=>(b.totalQty-a.totalQty) || a.product.localeCompare(b.product));
-}
-
-function shipmentSinceText() {
-  if (shipmentMeta.shippedSince) return `Shipped since ${fmtDate(shipmentMeta.shippedSince)}`;
-  if (shipmentMeta.coverageDays) return `Current report window: ${shipmentMeta.coverageDays} days`;
-  return 'Current shipment report window';
-}
-
-function renderShipmentHint(days) {
-  const hint = $('shipmentWindowHint'); if (!hint) return;
-  if (!shipmentRows.length) { hint.textContent = ''; return; }
-  if (shipmentMeta.isInventoryReport) {
-    const parts = [shipmentSinceText()];
-    if (shipmentMeta.coverageDays) parts.push(`${shipmentMeta.coverageDays}-day coverage window`);
-    if (shipmentMeta.lastUpdated) parts.push(`NC ABC updated ${shipmentMeta.lastUpdated}`);
-    if (days !== 'report' && shipmentMeta.coverageDays && Number(days) < shipmentMeta.coverageDays) {
-      parts.push(`This report was generated for a ${shipmentMeta.coverageDays}-day window; generate a shorter report to isolate only ${days} days.`);
-    }
-    hint.textContent = parts.join(' • ');
-  } else {
-    hint.textContent = 'Showing shipment rows from the selected date window.';
+  if (!rows.length) {
+    $('allocationTable').innerHTML = `<div class="empty">Allocation history data is not loaded yet, or no records match the selected filters.</div>`;
+    return;
   }
+  $('allocationTable').innerHTML = `<table><thead><tr><th>Date</th><th>Store</th><th>Brand / Product</th><th>Board</th></tr></thead><tbody>${rows.map(r => `
+    <tr><td>${fmtDate(r.date)}</td><td>${escapeHtml(r.store || '—')}</td><td>${escapeHtml(r.brand || '—')}</td><td>${escapeHtml(r.board || '—')}</td></tr>`).join('')}</tbody></table>`;
 }
 
 function renderShipments() {
-  const product = $('shipmentProductFilter').value, board = $('shipmentBoardFilter').value, days = $('shipmentDays').value;
-  renderShipmentHint(days);
-  filteredShipmentRows = shipmentRows.filter(r => (!product || r.product === product) && (!board || r.board === board) && shipmentInWindow(r, days));
-  const groups = groupedShipments(filteredShipmentRows);
-  $('shipmentCount').textContent = `${groups.length} product${groups.length === 1 ? '' : 's'}`;
+  const product = $('shipmentProductFilter').value;
+  const board = $('shipmentBoardFilter').value;
+  const rows = shipmentRows.filter(r => (!product || r.product === product) && (!board || r.board === board));
+  const productCount = groupedShipments(rows).length;
+  const boardCount = uniqueSorted(rows.map(r => r.board)).length;
+
+  $('shipmentCount').textContent = `${productCount} product${productCount === 1 ? '' : 's'}`;
+  $('shipmentSinceBanner').textContent = `Allocated brands ${shipmentSinceText().toLowerCase()}`;
+  $('shipmentTableSince').textContent = shipmentSinceText();
+  $('shipmentWindowHint').textContent = `This Radar uses the reporting window from the NC ABC Inventory Report: ${shipmentSinceText()}.`;
+
   if (!shipmentRows.length) {
-    $('shipmentHeroTable').innerHTML = `<div class="empty">No shipment records loaded yet. Use a local web server, or choose your ncabc_inventory_report.html above.</div>`;
+    $('shipmentHeroTable').innerHTML = `<div class="empty">Shipment Radar data is not loaded yet. Use a local web server, or choose your ncabc_inventory_report.html above.</div>`;
     return;
   }
-  if (!groups.length) {
+
+  if (!rows.length) {
+    $('shipmentResultsTitle').textContent = 'No Matching Shipment Records';
     $('shipmentHeroTable').innerHTML = `<div class="empty">No products match the selected shipment filters.</div>`;
     return;
   }
-  $('shipmentHeroTable').innerHTML = `<table><thead><tr><th>Product</th><th>Shipped Since</th><th>Boards Receiving</th><th>Total Bottles</th></tr></thead><tbody>${groups.slice(0,50).map(g => `<tr><td><strong>${escapeHtml(g.product)}</strong><br><small>${g.boards.size} board${g.boards.size===1?'':'s'}</small></td><td>${escapeHtml(shipmentSinceText())}</td><td>${[...g.boards.entries()].sort((a,b)=>a[0].localeCompare(b[0])).slice(0,18).map(([b,q])=>`<span class="badge">${escapeHtml(b)}${q ? ` · ${q}` : ''}</span>`).join('')}${g.boards.size>18 ? `<span class="badge">+${g.boards.size-18} more</span>` : ''}</td><td>${g.totalQty || '—'}</td></tr>`).join('')}</tbody></table>`;
+
+  if (product && !board) {
+    const boardRows = rows
+      .map(r => ({ board: r.board, qty: Number(r.qty) || 0 }))
+      .sort((a, b) => (b.qty || 0) - (a.qty || 0) || a.board.localeCompare(b.board));
+    const total = boardRows.reduce((sum, r) => sum + r.qty, 0);
+    $('shipmentResultsTitle').textContent = `${product} → Boards Receiving`;
+    $('shipmentHeroTable').innerHTML = `<div class="result-summary"><strong>${escapeHtml(product)}</strong><span>${boardCount} board${boardCount === 1 ? '' : 's'} receiving · ${total.toLocaleString()} bottles</span></div>
+      <table><thead><tr><th>Board</th><th>Bottles</th></tr></thead><tbody>${boardRows.map(r => `<tr><td>${escapeHtml(r.board)}</td><td>${r.qty.toLocaleString()}</td></tr>`).join('')}</tbody></table>`;
+    return;
+  }
+
+  if (board && !product) {
+    const productRows = rows
+      .map(r => ({ product: r.product, qty: Number(r.qty) || 0 }))
+      .filter(r => r.qty > 0)
+      .sort((a, b) => (b.qty || 0) - (a.qty || 0) || a.product.localeCompare(b.product));
+    const total = productRows.reduce((sum, r) => sum + r.qty, 0);
+    $('shipmentResultsTitle').textContent = `${board} → Products Received`;
+    $('shipmentHeroTable').innerHTML = `<div class="result-summary"><strong>${escapeHtml(board)}</strong><span>${productRows.length} product${productRows.length === 1 ? '' : 's'} received · ${total.toLocaleString()} bottles</span></div>
+      <table><thead><tr><th>Product</th><th>Bottles</th></tr></thead><tbody>${productRows.map(r => `<tr><td>${escapeHtml(r.product)}</td><td>${r.qty.toLocaleString()}</td></tr>`).join('')}</tbody></table>`;
+    return;
+  }
+
+  if (product && board) {
+    const total = rows.reduce((sum, r) => sum + (Number(r.qty) || 0), 0);
+    $('shipmentResultsTitle').textContent = `${product} at ${board}`;
+    $('shipmentHeroTable').innerHTML = `<div class="result-summary"><strong>${escapeHtml(product)}</strong><span>${escapeHtml(board)} · ${total.toLocaleString()} bottles</span></div>
+      <table><thead><tr><th>Product</th><th>Board</th><th>Bottles</th></tr></thead><tbody><tr><td>${escapeHtml(product)}</td><td>${escapeHtml(board)}</td><td>${total.toLocaleString()}</td></tr></tbody></table>`;
+    return;
+  }
+
+  const groups = groupedShipments(rows);
+  $('shipmentResultsTitle').textContent = 'Product → Boards Receiving';
+  $('shipmentHeroTable').innerHTML = `<table><thead><tr><th>Product</th><th>Boards Receiving</th><th>Total Bottles</th></tr></thead><tbody>${groups.map(g => `
+    <tr><td><strong>${escapeHtml(g.product)}</strong><br><small>${g.boards.size} board${g.boards.size === 1 ? '' : 's'}</small></td><td>${[...g.boards.entries()].filter(([, q]) => q > 0).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 16).map(([b, q]) => `<span class="badge">${escapeHtml(b)} · ${q.toLocaleString()}</span>`).join('')}${g.boards.size > 16 ? `<span class="badge">+${g.boards.size - 16} more</span>` : ''}</td><td>${g.totalQty.toLocaleString()}</td></tr>`).join('')}</tbody></table>`;
 }
 
 function renderHome() {
-  const recent = allocationRows.filter(r => withinDays(r.date, 30)).sort((a,b)=>(b.date?.getTime()||0)-(a.date?.getTime()||0)).slice(0,6);
-  $('homeRecentAllocations').innerHTML = recent.length ? recent.map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.brand || 'Unknown Brand')}</strong><small>${escapeHtml(r.store || 'Unknown Store')}</small></div><span>${fmtDate(r.date)}</span></div>`).join('') : `<div class="empty">Allocation history data is not loaded yet.</div>`;
-  const since = $('homeShipmentSince');
-  if (since) since.textContent = shipmentRows.length ? shipmentSinceText() : '';
-  const shipmentGroups = groupedShipments(shipmentRows).slice(0,6);
-  $('homeShipmentPreview').innerHTML = shipmentGroups.length ? shipmentGroups.map(g => `<div class="compact-item"><div><strong>${escapeHtml(g.product)}</strong><small>${escapeHtml(shipmentSinceText())}<br>${[...g.boards.keys()].sort().slice(0,4).join(', ') || 'Board unknown'}</small></div><span>${g.totalQty || '—'} bottles</span></div>`).join('') : `<div class="empty">Shipment Radar data is not loaded yet.</div>`;
+  const recent = allocationRows
+    .filter(r => withinDays(r.date, 30))
+    .sort((a, b) => (b.date?.getTime() || 0) - (a.date?.getTime() || 0))
+    .slice(0, 6);
+  $('homeRecentAllocations').innerHTML = recent.length
+    ? recent.map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.brand || 'Unknown Brand')}</strong><small>${escapeHtml(r.store || 'Unknown Store')}</small></div><span>${fmtDate(r.date)}</span></div>`).join('')
+    : `<div class="empty">Allocation history data is not loaded yet.</div>`;
+
+  $('homeShipmentSince').textContent = shipmentRows.length ? shipmentSinceText() : '';
+  const groups = groupedShipments(shipmentRows);
+  const boardsReceiving = uniqueSorted(shipmentRows.filter(r => Number(r.qty) > 0).map(r => r.board)).length;
+  $('homeShipmentStats').textContent = shipmentRows.length ? `Boards Receiving Allocated Products: ${boardsReceiving} · Products Tracked: ${groups.length}` : '';
+  $('homeShipmentPreview').innerHTML = groups.length
+    ? groups.slice(0, 5).map((g, i) => `<div class="compact-item ranked-item"><div><strong>${i + 1}. ${escapeHtml(g.product)}</strong><small>${g.boards.size} board${g.boards.size === 1 ? '' : 's'} receiving</small></div><span>${g.totalQty.toLocaleString()} bottles</span></div>`).join('')
+    : `<div class="empty">Shipment Radar data is not loaded yet.</div>`;
 }
 
-function updateDataStatus(allocLoad, shipLoad) {
+function updateDataStatus() {
   const parts = [];
-  if (allocationRows.length) parts.push(`Allocation History loaded`);
-  if (shipmentRows.length) parts.push(`Shipment Radar loaded: ${shipmentRows.length} board rows`);
+  if (allocationRows.length) parts.push('Allocation History loaded');
+  if (shipmentRows.length) parts.push(`Shipment Radar loaded · ${shipmentSinceText()}`);
   $('dataStatus').textContent = parts.length ? parts.join(' • ') : 'Local data not loaded yet';
 }
 
+function setSection(section, scrollTargetId = null) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.toggle('active', s.id === section));
+  document.querySelectorAll('.nav-btn').forEach(n => n.classList.toggle('active', n.dataset.section === section));
+  const target = scrollTargetId ? $(scrollTargetId) : null;
+  setTimeout(() => {
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 30);
+}
+
 function wireNav() {
-  document.querySelectorAll('[data-section], [data-section-jump]').forEach(btn => btn.addEventListener('click', () => {
-    const section = btn.dataset.section || btn.dataset.sectionJump;
-    document.querySelectorAll('.page-section').forEach(s => s.classList.toggle('active', s.id === section));
-    document.querySelectorAll('.nav-btn').forEach(n => n.classList.toggle('active', n.dataset.section === section));
-    window.scrollTo({ top:0, behavior:'smooth' });
-  }));
+  document.querySelectorAll('[data-section], [data-section-jump]').forEach(btn => {
+    btn.addEventListener('click', () => setSection(btn.dataset.section || btn.dataset.sectionJump, btn.dataset.scrollTarget || null));
+  });
 }
-function refreshShipmentControls() {
-  fillSelect($('shipmentProductFilter'), uniqueSorted(shipmentRows.map(r=>r.product)), 'All products');
-  fillSelect($('shipmentBoardFilter'), uniqueSorted(shipmentRows.map(r=>r.board)), 'All boards');
-  renderShipments(); renderHome();
-}
-function wireFileLoaders() {
-  const input = $('shipmentFileInput'), card = $('shipmentLoadCard'); if (!input) return;
+
+function wireFileLoader() {
+  const input = $('shipmentFileInput');
+  if (!input) return;
   input.addEventListener('change', async () => {
-    const file = input.files?.[0]; if (!file) return;
-    const parsed = parseDataFile(await file.text(), file.name);
-    shipmentRows = normalizedShipmentRows(parsed.rows, parsed.alreadyNormalized);
-    if (card && shipmentRows.length) card.style.display = 'none';
-    refreshShipmentControls();
-    $('dataStatus').textContent = `Shipment Radar loaded: ${shipmentRows.length} board rows`;
+    const file = input.files && input.files[0];
+    if (!file) return;
+    const text = await file.text();
+    shipmentRows = parseInventoryReportHTML(text, file.name);
+    fillSelect($('shipmentProductFilter'), uniqueSorted(shipmentRows.map(r => r.product)), 'All products');
+    fillSelect($('shipmentBoardFilter'), uniqueSorted(shipmentRows.map(r => r.board)), 'All boards');
+    renderShipments();
+    renderHome();
+    updateDataStatus();
+    $('shipmentLoadCard').style.display = shipmentRows.length ? 'none' : 'block';
   });
 }
 
 async function init() {
-  wireNav(); wireFileLoaders();
-  const [allocLoad, shipLoad] = await Promise.all([loadFirstAvailable(DATA_CANDIDATES.allocations), loadFirstAvailable(DATA_CANDIDATES.shipments)]);
+  wireNav();
+  wireFileLoader();
+
+  const [allocLoad, shipLoad] = await Promise.all([
+    loadFirstAvailable(DATA_CANDIDATES.allocations, parseCSV),
+    loadFirstAvailable(DATA_CANDIDATES.shipments, parseInventoryReportHTML)
+  ]);
+
   allocationRows = normalizedAllocationRows(allocLoad.rows);
-  shipmentRows = normalizedShipmentRows(shipLoad.rows, shipLoad.alreadyNormalized);
-  fillSelect($('storeFilter'), uniqueSorted(allocationRows.map(r=>r.store)), 'All stores');
-  fillSelect($('brandFilter'), uniqueSorted(allocationRows.map(r=>r.brand)), 'All brands');
-  refreshShipmentControls();
-  ['storeFilter','brandFilter','allocationDays'].forEach(id => $(id)?.addEventListener('change', renderAllocation));
-  ['shipmentProductFilter','shipmentBoardFilter','shipmentDays'].forEach(id => $(id)?.addEventListener('change', renderShipments));
-  renderAllocation(); renderShipments(); renderHome(); updateDataStatus(allocLoad, shipLoad);
-  const loadCard = $('shipmentLoadCard'); if (loadCard && !shipmentRows.length) loadCard.style.display = 'block';
+  shipmentRows = shipLoad.rows;
+  if (!shipmentRows.length) $('shipmentLoadCard').style.display = 'block';
+
+  fillSelect($('storeFilter'), uniqueSorted(allocationRows.map(r => r.store)), 'All stores');
+  fillSelect($('brandFilter'), uniqueSorted(allocationRows.map(r => r.brand)), 'All brands');
+  fillSelect($('shipmentProductFilter'), uniqueSorted(shipmentRows.map(r => r.product)), 'All products');
+  fillSelect($('shipmentBoardFilter'), uniqueSorted(shipmentRows.map(r => r.board)), 'All boards');
+
+  ['storeFilter', 'brandFilter', 'allocationDays'].forEach(id => $(id).addEventListener('change', renderAllocation));
+  ['shipmentProductFilter', 'shipmentBoardFilter'].forEach(id => $(id).addEventListener('change', renderShipments));
+
+  renderAllocation();
+  renderShipments();
+  renderHome();
+  updateDataStatus();
 }
+
 init();
