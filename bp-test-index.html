@@ -4,15 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bourbon Pourcast</title>
-  <link rel="stylesheet" href="bp-test-styles.css?v=3.4" />
+  <link rel="stylesheet" href="bp-test-styles.css?v=3.6" />
 </head>
 <body>
   <header class="site-header">
     <div class="brand-wrap">
-      <div class="logo-mark">BP</div>
-      <div>
+      <img class="brand-logo" src="logo.png" alt="Bourbon Pourcast" onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='grid';" />
+      <div class="logo-fallback" aria-hidden="true">BP</div>
+      <div class="brand-copy">
         <h1>Bourbon Pourcast</h1>
-        <p>NC allocations, shipment radar, and smarter bourbon intelligence.</p>
+        <p>Tracking North Carolina Bourbon Drops, Allocations &amp; Shipments</p>
       </div>
     </div>
     <nav class="top-nav" aria-label="Primary navigation">
@@ -24,15 +25,20 @@
   </header>
 
   <main>
-    <div class="ad-slot ad-top">Ad Placement — Top Leaderboard</div>
+    <a class="sponsor-banner sponsor-top" href="https://www.durhamabc.com" target="_blank" rel="noopener noreferrer">
+      <span>Featured Board</span>
+      <strong>Durham County ABC</strong>
+      <small>View Durham ABC news, drops, and store information</small>
+    </a>
 
     <section id="home" class="page-section active">
       <div class="hero-card">
         <div>
-          <h2>Today’s Bourbon Pourcast Dashboard</h2>
-          <p class="hero-copy">A mobile-first home base for allocation history and NC shipment intelligence.</p>
+          <p class="eyebrow">Bourbon Pourcast</p>
+          <h2>Today’s Bourbon Pourcast</h2>
+          <p class="hero-copy">A mobile-first home base for NC allocation history and shipment intelligence.</p>
+          <p class="data-status" id="dataStatus">Loading local data…</p>
         </div>
-        <div class="data-status" id="dataStatus">Loading local data…</div>
       </div>
 
       <div class="grid two">
@@ -42,25 +48,30 @@
               <p class="eyebrow">Allocation History</p>
               <h3>Recent Drops</h3>
             </div>
-            <button class="small-link" data-section-jump="allocation">View Lookup</button>
+            <button class="small-link" data-section-jump="allocation">View All Drops</button>
           </div>
           <div id="homeRecentAllocations" class="compact-list"></div>
         </article>
 
-        <article class="card feature-card">
+        <article class="card feature-card" id="shipmentSnapshotCard">
           <div class="card-head">
             <div>
-              <p class="eyebrow">NC Shipment Radar</p>
+              <p class="eyebrow">NC Shipment Snapshot</p>
               <h3>Recently Shipped Products</h3>
               <p class="mini-meta" id="homeShipmentSince"></p>
+              <p class="mini-meta" id="homeShipmentStats"></p>
             </div>
-            <button class="small-link" data-section-jump="shipments">View Radar</button>
+            <button class="small-link" data-section-jump="shipments">Explore NC Shipment Radar</button>
           </div>
           <div id="homeShipmentPreview" class="compact-list"></div>
         </article>
       </div>
 
-      <div class="ad-slot">Ad Placement — Mid Page Rectangle</div>
+      <a class="sponsor-banner sponsor-mid" href="https://abc.nc.gov" target="_blank" rel="noopener noreferrer">
+        <span>Official NC ABC Resource</span>
+        <strong>North Carolina ABC Commission</strong>
+        <small>Statewide ABC resources, products, permits, and board information</small>
+      </a>
 
       <article class="card">
         <p class="eyebrow">Why this matters</p>
@@ -72,14 +83,14 @@
     <section id="allocation" class="page-section">
       <div class="section-title">
         <div>
-          <p class="eyebrow">Feature #2</p>
-          <h2>Allocation History</h2>
+          <p class="eyebrow">Allocation History</p>
+          <h2>All Drops</h2>
           <p>Defaults to the last 30 days. Filter by store, brand, or both.</p>
         </div>
         <span class="pill" id="allocationCount">0 results</span>
       </div>
 
-      <div class="filters card">
+      <div class="filters card allocation-filters">
         <label>Store
           <select id="storeFilter"><option value="">All stores</option></select>
         </label>
@@ -109,11 +120,15 @@
     <section id="shipments" class="page-section">
       <div class="section-title">
         <div>
-          <p class="eyebrow">Feature #3</p>
+          <p class="eyebrow">NC Shipment Radar</p>
           <h2>NC Shipment Radar</h2>
           <p>See which allocated products were shipped to which NC ABC boards.</p>
+          <p class="mini-meta strong-meta" id="shipmentSinceBanner"></p>
         </div>
-        <div class="section-actions"><button class="small-link ghost-link" data-section-jump="home">Back to Dashboard</button><span class="pill" id="shipmentCount">0 products</span></div>
+        <div class="section-actions">
+          <button class="small-link ghost-link" data-section-jump="home" data-scroll-target="shipmentSnapshotCard">← Back to NC Shipment Snapshot</button>
+          <span class="pill" id="shipmentCount">0 products</span>
+        </div>
       </div>
 
       <div class="card data-load-card" id="shipmentLoadCard" style="display:none;">
@@ -121,33 +136,28 @@
         <h3>Load the NC ABC Inventory Report</h3>
         <p class="body-copy">Choose your existing <strong>ncabc_inventory_report.html</strong> if the browser blocks automatic local loading.</p>
         <div class="signup-row">
-          <input id="shipmentFileInput" type="file" accept=".html,.htm,.csv,text/html,text/csv" />
+          <input id="shipmentFileInput" type="file" accept=".html,.htm,text/html" />
         </div>
       </div>
 
-      <div class="filters card">
+      <div class="filters card shipment-filters">
         <label>Product
           <select id="shipmentProductFilter"><option value="">All products</option></select>
         </label>
         <label>Board
           <select id="shipmentBoardFilter"><option value="">All boards</option></select>
         </label>
-        <label>Date Window
-          <select id="shipmentDays">
-            <option value="report" selected>Current report window</option>
-            <option value="7">Last 7 days</option>
-            <option value="14">Last 14 days</option>
-            <option value="30">Last 30 days</option>
-            <option value="60">Last 60 days</option>
-            <option value="90">Last 90 days</option>
-            <option value="all">All available</option>
-          </select>
-        </label>
       </div>
       <div class="hint" id="shipmentWindowHint"></div>
 
       <article class="card hero-table-card">
-        <div class="card-head"><div><p class="eyebrow">Recently Shipped Products</p><h3>Product → Boards Receiving</h3></div></div>
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">Recently Shipped Products</p>
+            <h3 id="shipmentResultsTitle">Product → Boards Receiving</h3>
+            <p class="mini-meta" id="shipmentTableSince"></p>
+          </div>
+        </div>
         <div id="shipmentHeroTable"></div>
       </article>
     </section>
@@ -163,10 +173,15 @@
   </main>
 
   <footer>
-    <div class="ad-slot ad-mobile">Future Sticky Mobile Ad Placement</div>
-    <p>Bourbon Pourcast preview build.</p>
+    <a class="sponsor-banner sponsor-bottom" href="https://abc.nc.gov" target="_blank" rel="noopener noreferrer">
+      <span>Official State Resource</span>
+      <strong>North Carolina ABC Commission</strong>
+      <small>Visit abc.nc.gov</small>
+    </a>
+    <p>© 2026 Bourbon Pourcast. All rights reserved.</p>
+    <p><a class="footer-link" href="https://www.facebook.com/BourbonPourcast/" target="_blank" rel="noopener noreferrer">Follow Bourbon Pourcast on Facebook</a></p>
   </footer>
 
-  <script src="bp-test-app.js?v=3.4"></script>
+  <script src="bp-test-app.js?v=3.6"></script>
 </body>
 </html>
