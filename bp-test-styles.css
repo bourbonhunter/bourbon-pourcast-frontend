@@ -149,3 +149,28 @@ footer { padding: 12px 0 34px; text-align: center; color: var(--muted); }
   .hero-card h2 { font-size: clamp(1.8rem, 11vw, 2.7rem); letter-spacing: -0.04em; }
   .nav-btn, .small-link { padding: 9px 11px; }
 }
+
+
+.durham-card { grid-column: 1 / -1; }
+.durham-launch-card { max-width: 760px; margin-inline: auto; text-align: center; }
+.large-link-button {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 13px 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+}
+.alerts-clean { text-align: center; }
+.coming-soon-badge {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: #fff3d1;
+  color: var(--accent-2);
+  border: 1px solid rgba(185,120,24,.25);
+  font-weight: 900;
+}

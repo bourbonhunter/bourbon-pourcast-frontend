@@ -218,7 +218,7 @@ function renderShipments() {
   const boardCount = uniqueSorted(rows.map(r => r.board)).length;
 
   $('shipmentCount').textContent = `${productCount} product${productCount === 1 ? '' : 's'}`;
-  $('shipmentSinceBanner').textContent = `Allocated brands ${shipmentSinceText().toLowerCase()}`;
+  $('shipmentSinceBanner').textContent = shipmentMeta.shippedSince ? `Allocated Brands Shipped Since: ${fmtDate(shipmentMeta.shippedSince)}` : 'Allocated Brands Shipped Since: Report window unavailable';
   $('shipmentTableSince').textContent = shipmentSinceText();
   $('shipmentWindowHint').textContent = `This Radar uses the reporting window from the NC ABC Inventory Report: ${shipmentSinceText()}.`;
 
