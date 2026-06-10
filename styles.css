@@ -1,0 +1,6 @@
+
+body{font-family:Arial,sans-serif;max-width:900px;margin:auto;padding:12px;background:#f7f7f7}
+header,nav,.card,.ad{background:white;padding:16px;margin:12px 0;border-radius:10px}
+nav a{margin-right:12px}
+input{width:100%;padding:10px}
+.ad{text-align:center;font-weight:bold}
