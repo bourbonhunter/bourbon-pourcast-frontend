@@ -73,3 +73,26 @@ footer { padding: 12px 0 34px; text-align: center; color: var(--muted); }
   .signup-row { flex-direction: column; }
   .ad-mobile { display: grid; position: sticky; bottom: 8px; z-index: 20; min-height: 54px; }
 }
+
+/* v3.3 mobile/layout fixes */
+html, body { max-width: 100%; overflow-x: hidden; }
+.hero-card, .hero-card > div, .card, .feature-card, .compact-item { min-width: 0; }
+.hero-card { grid-template-columns: minmax(0, 1fr); }
+.hero-card h2 { overflow-wrap: anywhere; word-break: normal; max-width: 100%; }
+.data-status, .pill { white-space: normal; max-width: 100%; overflow-wrap: anywhere; text-align: left; }
+.hint { color: var(--muted); font-size: .9rem; line-height: 1.45; margin: -2px 2px 10px; padding: 0 4px; }
+.hero-table-card table { min-width: 0; }
+@media (max-width: 760px) {
+  .hero-card { padding: 18px; }
+  .hero-card h2 { font-size: clamp(2rem, 12vw, 3.05rem); letter-spacing: -0.04em; line-height: 1; }
+  .data-status { display: block; width: 100%; border-radius: 16px; }
+  .hero-table-card table { min-width: 560px; }
+}
+@media (max-width: 420px) {
+  .site-header, main, footer { width: calc(100% - 14px); }
+  .logo-mark { width: 42px; height: 42px; border-radius: 14px; }
+  .brand-wrap { gap: 10px; }
+  .brand-wrap p { font-size: .88rem; }
+  .hero-card h2 { font-size: clamp(1.8rem, 11vw, 2.6rem); }
+  .nav-btn, .small-link { padding: 9px 11px; }
+}

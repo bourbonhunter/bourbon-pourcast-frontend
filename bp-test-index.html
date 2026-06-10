@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bourbon Pourcast</title>
-  <link rel="stylesheet" href="bp-test-styles.css" />
+  <link rel="stylesheet" href="bp-test-styles.css?v=3.3" />
 </head>
 <body>
   <header class="site-header">
@@ -12,7 +12,7 @@
       <div class="logo-mark">BP</div>
       <div>
         <h1>Bourbon Pourcast</h1>
-        <p>NC allocations, shipment radar, and smarter drop history.</p>
+        <p>NC allocations, shipment radar, and smarter bourbon intelligence.</p>
       </div>
     </div>
     <nav class="top-nav" aria-label="Primary navigation">
@@ -32,7 +32,7 @@
           <h2>Today’s Bourbon Pourcast Dashboard</h2>
           <p class="hero-copy">A mobile-first home base for allocation history and NC shipment intelligence.</p>
         </div>
-        <div class="data-status" id="dataStatus">Loading local CSV data…</div>
+        <div class="data-status" id="dataStatus">Loading local data…</div>
       </div>
 
       <div class="grid two">
@@ -102,9 +102,7 @@
         <div class="stat-card"><span>Latest Drop</span><strong id="statLatest">—</strong></div>
       </div>
 
-      <article class="card table-card">
-        <div id="allocationTable"></div>
-      </article>
+      <article class="card table-card"><div id="allocationTable"></div></article>
     </section>
 
     <section id="shipments" class="page-section">
@@ -112,17 +110,17 @@
         <div>
           <p class="eyebrow">Feature #3</p>
           <h2>NC Shipment Radar</h2>
-          <p>Recently shipped products and the boards receiving them.</p>
+          <p>See which allocated products were shipped to which NC ABC boards.</p>
         </div>
         <span class="pill" id="shipmentCount">0 products</span>
       </div>
 
       <div class="card data-load-card" id="shipmentLoadCard" style="display:none;">
         <p class="eyebrow">Shipment Data</p>
-        <h3>Load Shipment Radar Data</h3>
-        <p class="body-copy">If the browser blocks local CSV loading, choose your shipment CSV or HTML report here.</p>
+        <h3>Load the NC ABC Inventory Report</h3>
+        <p class="body-copy">Choose your existing <strong>ncabc_inventory_report.html</strong> if the browser blocks automatic local loading.</p>
         <div class="signup-row">
-          <input id="shipmentFileInput" type="file" accept=".csv,.html,.htm,text/csv,text/html" />
+          <input id="shipmentFileInput" type="file" accept=".html,.htm,.csv,text/html,text/csv" />
         </div>
       </div>
 
@@ -135,32 +133,25 @@
         </label>
         <label>Date Window
           <select id="shipmentDays">
-            <option value="30" selected>Last 30 days</option>
+            <option value="report" selected>Current report window</option>
+            <option value="7">Last 7 days</option>
+            <option value="14">Last 14 days</option>
+            <option value="30">Last 30 days</option>
             <option value="60">Last 60 days</option>
             <option value="90">Last 90 days</option>
-            <option value="365">Last year</option>
             <option value="all">All available</option>
           </select>
         </label>
       </div>
+      <div class="hint" id="shipmentWindowHint"></div>
 
       <article class="card hero-table-card">
-        <div class="card-head">
-          <div>
-            <p class="eyebrow">Recently Shipped Products</p>
-            <h3>Product → Boards Receiving</h3>
-          </div>
-        </div>
+        <div class="card-head"><div><p class="eyebrow">Recently Shipped Products</p><h3>Product → Boards Receiving</h3></div></div>
         <div id="shipmentHeroTable"></div>
       </article>
 
       <article class="card table-card">
-        <div class="card-head">
-          <div>
-            <p class="eyebrow">Detailed Shipment Report</p>
-            <h3>Shipment Records</h3>
-          </div>
-        </div>
+        <div class="card-head"><div><p class="eyebrow">Detailed Shipment Report</p><h3>Shipment Records</h3></div></div>
         <div id="shipmentDetailTable"></div>
       </article>
     </section>
@@ -170,19 +161,16 @@
         <p class="eyebrow">Coming Soon</p>
         <h2>My Alerts</h2>
         <p>Email registration and SMS alerts will plug in here later. The UI is already reserved so we do not have to redesign the site around login later.</p>
-        <div class="signup-row">
-          <input type="email" placeholder="Email address" disabled />
-          <button disabled>Register Soon</button>
-        </div>
+        <div class="signup-row"><input type="email" placeholder="Email address" disabled /><button disabled>Register Soon</button></div>
       </article>
     </section>
   </main>
 
   <footer>
     <div class="ad-slot ad-mobile">Future Sticky Mobile Ad Placement</div>
-    <p>Bourbon Pourcast test build. Place CSV files beside this HTML file.</p>
+    <p>Bourbon Pourcast preview build.</p>
   </footer>
 
-  <script src="bp-test-app.js?v=3.2"></script>
+  <script src="bp-test-app.js?v=3.3"></script>
 </body>
 </html>
