@@ -1,111 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bourbon Pourcast — Allocation History Test</title>
-  <link rel="stylesheet" href="bp-test.css" />
+  <title>Bourbon Pourcast Test Site v3</title>
+  <link rel="stylesheet" href="bp-test-styles.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="brand-lockup">
+    <div class="brand-wrap">
       <div class="logo-mark">BP</div>
       <div>
         <h1>Bourbon Pourcast</h1>
-        <p>Allocation history lookup powered by drop_history.csv.</p>
+        <p>NC allocations, shipment radar, and smarter drop history.</p>
       </div>
     </div>
+    <nav class="top-nav" aria-label="Primary navigation">
+      <button class="nav-btn active" data-section="home">Home</button>
+      <button class="nav-btn" data-section="allocation">Allocation History</button>
+      <button class="nav-btn" data-section="shipments">Shipment Radar</button>
+      <button class="nav-btn" data-section="alerts">Alerts</button>
+    </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <div>
-        <p class="eyebrow">Allocation history</p>
-        <h2>Store + Brand Lookup</h2>
-        <p class="hero-copy">
-          Choose a store, brand, or both. Results default to the most recent 30 days available in the drop history.
-        </p>
+    <div class="ad-slot ad-top">Ad Placement — Top Leaderboard</div>
+
+    <section id="home" class="page-section active">
+      <div class="hero-card">
+        <div>
+          <p class="eyebrow">Test Site v3</p>
+          <h2>Today’s Bourbon Pourcast Dashboard</h2>
+          <p class="hero-copy">A mobile-first home base for allocation history and NC shipment intelligence.</p>
+        </div>
+        <div class="data-status" id="dataStatus">Loading local CSV data…</div>
       </div>
-      <aside class="hero-card">
-        <h3>Current rules</h3>
-        <ul>
-          <li>Dropdowns are generated from <code>drop_history.csv</code></li>
-          <li>Default window is last 30 days</li>
-          <li>Full history is not exposed by default</li>
-          <li>Store + brand can be combined</li>
-        </ul>
-      </aside>
+
+      <div class="grid two">
+        <article class="card feature-card">
+          <div class="card-head">
+            <div>
+              <p class="eyebrow">Allocation History</p>
+              <h3>Recent Drops</h3>
+            </div>
+            <button class="small-link" data-section-jump="allocation">View Lookup</button>
+          </div>
+          <div id="homeRecentAllocations" class="compact-list"></div>
+        </article>
+
+        <article class="card feature-card">
+          <div class="card-head">
+            <div>
+              <p class="eyebrow">NC Shipment Radar</p>
+              <h3>Recently Shipped Products</h3>
+            </div>
+            <button class="small-link" data-section-jump="shipments">View Radar</button>
+          </div>
+          <div id="homeShipmentPreview" class="compact-list"></div>
+        </article>
+      </div>
+
+      <div class="ad-slot">Ad Placement — Mid Page Rectangle</div>
+
+      <article class="card">
+        <p class="eyebrow">Why this matters</p>
+        <h3>Connect shipments to actual store drops</h3>
+        <p class="body-copy">The long-term win is connecting “what shipped to a board” with “what actually showed up in stores.” That makes Bourbon Pourcast useful before, during, and after a drop.</p>
+      </article>
     </section>
 
-    <section class="ad ad-top">Ad Space — mobile / leaderboard</section>
+    <section id="allocation" class="page-section">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Feature #2</p>
+          <h2>Allocation History</h2>
+          <p>Defaults to the last 30 days. Filter by store, brand, or both.</p>
+        </div>
+        <span class="pill" id="allocationCount">0 results</span>
+      </div>
 
-    <section class="dashboard-grid">
-      <article class="panel wide">
-        <div class="panel-heading">
+      <div class="filters card">
+        <label>Store
+          <select id="storeFilter"><option value="">All stores</option></select>
+        </label>
+        <label>Brand / Product
+          <select id="brandFilter"><option value="">All brands</option></select>
+        </label>
+        <label>Date Window
+          <select id="allocationDays">
+            <option value="30" selected>Last 30 days</option>
+            <option value="60">Last 60 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="365">Last year</option>
+            <option value="all">All available</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><span>Stores</span><strong id="statStores">0</strong></div>
+        <div class="stat-card"><span>Brands</span><strong id="statBrands">0</strong></div>
+        <div class="stat-card"><span>Latest Drop</span><strong id="statLatest">—</strong></div>
+      </div>
+
+      <article class="card table-card">
+        <div id="allocationTable"></div>
+      </article>
+    </section>
+
+    <section id="shipments" class="page-section">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Feature #3</p>
+          <h2>NC Shipment Radar</h2>
+          <p>Recently shipped products and the boards receiving them.</p>
+        </div>
+        <span class="pill" id="shipmentCount">0 products</span>
+      </div>
+
+      <article class="card hero-table-card">
+        <div class="card-head">
           <div>
-            <p class="eyebrow">Lookup</p>
-            <h2>Recent Drop History</h2>
+            <p class="eyebrow">Recently Shipped Products</p>
+            <h3>Product → Boards Receiving</h3>
           </div>
-          <span id="resultCount" class="pill">Loading…</span>
+          <button id="downloadShipments" class="small-link">Download Filtered CSV</button>
         </div>
-
-        <div id="statusMessage" class="status-message">Loading drop_history.csv…</div>
-
-        <div class="filters">
-          <label>
-            Store
-            <select id="storeFilter" disabled>
-              <option value="">All tracked stores</option>
-            </select>
-          </label>
-
-          <label>
-            Brand
-            <select id="brandFilter" disabled>
-              <option value="">All tracked brands</option>
-            </select>
-          </label>
-
-          <label>
-            Date window
-            <select id="daysFilter" disabled>
-              <option value="30" selected>Past 30 days</option>
-              <option value="14">Past 14 days</option>
-              <option value="7">Past 7 days</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="search-box inline-search">
-          <input id="textSearch" type="search" placeholder="Optional text search: Davis, Cary, Stagg..." autocomplete="off" disabled />
-          <button id="clearFilters" type="button" disabled>Clear</button>
-        </div>
-
-        <div class="range-note" id="rangeNote"></div>
-
-        <div id="results" class="results"></div>
+        <div id="shipmentHeroTable"></div>
       </article>
 
-      <aside class="panel">
-        <p class="eyebrow">Selected view</p>
-        <h2>Summary</h2>
-        <div id="summaryPanel" class="summary-list"></div>
-      </aside>
+      <div class="filters card">
+        <label>Product
+          <select id="shipmentProductFilter"><option value="">All products</option></select>
+        </label>
+        <label>Board
+          <select id="shipmentBoardFilter"><option value="">All boards</option></select>
+        </label>
+        <label>Date Window
+          <select id="shipmentDays">
+            <option value="30" selected>Last 30 days</option>
+            <option value="60">Last 60 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="365">Last year</option>
+            <option value="all">All available</option>
+          </select>
+        </label>
+      </div>
 
-      <aside class="panel">
-        <p class="eyebrow">Brand watch</p>
-        <h2>Last Seen</h2>
-        <div id="brandSummary" class="summary-list"></div>
-      </aside>
+      <article class="card table-card">
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">Detailed Shipment Report</p>
+            <h3>Shipment Records</h3>
+          </div>
+        </div>
+        <div id="shipmentDetailTable"></div>
+      </article>
     </section>
 
-    <section class="ad ad-bottom">Ad Space — mid-page / mobile candidate</section>
+    <section id="alerts" class="page-section">
+      <article class="card signup-card">
+        <p class="eyebrow">Coming Soon</p>
+        <h2>My Alerts</h2>
+        <p>Email registration and SMS alerts will plug in here later. The UI is already reserved so we do not have to redesign the site around login later.</p>
+        <div class="signup-row">
+          <input type="email" placeholder="Email address" disabled />
+          <button disabled>Register Soon</button>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>
-    <p>Static frontend test. Requires <code>drop_history.csv</code> in the same folder as this page.</p>
+    <div class="ad-slot ad-mobile">Future Sticky Mobile Ad Placement</div>
+    <p>Bourbon Pourcast test build. Place CSV files beside this HTML file.</p>
   </footer>
 
-  <script src="bp-test.js"></script>
+  <script src="bp-test-app.js"></script>
 </body>
 </html>
