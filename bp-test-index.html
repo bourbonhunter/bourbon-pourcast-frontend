@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bourbon Pourcast — Test Site</title>
+  <title>Bourbon Pourcast — Allocation History Test</title>
   <link rel="stylesheet" href="bp-test.css" />
 </head>
 <body>
@@ -12,119 +12,100 @@
       <div class="logo-mark">BP</div>
       <div>
         <h1>Bourbon Pourcast</h1>
-        <p>Track allocation history, shipment activity, and Durham drops.</p>
+        <p>Allocation history lookup powered by drop_history.csv.</p>
       </div>
     </div>
-    <a class="header-cta" href="#alerts">Get Alerts</a>
   </header>
 
   <main>
     <section class="hero">
       <div>
-        <p class="eyebrow">Early user testing prototype</p>
-        <h2>Find out what your favorite ABC store has been getting.</h2>
+        <p class="eyebrow">Allocation history</p>
+        <h2>Store + Brand Lookup</h2>
         <p class="hero-copy">
-          Search by store, brand, or city to see recent allocation history. This version uses static test data so you can test the user flow before we wire in the live CSV pipeline.
+          Choose a store, brand, or both. Results default to the most recent 30 days available in the drop history.
         </p>
-        <div class="search-box">
-          <input id="globalSearch" type="search" placeholder="Try Davis, Eagle Rare, Cary, Stagg..." autocomplete="off" />
-          <button id="clearSearch" type="button">Clear</button>
-        </div>
       </div>
       <aside class="hero-card">
-        <h3>What users can do</h3>
+        <h3>Current rules</h3>
         <ul>
-          <li>Look up a store’s recent drops</li>
-          <li>Check brand sightings by location</li>
-          <li>Scan Durham drop alert status</li>
-          <li>Register interest in email/SMS alerts</li>
+          <li>Dropdowns are generated from <code>drop_history.csv</code></li>
+          <li>Default window is last 30 days</li>
+          <li>Full history is not exposed by default</li>
+          <li>Store + brand can be combined</li>
         </ul>
       </aside>
     </section>
 
-    <section class="ad ad-top">Ad Space — leaderboard / mobile banner</section>
+    <section class="ad ad-top">Ad Space — mobile / leaderboard</section>
 
     <section class="dashboard-grid">
       <article class="panel wide">
         <div class="panel-heading">
           <div>
-            <p class="eyebrow">Allocation history</p>
-            <h2>Store + Brand Lookup</h2>
+            <p class="eyebrow">Lookup</p>
+            <h2>Recent Drop History</h2>
           </div>
-          <span id="resultCount" class="pill">0 results</span>
+          <span id="resultCount" class="pill">Loading…</span>
         </div>
+
+        <div id="statusMessage" class="status-message">Loading drop_history.csv…</div>
+
         <div class="filters">
-          <select id="cityFilter">
-            <option value="">All cities</option>
-          </select>
-          <select id="brandFilter">
-            <option value="">All brands</option>
-          </select>
-          <select id="storeFilter">
-            <option value="">All stores</option>
-          </select>
+          <label>
+            Store
+            <select id="storeFilter" disabled>
+              <option value="">All tracked stores</option>
+            </select>
+          </label>
+
+          <label>
+            Brand
+            <select id="brandFilter" disabled>
+              <option value="">All tracked brands</option>
+            </select>
+          </label>
+
+          <label>
+            Date window
+            <select id="daysFilter" disabled>
+              <option value="30" selected>Past 30 days</option>
+              <option value="14">Past 14 days</option>
+              <option value="7">Past 7 days</option>
+            </select>
+          </label>
         </div>
+
+        <div class="search-box inline-search">
+          <input id="textSearch" type="search" placeholder="Optional text search: Davis, Cary, Stagg..." autocomplete="off" disabled />
+          <button id="clearFilters" type="button" disabled>Clear</button>
+        </div>
+
+        <div class="range-note" id="rangeNote"></div>
+
         <div id="results" class="results"></div>
       </article>
 
       <aside class="panel">
-        <p class="eyebrow">Quick view</p>
-        <h2>Last Seen by Brand</h2>
-        <div id="brandSummary" class="summary-list"></div>
+        <p class="eyebrow">Selected view</p>
+        <h2>Summary</h2>
+        <div id="summaryPanel" class="summary-list"></div>
       </aside>
 
       <aside class="panel">
-        <p class="eyebrow">NC inventory shipped</p>
-        <h2>Shipment Radar</h2>
-        <div id="shipmentRadar" class="summary-list"></div>
+        <p class="eyebrow">Brand watch</p>
+        <h2>Last Seen</h2>
+        <div id="brandSummary" class="summary-list"></div>
       </aside>
-
-      <aside class="panel" id="durham">
-        <p class="eyebrow">Durham ABC</p>
-        <h2>Durham Drop Alerts</h2>
-        <div id="durhamDrops" class="summary-list"></div>
-      </aside>
-
-      <article class="panel wide" id="alerts">
-        <div class="panel-heading">
-          <div>
-            <p class="eyebrow">Future feature</p>
-            <h2>Alert Registration Preview</h2>
-          </div>
-          <span class="pill">UI only</span>
-        </div>
-        <p class="muted">This form is not connected yet. It is here so testers can react to the registration flow before we build auth, email verification, and SMS opt-in.</p>
-        <form id="alertForm" class="alert-form">
-          <label>
-            Email
-            <input type="email" placeholder="you@example.com" required />
-          </label>
-          <label>
-            Favorite store or city
-            <input type="text" placeholder="Davis Drive, Cary, Durham..." />
-          </label>
-          <label>
-            Favorite brands
-            <input type="text" placeholder="Eagle Rare, Stagg, Weller..." />
-          </label>
-          <div class="checkbox-row">
-            <label><input type="checkbox" /> Email alerts</label>
-            <label><input type="checkbox" /> SMS alerts later</label>
-          </div>
-          <button type="submit">Preview Signup</button>
-          <p id="formMessage" class="form-message"></p>
-        </form>
-      </article>
     </section>
 
-    <section class="ad ad-bottom">Ad Space — mid-page / sticky mobile candidate</section>
+    <section class="ad ad-bottom">Ad Space — mid-page / mobile candidate</section>
   </main>
 
   <footer>
-    <p>Bourbon Pourcast test build. Static data prototype for user testing.</p>
+    <p>Static frontend test. Requires <code>drop_history.csv</code> in the same folder as this page.</p>
   </footer>
 
-  <script src="bp-test-data.js"></script>
   <script src="bp-test.js"></script>
 </body>
 </html>
