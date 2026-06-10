@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bourbon Pourcast Test Site v3</title>
+  <title>Bourbon Pourcast</title>
   <link rel="stylesheet" href="bp-test-styles.css" />
 </head>
 <body>
@@ -29,7 +29,6 @@
     <section id="home" class="page-section active">
       <div class="hero-card">
         <div>
-          <p class="eyebrow">Test Site v3</p>
           <h2>Today’s Bourbon Pourcast Dashboard</h2>
           <p class="hero-copy">A mobile-first home base for allocation history and NC shipment intelligence.</p>
         </div>
@@ -118,17 +117,6 @@
         <span class="pill" id="shipmentCount">0 products</span>
       </div>
 
-      <article class="card hero-table-card">
-        <div class="card-head">
-          <div>
-            <p class="eyebrow">Recently Shipped Products</p>
-            <h3>Product → Boards Receiving</h3>
-          </div>
-          <button id="downloadShipments" class="small-link">Download Filtered CSV</button>
-        </div>
-        <div id="shipmentHeroTable"></div>
-      </article>
-
       <div class="filters card">
         <label>Product
           <select id="shipmentProductFilter"><option value="">All products</option></select>
@@ -146,6 +134,16 @@
           </select>
         </label>
       </div>
+
+      <article class="card hero-table-card">
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">Recently Shipped Products</p>
+            <h3>Product → Boards Receiving</h3>
+          </div>
+        </div>
+        <div id="shipmentHeroTable"></div>
+      </article>
 
       <article class="card table-card">
         <div class="card-head">

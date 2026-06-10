@@ -1,6 +1,6 @@
 const CSV_CANDIDATES = {
   allocations: ['drop_history.csv'],
-  shipments: ['nc_shipment_radar.csv', 'ncabc_inventory_report.csv', 'stock_shipped.csv']
+  shipments: ['nc_shipment_radar.csv', 'ncabc_inventory_report.csv', 'stock_shipped.csv', 'ncabc_stock_shipped.csv', 'shipment_report.csv']
 };
 
 let allocationRows = [];
@@ -15,10 +15,15 @@ function normalizeKey(key) {
 
 function pick(row, candidates) {
   const keys = Object.keys(row || {});
+  const normalized = keys.map(k => ({ key: k, norm: normalizeKey(k), value: String(row[k] ?? '').trim() }));
   for (const candidate of candidates) {
     const target = normalizeKey(candidate);
-    const match = keys.find(k => normalizeKey(k) === target || normalizeKey(k).includes(target));
-    if (match && row[match] !== undefined && row[match] !== '') return String(row[match]).trim();
+    let match = normalized.find(k => k.norm === target && k.value);
+    if (match) return match.value;
+    match = normalized.find(k => k.norm.startsWith(target) && k.value);
+    if (match) return match.value;
+    match = normalized.find(k => k.norm.includes(target) && k.value);
+    if (match) return match.value;
   }
   return '';
 }
@@ -98,11 +103,11 @@ function normalizedAllocationRows(rows) {
 
 function normalizedShipmentRows(rows) {
   return rows.map(row => {
-    const dateRaw = pick(row, ['date', 'ship_date', 'shipment_date', 'report_date', 'timestamp']);
-    const product = pick(row, ['product', 'brand', 'product_name', 'item', 'description', 'item_name']);
-    const board = pick(row, ['board', 'county', 'abc_board', 'recipient', 'destination']);
-    const qty = pick(row, ['qty', 'quantity', 'cases', 'bottles', 'units', 'shipped']);
-    const code = pick(row, ['code', 'item_code', 'product_code', 'nc_code']);
+    const dateRaw = pick(row, ['date', 'ship_date', 'shipment_date', 'shipping_date', 'report_date', 'run_date', 'created_at', 'timestamp']);
+    const product = pick(row, ['product', 'product_name', 'item_name', 'brand', 'item', 'description', 'desc', 'spirit_name', 'liquor_description', 'name']);
+    const board = pick(row, ['board', 'abc_board', 'board_name', 'county', 'county_name', 'recipient', 'destination', 'location', 'agency', 'customer', 'ship_to']);
+    const qty = pick(row, ['qty', 'quantity', 'case_qty', 'cases', 'bottles', 'units', 'shipped', 'amount']);
+    const code = pick(row, ['code', 'item_code', 'product_code', 'nc_code', 'bailment_code', 'sku']);
     const date = asDate(dateRaw);
     return { dateRaw, date, product, board, qty, code, raw: row };
   }).filter(r => r.product || r.board);
@@ -163,7 +168,7 @@ function renderShipments() {
   $('shipmentCount').textContent = `${groups.length} product${groups.length === 1 ? '' : 's'}`;
 
   if (!groups.length) {
-    $('shipmentHeroTable').innerHTML = `<div class="empty">No shipment records found. Add nc_shipment_radar.csv, ncabc_inventory_report.csv, or stock_shipped.csv beside this file.</div>`;
+    $('shipmentHeroTable').innerHTML = `<div class="empty">No shipment records found. Add a shipment CSV beside this file, or adjust the filters.</div>`;
     $('shipmentDetailTable').innerHTML = `<div class="empty">No detailed shipment rows available.</div>`;
     return;
   }
@@ -186,15 +191,6 @@ function renderHome() {
   $('homeShipmentPreview').innerHTML = shipmentGroups.length ? shipmentGroups.map(g => `<div class="compact-item"><div><strong>${escapeHtml(g.product)}</strong><small>${[...g.boards].sort().slice(0, 4).join(', ') || 'Board unknown'}</small></div><span>${fmtDate(g.latest)}</span></div>`).join('') : `<div class="empty">Add shipment CSV to populate Shipment Radar.</div>`;
 }
 
-function downloadFilteredShipments() {
-  const headers = ['date', 'product', 'board', 'quantity', 'code'];
-  const body = filteredShipmentRows.map(r => [fmtDate(r.date), r.product, r.board, r.qty, r.code].map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(','));
-  const blob = new Blob([[headers.join(','), ...body].join('\n')], { type: 'text/csv' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'bourbonpourcast_filtered_shipments.csv'; a.click();
-  URL.revokeObjectURL(url);
-}
 
 function wireNav() {
   document.querySelectorAll('[data-section], [data-section-jump]').forEach(btn => {
@@ -223,7 +219,6 @@ async function init() {
 
   ['storeFilter', 'brandFilter', 'allocationDays'].forEach(id => $(id).addEventListener('change', renderAllocation));
   ['shipmentProductFilter', 'shipmentBoardFilter', 'shipmentDays'].forEach(id => $(id).addEventListener('change', renderShipments));
-  $('downloadShipments').addEventListener('click', downloadFilteredShipments);
 
   renderAllocation();
   renderShipments();
