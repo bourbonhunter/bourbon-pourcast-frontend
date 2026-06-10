@@ -31,11 +31,11 @@ body {
   border-bottom: 1px solid var(--line);
 }
 .brand-wrap { display: flex; align-items: center; gap: 14px; min-width: 0; }
-.brand-logo { width: 64px; height: 64px; object-fit: contain; border-radius: 14px; flex: 0 0 auto; }
+.brand-logo { width: 90px; height: 90px; object-fit: contain; border-radius: 50%; flex: 0 0 auto; }
 .logo-fallback { width: 50px; height: 50px; border-radius: 16px; background: linear-gradient(135deg, var(--gold-light), var(--gold)); display: none; place-items: center; font-weight: 900; color: #170d07; box-shadow: var(--shadow); flex: 0 0 auto; }
 .brand-copy { min-width: 0; }
 h1, h2, h3, p { margin: 0; }
-h1 { font-size: clamp(1.35rem, 4vw, 2.05rem); color: var(--text); }
+h1 { font-size: clamp(1.5rem, 4vw, 2.15rem); color: var(--text); font-weight: 900; }
 .brand-wrap p, .section-title p, .body-copy, footer p { color: var(--muted); line-height: 1.45; }
 .brand-wrap p { max-width: 760px; }
 .top-nav { display: flex; gap: 8px; overflow-x: auto; padding: 16px 0 6px; }
@@ -129,7 +129,7 @@ footer { padding: 12px 0 34px; text-align: center; color: var(--muted); }
 .footer-link { color: var(--accent-2); font-weight: 900; text-decoration: none; }
 @media (max-width: 760px) {
   .site-header, main, footer { width: min(100% - 18px, 1120px); }
-  .brand-logo { width: 56px; height: 56px; }
+  .brand-logo { width: 60px; height: 60px; }
   .grid.two, .filters, .shipment-filters, .stats-grid { grid-template-columns: 1fr; }
   .card-head, .section-title { flex-direction: column; }
   .section-actions { width: 100%; justify-content: space-between; }
