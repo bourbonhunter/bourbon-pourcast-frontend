@@ -289,10 +289,7 @@ function renderHome() {
 }
 
 function updateDataStatus() {
-  const parts = [];
-  if (allocationRows.length) parts.push('Allocation History loaded');
-  if (shipmentRows.length) parts.push(`Shipment Radar loaded · ${shipmentSinceText()}`);
-  $('dataStatus').textContent = parts.length ? parts.join(' • ') : 'Local data not loaded yet';
+  // Status text intentionally hidden for the public demo build.
 }
 
 function setSection(section, scrollTargetId = null) {
