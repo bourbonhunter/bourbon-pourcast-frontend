@@ -117,6 +117,15 @@
         <span class="pill" id="shipmentCount">0 products</span>
       </div>
 
+      <div class="card data-load-card" id="shipmentLoadCard" style="display:none;">
+        <p class="eyebrow">Shipment Data</p>
+        <h3>Load Shipment Radar Data</h3>
+        <p class="body-copy">If the browser blocks local CSV loading, choose your shipment CSV or HTML report here.</p>
+        <div class="signup-row">
+          <input id="shipmentFileInput" type="file" accept=".csv,.html,.htm,text/csv,text/html" />
+        </div>
+      </div>
+
       <div class="filters card">
         <label>Product
           <select id="shipmentProductFilter"><option value="">All products</option></select>
@@ -174,6 +183,6 @@
     <p>Bourbon Pourcast test build. Place CSV files beside this HTML file.</p>
   </footer>
 
-  <script src="bp-test-app.js"></script>
+  <script src="bp-test-app.js?v=3.2"></script>
 </body>
 </html>
