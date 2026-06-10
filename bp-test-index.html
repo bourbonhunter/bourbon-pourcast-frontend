@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bourbon Pourcast — Test Site</title>
+  <link rel="stylesheet" href="bp-test.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-lockup">
+      <div class="logo-mark">BP</div>
+      <div>
+        <h1>Bourbon Pourcast</h1>
+        <p>Track allocation history, shipment activity, and Durham drops.</p>
+      </div>
+    </div>
+    <a class="header-cta" href="#alerts">Get Alerts</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Early user testing prototype</p>
+        <h2>Find out what your favorite ABC store has been getting.</h2>
+        <p class="hero-copy">
+          Search by store, brand, or city to see recent allocation history. This version uses static test data so you can test the user flow before we wire in the live CSV pipeline.
+        </p>
+        <div class="search-box">
+          <input id="globalSearch" type="search" placeholder="Try Davis, Eagle Rare, Cary, Stagg..." autocomplete="off" />
+          <button id="clearSearch" type="button">Clear</button>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <h3>What users can do</h3>
+        <ul>
+          <li>Look up a store’s recent drops</li>
+          <li>Check brand sightings by location</li>
+          <li>Scan Durham drop alert status</li>
+          <li>Register interest in email/SMS alerts</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="ad ad-top">Ad Space — leaderboard / mobile banner</section>
+
+    <section class="dashboard-grid">
+      <article class="panel wide">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Allocation history</p>
+            <h2>Store + Brand Lookup</h2>
+          </div>
+          <span id="resultCount" class="pill">0 results</span>
+        </div>
+        <div class="filters">
+          <select id="cityFilter">
+            <option value="">All cities</option>
+          </select>
+          <select id="brandFilter">
+            <option value="">All brands</option>
+          </select>
+          <select id="storeFilter">
+            <option value="">All stores</option>
+          </select>
+        </div>
+        <div id="results" class="results"></div>
+      </article>
+
+      <aside class="panel">
+        <p class="eyebrow">Quick view</p>
+        <h2>Last Seen by Brand</h2>
+        <div id="brandSummary" class="summary-list"></div>
+      </aside>
+
+      <aside class="panel">
+        <p class="eyebrow">NC inventory shipped</p>
+        <h2>Shipment Radar</h2>
+        <div id="shipmentRadar" class="summary-list"></div>
+      </aside>
+
+      <aside class="panel" id="durham">
+        <p class="eyebrow">Durham ABC</p>
+        <h2>Durham Drop Alerts</h2>
+        <div id="durhamDrops" class="summary-list"></div>
+      </aside>
+
+      <article class="panel wide" id="alerts">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Future feature</p>
+            <h2>Alert Registration Preview</h2>
+          </div>
+          <span class="pill">UI only</span>
+        </div>
+        <p class="muted">This form is not connected yet. It is here so testers can react to the registration flow before we build auth, email verification, and SMS opt-in.</p>
+        <form id="alertForm" class="alert-form">
+          <label>
+            Email
+            <input type="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            Favorite store or city
+            <input type="text" placeholder="Davis Drive, Cary, Durham..." />
+          </label>
+          <label>
+            Favorite brands
+            <input type="text" placeholder="Eagle Rare, Stagg, Weller..." />
+          </label>
+          <div class="checkbox-row">
+            <label><input type="checkbox" /> Email alerts</label>
+            <label><input type="checkbox" /> SMS alerts later</label>
+          </div>
+          <button type="submit">Preview Signup</button>
+          <p id="formMessage" class="form-message"></p>
+        </form>
+      </article>
+    </section>
+
+    <section class="ad ad-bottom">Ad Space — mid-page / sticky mobile candidate</section>
+  </main>
+
+  <footer>
+    <p>Bourbon Pourcast test build. Static data prototype for user testing.</p>
+  </footer>
+
+  <script src="bp-test-data.js"></script>
+  <script src="bp-test.js"></script>
+</body>
+</html>
