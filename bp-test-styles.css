@@ -96,3 +96,12 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .hero-card h2 { font-size: clamp(1.8rem, 11vw, 2.6rem); }
   .nav-btn, .small-link { padding: 9px 11px; }
 }
+
+/* v3.4 shipment radar simplification */
+.mini-meta { color: var(--muted); font-size: .86rem; line-height: 1.35; margin-top: 4px; text-transform: none; letter-spacing: 0; font-weight: 700; }
+.section-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.ghost-link { background: rgba(255,255,255,.06); color: var(--text); border-color: var(--line); }
+@media (max-width: 760px) {
+  .section-actions { width: 100%; justify-content: space-between; }
+  .hero-table-card table { min-width: 720px; }
+}

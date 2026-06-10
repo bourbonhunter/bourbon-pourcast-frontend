@@ -199,16 +199,21 @@ function groupedShipments(rows) {
   return [...groups.values()].sort((a,b)=>(b.totalQty-a.totalQty) || a.product.localeCompare(b.product));
 }
 
+function shipmentSinceText() {
+  if (shipmentMeta.shippedSince) return `Shipped since ${fmtDate(shipmentMeta.shippedSince)}`;
+  if (shipmentMeta.coverageDays) return `Current report window: ${shipmentMeta.coverageDays} days`;
+  return 'Current shipment report window';
+}
+
 function renderShipmentHint(days) {
   const hint = $('shipmentWindowHint'); if (!hint) return;
   if (!shipmentRows.length) { hint.textContent = ''; return; }
   if (shipmentMeta.isInventoryReport) {
-    const parts = [];
-    if (shipmentMeta.coverageDays) parts.push(`Current report covers ${shipmentMeta.coverageDays} days`);
-    if (shipmentMeta.shippedSince) parts.push(`since ${fmtDate(shipmentMeta.shippedSince)}`);
+    const parts = [shipmentSinceText()];
+    if (shipmentMeta.coverageDays) parts.push(`${shipmentMeta.coverageDays}-day coverage window`);
     if (shipmentMeta.lastUpdated) parts.push(`NC ABC updated ${shipmentMeta.lastUpdated}`);
     if (days !== 'report' && shipmentMeta.coverageDays && Number(days) < shipmentMeta.coverageDays) {
-      parts.push(`To show only ${days} days, generate an inventory report with a ${days}-day coverage window.`);
+      parts.push(`This report was generated for a ${shipmentMeta.coverageDays}-day window; generate a shorter report to isolate only ${days} days.`);
     }
     hint.textContent = parts.join(' • ');
   } else {
@@ -224,21 +229,22 @@ function renderShipments() {
   $('shipmentCount').textContent = `${groups.length} product${groups.length === 1 ? '' : 's'}`;
   if (!shipmentRows.length) {
     $('shipmentHeroTable').innerHTML = `<div class="empty">No shipment records loaded yet. Use a local web server, or choose your ncabc_inventory_report.html above.</div>`;
-    $('shipmentDetailTable').innerHTML = `<div class="empty">No detailed shipment rows available.</div>`; return;
+    return;
   }
   if (!groups.length) {
     $('shipmentHeroTable').innerHTML = `<div class="empty">No products match the selected shipment filters.</div>`;
-    $('shipmentDetailTable').innerHTML = `<div class="empty">No board records match the selected shipment filters.</div>`; return;
+    return;
   }
-  $('shipmentHeroTable').innerHTML = `<table><thead><tr><th>Product</th><th>Boards Receiving</th><th>Total Bottles</th></tr></thead><tbody>${groups.slice(0,50).map(g => `<tr><td><strong>${escapeHtml(g.product)}</strong><br><small>${g.boards.size} board${g.boards.size===1?'':'s'}</small></td><td>${[...g.boards.keys()].sort().slice(0,18).map(b=>`<span class="badge">${escapeHtml(b)}</span>`).join('')}${g.boards.size>18 ? `<span class="badge">+${g.boards.size-18} more</span>` : ''}</td><td>${g.totalQty || '—'}</td></tr>`).join('')}</tbody></table>`;
-  $('shipmentDetailTable').innerHTML = `<table><thead><tr><th>Product</th><th>Board</th><th>Bottles</th></tr></thead><tbody>${filteredShipmentRows.sort((a,b)=>a.product.localeCompare(b.product)||a.board.localeCompare(b.board)).map(r=>`<tr><td>${escapeHtml(r.product)}</td><td>${escapeHtml(r.board)}</td><td>${escapeHtml(r.qty || '—')}</td></tr>`).join('')}</tbody></table>`;
+  $('shipmentHeroTable').innerHTML = `<table><thead><tr><th>Product</th><th>Shipped Since</th><th>Boards Receiving</th><th>Total Bottles</th></tr></thead><tbody>${groups.slice(0,50).map(g => `<tr><td><strong>${escapeHtml(g.product)}</strong><br><small>${g.boards.size} board${g.boards.size===1?'':'s'}</small></td><td>${escapeHtml(shipmentSinceText())}</td><td>${[...g.boards.entries()].sort((a,b)=>a[0].localeCompare(b[0])).slice(0,18).map(([b,q])=>`<span class="badge">${escapeHtml(b)}${q ? ` · ${q}` : ''}</span>`).join('')}${g.boards.size>18 ? `<span class="badge">+${g.boards.size-18} more</span>` : ''}</td><td>${g.totalQty || '—'}</td></tr>`).join('')}</tbody></table>`;
 }
 
 function renderHome() {
   const recent = allocationRows.filter(r => withinDays(r.date, 30)).sort((a,b)=>(b.date?.getTime()||0)-(a.date?.getTime()||0)).slice(0,6);
   $('homeRecentAllocations').innerHTML = recent.length ? recent.map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.brand || 'Unknown Brand')}</strong><small>${escapeHtml(r.store || 'Unknown Store')}</small></div><span>${fmtDate(r.date)}</span></div>`).join('') : `<div class="empty">Allocation history data is not loaded yet.</div>`;
+  const since = $('homeShipmentSince');
+  if (since) since.textContent = shipmentRows.length ? shipmentSinceText() : '';
   const shipmentGroups = groupedShipments(shipmentRows).slice(0,6);
-  $('homeShipmentPreview').innerHTML = shipmentGroups.length ? shipmentGroups.map(g => `<div class="compact-item"><div><strong>${escapeHtml(g.product)}</strong><small>${[...g.boards.keys()].sort().slice(0,4).join(', ') || 'Board unknown'}</small></div><span>${g.totalQty || '—'} bottles</span></div>`).join('') : `<div class="empty">Shipment Radar data is not loaded yet.</div>`;
+  $('homeShipmentPreview').innerHTML = shipmentGroups.length ? shipmentGroups.map(g => `<div class="compact-item"><div><strong>${escapeHtml(g.product)}</strong><small>${escapeHtml(shipmentSinceText())}<br>${[...g.boards.keys()].sort().slice(0,4).join(', ') || 'Board unknown'}</small></div><span>${g.totalQty || '—'} bottles</span></div>`).join('') : `<div class="empty">Shipment Radar data is not loaded yet.</div>`;
 }
 
 function updateDataStatus(allocLoad, shipLoad) {

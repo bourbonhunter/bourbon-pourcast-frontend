@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bourbon Pourcast</title>
-  <link rel="stylesheet" href="bp-test-styles.css?v=3.3" />
+  <link rel="stylesheet" href="bp-test-styles.css?v=3.4" />
 </head>
 <body>
   <header class="site-header">
@@ -52,6 +52,7 @@
             <div>
               <p class="eyebrow">NC Shipment Radar</p>
               <h3>Recently Shipped Products</h3>
+              <p class="mini-meta" id="homeShipmentSince"></p>
             </div>
             <button class="small-link" data-section-jump="shipments">View Radar</button>
           </div>
@@ -112,7 +113,7 @@
           <h2>NC Shipment Radar</h2>
           <p>See which allocated products were shipped to which NC ABC boards.</p>
         </div>
-        <span class="pill" id="shipmentCount">0 products</span>
+        <div class="section-actions"><button class="small-link ghost-link" data-section-jump="home">Back to Dashboard</button><span class="pill" id="shipmentCount">0 products</span></div>
       </div>
 
       <div class="card data-load-card" id="shipmentLoadCard" style="display:none;">
@@ -149,11 +150,6 @@
         <div class="card-head"><div><p class="eyebrow">Recently Shipped Products</p><h3>Product → Boards Receiving</h3></div></div>
         <div id="shipmentHeroTable"></div>
       </article>
-
-      <article class="card table-card">
-        <div class="card-head"><div><p class="eyebrow">Detailed Shipment Report</p><h3>Shipment Records</h3></div></div>
-        <div id="shipmentDetailTable"></div>
-      </article>
     </section>
 
     <section id="alerts" class="page-section">
@@ -171,6 +167,6 @@
     <p>Bourbon Pourcast preview build.</p>
   </footer>
 
-  <script src="bp-test-app.js?v=3.3"></script>
+  <script src="bp-test-app.js?v=3.4"></script>
 </body>
 </html>
