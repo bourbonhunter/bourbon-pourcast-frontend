@@ -411,7 +411,7 @@ function wireAlertSignup() {
           "✅ You're already registered. No action required.";
       } else {
         message.textContent =
-          "✅ Thanks for registering! You'll receive free NC bourbon alerts and future alert updates.";
+          "✅ Thanks for registering! You'll receive free Bourbon Pourcast updates and be notified when new alert features become available.";
       }
 
       emailInput.value = "";
