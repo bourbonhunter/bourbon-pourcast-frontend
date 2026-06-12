@@ -408,7 +408,7 @@ function wireAlertSignup() {
 
       if (result === "already_registered") {
         message.textContent =
-          "✅ You're already registered. No action required.";
+          "✅ You're already registered. No action required. Existing subscribers will automatically receive future updates.";
       } else {
         message.textContent =
           "✅ Thanks for registering! You'll receive free Bourbon Pourcast updates and be notified when new alert features become available.";
