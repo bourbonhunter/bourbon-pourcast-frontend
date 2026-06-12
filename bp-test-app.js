@@ -353,3 +353,77 @@ async function init() {
 }
 
 init();
+// ==========================================
+// Bourbon Pourcast Alert Registration
+// ==========================================
+
+const SUPABASE_URL = "https://akitjakjvaupljhvsgnb.supabase.co";
+const SUPABASE_KEY = "sb_publishable_JTOyuIOQyFadm01Iv9EPyg_lsPIHC83";
+
+async function registerAlertSubscriber(email) {
+  const response = await fetch(
+    `${SUPABASE_URL}/rest/v1/rpc/register_email_subscriber`,
+    {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        p_email: email
+      })
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(`Registration failed (${response.status})`);
+  }
+
+  return await response.json();
+}
+
+function wireAlertSignup() {
+  const form = document.getElementById("alertSignupForm");
+  const emailInput = document.getElementById("alertEmail");
+  const message = document.getElementById("alertSignupMessage");
+
+  if (!form || !emailInput || !message) {
+    return;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!email) {
+      return;
+    }
+
+    message.textContent = "Registering...";
+
+    try {
+      const result = await registerAlertSubscriber(email);
+
+      if (result === "already_registered") {
+        message.textContent =
+          "✅ You're already registered. No action required.";
+      } else {
+        message.textContent =
+          "✅ Thanks for registering! You'll receive free NC bourbon alerts and future alert updates.";
+      }
+
+      emailInput.value = "";
+    } catch (err) {
+      console.error(err);
+
+      message.textContent =
+        "Sorry, registration failed. Please try again.";
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  wireAlertSignup();
+});
