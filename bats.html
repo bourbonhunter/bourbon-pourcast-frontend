@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allocated Bourbon Transparency | Bourbon Pourcast</title>
+  <meta name="description" content="A public transparency platform promoting real-time visibility of allocations and hard-to-find bourbons across participating ABC boards." />
+  <style>
+    :root {
+      --navy: #0b2f4f;
+      --navy-dark: #08243d;
+      --blue: #1f5f8b;
+      --gold: #b7892b;
+      --gold-light: #f2dfad;
+      --gray-50: #f6f8fb;
+      --gray-100: #eef2f6;
+      --gray-200: #dce4ec;
+      --gray-600: #506173;
+      --gray-800: #233142;
+      --white: #ffffff;
+      --success: #176b3a;
+      --shadow: 0 10px 30px rgba(8, 36, 61, 0.12);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .top-strip {
+      background: var(--navy-dark);
+      color: #dce9f5;
+      font-size: 0.85rem;
+      padding: 0.45rem 1rem;
+      text-align: center;
+    }
+
+    header {
+      background: var(--navy);
+      color: var(--white);
+      border-bottom: 4px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .brand strong {
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand span {
+      font-size: 0.78rem;
+      color: #dce9f5;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      padding: 0.55rem 0.75rem;
+      border-radius: 999px;
+      color: #f4f8fc;
+      font-size: 0.92rem;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #174c78 62%, #245f8e 100%);
+      color: var(--white);
+      padding: 4.5rem 1rem 4rem;
+    }
+
+    .hero-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: #f9efd3;
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(2.2rem, 6vw, 4.7rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero p {
+      font-size: 1.18rem;
+      color: #e6f0f8;
+      max-width: 760px;
+      margin: 0 0 1.3rem;
+    }
+
+    .hero .lead {
+      font-size: 1.32rem;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.05rem;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 2px solid transparent;
+      min-height: 48px;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .btn-secondary {
+      border-color: rgba(255,255,255,0.55);
+      color: var(--white);
+    }
+
+    .hero-card {
+      background: var(--white);
+      color: var(--gray-800);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h2 {
+      margin: 0 0 0.5rem;
+      color: var(--navy);
+      font-size: 1.25rem;
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.75rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .status-row:last-child {
+      border-bottom: 0;
+    }
+
+    .dot {
+      width: 13px;
+      height: 13px;
+      background: var(--success);
+      border-radius: 50%;
+      margin-top: 0.35rem;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2.2rem 1rem 4rem;
+    }
+
+    section {
+      margin: 0 0 2.3rem;
+      scroll-margin-top: 110px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title h2 {
+      color: var(--navy);
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .section-title p {
+      color: var(--gray-600);
+      margin: 0;
+      max-width: 620px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: 0 5px 20px rgba(8, 36, 61, 0.06);
+    }
+
+    .card h3 {
+      margin: 0 0 0.55rem;
+      color: var(--navy);
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--gray-600);
+    }
+
+    .problem-card {
+      border-top: 5px solid #9f3b2f;
+    }
+
+    .solution-card {
+      border-top: 5px solid var(--success);
+    }
+
+    .value-card {
+      border-top: 5px solid var(--gold);
+    }
+
+    .feed-wrap {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .feed-head {
+      background: var(--navy);
+      color: var(--white);
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .feed-head strong {
+      font-size: 1.1rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: 999px;
+      background: #e8f4ec;
+      color: var(--success);
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .feed-head .badge {
+      background: rgba(255,255,255,0.15);
+      color: #e9f7ee;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-200);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--navy);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--gray-100);
+    }
+
+    td {
+      font-size: 0.95rem;
+    }
+
+    .qty {
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+
+
+
+    .flow-panel {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .flow-diagram {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.8rem;
+      align-items: stretch;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 168px;
+      padding: 1rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      background: var(--gray-50);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.45rem;
+      text-align: center;
+    }
+
+    .flow-step::after {
+      content: "→";
+      position: absolute;
+      right: -0.72rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(8, 36, 61, 0.16);
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step strong {
+      color: var(--navy);
+      font-size: 0.98rem;
+      line-height: 1.2;
+    }
+
+    .flow-step span {
+      color: var(--gray-600);
+      font-size: 0.84rem;
+      line-height: 1.35;
+    }
+
+    .flow-platform {
+      background: #eaf2f8;
+      border-color: #bfd5e7;
+    }
+
+    .flow-platform strong {
+      color: var(--blue);
+    }
+
+    .flow-note {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-left: 5px solid var(--gold);
+      background: #fff8e7;
+      color: #6d4d0b;
+      border-radius: 10px;
+    }
+
+    .ticker {
+      height: 390px;
+      overflow: hidden;
+      background: #071f35;
+      position: relative;
+    }
+
+    .ticker::before,
+    .ticker::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 52px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ticker::before {
+      top: 0;
+      background: linear-gradient(to bottom, #071f35, rgba(7,31,53,0));
+    }
+
+    .ticker::after {
+      bottom: 0;
+      background: linear-gradient(to top, #071f35, rgba(7,31,53,0));
+    }
+
+    .ticker-track {
+      animation: scroll-feed 34s linear infinite;
+    }
+
+    .ticker:hover .ticker-track,
+    .ticker:focus-within .ticker-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll-feed {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-630px); }
+    }
+
+    .ticker-row {
+      display: grid;
+      grid-template-columns: 92px minmax(150px, 1.2fr) minmax(92px, 0.7fr) minmax(190px, 1.4fr) 74px 80px;
+      gap: 0.8rem;
+      align-items: center;
+      min-height: 64px;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: #f4f8fc;
+      font-family: "Courier New", Courier, monospace;
+      letter-spacing: -0.02em;
+    }
+
+    .ticker-row .time {
+      color: #f7d989;
+      font-weight: 800;
+    }
+
+    .ticker-row .board,
+    .ticker-row .store {
+      color: #c9d8e6;
+    }
+
+    .ticker-row .product {
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .ticker-row .qty {
+      color: #f7d989;
+      font-weight: 900;
+    }
+
+    .demo-note {
+      padding: 0.75rem 1rem;
+      background: #fff8e7;
+      color: #6d4d0b;
+      font-size: 0.9rem;
+      border-top: 1px solid #f0dda8;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      min-height: 170px;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+    }
+
+    .step h3 {
+      color: var(--navy);
+      margin: 0 0 0.4rem;
+    }
+
+    .step p {
+      color: var(--gray-600);
+      margin: 0;
+      font-size: 0.94rem;
+    }
+
+    .pilot {
+      background: linear-gradient(135deg, var(--navy) 0%, #173f65 100%);
+      color: var(--white);
+      border-radius: 22px;
+      padding: 1.6rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1rem;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .pilot h2 {
+      margin: 0 0 0.6rem;
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
+    }
+
+    .pilot p {
+      color: #e6f0f8;
+      margin: 0 0 1rem;
+    }
+
+    .pilot ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: #f8fbff;
+    }
+
+    .pilot-side {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+
+    .pilot-side strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: #fff2c9;
+    }
+
+    footer {
+      background: var(--navy-dark);
+      color: #dce9f5;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    footer strong {
+      color: var(--white);
+    }
+
+    @media (max-width: 850px) {
+      .nav-wrap {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .hero-inner,
+      .grid-2,
+      .grid-3,
+      .process,
+      .pilot {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-diagram {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .flow-step::after {
+        content: "↓";
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: -1.15rem;
+        transform: translateX(-50%);
+      }
+
+      .hero {
+        padding-top: 3rem;
+      }
+
+      .section-title {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+
+  
+    .flow-panel {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .flow-diagram {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.8rem;
+      align-items: stretch;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 168px;
+      padding: 1rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      background: var(--gray-50);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.45rem;
+      text-align: center;
+    }
+
+    .flow-step::after {
+      content: "→";
+      position: absolute;
+      right: -0.72rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(8, 36, 61, 0.16);
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step strong {
+      color: var(--navy);
+      font-size: 0.98rem;
+      line-height: 1.2;
+    }
+
+    .flow-step span {
+      color: var(--gray-600);
+      font-size: 0.84rem;
+      line-height: 1.35;
+    }
+
+    .flow-platform {
+      background: #eaf2f8;
+      border-color: #bfd5e7;
+    }
+
+    .flow-platform strong {
+      color: var(--blue);
+    }
+
+    .flow-note {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-left: 5px solid var(--gold);
+      background: #fff8e7;
+      color: #6d4d0b;
+      border-radius: 10px;
+    }
+
+    .ticker {
+        height: 430px;
+      }
+
+      .ticker-track {
+        animation-duration: 42s;
+      }
+
+      .ticker-row {
+        grid-template-columns: 1fr;
+        gap: 0.18rem;
+        min-height: 116px;
+        padding: 0.95rem 1rem;
+      }
+
+      .ticker-row span::before {
+        color: rgba(255,255,255,0.55);
+        display: inline-block;
+        min-width: 74px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .ticker-row .time::before { content: "Time"; }
+      .ticker-row .board::before { content: "Board"; }
+      .ticker-row .store::before { content: "Store"; }
+      .ticker-row .product::before { content: "Product"; }
+      .ticker-row .qty::before { content: "Quantity"; }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead {
+        display: none;
+      }
+
+      tr {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      td {
+        border: 0;
+        padding: 0.25rem 0;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        color: var(--gray-600);
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 800;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-strip">Demo concept for ABC boards and control-state agencies. Not an official NC ABC service.</div>
+
+  <header>
+    <div class="nav-wrap">
+      <a class="brand" href="#top" aria-label="Allocated Bourbon Transparency home">
+        <strong>Allocated Bourbon Transparency</strong>
+        <span>Powered by Bourbon Pourcast</span>
+      </a>
+      <nav aria-label="Page navigation">
+        <a href="#problem">The Problem</a>
+        <a href="#solution">The Solution</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#feed">Demo Feed</a>
+        <a href="#archive">Archive</a>
+        <a href="#pilot">Pilot Program</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Public visibility • Equal access • Historical accountability</div>
+        <h1>Allocated Bourbon Transparency</h1>
+        <p class="lead">Promoting real-time visibility of allocations and hard-to-find bourbons across participating ABC boards.</p>
+        <p>ABC boards retain complete control of their inventory systems. Participating stores supply scan data from existing store-level receiving workflows. Bourbon Pourcast handles the processing, publishing, and permanent archive for public transparency.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#feed">View Demo Feed</a>
+          <a class="btn btn-secondary" href="#how-it-works">How It Works</a>
+          <a class="btn btn-secondary" href="#pilot">Discuss Pilot Program</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Transparency summary">
+        <h2>What boards get</h2>
+        <div class="status-row">
+          <span class="dot" aria-hidden="true"></span>
+          <div><strong>No system replacement</strong><br />Existing inventory processes remain in place.</div>
+        </div>
+        <div class="status-row">
+          <span class="dot" aria-hidden="true"></span>
+          <div><strong>Public allocation feed</strong><br />Allocation activity is published for all users, not just subscribers.</div>
+        </div>
+        <div class="status-row">
+          <span class="dot" aria-hidden="true"></span>
+          <div><strong>Permanent archive</strong><br />Bourbon Pourcast maintains the searchable public record.</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <main>
+    <section id="problem">
+      <div class="section-title">
+        <h2>The problem boards are already managing</h2>
+        <p>Allocated bourbon creates recurring pressure on store teams, public websites, and public confidence.</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="card problem-card">
+          <h3>Repeated inventory searches</h3>
+          <p>High-demand products can drive frequent customer searches and automated traffic against public inventory tools.</p>
+        </article>
+        <article class="card problem-card">
+          <h3>Store phone calls</h3>
+          <p>Staff time is consumed by repeated questions about whether allocated bottles have arrived or remain available.</p>
+        </article>
+        <article class="card problem-card">
+          <h3>Fairness concerns</h3>
+          <p>When allocation visibility is inconsistent, customers may assume insiders or small groups have an advantage.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="solution">
+      <div class="section-title">
+        <h2>The solution: publish allocation activity from store scan data</h2>
+        <p>Participating stores supply scan data from their existing receiving workflow. Bourbon Pourcast handles processing, public visibility, archive, and consumer traffic.</p>
+      </div>
+      <div class="process">
+        <article class="step">
+          <h3>Store scan occurs</h3>
+          <p>Allocated bottles continue to be scanned by store staff through the store's existing receiving or inventory workflow.</p>
+        </article>
+        <article class="step">
+          <h3>Scan data is supplied</h3>
+          <p>Store-level scan data is shared by feed, export, API, secure file drop, or other low-friction method approved by the board.</p>
+        </article>
+        <article class="step">
+          <h3>We process and publish</h3>
+          <p>Bourbon Pourcast identifies allocation activity, formats the public record, and publishes it in near real time.</p>
+        </article>
+        <article class="step">
+          <h3>Archive is maintained</h3>
+          <p>Each published allocation record becomes part of a permanent searchable archive maintained by Bourbon Pourcast.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Board-facing value proposition</h2>
+        <p>The platform is designed to reduce friction for boards while increasing public confidence.</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="card value-card">
+          <h3>No inventory system replacement</h3>
+          <p>Boards keep their current POS, receiving, inventory, and store operations while Bourbon Pourcast handles the public-facing transparency layer.</p>
+        </article>
+        <article class="card value-card">
+          <h3>Reduced inquiry burden</h3>
+          <p>Customers can self-serve allocation information instead of calling stores or repeatedly searching board systems.</p>
+        </article>
+        <article class="card value-card">
+          <h3>Public confidence</h3>
+          <p>Timestamped visibility helps demonstrate that allocation activity is published fairly, consistently, and without preferential access.</p>
+        </article>
+      </div>
+    </section>
+
+
+    <section id="how-it-works">
+      <div class="section-title">
+        <h2>How it works</h2>
+        <p>A simple flow designed to preserve existing store operations while creating public visibility.</p>
+      </div>
+      <div class="flow-panel">
+        <div class="flow-diagram" aria-label="Allocated Bourbon Transparency workflow diagram">
+          <div class="flow-step">
+            <strong>Participating ABC Store</strong>
+            <span>Store continues normal receiving and inventory work.</span>
+          </div>
+          <div class="flow-step">
+            <strong>Store Scan Occurs</strong>
+            <span>Allocated bottles are scanned through the existing store workflow.</span>
+          </div>
+          <div class="flow-step">
+            <strong>Scan Data Supplied</strong>
+            <span>Approved scan data is supplied by the board or store-approved process.</span>
+          </div>
+          <div class="flow-step flow-platform">
+            <strong>Bourbon Pourcast Handles It</strong>
+            <span>Process, identify allocation activity, publish, and archive.</span>
+          </div>
+          <div class="flow-step">
+            <strong>Public Transparency Feed</strong>
+            <span>Allocation activity becomes visible to all users in near real time.</span>
+          </div>
+          <div class="flow-step">
+            <strong>Permanent Archive</strong>
+            <span>A searchable historical record supports fairness and accountability.</span>
+          </div>
+        </div>
+        <div class="flow-note"><strong>No replacement required:</strong> participating boards keep their existing POS, receiving, inventory, and store operations. Bourbon Pourcast provides the public transparency layer.</div>
+      </div>
+    </section>
+
+    <section id="feed">
+      <div class="section-title">
+        <h2>Live transparency feed demo</h2>
+        <p>Example display of how store scan data becomes a public transparency feed handled by Bourbon Pourcast.</p>
+      </div>
+      <div class="feed-wrap">
+        <div class="feed-head">
+          <strong>Allocation Activity Feed</strong>
+          <span class="badge">Demo feed</span>
+        </div>
+        <div class="ticker" aria-label="Slow scrolling allocation activity demo">
+          <div class="ticker-track">
+            <div class="ticker-row">
+              <span class="time">10:42 AM</span>
+              <span class="board">Wake County ABC</span>
+              <span class="store">Store #12</span>
+              <span class="product">Blanton's Single Barrel</span>
+              <span class="qty">Qty 4</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row">
+              <span class="time">10:58 AM</span>
+              <span class="board">Durham County ABC</span>
+              <span class="store">Store #5</span>
+              <span class="product">Eagle Rare 10 Year</span>
+              <span class="qty">Qty 6</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row">
+              <span class="time">11:14 AM</span>
+              <span class="board">Wake County ABC</span>
+              <span class="store">Store #9</span>
+              <span class="product">E.H. Taylor Small Batch</span>
+              <span class="qty">Qty 5</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row">
+              <span class="time">11:31 AM</span>
+              <span class="board">Johnston County ABC</span>
+              <span class="store">Store #2</span>
+              <span class="product">Weller Special Reserve</span>
+              <span class="qty">Qty 6</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row">
+              <span class="time">11:47 AM</span>
+              <span class="board">Wake County ABC</span>
+              <span class="store">Store #7</span>
+              <span class="product">Stagg</span>
+              <span class="qty">Qty 4</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row">
+              <span class="time">12:03 PM</span>
+              <span class="board">Orange County ABC</span>
+              <span class="store">Store #3</span>
+              <span class="product">Old Forester Birthday Bourbon</span>
+              <span class="qty">Qty 4</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row">
+              <span class="time">12:21 PM</span>
+              <span class="board">Wake County ABC</span>
+              <span class="store">Store #10</span>
+              <span class="product">Rock Hill Farms</span>
+              <span class="qty">Qty 4</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row">
+              <span class="time">12:39 PM</span>
+              <span class="board">Mecklenburg County ABC</span>
+              <span class="store">Store #16</span>
+              <span class="product">Weller Antique 107</span>
+              <span class="qty">Qty 6</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row">
+              <span class="time">12:55 PM</span>
+              <span class="board">Wake County ABC</span>
+              <span class="store">Store #4</span>
+              <span class="product">Henry McKenna 10 Year</span>
+              <span class="qty">Qty 5</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row">
+              <span class="time">1:12 PM</span>
+              <span class="board">Durham County ABC</span>
+              <span class="store">Store #8</span>
+              <span class="product">Elijah Craig Barrel Proof</span>
+              <span class="qty">Qty 6</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row duplicate" aria-hidden="true">
+              <span class="time">10:42 AM</span>
+              <span class="board">Wake County ABC</span>
+              <span class="store">Store #12</span>
+              <span class="product">Blanton's Single Barrel</span>
+              <span class="qty">Qty 4</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row duplicate" aria-hidden="true">
+              <span class="time">10:58 AM</span>
+              <span class="board">Durham County ABC</span>
+              <span class="store">Store #5</span>
+              <span class="product">Eagle Rare 10 Year</span>
+              <span class="qty">Qty 6</span>
+              <span class="badge">Public</span>
+            </div>
+            <div class="ticker-row duplicate" aria-hidden="true">
+              <span class="time">11:14 AM</span>
+              <span class="board">Wake County ABC</span>
+              <span class="store">Store #9</span>
+              <span class="product">E.H. Taylor Small Batch</span>
+              <span class="qty">Qty 5</span>
+              <span class="badge">Public</span>
+            </div>
+          </div>
+        </div>
+        <div class="demo-note">Demo data shown for presentation purposes. A production feed would use store scan data supplied by participating boards and processed by Bourbon Pourcast.</div>
+      </div>
+    </section>
+
+    <section id="archive">
+      <div class="section-title">
+        <h2>Public allocation archive</h2>
+        <p>Every published allocation record becomes part of a searchable public archive maintained by Bourbon Pourcast.</p>
+      </div>
+      <div class="grid grid-2">
+        <article class="card solution-card">
+          <h3>Search by product, board, store, or date</h3>
+          <p>Consumers and board staff can quickly review historical allocation activity without relying on rumors, phone calls, screenshots, or private social media posts.</p>
+        </article>
+        <article class="card solution-card">
+          <h3>Transparency without preferential access</h3>
+          <p>The same allocation information is published publicly. Optional notifications can be offered as a convenience layer, not an earlier or exclusive data layer.</p>
+        </article>
+      </div>
+      <div class="actions" style="margin-top:1rem;">
+        <a class="btn btn-primary" style="color:#111;" href="allocation_history.html">Explore Existing Allocation History</a>
+      </div>
+    </section>
+
+    <section id="pilot">
+      <div class="pilot">
+        <div>
+          <h2>Pilot program concept</h2>
+          <p>A limited pilot can validate the workflow, measure consumer engagement, and demonstrate reduced pressure on stores and public inventory tools.</p>
+          <ul>
+            <li>One participating board and selected stores</li>
+            <li>Limited allocated product list</li>
+            <li>No replacement of existing inventory systems</li>
+            <li>Public feed plus permanent historical archive</li>
+            <li>Board feedback before broader rollout</li>
+          </ul>
+        </div>
+        <aside class="pilot-side">
+          <strong>Participation options</strong>
+          <p>Store scan feed, periodic export, API, CSV, secure file drop, or other board-approved data handoff.</p>
+          <a class="btn btn-primary" href="mailto:info@bourbonpourcast.com?subject=Allocated%20Bourbon%20Transparency%20Pilot">Discuss Pilot Program</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>Allocated Bourbon Transparency</strong><br />
+    A Bourbon Pourcast demonstration concept for public allocation visibility, equal access, and historical accountability.<br />
+    Not affiliated with or endorsed by the North Carolina ABC Commission or any ABC board unless specifically stated.
+  </footer>
+</body>
+</html>
