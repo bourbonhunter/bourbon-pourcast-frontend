@@ -174,3 +174,90 @@ footer { padding: 12px 0 34px; text-align: center; color: var(--muted); }
   border: 1px solid rgba(185,120,24,.25);
   font-weight: 900;
 }
+
+/* Drop Tracker vNext additions */
+.drop-tracker-filters { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tracker-stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.watchlist-card { border-color: rgba(185,120,24,.32); }
+.watch-item span { color: var(--accent-2); font-weight: 900; }
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 900;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+}
+.status-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-expected {
+  background: #fff8dc;
+  color: #7a5200;
+  border-color: rgba(185,120,24,.28);
+}
+.status-expected::before { background: #d89a45; }
+.status-announced {
+  background: #eaf3ff;
+  color: #174f86;
+  border-color: rgba(50,110,180,.22);
+}
+.status-announced::before { background: #2f80ed; }
+.status-verified {
+  background: #ebf8ee;
+  color: #1d6b34;
+  border-color: rgba(40,150,80,.22);
+}
+.status-verified::before { background: #26a65b; }
+td small { color: var(--muted); font-weight: 700; }
+@media (max-width: 760px) {
+  .drop-tracker-filters, .tracker-stats-grid { grid-template-columns: 1fr; }
+}
+
+/* Drop Tracker vNext stack additions */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  border: 1px solid rgba(0,0,0,.08);
+}
+.status-expected {
+  background: #fff7d6;
+  color: #6f4b00;
+  border-color: #eed081;
+}
+.status-announced {
+  background: #e9f2ff;
+  color: #16467d;
+  border-color: #b7d1f3;
+}
+.status-confirmed {
+  background: #e9f8ee;
+  color: #176238;
+  border-color: #bde5ca;
+}
+.status-neutral {
+  background: #f2f2f2;
+  color: #444;
+}
+.alerts-benefits {
+  margin: 8px 0 14px 22px;
+  padding: 0;
+  line-height: 1.6;
+}
+.signup-message {
+  min-height: 22px;
+  font-weight: 700;
+}

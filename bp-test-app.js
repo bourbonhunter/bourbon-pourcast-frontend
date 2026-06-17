@@ -1,9 +1,9 @@
 const DATA_CANDIDATES = {
-  allocations: ['drop_history.csv'],
+  dropTracker: ['drop_tracker.csv'],
   shipments: ['ncabc_inventory_report.html']
 };
 
-let allocationRows = [];
+let dropTrackerRows = [];
 let shipmentRows = [];
 let shipmentMeta = {
   file: null,
@@ -40,21 +40,41 @@ function asDate(value) {
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
+function atMidnight(date) {
+  if (!date) return null;
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function addDays(date, days) {
+  const d = atMidnight(date || new Date());
+  d.setDate(d.getDate() + Number(days));
+  return d;
+}
+
 function fmtDate(date) {
   return date ? date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
 }
 
-function shipmentSinceText() {
-  return shipmentMeta.shippedSince ? `Shipped Since: ${fmtDate(shipmentMeta.shippedSince)}` : 'Shipped Since: Report window unavailable';
+function fmtShortDate(date) {
+  return date ? date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '—';
 }
 
-function withinDays(rowDate, days) {
-  if (days === 'all') return true;
-  if (!rowDate) return true;
-  const cutoff = new Date();
-  cutoff.setHours(0, 0, 0, 0);
-  cutoff.setDate(cutoff.getDate() - Number(days));
-  return rowDate >= cutoff;
+function withinWindow(row, windowValue) {
+  if (windowValue === 'all') return true;
+  const trackerDate = atMidnight(row.expectedDate || row.announcedDate || row.confirmedDate);
+  if (!trackerDate) return false;
+
+  const today = atMidnight(new Date());
+  if (windowValue === 'next7') {
+    const end = addDays(today, 7);
+    return trackerDate >= today && trackerDate <= end;
+  }
+
+  const cutoff = new Date(today);
+  cutoff.setDate(cutoff.getDate() - Number(windowValue));
+  return trackerDate >= cutoff && trackerDate <= today;
 }
 
 function scoreKey(key, candidates) {
@@ -134,13 +154,7 @@ function parseInventoryReportHTML(text, fileName = 'ncabc_inventory_report.html'
       const board = detail.querySelector('.board')?.textContent.trim() || '';
       const qty = Number((detail.querySelector('.bottles')?.textContent || '').replace(/[^0-9.-]/g, '')) || 0;
       if (!board) return;
-      rows.push({
-        product,
-        board,
-        qty,
-        totalQty,
-        shippedSince: shipmentMeta.shippedSince
-      });
+      rows.push({ product, board, qty, totalQty, shippedSince: shipmentMeta.shippedSince });
     });
   });
   return rows;
@@ -156,15 +170,58 @@ async function loadFirstAvailable(files, parser) {
   return { file: null, rows: [] };
 }
 
-function normalizedAllocationRows(rows) {
+function normalizedDropTrackerRows(rows) {
   return rows.map(row => {
-    const dateRaw = pick(row, ['date', 'drop_date', 'effective_date', 'seen_date', 'timestamp']);
-    const store = pick(row, ['store', 'store_name', 'abc_store', 'location']);
+    const expectedRaw = pick(row, ['expecteddate', 'expected_date', 'drop_expected', 'expected']);
+    const announcedRaw = pick(row, ['announceddate', 'announced_date', 'drop_announced', 'announced']);
+    const confirmedRaw = pick(row, ['confirmeddate', 'verifieddate', 'confirmed_date', 'verified_date', 'drop_confirmed', 'drop_verified']);
+    const store = pick(row, ['store', 'storeaddress', 'store_name', 'abc_store', 'location']);
     const brand = pick(row, ['brand', 'product', 'product_name', 'item', 'description']);
     const board = pick(row, ['board', 'county', 'abc_board']);
-    const date = asDate(dateRaw);
-    return { dateRaw, date, store, brand, board, raw: row };
-  }).filter(r => r.store || r.brand);
+    const statusRaw = pick(row, ['status']);
+    const daysSinceLastRaw = pick(row, ['dayssincelast', 'days_since_last']);
+    const source = pick(row, ['source']);
+    const expectedDate = asDate(expectedRaw);
+    const announcedDate = asDate(announcedRaw);
+    const confirmedDate = asDate(confirmedRaw);
+    const status = normalizeStatus(statusRaw || (confirmedDate ? 'confirmed' : announcedDate ? 'announced' : 'expected'));
+    const daysSinceLast = Number(daysSinceLastRaw || 0) || null;
+    return { expectedRaw, announcedRaw, confirmedRaw, expectedDate, announcedDate, confirmedDate, store, brand, board, status, daysSinceLast, source, raw: row };
+  }).filter(r => r.store || r.brand || r.expectedDate || r.announcedDate || r.confirmedDate);
+}
+
+function normalizeStatus(value) {
+  const v = String(value || '').trim().toLowerCase();
+  if (v === 'verified') return 'confirmed';
+  if (v === 'confirm' || v === 'confirmed') return 'confirmed';
+  if (v === 'announce' || v === 'announced') return 'announced';
+  if (v === 'expected' || v === 'watch') return 'expected';
+  return v || 'announced';
+}
+
+function statusLabel(status) {
+  if (status === 'expected') return 'Expected';
+  if (status === 'confirmed') return 'Confirmed';
+  if (status === 'announced') return 'Announced';
+  return status ? status.charAt(0).toUpperCase() + status.slice(1) : 'Announced';
+}
+
+function statusIcon(status) {
+  if (status === 'expected') return '🟡';
+  if (status === 'confirmed') return '🟢';
+  if (status === 'announced') return '🔵';
+  return '⚪';
+}
+
+function statusClass(status) {
+  if (status === 'expected') return 'status-expected';
+  if (status === 'confirmed') return 'status-confirmed';
+  if (status === 'announced') return 'status-announced';
+  return 'status-neutral';
+}
+
+function statusPill(status) {
+  return `<span class="status-pill ${statusClass(status)}"><span>${statusIcon(status)}</span>${escapeHtml(statusLabel(status))}</span>`;
 }
 
 function fillSelect(select, values, allLabel) {
@@ -192,22 +249,53 @@ function groupedShipments(rows) {
 function renderAllocation() {
   const store = $('storeFilter').value;
   const brand = $('brandFilter').value;
+  const status = $('trackerStatusFilter').value;
   const days = $('allocationDays').value;
-  const rows = allocationRows
-    .filter(r => (!store || r.store === store) && (!brand || r.brand === brand) && withinDays(r.date, days))
-    .sort((a, b) => (b.date?.getTime() || 0) - (a.date?.getTime() || 0));
+
+  const rows = dropTrackerRows
+    .filter(r => (!store || r.store === store) && (!brand || r.brand === brand) && (!status || r.status === status) && withinWindow(r, days))
+    .sort((a, b) => {
+      const aDate = a.expectedDate || a.announcedDate || a.confirmedDate;
+      const bDate = b.expectedDate || b.announcedDate || b.confirmedDate;
+      if (days === 'next7') return (aDate?.getTime() || 0) - (bDate?.getTime() || 0) || String(a.store).localeCompare(String(b.store));
+      return (bDate?.getTime() || 0) - (aDate?.getTime() || 0) || String(a.store).localeCompare(String(b.store));
+    });
+
+  const expectedNext7 = dropTrackerRows.filter(r => r.status === 'expected' && withinWindow(r, 'next7')).length;
+  const visibleBrands = uniqueSorted(rows.map(r => r.brand));
+  const latestAnnounced = dropTrackerRows
+    .filter(r => r.status === 'announced' && r.announcedDate)
+    .sort((a, b) => b.announcedDate - a.announcedDate)[0];
 
   $('allocationCount').textContent = `${rows.length} result${rows.length === 1 ? '' : 's'}`;
+  $('statExpectedTomorrow').textContent = expectedNext7;
   $('statStores').textContent = uniqueSorted(rows.map(r => r.store)).length;
-  $('statBrands').textContent = uniqueSorted(rows.map(r => r.brand)).length;
-  $('statLatest').textContent = fmtDate(rows[0]?.date);
+  $('statBrands').textContent = visibleBrands.length;
+  $('statLatest').textContent = fmtDate(latestAnnounced?.announcedDate);
 
-  if (!rows.length) {
-    $('allocationTable').innerHTML = `<div class="empty">Allocation history data is not loaded yet, or no records match the selected filters.</div>`;
+  if (!dropTrackerRows.length) {
+    $('allocationTable').innerHTML = `<div class="empty">Drop Tracker data is not loaded yet. Add <strong>drop_tracker.csv</strong> beside this file.</div>`;
     return;
   }
-  $('allocationTable').innerHTML = `<table><thead><tr><th>Date</th><th>Store</th><th>Brand / Product</th><th>Board</th></tr></thead><tbody>${rows.map(r => `
-    <tr><td>${fmtDate(r.date)}</td><td>${escapeHtml(r.store || '—')}</td><td>${escapeHtml(r.brand || '—')}</td><td>${escapeHtml(r.board || '—')}</td></tr>`).join('')}</tbody></table>`;
+
+  if (!rows.length) {
+    $('allocationTable').innerHTML = `<div class="empty">No Drop Tracker records match the selected filters.</div>`;
+    return;
+  }
+
+  $('allocationTable').innerHTML = `<table><thead><tr><th>Expected</th><th>Announced</th><th>Store</th><th>Brand / Product</th><th>Board</th><th>Status</th></tr></thead><tbody>${rows.map(r => `
+    <tr>
+      <td>${fmtDate(r.expectedDate)}</td>
+      <td>${fmtDate(r.announcedDate)}</td>
+      <td>${escapeHtml(r.store || '—')}</td>
+      <td>${escapeHtml(r.brand || '—')}</td>
+      <td>${escapeHtml(r.board || '—')}</td>
+      <td>${statusPill(r.status)}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+function shipmentSinceText() {
+  return shipmentMeta.shippedSince ? `Shipped Since: ${fmtDate(shipmentMeta.shippedSince)}` : 'Shipped Since: Report window unavailable';
 }
 
 function renderShipments() {
@@ -271,13 +359,22 @@ function renderShipments() {
 }
 
 function renderHome() {
-  const recent = allocationRows
-    .filter(r => withinDays(r.date, 30))
-    .sort((a, b) => (b.date?.getTime() || 0) - (a.date?.getTime() || 0))
+  const recentAnnounced = dropTrackerRows
+    .filter(r => r.status === 'announced' && r.announcedDate)
+    .sort((a, b) => (b.announcedDate?.getTime() || 0) - (a.announcedDate?.getTime() || 0))
     .slice(0, 5);
-  $('homeRecentAllocations').innerHTML = recent.length
-    ? recent.map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.brand || 'Unknown Brand')}</strong><small>${escapeHtml(r.store || 'Unknown Store')}</small></div><span>${fmtDate(r.date)}</span></div>`).join('')
-    : `<div class="empty">Allocation history data is not loaded yet.</div>`;
+
+  $('homeRecentAllocations').innerHTML = recentAnnounced.length
+    ? recentAnnounced.map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.brand || 'Unknown Brand')}</strong><small>${escapeHtml(r.store || 'Unknown Store')}</small></div><span>${fmtShortDate(r.announcedDate)}</span></div>`).join('')
+    : `<div class="empty">No announced drops loaded yet.</div>`;
+
+  const watch = dropTrackerRows
+    .filter(r => r.status === 'expected' && withinWindow(r, 'next7'))
+    .sort((a, b) => (a.expectedDate?.getTime() || 0) - (b.expectedDate?.getTime() || 0) || String(a.store).localeCompare(String(b.store)));
+  $('homeWatchListTitle').textContent = `${watch.length} Store${watch.length === 1 ? '' : 's'} Expected Soon`;
+  $('homeWatchList').innerHTML = watch.length
+    ? watch.slice(0, 5).map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.store || 'Unknown Store')}</strong><small>${r.daysSinceLast ? `${r.daysSinceLast} days since last logged drop` : 'No recent logged drop'}</small></div><span>${fmtShortDate(r.expectedDate)}</span></div>`).join('') + (watch.length > 5 ? `<div class="compact-item"><div><strong>+${watch.length - 5} more</strong><small>Open Drop Tracker for full list</small></div><span>Next 7</span></div>` : '')
+    : `<div class="empty">No stores currently meet the Next 7 Days Watch List rule.</div>`;
 
   $('homeShipmentSince').textContent = shipmentRows.length ? shipmentSinceText() : '';
   const groups = groupedShipments(shipmentRows);
@@ -286,10 +383,6 @@ function renderHome() {
   $('homeShipmentPreview').innerHTML = groups.length
     ? groups.slice(0, 5).map((g, i) => `<div class="compact-item ranked-item"><div><strong>${i + 1}. ${escapeHtml(g.product)}</strong><small>${g.boards.size} board${g.boards.size === 1 ? '' : 's'} receiving</small></div><span>${g.totalQty.toLocaleString()} bottles</span></div>`).join('')
     : `<div class="empty">Shipment Radar data is not loaded yet.</div>`;
-}
-
-function updateDataStatus() {
-  // Status text intentionally hidden for the public demo build.
 }
 
 function setSection(section, scrollTargetId = null) {
@@ -304,7 +397,13 @@ function setSection(section, scrollTargetId = null) {
 
 function wireNav() {
   document.querySelectorAll('[data-section], [data-section-jump]').forEach(btn => {
-    btn.addEventListener('click', () => setSection(btn.dataset.section || btn.dataset.sectionJump, btn.dataset.scrollTarget || null));
+    btn.addEventListener('click', () => {
+      const targetSection = btn.dataset.section || btn.dataset.sectionJump;
+      if (btn.dataset.statusFilter && $('trackerStatusFilter')) $('trackerStatusFilter').value = btn.dataset.statusFilter;
+      if (btn.dataset.dateFilter && $('allocationDays')) $('allocationDays').value = btn.dataset.dateFilter;
+      if (targetSection === 'allocation') setTimeout(renderAllocation, 0);
+      setSection(targetSection, btn.dataset.scrollTarget || null);
+    });
   });
 }
 
@@ -320,7 +419,6 @@ function wireFileLoader() {
     fillSelect($('shipmentBoardFilter'), uniqueSorted(shipmentRows.map(r => r.board)), 'All boards');
     renderShipments();
     renderHome();
-    updateDataStatus();
     $('shipmentLoadCard').style.display = shipmentRows.length ? 'none' : 'block';
   });
 }
@@ -329,50 +427,48 @@ async function init() {
   wireNav();
   wireFileLoader();
 
-  const [allocLoad, shipLoad] = await Promise.all([
-    loadFirstAvailable(DATA_CANDIDATES.allocations, parseCSV),
+  const [trackerLoad, shipLoad] = await Promise.all([
+    loadFirstAvailable(DATA_CANDIDATES.dropTracker, parseCSV),
     loadFirstAvailable(DATA_CANDIDATES.shipments, parseInventoryReportHTML)
   ]);
 
-  allocationRows = normalizedAllocationRows(allocLoad.rows);
+  dropTrackerRows = normalizedDropTrackerRows(trackerLoad.rows);
   shipmentRows = shipLoad.rows;
   if (!shipmentRows.length) $('shipmentLoadCard').style.display = 'block';
 
-  fillSelect($('storeFilter'), uniqueSorted(allocationRows.map(r => r.store)), 'All stores');
-  fillSelect($('brandFilter'), uniqueSorted(allocationRows.map(r => r.brand)), 'All brands');
+  fillSelect($('storeFilter'), uniqueSorted(dropTrackerRows.map(r => r.store)), 'All stores');
+  fillSelect($('brandFilter'), uniqueSorted(dropTrackerRows.map(r => r.brand)), 'All brands');
   fillSelect($('shipmentProductFilter'), uniqueSorted(shipmentRows.map(r => r.product)), 'All products');
   fillSelect($('shipmentBoardFilter'), uniqueSorted(shipmentRows.map(r => r.board)), 'All boards');
 
-  ['storeFilter', 'brandFilter', 'allocationDays'].forEach(id => $(id).addEventListener('change', renderAllocation));
-  ['shipmentProductFilter', 'shipmentBoardFilter'].forEach(id => $(id).addEventListener('change', renderShipments));
+  ['storeFilter', 'brandFilter', 'allocationDays', 'trackerStatusFilter'].forEach(id => $(id)?.addEventListener('change', renderAllocation));
+  ['shipmentProductFilter', 'shipmentBoardFilter'].forEach(id => $(id)?.addEventListener('change', renderShipments));
 
   renderAllocation();
   renderShipments();
   renderHome();
-  updateDataStatus();
 }
 
 init();
+
 // ==========================================
 // Bourbon Pourcast Alert Registration
 // ==========================================
 
-const SUPABASE_URL = "https://akitjakjvaupljhvsgnb.supabase.co";
-const SUPABASE_KEY = "sb_publishable_JTOyuIOQyFadm01Iv9EPyg_lsPIHC83";
+const SUPABASE_URL = 'https://akitjakjvaupljhvsgnb.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_JTOyuIOQyFadm01Iv9EPyg_lsPIHC83';
 
 async function registerAlertSubscriber(email) {
   const response = await fetch(
     `${SUPABASE_URL}/rest/v1/rpc/register_email_subscriber`,
     {
-      method: "POST",
+      method: 'POST',
       headers: {
         apikey: SUPABASE_KEY,
         Authorization: `Bearer ${SUPABASE_KEY}`,
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        p_email: email
-      })
+      body: JSON.stringify({ p_email: email })
     }
   );
 
@@ -384,48 +480,41 @@ async function registerAlertSubscriber(email) {
 }
 
 function wireAlertSignup() {
-  const form = document.getElementById("alertSignupForm");
-  const emailInput = document.getElementById("alertEmail");
-  const message = document.getElementById("alertSignupMessage");
+  const form = document.getElementById('alertSignupForm');
+  const emailInput = document.getElementById('alertEmail');
+  const message = document.getElementById('alertSignupMessage');
 
-  if (!form || !emailInput || !message) {
-    return;
-  }
+  if (!form || !emailInput || !message) return;
 
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const email = emailInput.value.trim().toLowerCase();
+    if (!email) return;
 
-    if (!email) {
-      return;
-    }
-
-    message.textContent = "Registering...";
+    message.textContent = 'Registering...';
 
     try {
       const result = await registerAlertSubscriber(email);
 
-      if (result === "already_registered") {
-        message.textContent =
-          "✅ You're already registered. No action required. Existing subscribers will automatically receive future updates.";
+      if (result === 'already_registered') {
+        message.textContent = "✅ You're already registered. No action required.";
+        if (window.plausible) plausible('Already Registered');
       } else {
-        message.textContent =
-          "✅ Thanks for registering! You'll receive free Bourbon Pourcast updates and be notified when new alert features become available.";
+        message.textContent = "✅ Thanks for registering! You'll receive free Bourbon Pourcast updates and be notified when new alert features become available.";
+        if (window.plausible) plausible('Registration');
       }
 
-      emailInput.value = "";
+      emailInput.value = '';
     } catch (err) {
       console.error(err);
-
-      message.textContent =
-        "Sorry, registration failed. Please try again.";
+      message.textContent = 'Sorry, registration failed. Please try again.';
     }
   });
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", wireAlertSignup);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', wireAlertSignup);
 } else {
   wireAlertSignup();
 }
