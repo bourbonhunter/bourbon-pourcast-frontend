@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bourbon Pourcast</title>
+  <link rel="stylesheet" href="bp-test-styles.css?v=3.17" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-wrap">
+      <img class="brand-logo" src="logo.png" alt="Bourbon Pourcast" onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='grid';" />
+      <div class="logo-fallback" aria-hidden="true">BP</div>
+      <div class="brand-copy">
+        <h1>Bourbon Pourcast</h1>
+        <p>Your premier source of intelligence for tracking allocated and hard-to-find bourbon across all of North Carolina.</p>
+      </div>
+    </div>
+    <nav class="top-nav" aria-label="Primary navigation">
+      <button class="nav-btn active" data-section="home">Home</button>
+      <button class="nav-btn" data-section="allocation">Drop Tracker</button>
+      <button class="nav-btn" data-section="shipments">Shipment Radar</button>
+      <button class="nav-btn" data-section="durham">Durham Drops</button>
+      <button class="nav-btn" data-section="alerts">Alerts</button>
+    </nav>
+  </header>
+
+  <main>
+    <a class="sponsor-banner sponsor-top" href="https://www.durhamabc.com" target="_blank" rel="noopener noreferrer">
+      <span>Featured Board</span>
+      <strong>Durham County ABC</strong>
+      <small>View Durham ABC news, drops, and store information</small>
+    </a>
+
+    <section id="home" class="page-section active">
+      <div class="grid two">
+        <article class="card feature-card watchlist-card" id="watchListSnapshotCard">
+          <div class="card-head">
+            <div>
+              <p class="eyebrow">Next 7 Days Watch List</p>
+              <h3 id="homeWatchListTitle">Stores Expected Soon</h3>
+              <p class="mini-meta" id="homeWatchListMeta">Historically active stores to keep an eye on over the next 7 days.</p>
+            </div>
+            <button class="small-link" data-section-jump="allocation" data-status-filter="expected" data-date-filter="next7">Open Watch List</button>
+          </div>
+          <div id="homeWatchList" class="compact-list"></div>
+        </article>
+
+        <article class="card feature-card">
+          <div class="card-head">
+            <div>
+              <p class="eyebrow">Drop Tracker</p>
+              <h3>Recent Announcements</h3>
+            </div>
+            <button class="small-link" data-section-jump="allocation" data-status-filter="announced" data-date-filter="30">View Drop Tracker</button>
+          </div>
+          <div id="homeRecentAllocations" class="compact-list"></div>
+        </article>
+
+        <article class="card feature-card" id="shipmentSnapshotCard">
+          <div class="card-head">
+            <div>
+              <p class="eyebrow">NC Shipment Snapshot</p>
+              <h3>Recently Shipped Products</h3>
+              <p class="mini-meta" id="homeShipmentSince"></p>
+              <p class="mini-meta" id="homeShipmentStats"></p>
+            </div>
+            <button class="small-link" data-section-jump="shipments">Explore NC Shipment Radar</button>
+          </div>
+          <div id="homeShipmentPreview" class="compact-list"></div>
+        </article>
+
+        <article class="card feature-card durham-card" id="durhamSnapshotCard">
+          <div class="card-head">
+            <div>
+              <p class="eyebrow">Durham Drop Tracker</p>
+              <h3>Durham ABC Drops</h3>
+              <p class="mini-meta">Follow Durham's latest drop tiles and store activity.</p>
+            </div>
+            <button class="small-link" data-section-jump="durham">View Durham Drops</button>
+          </div>
+          <div class="compact-list">
+            <div class="compact-item"><div><strong>Durham Drop Tiles</strong><small>Opens your existing Durham tiles dashboard</small></div><span>Live Tracker</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="allocation" class="page-section">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Drop Tracker</p>
+          <h2>Allocation Activity Tracker</h2>
+          <p>Follow expected and announced allocation activity across North Carolina ABC systems.</p>
+        </div>
+        <span class="pill" id="allocationCount">0 results</span>
+      </div>
+
+      <div class="filters card allocation-filters drop-tracker-filters">
+        <label>Store
+          <select id="storeFilter"><option value="">All stores</option></select>
+        </label>
+        <label>Brand / Product
+          <select id="brandFilter"><option value="">All brands</option></select>
+        </label>
+        <label>Status
+          <select id="trackerStatusFilter">
+            <option value="">All statuses</option>
+            <option value="expected" selected>Expected</option>
+            <option value="announced">Announced</option>
+            <option value="confirmed">Confirmed</option>
+          </select>
+        </label>
+        <label>Date Window
+          <select id="allocationDays">
+            <option value="next7" selected>Next 7 days</option>
+            <option value="30">Last 30 days</option>
+            <option value="60">Last 60 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="365">Last year</option>
+            <option value="all">All available</option>
+          </select>
+        </label>
+      </div>
+      <div class="hint">Expected dates are based on historical patterns and are intended as informational guidance only. Announced activity is detected through Wake ABC search and daily delta tracking. Confirmed activity may be added later as independent verification becomes available.</div>
+
+      <div class="stats-grid tracker-stats-grid">
+        <div class="stat-card"><span>Expected Next 7 Days</span><strong id="statExpectedTomorrow">0</strong></div>
+        <div class="stat-card"><span>Stores</span><strong id="statStores">0</strong></div>
+        <div class="stat-card"><span>Brands</span><strong id="statBrands">0</strong></div>
+        <div class="stat-card"><span>Latest Announced</span><strong id="statLatest">—</strong></div>
+      </div>
+
+      <article class="card table-card"><div id="allocationTable"></div></article>
+    </section>
+
+    <section id="shipments" class="page-section">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">NC Shipment Radar</p>
+          <h2>NC Shipment Radar</h2>
+          <p>See which allocated products were shipped to which NC ABC boards.</p>
+          <p class="mini-meta strong-meta" id="shipmentSinceBanner"></p>
+        </div>
+        <div class="section-actions">
+          <button class="small-link ghost-link" data-section-jump="home" data-scroll-target="shipmentSnapshotCard">← Back to NC Shipment Snapshot</button>
+          <span class="pill" id="shipmentCount">0 products</span>
+        </div>
+      </div>
+
+      <div class="card data-load-card" id="shipmentLoadCard" style="display:none;">
+        <p class="eyebrow">Shipment Data</p>
+        <h3>Load the NC ABC Inventory Report</h3>
+        <p class="body-copy">Choose your existing <strong>ncabc_inventory_report.html</strong> if the browser blocks automatic local loading.</p>
+        <div class="signup-row">
+          <input id="shipmentFileInput" type="file" accept=".html,.htm,text/html" />
+        </div>
+      </div>
+
+      <div class="filters card shipment-filters">
+        <label>Product
+          <select id="shipmentProductFilter"><option value="">All products</option></select>
+        </label>
+        <label>Board
+          <select id="shipmentBoardFilter"><option value="">All boards</option></select>
+        </label>
+      </div>
+      <div class="hint" id="shipmentWindowHint"></div>
+
+      <article class="card hero-table-card">
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">Recently Shipped Products</p>
+            <h3 id="shipmentResultsTitle">Product → Boards Receiving</h3>
+            <p class="mini-meta" id="shipmentTableSince"></p>
+          </div>
+        </div>
+        <div id="shipmentHeroTable"></div>
+      </article>
+    </section>
+
+    <section id="durham" class="page-section">
+      <article class="card durham-launch-card">
+        <p class="eyebrow">Existing Tracker</p>
+        <h3>Durham Drop Tiles</h3>
+        <p class="body-copy">Open the Durham tile dashboard to see the latest Durham ABC drop activity and store tiles.</p>
+        <a class="large-link-button" href="durham_tiles.html">Open Durham Drop Tiles</a>
+      </article>
+    </section>
+
+    <section id="alerts" class="page-section">
+      <article class="card signup-card alerts-clean alerts-register-card">
+        <p class="eyebrow">Free Alerts</p>
+        <h2>📬 Register for Free NC Bourbon Alerts</h2>
+        <p class="body-copy">Get notified about:</p>
+        <ul class="alerts-benefits">
+          <li>Wake County Allocations</li>
+          <li>Durham Drop 500 Releases</li>
+          <li>NC Shipment Radar Updates</li>
+          <li>New Bourbon Pourcast Features</li>
+        </ul>
+        <p class="mini-meta">Already registered? No action required. Existing subscribers will automatically receive future updates.</p>
+
+        <form id="alertSignupForm" class="alert-signup-form">
+          <label for="alertEmail">Email address</label>
+          <div class="signup-row">
+            <input id="alertEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+            <button id="alertSignupButton" type="submit" class="large-link-button">Register for Free</button>
+          </div>
+          <p id="alertSignupMessage" class="signup-message" role="status" aria-live="polite"></p>
+        </form>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <a class="sponsor-banner sponsor-bottom" href="https://abc.nc.gov" target="_blank" rel="noopener noreferrer">
+      <span>Official State Resource</span>
+      <strong>North Carolina ABC Commission</strong>
+      <small>Visit abc.nc.gov</small>
+    </a>
+    <p>© 2026 Bourbon Pourcast. All rights reserved.</p>
+    <p><a class="footer-link" href="https://www.facebook.com/BourbonPourcast/" target="_blank" rel="noopener noreferrer">Follow Bourbon Pourcast on Facebook</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="bp-test-app.js?v=3.17"></script>
+</body>
+</html>

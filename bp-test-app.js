@@ -246,6 +246,31 @@ function groupedShipments(rows) {
   return [...groups.values()].sort((a, b) => (b.totalQty || 0) - (a.totalQty || 0) || a.product.localeCompare(b.product));
 }
 
+function applyDropTrackerPreset(statusValue, dateWindowValue) {
+  if ($('trackerStatusFilter')) $('trackerStatusFilter').value = statusValue || '';
+  if ($('allocationDays')) $('allocationDays').value = dateWindowValue || 'next7';
+}
+
+function openDropTrackerPreset(statusValue = 'expected', dateWindowValue = 'next7') {
+  applyDropTrackerPreset(statusValue, dateWindowValue);
+  renderAllocation();
+  setSection('allocation');
+}
+
+function handleTrackerDateWindowChange() {
+  const days = $('allocationDays')?.value;
+  const status = $('trackerStatusFilter');
+
+  // If a user arrives from Recent Announcements, the Status filter is Announced.
+  // Switching the Date Window to Next 7 days should show the Watch List, so
+  // automatically switch to Expected instead of returning a confusing zero-result view.
+  if (days === 'next7' && status && status.value === 'announced') {
+    status.value = 'expected';
+  }
+
+  renderAllocation();
+}
+
 function renderAllocation() {
   const store = $('storeFilter').value;
   const brand = $('brandFilter').value;
@@ -371,10 +396,10 @@ function renderHome() {
   const watch = dropTrackerRows
     .filter(r => r.status === 'expected' && withinWindow(r, 'next7'))
     .sort((a, b) => (a.expectedDate?.getTime() || 0) - (b.expectedDate?.getTime() || 0) || String(a.store).localeCompare(String(b.store)));
-  $('homeWatchListTitle').textContent = `${watch.length} Store${watch.length === 1 ? '' : 's'} Expected Soon`;
+  $('homeWatchListTitle').textContent = `${watch.length} Store${watch.length === 1 ? '' : 's'} to Watch`;
   $('homeWatchList').innerHTML = watch.length
-    ? watch.slice(0, 5).map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.store || 'Unknown Store')}</strong><small>${r.daysSinceLast === 'New' ? 'No prior logged drop' : r.daysSinceLast ? `${r.daysSinceLast} days since last logged drop` : 'No recent logged drop'}</small></div><span>${fmtShortDate(r.expectedDate)}</span></div>`).join('') + (watch.length > 5 ? `<div class="compact-item"><div><strong>+${watch.length - 5} more</strong><small>Open Drop Tracker for full list</small></div><span>Next 7</span></div>` : '')
-    : `<div class="empty">No stores currently meet the Next 7 Days Watch List rule.</div>`;
+    ? watch.slice(0, 5).map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.store || 'Unknown Store')}</strong><small>${r.daysSinceLast === 'New' ? 'No prior logged activity' : r.daysSinceLast ? `${r.daysSinceLast} days since last logged activity` : 'No recent logged activity'}</small></div><span>${fmtShortDate(r.expectedDate)}</span></div>`).join('') + (watch.length > 5 ? `<button type="button" class="compact-item compact-action" onclick="openDropTrackerPreset('expected','next7')"><div><strong>+${watch.length - 5} more</strong><small>Open Drop Tracker for the full Watch List</small></div><span>Next 7</span></button>` : '')
+    : `<div class="empty">No stores are currently on the Next 7 Days Watch List.</div>`;
 
   $('homeShipmentSince').textContent = shipmentRows.length ? shipmentSinceText() : '';
   const groups = groupedShipments(shipmentRows);
@@ -399,8 +424,9 @@ function wireNav() {
   document.querySelectorAll('[data-section], [data-section-jump]').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetSection = btn.dataset.section || btn.dataset.sectionJump;
-      if (btn.dataset.statusFilter && $('trackerStatusFilter')) $('trackerStatusFilter').value = btn.dataset.statusFilter;
-      if (btn.dataset.dateFilter && $('allocationDays')) $('allocationDays').value = btn.dataset.dateFilter;
+      if (targetSection === 'allocation' && (btn.dataset.statusFilter || btn.dataset.dateFilter)) {
+        applyDropTrackerPreset(btn.dataset.statusFilter || $('trackerStatusFilter')?.value || '', btn.dataset.dateFilter || $('allocationDays')?.value || 'next7');
+      }
       if (targetSection === 'allocation') setTimeout(renderAllocation, 0);
       setSection(targetSection, btn.dataset.scrollTarget || null);
     });
@@ -441,7 +467,8 @@ async function init() {
   fillSelect($('shipmentProductFilter'), uniqueSorted(shipmentRows.map(r => r.product)), 'All products');
   fillSelect($('shipmentBoardFilter'), uniqueSorted(shipmentRows.map(r => r.board)), 'All boards');
 
-  ['storeFilter', 'brandFilter', 'allocationDays', 'trackerStatusFilter'].forEach(id => $(id)?.addEventListener('change', renderAllocation));
+  ['storeFilter', 'brandFilter', 'trackerStatusFilter'].forEach(id => $(id)?.addEventListener('change', renderAllocation));
+  $('allocationDays')?.addEventListener('change', handleTrackerDateWindowChange);
   ['shipmentProductFilter', 'shipmentBoardFilter'].forEach(id => $(id)?.addEventListener('change', renderShipments));
 
   renderAllocation();

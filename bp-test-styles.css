@@ -261,3 +261,16 @@ td small { color: var(--muted); font-weight: 700; }
   min-height: 22px;
   font-weight: 700;
 }
+
+/* Drop Tracker beta fix: make dynamic Watch List "+ more" rows behave like links/buttons. */
+.compact-action {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+.compact-action:hover strong,
+.compact-action:focus-visible strong {
+  text-decoration: underline;
+}
