@@ -185,7 +185,7 @@ function normalizedDropTrackerRows(rows) {
     const announcedDate = asDate(announcedRaw);
     const confirmedDate = asDate(confirmedRaw);
     const status = normalizeStatus(statusRaw || (confirmedDate ? 'confirmed' : announcedDate ? 'announced' : 'expected'));
-    const daysSinceLast = Number(daysSinceLastRaw || 0) || null;
+    const daysSinceLast = /^new$/i.test(daysSinceLastRaw) ? 'New' : (Number(daysSinceLastRaw || 0) || null);
     return { expectedRaw, announcedRaw, confirmedRaw, expectedDate, announcedDate, confirmedDate, store, brand, board, status, daysSinceLast, source, raw: row };
   }).filter(r => r.store || r.brand || r.expectedDate || r.announcedDate || r.confirmedDate);
 }
@@ -373,7 +373,7 @@ function renderHome() {
     .sort((a, b) => (a.expectedDate?.getTime() || 0) - (b.expectedDate?.getTime() || 0) || String(a.store).localeCompare(String(b.store)));
   $('homeWatchListTitle').textContent = `${watch.length} Store${watch.length === 1 ? '' : 's'} Expected Soon`;
   $('homeWatchList').innerHTML = watch.length
-    ? watch.slice(0, 5).map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.store || 'Unknown Store')}</strong><small>${r.daysSinceLast ? `${r.daysSinceLast} days since last logged drop` : 'No recent logged drop'}</small></div><span>${fmtShortDate(r.expectedDate)}</span></div>`).join('') + (watch.length > 5 ? `<div class="compact-item"><div><strong>+${watch.length - 5} more</strong><small>Open Drop Tracker for full list</small></div><span>Next 7</span></div>` : '')
+    ? watch.slice(0, 5).map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.store || 'Unknown Store')}</strong><small>${r.daysSinceLast === 'New' ? 'No prior logged drop' : r.daysSinceLast ? `${r.daysSinceLast} days since last logged drop` : 'No recent logged drop'}</small></div><span>${fmtShortDate(r.expectedDate)}</span></div>`).join('') + (watch.length > 5 ? `<div class="compact-item"><div><strong>+${watch.length - 5} more</strong><small>Open Drop Tracker for full list</small></div><span>Next 7</span></div>` : '')
     : `<div class="empty">No stores currently meet the Next 7 Days Watch List rule.</div>`;
 
   $('homeShipmentSince').textContent = shipmentRows.length ? shipmentSinceText() : '';
