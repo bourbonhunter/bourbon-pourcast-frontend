@@ -1,11 +1,4 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-06-17,,,"100 Village Walk Dr., Holly Springs, NC 27540",,Wake County ABC,Expected,New,drop_table_rule
-2026-06-17,,,"1940 Cinema Dr., Fuquay Varina, NC 27526",,Wake County ABC,Expected,27,drop_table_rule
-2026-06-17,,,"209 S Salisbury St., Raleigh, NC 27601",,Wake County ABC,Expected,New,drop_table_rule
-2026-06-17,,,"4215 The Circle at North Hills Rd., Raleigh, NC 27609",,Wake County ABC,Expected,New,drop_table_rule
-2026-06-17,,,"4501 Vineyrd Pine Ln., Rolesville, NC 27571",,Wake County ABC,Expected,30,drop_table_rule
-2026-06-17,,,"665 Cary Towne Blvd., Cary, NC 27511",,Wake County ABC,Expected,33,drop_table_rule
-2026-06-17,,,"7911 ACC Blvd., Raleigh, NC 27617",,Wake County ABC,Expected,27,drop_table_rule
 2026-06-18,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,55,drop_table_rule
 2026-06-18,,,"3320 Olympia Dr., Raleigh, NC 27603",,Wake County ABC,Expected,34,drop_table_rule
 2026-06-18,,,"6301 Town Center Dr., Raleigh, NC 27614",,Wake County ABC,Expected,34,drop_table_rule
@@ -15,6 +8,12 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-06-19,,,"420 Woodburn Rd., Raleigh, NC 27605",,Wake County ABC,Expected,29,drop_table_rule
 2026-06-19,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,35,drop_table_rule
 2026-06-23,,,"1222 New Bern Ave., Raleigh, NC 27401",,Wake County ABC,Expected,68,drop_table_rule
+2026-06-24,,,"100 Village Walk Dr., Holly Springs, NC 27540",,Wake County ABC,Expected,New,drop_table_rule
+2026-06-24,,,"1940 Cinema Dr., Fuquay Varina, NC 27526",,Wake County ABC,Expected,34,drop_table_rule
+2026-06-24,,,"209 S Salisbury St., Raleigh, NC 27601",,Wake County ABC,Expected,New,drop_table_rule
+2026-06-24,,,"4215 The Circle at North Hills Rd., Raleigh, NC 27609",,Wake County ABC,Expected,New,drop_table_rule
+2026-06-24,,,"4501 Vineyrd Pine Ln., Rolesville, NC 27571",,Wake County ABC,Expected,37,drop_table_rule
+2026-06-24,,,"665 Cary Towne Blvd., Cary, NC 27511",,Wake County ABC,Expected,40,drop_table_rule
 2025-06-16,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-07-17,2025-07-23,,"6809 Davis Circle, Raleigh, NC 27612",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Announced,,wake_delta
 2025-07-18,2025-07-23,,"1793 West Williams St., Apex, NC 27502",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Announced,,wake_delta
@@ -1024,3 +1023,7 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-06-15,2026-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2026-06-15,2026-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 ,2026-06-15,,"209 S Salisbury St, Raleigh, NC 27601",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
+2026-06-16,2026-06-17,,"1601-61 Cross Link Rd., Raleigh, NC 27610",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
+2026-06-16,2026-06-17,,"1601-61 Cross Link Rd., Raleigh, NC 27610",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
+2026-06-17,2026-06-17,,"7911 ACC Blvd., Raleigh, NC 27617",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
+2026-06-17,2026-06-17,,"7911 ACC Blvd., Raleigh, NC 27617",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
