@@ -1,7 +1,6 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
 2026-06-23,,,"1222 New Bern Ave., Raleigh, NC 27401",,Wake County ABC,Expected,70,drop_table_rule
 2026-06-24,,,"1940 Cinema Dr., Fuquay Varina, NC 27526",,Wake County ABC,Expected,35,drop_table_rule
-2026-06-24,,,"4215 The Circle at North Hills Rd., Raleigh, NC 27609",,Wake County ABC,Expected,70,drop_table_rule
 2026-06-24,,,"4501 Vineyard Pine Ln., Rolesville, NC 27571",,Wake County ABC,Expected,37,drop_table_rule
 2026-06-24,,,"665 Cary Towne Blvd., Cary, NC 27511",,Wake County ABC,Expected,42,drop_table_rule
 2026-06-25,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,63,drop_table_rule
@@ -1029,3 +1028,9 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-06-18,2026-06-18,,"4009 Davis Dr., Morrisville, NC 27560",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
 2026-06-18,2026-06-18,,"4009 Davis Dr., Morrisville, NC 27560",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2026-06-18,2026-06-18,,"6809 Davis Circle, Raleigh, NC 27612",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
+2026-06-20,2026-06-20,,"100 Village Walk Dr, Holly Springs, NC 27540",PENELOPE RIVIERA CASK FINISH,Wake County ABC,Announced,,wake_delta
+2026-06-19,2026-06-20,,"3615 SW Cary Parkway , Cary, NC 27513",PENELOPE RIVIERA CASK FINISH,Wake County ABC,Announced,,wake_delta
+2026-06-19,2026-06-20,,"4009 Davis Dr., Morrisville, NC 27560",PENELOPE RIVIERA CASK FINISH,Wake County ABC,Announced,,wake_delta
+2026-06-20,2026-06-20,,"4215 The Circle at North Hills Rd, Raleigh, NC 27609",PENELOPE RIVIERA CASK FINISH,Wake County ABC,Announced,,wake_delta
+2026-06-18,2026-06-20,,"6809 Davis Circle, Raleigh, NC 27612",PENELOPE RIVIERA CASK FINISH,Wake County ABC,Announced,,wake_delta
+2026-06-20,2026-06-20,,"7911 ACC Blvd., Raleigh, NC 27617",PENELOPE RIVIERA CASK FINISH,Wake County ABC,Announced,,wake_delta
