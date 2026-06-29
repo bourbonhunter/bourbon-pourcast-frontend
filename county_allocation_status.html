@@ -232,7 +232,7 @@ const countySignals = [
 const statusMeta={
   blue:{label:"Inventory Available",desc:"Public store-level inventory is available for this county.",icon:"🔵"},
   green:{label:"Allocation Activity Underway",desc:"County confirms allocation activity is currently underway.",icon:"🟢"},
-  yellow:{label:"Allocation Activity Expected Soon",desc:"County expects allocation activity soon, but activity is not yet underway.",icon:"🟡"},
+  yellow:{label:"Allocation Activity Expected Soon",desc:"We expect allocation activity soon, but no confirmed allocation activity is underway.",icon:"🟡"},
   gray:{label:"No Current Allocation Signal",desc:"No county status is currently being provided.",icon:"⚫"}
 };
 function sortedSignals(){const order={blue:0,green:1,yellow:2,gray:3};return [...countySignals].sort((a,b)=>(order[a.status]??9)-(order[b.status]??9)||a.county.localeCompare(b.county));}
