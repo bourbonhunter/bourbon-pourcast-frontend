@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>County Allocation Status | Bourbon Pourcast</title>
+<style>
+:root{--gold:#C19A32;--gold2:#e7c967;--blue:#38bdf8;--green:#22c55e;--yellow:#facc15;--gray:#9ca3af;--cream:#fff4d4;}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--cream);background:radial-gradient(circle at 15% 5%,rgba(193,154,50,.25),transparent 32%),linear-gradient(180deg,#171107,#070504);}
+.wrap{max-width:1180px;margin:auto;padding:22px 16px 54px} .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:18px}
+.brand{font-weight:900;display:flex;align-items:center;gap:12px;color:var(--cream);text-decoration:none}.brand-logo{width:58px;height:58px;object-fit:contain;display:block}.logo-fallback{width:58px;height:58px;border-radius:50%;display:none;place-items:center;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#110c04;font-weight:1000}.brand-copy{display:flex;flex-direction:column;gap:2px}.brand-copy strong{font-size:20px;line-height:1;color:#fff5d8}.brand-copy span{font-size:12px;line-height:1.25;color:#cdbf9d;max-width:520px;font-weight:700}
+.badge,.top-link{border:1px solid rgba(193,154,50,.45);background:rgba(193,154,50,.12);padding:8px 12px;border-radius:999px;font-size:12px;font-weight:900;text-transform:uppercase;color:#f7e7b2;text-decoration:none;cursor:pointer}
+.top-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.top-link:hover,.badge:hover{background:rgba(193,154,50,.2)}
+.hero{position:relative;border:1px solid rgba(193,154,50,.38);border-radius:30px;background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.035));box-shadow:0 26px 70px rgba(0,0,0,.45);padding:42px 28px}
+.hero:after{content:"NC";position:absolute;right:28px;top:18px;font-size:170px;font-weight:1000;letter-spacing:-.12em;color:rgba(193,154,50,.055);pointer-events:none;line-height:.8}.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center} .eyebrow{display:inline-block;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#110c04;padding:9px 14px;border-radius:999px;font-weight:900;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+h1{font-size:clamp(38px,7vw,78px);line-height:.95;margin:0;letter-spacing:-.055em} .sub{font-size:clamp(16px,2.3vw,20px);line-height:1.55;color:#dfd2ad;max-width:740px}
+.minis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px} .mini{background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:13px} .mini b{display:block;color:#fff5d8;font-size:14px} .mini span{display:block;color:#bfb394;font-size:12px;line-height:1.35;margin-top:4px}
+.hot{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:26px;background:#0f0b05;padding:22px;min-height:318px} .hot:before{content:"";position:absolute;inset:-60px;background:radial-gradient(circle,rgba(56,189,248,.25),transparent 48%);animation:pulse 3s ease-in-out infinite} @keyframes pulse{0%,100%{transform:scale(.95);opacity:.7}50%{transform:scale(1.05);opacity:1}}
+.hot-inner{position:relative;z-index:1} .hot-sign{text-align:center;border:3px solid rgba(56,189,248,.9);border-radius:22px;padding:18px 14px;color:#bae6fd;box-shadow:0 0 24px rgba(56,189,248,.38),inset 0 0 26px rgba(56,189,248,.12)} .hot-sign .small{font-size:13px;font-weight:900;letter-spacing:.12em;text-transform:uppercase} .hot-sign .big{font-size:34px;font-weight:1000;margin-top:8px;text-shadow:0 0 14px rgba(56,189,248,.5)} .hot-sign .county{margin-top:10px;font-weight:800;color:#f4ffe9}
+.phone{max-width:360px;margin:18px auto 0;border:1px solid rgba(255,255,255,.18);border-radius:24px;background:rgba(255,255,255,.08);padding:12px}.phone-title{font-size:12px;color:#bdb391;font-weight:900;margin-bottom:9px}.phone-row{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;background:rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;margin:7px 0;font-size:14px}.phone-row span{min-width:112px}.phone-row strong{text-align:right;line-height:1.25;color:#fff7df}.phone-empty{text-align:center;color:#bdb391;font-weight:800;font-size:13px;padding:10px 8px}
+.blue{color:var(--blue)} .green{color:var(--green)} .yellow{color:var(--yellow)} .gray{color:var(--gray)}
+.ticker{margin:24px 0;border:1px solid rgba(193,154,50,.42);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.055)} .ticker-head{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(193,154,50,.25);background:rgba(0,0,0,.18)} .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:#efe3bf} .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor;margin-right:5px}
+.window{overflow:hidden;position:relative;padding:18px 0;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.035),rgba(0,0,0,.35))} .track{display:flex;width:max-content;gap:12px;animation:scroll 58s linear infinite} .window:hover .track{animation-play-state:paused} @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.pill{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);font-size:14px} .pill .sig{width:12px;height:12px;border-radius:50%;background:currentColor;box-shadow:0 0 15px currentColor}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0} .card{position:relative;overflow:hidden;min-height:220px;border-radius:22px;padding:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13)} .card:after{content:"";position:absolute;inset:auto -30px -65px;height:115px;background:radial-gradient(circle,currentColor,transparent 68%);opacity:.14} .card h2{font-size:16px;margin:0 0 10px;color:#fff1c7} .desc{font-size:12px;line-height:1.35;color:#bfb495;margin-bottom:14px} .chip{display:flex;justify-content:space-between;gap:8px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:10px 11px;margin:8px 0;position:relative;z-index:1} .chip b{font-size:13px;color:#fff7df} .chip small{font-size:11px;color:#c6b992;text-align:right}.chip small .inventory{display:block;margin-top:4px;color:#bae6fd;font-weight:900;white-space:nowrap}
+.section{margin-top:24px;border-radius:26px;padding:24px;background:#fff8e7;color:#161109;border:1px solid rgba(193,154,50,.45)} .section h2{font-size:28px;margin:0 0 10px;letter-spacing:-.02em} .section p{color:#594f36;line-height:1.55;margin:0} .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin-top:18px} .choice{background:#fff;border:1px solid #eadbad;border-radius:20px;min-height:112px;text-align:center;padding:16px;display:flex;flex-direction:column;justify-content:center} .choice span{font-size:12px;color:#695e43;margin-top:6px;line-height:1.35} .arrow{color:var(--gold);font-weight:1000;font-size:24px} .control{margin-top:18px;background:linear-gradient(90deg,#f6e5ae,#fff8de);border:1px solid rgba(193,154,50,.45);border-radius:18px;text-align:center;padding:16px;font-weight:900}
+.benefits{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px} .benefit{background:#fff;border:1px solid #eadbad;border-radius:18px;padding:15px} .benefit b{display:block;font-size:14px;margin-bottom:6px} .benefit span{display:block;font-size:12px;color:#6a6048;line-height:1.4}
+.footer{text-align:center;color:#91876f;font-size:12px;margin-top:28px;line-height:1.5}
+@media(max-width:960px){.hero-grid{grid-template-columns:1fr}.board{grid-template-columns:1fr 1fr}.benefits{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);justify-self:center}.minis{grid-template-columns:1fr}}
+@media(max-width:560px){.top{flex-direction:column;align-items:flex-start}.hero{padding:30px 18px;border-radius:22px}.board{grid-template-columns:1fr}.benefits{grid-template-columns:1fr}.ticker-head{flex-direction:column}.track{animation-duration:85s}}
+
+.request-bar{margin:24px 0 0;display:flex;justify-content:center}
+.request-btn{border:1px solid rgba(193,154,50,.55);background:linear-gradient(90deg,var(--gold),var(--gold2));color:#120d04;border-radius:999px;padding:12px 18px;font-weight:1000;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.22)}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);z-index:50}
+.modal.open{display:flex}
+.modal-card{width:min(620px,100%);background:#fff8e7;color:#171107;border:1px solid rgba(193,154,50,.6);border-radius:22px;padding:22px;box-shadow:0 28px 80px rgba(0,0,0,.55)}
+.modal-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:14px}
+.modal-head h2{margin:0;font-size:24px;letter-spacing:-.02em}.modal-head p{margin:6px 0 0;color:#5e5339;line-height:1.45;font-size:13px}
+.close-btn{border:0;background:#171107;color:#fff4d4;border-radius:999px;width:34px;height:34px;cursor:pointer;font-weight:900}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-grid label{font-size:12px;font-weight:900;color:#4f452d;text-transform:uppercase;letter-spacing:.04em}
+.form-grid input,.form-grid select,.form-grid textarea{width:100%;margin-top:6px;border:1px solid #d8c488;border-radius:12px;padding:11px 12px;font:inherit;background:#fff;color:#171107}
+.form-grid .wide{grid-column:1/-1}.send-btn{margin-top:14px;width:100%;border:0;border-radius:14px;padding:13px 16px;font-weight:1000;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#120d04;cursor:pointer}
+.form-note{font-size:12px;color:#6a6048;line-height:1.45;margin:12px 0 0}.status-note{font-size:12px;color:#6a6048;margin-top:8px;min-height:16px}
+@media(max-width:560px){.form-grid{grid-template-columns:1fr}.top-actions{width:100%}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top">
+  <a class="brand" href="index.html" aria-label="Bourbon Pourcast home">
+    <img class="brand-logo" src="logo.png" alt="Bourbon Pourcast" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';" />
+    <div class="logo-fallback" aria-hidden="true">BP</div>
+    <div class="brand-copy">
+      <strong>Bourbon Pourcast</strong>
+      <span>Your premier source of data intelligence for tracking allocated and hard-to-find bourbon across all of North Carolina.</span>
+    </div>
+  </a>
+  <div class="top-actions">
+    <a class="top-link" href="index.html">Home</a>
+    <button class="badge" type="button" onclick="openModal()">Request Status Update</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">County Allocation Status</div>
+      <p class="sub">General allocation activity signals for North Carolina ABC Boards. This page is designed to show broad county-level status without brand names, bottle counts, exact release times, or store-specific release details.</p>
+      <div class="minis">
+        <div class="mini"><b>No exact release times</b><span>County signals avoid line-forming details.</span></div>
+        <div class="mini"><b>No bottle counts</b><span>Status reflects general activity only.</span></div>
+        <div class="mini"><b>Board controlled</b><span>Participating boards choose when to share a signal.</span></div>
+      </div>
+      <div style="margin-top:16px;padding:13px 15px;border:1px solid rgba(193,154,50,.28);background:rgba(193,154,50,.09);border-radius:16px;color:#ead9aa;font-size:13px;line-height:1.45;">
+        <b>General signals only:</b> Bourbon Pourcast does not publish board-submitted brand names, bottle counts, exact release times, or store-specific release details on this page.
+      </div>
+    </div>
+    <div class="hot">
+      <div class="hot-inner">
+        <div class="hot-sign">
+          <div class="small">ALLOCATIONS STATUS</div>
+          <div class="big">LATEST COUNTY BOARD SIGNALS</div>
+          <div class="county">Recent Updates</div>
+        </div>
+        <div class="phone" id="hotNowPanel" aria-label="Latest county board signals"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ticker">
+  <div class="ticker-head">
+    <b>🥃 NC County Board Watch</b>
+    <div class="legend">
+      <span class="blue"><i class="dot"></i>Store-Level Inventory Available</span>
+      <span class="green"><i class="dot"></i>Allocation Activity Underway</span>
+      <span class="yellow"><i class="dot"></i>Allocation Activity Expected Soon</span>
+      <span class="gray"><i class="dot"></i>No Current Allocation Signal</span>
+    </div>
+  </div>
+  <div class="window"><div id="tickerTrack" class="track"></div></div>
+</section>
+
+<section class="board" id="statusBoard"></section>
+
+<div class="request-bar">
+  <button class="request-btn" type="button" onclick="openModal()">Submit a County Status Request</button>
+</div>
+
+<section class="section">
+  <h2>How county signals work</h2>
+  <p>County status signals are intentionally general. A participating board may share that allocation activity is underway, expected soon, or not currently available without advertising brands or publishing operational release details.</p>
+  <div class="flow">
+    <div class="choice"><b>County Signal</b><span>General status only.</span></div>
+    <div class="arrow">→</div>
+    <div class="choice"><b>Public Watch Board</b><span>Everyone sees the same county-level signal.</span></div>
+    <div class="arrow">→</div>
+    <div class="choice"><b>Details Stay Local</b><span>Boards retain control over their own procedures.</span></div>
+  </div>
+</section>
+
+<div class="footer">
+  County status signals are general informational indicators only and do not represent official endorsement by any state agency.<br/>
+  Bourbon Pourcast is independently operated and is not affiliated with or endorsed by the North Carolina ABC Commission.<br/>
+  Bourbon Pourcast • County Allocation Status
+</div>
+</main>
+
+<div class="modal" id="requestModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="requestTitle">
+    <div class="modal-head">
+      <div>
+        <h2 id="requestTitle">Request a County Status Update</h2>
+        <p>Use this form to request a general county-level status update. Requests are manually reviewed before publication.</p>
+      </div>
+      <button class="close-btn" type="button" onclick="closeModal()" aria-label="Close">×</button>
+    </div>
+    <form id="requestForm">
+      <div class="form-grid">
+        <label>Your name
+          <input name="name" autocomplete="name" required />
+        </label>
+        <label>Email address
+          <input name="email" type="email" autocomplete="email" required />
+        </label>
+        <label>Phone number
+          <input name="phone" type="tel" autocomplete="tel" required />
+        </label>
+        <label>County / ABC Board
+          <input name="county" placeholder="Example: Wake County ABC" required />
+        </label>
+        <label class="wide">Requested status
+          <select name="status" required>
+            <option value="">Choose a status</option>
+            <option>Blue - Store-Level Inventory Available</option>
+            <option>Green - Allocation activity underway</option>
+            <option>Yellow - Allocation activity expected soon</option>
+            <option>Gray - No current allocation signal</option>
+            <option>Correction / update to existing status</option>
+          </select>
+        </label>
+        <label class="wide">Optional note
+          <textarea name="note" rows="4" placeholder="General notes only. Please do not include brand names, bottle counts, exact release times, or store-specific release details."></textarea>
+        </label>
+      </div>
+      <button class="send-btn" type="submit">Send Request</button>
+      <p class="form-note">This opens an email to support@bourbonpourcast.com. Requests are reviewed before any public status is updated.</p>
+      <p class="status-note" id="statusRequestMessage" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<script src="county_status.js?v=1.0"></script>
+<script>
+/*
+  BOURBON POURCAST COUNTY STATUS ENGINE
+  -------------------------------------
+  Edit county_status.js only.
+
+  The page below automatically builds:
+  - Latest County Board Signals / Hot Now panel
+  - Scrolling county ticker
+  - Status cards
+
+  To update a county, change only that county's status or headline in county_status.js.
+*/
+const statusMeta={
+  blue:{label:"Store-Level Inventory Available",desc:"This county provides public online access to retail store-level inventory.",icon:"🔵",hotLabel:"Inventory"},
+  green:{label:"Allocation Activity Underway",desc:"County confirms allocation activity is currently underway.",icon:"🟢",hotLabel:"Underway"},
+  yellow:{label:"Allocation Activity Expected Soon",desc:"We expect allocation activity soon, but no confirmed allocation activity is underway.",icon:"🟡",hotLabel:"Expected Soon"},
+  gray:{label:"No Current Allocation Signal",desc:"No county status is currently being provided.",icon:"⚫",hotLabel:"No Signal"}
+};
+function sortedSignals(){const order={blue:0,green:1,yellow:2,gray:3};return [...countySignals].sort((a,b)=>(order[a.status]??9)-(order[b.status]??9)||a.county.localeCompare(b.county));}
+function latestSignals(){
+  return [...countySignals]
+    .filter(item=>["green","yellow"].includes(item.status))
+    .sort((a,b)=>String(b.updated||"").localeCompare(String(a.updated||"")) || a.county.localeCompare(b.county));
+}
+function signalText(item){return item.headline || item.note || statusMeta[item.status]?.label || "";}
+function renderHotNowPanel(){
+  const panel=document.getElementById("hotNowPanel");
+  if(!panel) return;
+  const items=latestSignals();
+  panel.innerHTML="";
+  if(!items.length){
+    panel.innerHTML='<div class="phone-empty">No active county signals</div>';
+    return;
+  }
+  items.slice(0,4).forEach(item=>{
+    const row=document.createElement("div");
+    row.className="phone-row";
+    row.innerHTML=`<span class="${item.status}">● ${item.county}</span><strong>${signalText(item)}</strong>`;
+    panel.appendChild(row);
+  });
+}
+function renderTicker(){const track=document.getElementById("tickerTrack");track.innerHTML="";[...sortedSignals(),...sortedSignals()].forEach(item=>{const meta=statusMeta[item.status];const pill=document.createElement("div");pill.className=`pill ${item.status}`;pill.innerHTML=`<span class="sig"></span><b>${item.county} County</b><span>• ${meta.label}</span>`;track.appendChild(pill);});}
+function renderStatusBoard(){const board=document.getElementById("statusBoard");board.innerHTML="";["blue","green","yellow","gray"].forEach(status=>{const meta=statusMeta[status];const items=countySignals.filter(x=>x.status===status);if(!items.length)return;const card=document.createElement("div");card.className=`card ${status}`;card.innerHTML=`<h2>${meta.icon} ${meta.label}</h2><div class="desc">${meta.desc}</div><div class="chips"></div>`;const chips=card.querySelector(".chips");items.forEach(item=>{const chip=document.createElement("div");chip.className="chip";chip.innerHTML=`<b>${item.county} County</b><small>${signalText(item)}</small>`;chips.appendChild(chip);});board.appendChild(card);});}
+function openModal(){document.getElementById("requestModal").classList.add("open");}
+function closeModal(){document.getElementById("requestModal").classList.remove("open");}
+function submitStatusRequest(e){
+  e.preventDefault();
+  const form=e.currentTarget;
+  const data=Object.fromEntries(new FormData(form).entries());
+  const subject=encodeURIComponent(`County Allocation Status Request - ${data.county || "NC ABC Board"}`);
+  const body=encodeURIComponent(
+`Name: ${data.name || ""}
+Email: ${data.email || ""}
+Phone: ${data.phone || ""}
+County / Board: ${data.county || ""}
+Requested Status: ${data.status || ""}
+
+Optional note:
+${data.note || ""}
+
+Submitted from Bourbon Pourcast County Allocation Status page.`
+  );
+  window.location.href=`mailto:support@bourbonpourcast.com?subject=${subject}&body=${body}`;
+  document.getElementById("statusRequestMessage").textContent="Your email app should open with the request ready to send.";
+}
+renderHotNowPanel();renderTicker();renderStatusBoard();
+document.getElementById("requestForm").addEventListener("submit", submitStatusRequest);
+document.getElementById("requestModal").addEventListener("click", (e)=>{if(e.target.id==="requestModal") closeModal();});
+document.addEventListener("keydown", (e)=>{if(e.key==="Escape") closeModal();});
+</script>
+</body>
+</html>
