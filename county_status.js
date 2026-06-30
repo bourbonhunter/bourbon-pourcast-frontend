@@ -10,6 +10,21 @@
     yellow = Allocation Activity Expected Soon
     gray   = No Current Allocation Signal
 
+    When changing a county:
+
+1. Change the status.
+2. Change the headline.
+3. Update the date.
+
+Example:
+
+{
+  county:"Durham",
+  status:"green",
+  headline:"Allocation Activity Underway",
+  updated:"2026-06-30"
+}
+
   The page automatically updates:
     - Latest County Board Signals / Hot Now panel
     - Scrolling county ticker
