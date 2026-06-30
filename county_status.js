@@ -36,4 +36,5 @@ const countySignals = [
   { county:"Moore", status:"gray", headline:"No current allocation signal" },
   { county:"Chatham", status:"gray", headline:"No current allocation signal" },
   { county:"Lee", status:"gray", headline:"No current allocation signal" }
+  { county:"Gastonia", status:"yellow", headline:"Allocation activity expected soon" }
 ];
