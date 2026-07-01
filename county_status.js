@@ -40,6 +40,7 @@ Example:
 ****************************************************************/
 const countySignals = [
   { county:"Wake", status:"blue", headline:"Retail Store-Level Inventory Available Online", updated:"2026-06-30" },
+  { county:"Wake", status:"yellow", headline:"Allocation activity expected soon", updated:"2026-07-01" },
   { county:"Durham", status:"green", headline:"Allocation Activity Underway", updated:"2026-06-30" },
   { county:"Wayne", status:"gray", headline:"No current allocation signal" },
   { county:"Johnston", status:"gray", headline:"No current allocation signal" },
