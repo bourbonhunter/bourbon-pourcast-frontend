@@ -6,6 +6,7 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-07-10,,,"420 Woodburn Rd., Raleigh, NC 27605",,Wake County ABC,Expected,50,drop_table_rule
 2026-07-10,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,56,drop_table_rule
 2026-07-10,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,28,history_override_rule
+2026-07-13,,,"200 New Rand Road, Garner, NC 27529",,Wake County ABC,Expected,28,drop_table_rule
 2025-06-16,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-07-22,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-07-22,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Announced,,wake_delta
