@@ -1,5 +1,4 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-07-13,,,"200 New Rand Road, Garner, NC 27529",,Wake County ABC,Expected,28,drop_table_rule
 2026-07-14,,,"11360 Capital Blvd., Wake Forest, NC 27587",,Wake County ABC,Expected,35,drop_table_rule
 2026-07-15,,,"1601-61 Cross Link Rd., Raleigh, NC 27610",,Wake County ABC,Expected,28,history_override_rule
 2026-07-15,,,"4501 Vineyard Pine Ln., Rolesville, NC 27571",,Wake County ABC,Expected,58,drop_table_rule
@@ -12,6 +11,8 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-07-17,,,"420 Woodburn Rd., Raleigh, NC 27605",,Wake County ABC,Expected,57,drop_table_rule
 2026-07-17,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,63,drop_table_rule
 2026-07-17,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,35,history_override_rule
+2026-07-20,,,"200 New Rand Road, Garner, NC 27529",,Wake County ABC,Expected,35,drop_table_rule
+2026-07-21,,,"7200 Sandy Fork Rd., Raleigh, NC 27609",,Wake County ABC,Expected,28,history_override_rule
 2025-06-16,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-07-22,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-07-22,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Announced,,wake_delta
