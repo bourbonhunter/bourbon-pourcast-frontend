@@ -1,11 +1,4 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-07-17,,,"1415 E. Williams St., Apex, NC 27617",,Wake County ABC,Expected,32,drop_table_rule
-2026-07-17,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,84,history_override_rule
-2026-07-17,,,"3615 SW Cary Parkway, Cary, NC 27513",,Wake County ABC,Expected,28,drop_table_rule
-2026-07-17,,,"4009 Davis Dr., Morrisville, NC 27560",,Wake County ABC,Expected,28,drop_table_rule
-2026-07-17,,,"420 Woodburn Rd., Raleigh, NC 27605",,Wake County ABC,Expected,57,drop_table_rule
-2026-07-17,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,63,drop_table_rule
-2026-07-17,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,35,history_override_rule
 2026-07-20,,,"200 New Rand Road, Garner, NC 27529",,Wake County ABC,Expected,35,drop_table_rule
 2026-07-21,,,"11360 Capital Blvd., Wake Forest, NC 27587",,Wake County ABC,Expected,42,drop_table_rule
 2026-07-21,,,"7200 Sandy Fork Rd., Raleigh, NC 27609",,Wake County ABC,Expected,28,history_override_rule
@@ -17,6 +10,12 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-07-22,,,"7911 ACC Blvd., Raleigh, NC 27617",,Wake County ABC,Expected,32,drop_table_rule
 2026-07-23,,,"6301 Town Center Dr., Raleigh, NC 27614",,Wake County ABC,Expected,70,drop_table_rule
 2026-07-23,,,"6809 Davis Circle, Raleigh, NC 27612",,Wake County ABC,Expected,35,drop_table_rule
+2026-07-24,,,"1415 E. Williams St., Apex, NC 27617",,Wake County ABC,Expected,39,drop_table_rule
+2026-07-24,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,91,history_override_rule
+2026-07-24,,,"3615 SW Cary Parkway, Cary, NC 27513",,Wake County ABC,Expected,35,drop_table_rule
+2026-07-24,,,"4009 Davis Dr., Morrisville, NC 27560",,Wake County ABC,Expected,35,drop_table_rule
+2026-07-24,,,"420 Woodburn Rd., Raleigh, NC 27605",,Wake County ABC,Expected,64,drop_table_rule
+2026-07-24,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,70,drop_table_rule
 2025-06-16,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-07-22,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-07-22,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Announced,,wake_delta
@@ -1061,3 +1060,4 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-07-02,2026-07-02,,"7336 Creedmoor Rd., Raleigh, NC 27613",PENELOPE RIVIERA CASK FINISH,Wake County ABC,Announced,,wake_delta
 2026-07-08,2026-07-10,,"209 S Salisbury St, Raleigh, NC 27601",PENELOPE RIO CASK FINISH,Wake County ABC,Announced,,wake_delta
 2026-07-08,2026-07-10,,"209 S Salisbury St, Raleigh, NC 27601",PENELOPE RIVIERA CASK FINISH,Wake County ABC,Announced,,wake_delta
+2026-07-17,2026-07-17,,"704 Money Ct., Knightdale, NC 27545",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
