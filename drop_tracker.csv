@@ -1,21 +1,14 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-07-20,,,"200 New Rand Road, Garner, NC 27529",,Wake County ABC,Expected,35,drop_table_rule
-2026-07-21,,,"11360 Capital Blvd., Wake Forest, NC 27587",,Wake County ABC,Expected,42,drop_table_rule
-2026-07-21,,,"7200 Sandy Fork Rd., Raleigh, NC 27609",,Wake County ABC,Expected,28,history_override_rule
 2026-07-22,,,"100 Village Walk Dr., Holly Springs, NC 27540",,Wake County ABC,Expected,32,drop_table_rule
 2026-07-22,,,"1601-61 Cross Link Rd., Raleigh, NC 27610",,Wake County ABC,Expected,35,history_override_rule
-2026-07-22,,,"1940 Cinema Dr., Fuquay Varina, NC 27526",,Wake County ABC,Expected,29,drop_table_rule
-2026-07-22,,,"4215 The Circle at North Hills Rd., Raleigh, NC 27609",,Wake County ABC,Expected,29,drop_table_rule
 2026-07-22,,,"4501 Vineyard Pine Ln., Rolesville, NC 27571",,Wake County ABC,Expected,65,drop_table_rule
-2026-07-22,,,"7911 ACC Blvd., Raleigh, NC 27617",,Wake County ABC,Expected,32,drop_table_rule
-2026-07-23,,,"6301 Town Center Dr., Raleigh, NC 27614",,Wake County ABC,Expected,70,drop_table_rule
 2026-07-23,,,"6809 Davis Circle, Raleigh, NC 27612",,Wake County ABC,Expected,35,drop_table_rule
 2026-07-24,,,"1415 E. Williams St., Apex, NC 27617",,Wake County ABC,Expected,39,drop_table_rule
 2026-07-24,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,91,history_override_rule
-2026-07-24,,,"3615 SW Cary Parkway, Cary, NC 27513",,Wake County ABC,Expected,35,drop_table_rule
 2026-07-24,,,"4009 Davis Dr., Morrisville, NC 27560",,Wake County ABC,Expected,35,drop_table_rule
 2026-07-24,,,"420 Woodburn Rd., Raleigh, NC 27605",,Wake County ABC,Expected,64,drop_table_rule
 2026-07-24,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,70,drop_table_rule
+2026-07-28,,,"1505 Banyon Pl., Wendell, NC 27571",,Wake County ABC,Expected,28,drop_table_rule
 2025-06-16,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-07-22,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-07-22,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Announced,,wake_delta
@@ -331,7 +324,7 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2025-11-25,2025-11-25,,"665 Cary Towne Blvd., Cary, NC 27511",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
 2025-11-25,2025-11-25,,"665 Cary Towne Blvd., Cary, NC 27511",E.H. TAYLOR JR. BARREL PROOF,Wake County ABC,Announced,,wake_delta
 2025-11-25,2025-11-25,,"665 Cary Towne Blvd., Cary, NC 27511",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
-2025-11-26,2025-11-26,,"6301 Town Center Dr., Raleigh, NC 27614",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
+2025-11-24,2025-11-26,,"6301 Town Center Dr., Raleigh, NC 27614",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
 2025-11-26,2025-11-26,,"704 Money Ct., Knightdale, NC 27545",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
 2025-11-26,2025-11-26,,"704 Money Ct., Knightdale, NC 27545",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2025-11-27,2025-11-28,,"1222 New Bern Ave., Raleigh, NC 27401",JACK DANIEL'S SINGLE BARREL HERITAGE,Wake County ABC,Announced,,wake_delta
@@ -570,7 +563,7 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-01-20,2026-01-20,,"1222 New Bern Ave., Raleigh, NC 27401",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
 2026-01-20,2026-01-20,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2026-01-20,2026-01-20,,"2645 Appliance Ct., Raleigh, NC 27604",1792 FULL PROOF BARR SEL (BTB),Wake County ABC,Announced,,wake_delta
-2026-01-20,2026-01-20,,"6301 Town Center Dr., Raleigh, NC 27614",1792 FULL PROOF BARR SEL (BTB),Wake County ABC,Announced,,wake_delta
+2026-01-19,2026-01-20,,"6301 Town Center Dr., Raleigh, NC 27614",1792 FULL PROOF BARR SEL (BTB),Wake County ABC,Announced,,wake_delta
 2026-01-20,2026-01-20,,"6494 Tryon Rd., Cary, NC 27511",1792 FULL PROOF BARR SEL (BTB),Wake County ABC,Announced,,wake_delta
 2026-01-20,2026-01-20,,"7200 Sandy Fork Rd., Raleigh, NC 27609",1792 FULL PROOF BARR SEL (BTB),Wake County ABC,Announced,,wake_delta
 2026-01-20,2026-01-20,,"7911 ACC Blvd., Raleigh, NC 27617",BLANTON'S BOURBON,Wake County ABC,Announced,,wake_delta
@@ -731,8 +724,8 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-03-19,2026-03-20,,"2645 Appliance Ct., Raleigh, NC 27604",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2026-03-18,2026-03-20,,"4501 Vineyard Pine Ln., Rolesville, NC 27571",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
 2026-03-18,2026-03-20,,"4501 Vineyard Pine Ln., Rolesville, NC 27571",OLD FORESTER 1924,Wake County ABC,Announced,,wake_delta
-2026-03-19,2026-03-20,,"6301 Town Center Dr., Raleigh, NC 27614",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
-2026-03-19,2026-03-20,,"6301 Town Center Dr., Raleigh, NC 27614",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
+2026-03-20,2026-03-20,,"6301 Town Center Dr., Raleigh, NC 27614",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
+2026-03-20,2026-03-20,,"6301 Town Center Dr., Raleigh, NC 27614",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2026-03-20,2026-03-20,,"6494 Tryon Rd., Cary, NC 27511",BLANTON'S BOURBON,Wake County ABC,Announced,,wake_delta
 2026-03-20,2026-03-20,,"6494 Tryon Rd., Cary, NC 27511",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
 2026-03-20,2026-03-20,,"6494 Tryon Rd., Cary, NC 27511",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
@@ -751,7 +744,7 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-04-01,2026-04-02,,"7911 ACC Blvd., Raleigh, NC 27617",OLD FORESTER 1924,Wake County ABC,Announced,,wake_delta
 2026-04-01,2026-04-03,,"100 Village Walk Dr., Holly Springs, NC 27540",OLD FORESTER 1924,Wake County ABC,Announced,,wake_delta
 2026-04-07,2026-04-07,,"2645 Appliance Ct., Raleigh, NC 27604",OLD FORESTER 1924,Wake County ABC,Announced,,wake_delta
-2026-04-07,2026-04-07,,"6301 Town Center Dr., Raleigh, NC 27614",OLD FORESTER 1924,Wake County ABC,Announced,,wake_delta
+2026-04-06,2026-04-07,,"6301 Town Center Dr., Raleigh, NC 27614",OLD FORESTER 1924,Wake County ABC,Announced,,wake_delta
 2026-04-10,2026-04-10,,"420 Woodburn Rd., Raleigh, NC 27605",OLD FORESTER 1924,Wake County ABC,Announced,,wake_delta
 2026-04-13,2026-04-13,,"2109-106 Avent Ferry Rd., Raleigh, NC 27606",OLD FORESTER 1924,Wake County ABC,Announced,,wake_delta
 2026-04-13,2026-04-13,,"6494 Tryon Rd., Cary, NC 27511",OLD FORESTER 1924,Wake County ABC,Announced,,wake_delta
@@ -927,8 +920,8 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-05-14,2026-05-15,,"3320 Olympia Dr., Raleigh, NC 27603",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
 2026-05-14,2026-05-15,,"3320 Olympia Dr., Raleigh, NC 27603",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2026-05-14,2026-05-15,,"3320 Olympia Dr., Raleigh, NC 27603",OLD FITZGERALD 7Y BIB,Wake County ABC,Announced,,wake_delta
-2026-05-14,2026-05-15,,"6301 Town Center Dr., Raleigh, NC 27614",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
-2026-05-14,2026-05-15,,"6301 Town Center Dr., Raleigh, NC 27614",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
+2026-05-15,2026-05-15,,"6301 Town Center Dr., Raleigh, NC 27614",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
+2026-05-15,2026-05-15,,"6301 Town Center Dr., Raleigh, NC 27614",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
 2026-05-15,2026-05-15,,"6494 Tryon Rd., Cary, NC 27511",BLANTON'S BOURBON,Wake County ABC,Announced,,wake_delta
 2026-05-15,2026-05-15,,"6494 Tryon Rd., Cary, NC 27511",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
 2026-05-15,2026-05-15,,"6494 Tryon Rd., Cary, NC 27511",EAGLE RARE 10Y,Wake County ABC,Announced,,wake_delta
@@ -1061,3 +1054,17 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-07-08,2026-07-10,,"209 S Salisbury St, Raleigh, NC 27601",PENELOPE RIO CASK FINISH,Wake County ABC,Announced,,wake_delta
 2026-07-08,2026-07-10,,"209 S Salisbury St, Raleigh, NC 27601",PENELOPE RIVIERA CASK FINISH,Wake County ABC,Announced,,wake_delta
 2026-07-17,2026-07-17,,"704 Money Ct., Knightdale, NC 27545",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"11360 Capital Blvd., Wake Forest, NC 27587",PEERLESS HIGH RYE BOURBON,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"1940 Cinema Dr., Fuquay Varina, NC 27526",WILD TURKEY 101 8Y,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"200 New Rand Road, Garner, NC 27529",WILD TURKEY 101 8Y,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"209 S Salisbury St, Raleigh, NC 27601",PEERLESS HIGH RYE BOURBON,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"2109-106 Avent Ferry Rd., Raleigh, NC 27606",PEERLESS HIGH RYE BOURBON,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"2109-106 Avent Ferry Rd., Raleigh, NC 27606",WILD TURKEY 101 8Y,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"2645 Appliance Ct., Raleigh, NC 27604",WILD TURKEY 101 8Y,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"3615 SW Cary Parkway , Cary, NC 27513",WILD TURKEY 101 8Y,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"4215 The Circle at North Hills Rd, Raleigh, NC 27609",PEERLESS HIGH RYE BOURBON,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"6301 Town Center Dr., Raleigh, NC 27614",WILD TURKEY 101 8Y,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"665 Cary Towne Blvd., Cary, NC 27511",ELMER T LEE SINGLE BARREL,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"704 Money Ct., Knightdale, NC 27545",WILD TURKEY 101 8Y,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"7200 Sandy Fork Rd., Raleigh, NC 27609",PEERLESS HIGH RYE BOURBON,Wake County ABC,Announced,,wake_delta
+2026-07-20,2026-07-20,,"7911 ACC Blvd., Raleigh, NC 27617",WILD TURKEY 101 8Y,Wake County ABC,Announced,,wake_delta
