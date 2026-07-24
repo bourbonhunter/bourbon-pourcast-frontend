@@ -440,13 +440,17 @@ function renderHome() {
     ? watch.slice(0, 5).map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.store || 'Unknown Store')}</strong><small>${r.daysSinceLast === 'New' ? 'No prior logged activity' : r.daysSinceLast ? `${r.daysSinceLast} days since last logged activity` : 'No recent logged activity'}</small></div><span>${fmtShortDate(r.expectedDate)}</span></div>`).join('') + (watch.length > 5 ? `<button type="button" class="compact-item compact-action" onclick="openDropTrackerPreset('expected','next7')"><div><strong>+${watch.length - 5} more</strong><small>Open Drop Tracker for the full Watch List</small></div><span>Next 7</span></button>` : '')
     : `<div class="empty">No stores are currently on the Next 7 Days Watch List.</div>`;
 
-  $('homeShipmentSince').textContent = shipmentRows.length ? shipmentSinceText() : '';
-  const groups = groupedShipments(shipmentRows);
-  const boardsReceiving = uniqueSorted(shipmentRows.filter(r => Number(r.qty) > 0).map(r => r.board)).length;
-  $('homeShipmentStats').textContent = shipmentRows.length ? `Boards Receiving Allocated Products: ${boardsReceiving} · Products Tracked: ${groups.length}` : '';
-  $('homeShipmentPreview').innerHTML = groups.length
-    ? groups.slice(0, 5).map((g, i) => `<div class="compact-item ranked-item"><div><strong>${i + 1}. ${escapeHtml(g.product)}</strong><small>${g.boards.size} board${g.boards.size === 1 ? '' : 's'} receiving</small></div><span>${g.totalQty.toLocaleString()} bottles</span></div>`).join('')
-    : `<div class="empty">Shipment Radar data is not loaded yet.</div>`;
+  // Homepage County Allocation Status summary now uses the official June 2026
+  // NC ABC monthly shipment dataset imported into AIM. Keep the separate
+  // Shipment Radar rendering unchanged below/elsewhere.
+  $('homeShipmentSince').textContent = 'Official NC ABC Shipments: June 1–29, 2026';
+  $('homeShipmentStats').textContent = '172 ABC Boards • 21 tracked products • 7,884 cases shipped';
+  $('homeShipmentPreview').innerHTML = `
+    <div class="compact-item ranked-item"><div><strong>1. Buffalo Trace Bourbon Whiskey</strong><small>170 boards receiving</small></div><span>3,767 cases</span></div>
+    <div class="compact-item ranked-item"><div><strong>2. Eagle Rare</strong><small>169 boards receiving</small></div><span>944 cases</span></div>
+    <div class="compact-item ranked-item"><div><strong>3. 1792 12Y</strong><small>163 boards receiving</small></div><span>391 cases</span></div>
+    <div class="compact-item ranked-item"><div><strong>4. E.H. Taylor</strong><small>171 boards receiving</small></div><span>351 cases</span></div>
+    <div class="compact-item ranked-item"><div><strong>5. Michter's Barrel Strength Sour Mash Whiskey</strong><small>151 boards receiving</small></div><span>335 cases</span></div>`;
 }
 
 function setSection(section, scrollTargetId = null) {
