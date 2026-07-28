@@ -1,0 +1,24 @@
+{
+  "generated_on": "2026-07-28",
+  "source": "Bourbon Pourcast AIM Board Intelligence",
+  "boards": [
+    {
+      "board_id": "durham",
+      "board_name": "Durham County ABC Board",
+      "county": "Durham",
+      "activity_status": "gray",
+      "activity_label": "No Current Signal",
+      "inventory_capability": true,
+      "updated": "2026-07-28"
+    },
+    {
+      "board_id": "wake",
+      "board_name": "Wake County ABC Board",
+      "county": "Wake",
+      "activity_status": "green",
+      "activity_label": "Allocation Activity Underway",
+      "inventory_capability": true,
+      "updated": "2026-07-28"
+    }
+  ]
+}
