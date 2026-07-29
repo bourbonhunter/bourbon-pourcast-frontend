@@ -179,14 +179,13 @@ h1{font-size:clamp(38px,7vw,78px);line-height:.95;margin:0;letter-spacing:-.055e
 /*
   BOURBON POURCAST COUNTY STATUS ENGINE
   -------------------------------------
-  Edit county_status.js only.
+  The official statewide AIM Board feed automatically builds:
+  - Latest active Board signals / Hot Now panel
+  - Active-signal ticker
+  - Complete Board status cards, including every Gray Board
 
-  The page below automatically builds:
-  - Latest County Board Signals / Hot Now panel
-  - Scrolling county ticker
-  - Status cards
-
-  To update a county, change only that county's status or headline in county_status.js.
+  Public status exceptions are maintained privately in
+  statewide/data/board_public_status_overrides.csv.
 */
 const statusMeta={
   blue:{label:"Store-Level Inventory Available",desc:"This county provides public online access to retail store-level inventory.",icon:"🔵",hotLabel:"Inventory"},
@@ -194,11 +193,21 @@ const statusMeta={
   yellow:{label:"Allocation Activity Expected Soon",desc:"AIM indicates allocation activity may be approaching, but no qualifying recent confirmed activity is currently underway.",icon:"🟡",hotLabel:"Expected Soon"},
   gray:{label:"No Current Allocation Signal",desc:"No qualifying recent allocation activity or expected-soon AIM signal is currently active.",icon:"⚫",hotLabel:"No Signal"}
 };
-function sortedSignals(){const order={blue:0,green:1,yellow:2,gray:3};return [...countySignals].sort((a,b)=>(order[a.status]??9)-(order[b.status]??9)||a.county.localeCompare(b.county));}
+function boardDisplay(item){
+  const county=item.county ? ` · ${item.county} County` : "";
+  return `${item.board_name || item.county || "NC ABC Board"}${county}`;
+}
+function sortedSignals(){
+  const order={blue:0,green:1,yellow:2,gray:3};
+  return [...countySignals].sort((a,b)=>
+    (order[a.status]??9)-(order[b.status]??9) ||
+    boardDisplay(a).localeCompare(boardDisplay(b))
+  );
+}
 function latestSignals(){
   return [...countySignals]
     .filter(item=>["green","yellow"].includes(item.status))
-    .sort((a,b)=>String(b.updated||"").localeCompare(String(a.updated||"")) || a.county.localeCompare(b.county));
+    .sort((a,b)=>String(b.updated||"").localeCompare(String(a.updated||"")) || boardDisplay(a).localeCompare(boardDisplay(b)));
 }
 function signalText(item){return item.headline || item.note || statusMeta[item.status]?.label || "";}
 function renderHotNowPanel(){
@@ -207,18 +216,76 @@ function renderHotNowPanel(){
   const items=latestSignals();
   panel.innerHTML="";
   if(!items.length){
-    panel.innerHTML='<div class="phone-empty">No active county signals</div>';
+    panel.innerHTML='<div class="phone-empty">No active Board signals</div>';
     return;
   }
   items.slice(0,4).forEach(item=>{
     const row=document.createElement("div");
     row.className="phone-row";
-    row.innerHTML=`<span class="${item.status}">● ${item.county}</span><strong>${signalText(item)}</strong>`;
+    row.innerHTML=`<span class="${item.status}">● ${item.board_name}</span><strong>${signalText(item)}</strong>`;
     panel.appendChild(row);
   });
 }
-function renderTicker(){const track=document.getElementById("tickerTrack");track.innerHTML="";[...sortedSignals(),...sortedSignals()].forEach(item=>{const meta=statusMeta[item.status];const pill=document.createElement("div");pill.className=`pill ${item.status}`;pill.innerHTML=`<span class="sig"></span><b>${item.county} County</b><span>• ${meta.label}</span>`;track.appendChild(pill);});}
-function renderStatusBoard(){const board=document.getElementById("statusBoard");board.innerHTML="";["blue","green","yellow","gray"].forEach(status=>{const meta=statusMeta[status];const items=countySignals.filter(x=>x.status===status);if(!items.length)return;const card=document.createElement("div");card.className=`card ${status}`;card.innerHTML=`<h2>${meta.icon} ${meta.label}</h2><div class="desc">${meta.desc}</div><div class="chips"></div>`;const chips=card.querySelector(".chips");items.forEach(item=>{const chip=document.createElement("div");chip.className="chip";chip.innerHTML=`<b>${item.county} County</b><small>${signalText(item)}</small><small><a href="aim_dashboard.html?board=${encodeURIComponent(item.board_id||item.county.toLowerCase())}">View AIM Intelligence →</a></small>`;chips.appendChild(chip);});board.appendChild(card);});}
+function renderTicker(){
+  const track=document.getElementById("tickerTrack");
+  track.innerHTML="";
+  const active=sortedSignals().filter(item=>item.status!=="gray");
+  const items=active.length ? active : sortedSignals().slice(0,10);
+  [...items,...items].forEach(item=>{
+    const meta=statusMeta[item.status];
+    const pill=document.createElement("div");
+    pill.className=`pill ${item.status}`;
+    pill.innerHTML=`<span class="sig"></span><b>${item.board_name}</b><span>• ${meta.label}</span>`;
+    track.appendChild(pill);
+  });
+}
+function makeBoardChip(item){
+  const chip=document.createElement("div");
+  chip.className="chip";
+  const countyLine=item.county ? `<small>${item.county} County · ${signalText(item)}</small>` : `<small>${signalText(item)}</small>`;
+  chip.innerHTML=`<b>${item.board_name}</b>${countyLine}<small><a href="aim_dashboard.html?board=${encodeURIComponent(item.board_id)}">View AIM Intelligence →</a></small>`;
+  return chip;
+}
+function renderStatusBoard(){
+  const board=document.getElementById("statusBoard");
+  board.innerHTML="";
+  ["blue","green","yellow","gray"].forEach(status=>{
+    const meta=statusMeta[status];
+    const items=countySignals
+      .filter(x=>x.status===status)
+      .sort((a,b)=>boardDisplay(a).localeCompare(boardDisplay(b)));
+    if(!items.length)return;
+
+    const card=document.createElement("div");
+    card.className=`card ${status}`;
+    const countLabel=status==="gray" ? ` (${items.length} Boards)` : "";
+    card.innerHTML=`<h2>${meta.icon} ${meta.label}${countLabel}</h2><div class="desc">${meta.desc}</div><div class="chips"></div>`;
+    const chips=card.querySelector(".chips");
+
+    const initialLimit=status==="gray" ? 15 : items.length;
+    items.slice(0,initialLimit).forEach(item=>chips.appendChild(makeBoardChip(item)));
+
+    if(status==="gray" && items.length>initialLimit){
+      const more=document.createElement("div");
+      more.className="chips";
+      more.hidden=true;
+      items.slice(initialLimit).forEach(item=>more.appendChild(makeBoardChip(item)));
+      card.appendChild(more);
+
+      const button=document.createElement("button");
+      button.type="button";
+      button.className="send-btn";
+      button.style.marginTop="14px";
+      button.textContent=`Show ${items.length-initialLimit} More Boards`;
+      button.addEventListener("click",()=>{
+        more.hidden=!more.hidden;
+        button.textContent=more.hidden ? `Show ${items.length-initialLimit} More Boards` : "Show Fewer Boards";
+      });
+      card.appendChild(button);
+    }
+    board.appendChild(card);
+  });
+}
 function openModal(){document.getElementById("requestModal").classList.add("open");}
 function closeModal(){document.getElementById("requestModal").classList.remove("open");}
 function submitStatusRequest(e){
