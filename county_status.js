@@ -38,6 +38,7 @@ async function loadAimCountySignals() {
       // Activity state: exactly one of Green / Yellow / Gray.
       countySignals.push({
         county,
+        board_id: board.board_id || '',
         status: String(board.activity_status || 'gray').toLowerCase(),
         headline: board.activity_label || 'No Current Signal',
         updated: board.updated || payload.generated_on || ''
@@ -58,7 +59,7 @@ async function loadAimCountySignals() {
     // Conservative fallbacks if the generated feed is temporarily unavailable.
     countySignals.push(
       { county:'Wake', status:'blue', headline:'Retail Store-Level Inventory Available Online' },
-      { county:'Durham', status:'blue', headline:'Retail Store-Level Inventory Available Online' }
+      { county:'Durham', board_id:'durham', status:'yellow', headline:'Allocation Activity Expected Soon' }
     );
   }
 }
