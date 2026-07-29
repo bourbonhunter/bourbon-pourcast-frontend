@@ -6,9 +6,9 @@
       "board_id": "durham",
       "board_name": "Durham County ABC Board",
       "county": "Durham",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
-      "inventory_capability": true,
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
+      "inventory_capability": false,
       "updated": "2026-07-29"
     },
     {

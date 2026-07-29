@@ -1,0 +1,4 @@
+Bourbon Pourcast 7.4B Rev2 frontend
+- Durham: Yellow / Drop500 active, Blue removed (public_county_status.json)
+- Drop Tracker default: All Statuses + Last 30 Days (index.html)
+No bp-test-app.js change is required for this default-view adjustment.
