@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AIM Intelligence Dashboard Beta | Bourbon Pourcast</title>
+<title>AIM Details | Bourbon Pourcast</title>
 <style>
 body{font-family:Arial,sans-serif;margin:0;background:#f6f4ef;color:#171717}.wrap{max-width:1100px;margin:auto;padding:24px}
 .hero{background:#111;color:#fff;padding:28px;border-radius:18px}.hero b{color:#d5aa52}.controls{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
@@ -8,13 +8,13 @@ select,input{padding:11px;border:1px solid #bbb;border-radius:9px;background:#ff
 .status{font-weight:800;text-transform:uppercase}.green{color:#16823b}.yellow{color:#9b7300}.gray{color:#666}.blue{color:#1767aa}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.sub{background:#fafafa;border-radius:12px;padding:14px}
 table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;border-bottom:1px solid #e5e5e5;padding:8px}
-.note{font-size:13px;color:#666}.empty{color:#777;font-style:italic}.back{color:#fff}
+.note{font-size:13px;color:#666}.empty{color:#777;font-style:italic}.back{color:#e1bd67}.official-link{color:#8a6819;font-weight:700}.powered{margin:28px 0 8px;text-align:center;color:#555;font-size:13px}.powered b{color:#111}
 </style></head><body><div class="wrap">
 <div class="hero"><a class="back" href="county_allocation_status.html">← County Allocation Status</a>
-<h1>AIM Intelligence Dashboard <b>Beta</b></h1>
-<p>Explore what Bourbon Pourcast currently knows about each NC ABC Board: current allocation signal, Board policy/mechanism, official store locations, recent allocation activity, and NC ABC shipment intelligence.</p>
+<h1>AIM Details <b>Beta</b></h1>
+<p>Explore the AIM Status and AIM Evidence Bourbon Pourcast currently has for each NC ABC Board, including Board policy/mechanism, official retail store locations, recent allocation activity, and NC ABC shipment intelligence.</p>
 </div>
 <div class="controls"><select id="board"></select><input id="q" placeholder="Filter stores or products"></div>
 <div id="view"></div>
-<p class="note">Shipment intelligence reports products shipped to a Board and does not by itself mean a product is currently available at a retail store. AIM status signals remain governed separately.</p>
+<p class="note">Shipment intelligence reports products shipped to a Board and does not by itself mean a product is currently available at a retail store. AIM Status remains governed separately.</p><div class="powered"><b>Powered by AIM™ (Allocation Intelligence Model)</b><br>Analyzing public allocation evidence across North Carolina ABC Boards.</div>
 </div><script src="aim_dashboard.js?v=1"></script></body></html>

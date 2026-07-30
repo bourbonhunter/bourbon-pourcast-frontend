@@ -42,6 +42,10 @@ h1{font-size:clamp(38px,7vw,78px);line-height:.95;margin:0;letter-spacing:-.055e
 .form-grid .wide{grid-column:1/-1}.send-btn{margin-top:14px;width:100%;border:0;border-radius:14px;padding:13px 16px;font-weight:1000;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#120d04;cursor:pointer}
 .form-note{font-size:12px;color:#6a6048;line-height:1.45;margin:12px 0 0}.status-note{font-size:12px;color:#6a6048;margin-top:8px;min-height:16px}
 @media(max-width:560px){.form-grid{grid-template-columns:1fr}.top-actions{width:100%}}
+
+.aim-details-link{display:inline-block;margin-top:6px;padding:5px 10px;border:1px solid #c8a24a;border-radius:999px;background:#171717;color:#e1bd67!important;text-decoration:none!important;font-weight:800;font-size:12px;letter-spacing:.2px}
+.aim-details-link:hover,.aim-details-link:focus{background:#c8a24a;color:#111!important;outline:none}
+
 </style>
 </head>
 <body>
@@ -243,7 +247,7 @@ function makeBoardChip(item){
   const chip=document.createElement("div");
   chip.className="chip";
   const countyLine=item.county ? `<small>${item.county} County · ${signalText(item)}</small>` : `<small>${signalText(item)}</small>`;
-  chip.innerHTML=`<b>${item.board_name}</b>${countyLine}<small><a href="aim_dashboard.html?board=${encodeURIComponent(item.board_id)}">View AIM Intelligence →</a></small>`;
+  chip.innerHTML=`<b>${item.board_name}</b>${countyLine}<small><a class="aim-details-link" href="aim_dashboard.html?board=${encodeURIComponent(item.board_id)}">AIM Details →</a></small>`;
   return chip;
 }
 function renderStatusBoard(){
