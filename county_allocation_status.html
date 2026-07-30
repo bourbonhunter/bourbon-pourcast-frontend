@@ -22,7 +22,21 @@ h1{font-size:clamp(38px,7vw,78px);line-height:.95;margin:0;letter-spacing:-.055e
 .ticker{margin:24px 0;border:1px solid rgba(193,154,50,.42);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.055)} .ticker-head{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(193,154,50,.25);background:rgba(0,0,0,.18)} .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:#efe3bf} .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor;margin-right:5px}
 .window{overflow:hidden;position:relative;padding:18px 0;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.035),rgba(0,0,0,.35))} .track{display:flex;width:max-content;gap:12px;animation:scroll 58s linear infinite} .window:hover .track{animation-play-state:paused} @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .pill{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);font-size:14px} .pill .sig{width:12px;height:12px;border-radius:50%;background:currentColor;box-shadow:0 0 15px currentColor}
-.board{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0} .card{position:relative;overflow:hidden;min-height:220px;border-radius:22px;padding:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13)} .card:after{content:"";position:absolute;inset:auto -30px -65px;height:115px;background:radial-gradient(circle,currentColor,transparent 68%);opacity:.14} .card h2{font-size:16px;margin:0 0 10px;color:#fff1c7} .desc{font-size:12px;line-height:1.35;color:#bfb495;margin-bottom:14px} .chip{display:flex;justify-content:space-between;gap:8px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:10px 11px;margin:8px 0;position:relative;z-index:1} .chip b{font-size:13px;color:#fff7df} .chip small{font-size:11px;color:#c6b992;text-align:right}.chip small .inventory{display:block;margin-top:4px;color:#bae6fd;font-weight:900;white-space:nowrap}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px 0}
+.board-card{position:relative;min-height:166px;border-radius:20px;padding:18px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 24px rgba(0,0,0,.12);display:flex;flex-direction:column}
+.board-card-name{font-size:16px;line-height:1.25;font-weight:900;color:#fff7df;margin:0 0 20px}
+.board-card-signals{display:grid;gap:9px;margin-bottom:18px}
+.board-card-signal{display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.35;color:#f1e7c8}
+.board-card-signal .signal-dot{width:11px;height:11px;border-radius:50%;flex:0 0 11px;margin-top:3px;box-shadow:0 0 0 2px rgba(255,255,255,.06)}
+.board-card-signal.green .signal-dot{background:#22c55e}
+.board-card-signal.yellow .signal-dot{background:#f2bd27}
+.board-card-signal.gray .signal-dot{background:#9ca3af}
+.board-card-signal.blue .signal-dot{background:#3b82f6}
+.board-card-details{margin-top:auto;align-self:flex-start;color:#e1bd67;text-decoration:none;font-weight:900;font-size:13px;letter-spacing:.1px}
+.board-card-details:hover,.board-card-details:focus{color:#fff1c7;text-decoration:underline;text-underline-offset:4px}
+.board-expand{grid-column:1/-1;justify-self:center;margin-top:4px;border:1px solid rgba(193,154,50,.55);background:transparent;color:#f1d584;border-radius:10px;padding:11px 16px;font-weight:900;cursor:pointer}
+.board-expand:hover,.board-expand:focus{background:rgba(193,154,50,.12);color:#fff1c7}
+
 .section{margin-top:24px;border-radius:26px;padding:24px;background:#fff8e7;color:#161109;border:1px solid rgba(193,154,50,.45)} .section h2{font-size:28px;margin:0 0 10px;letter-spacing:-.02em} .section p{color:#594f36;line-height:1.55;margin:0} .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin-top:18px} .choice{background:#fff;border:1px solid #eadbad;border-radius:20px;min-height:112px;text-align:center;padding:16px;display:flex;flex-direction:column;justify-content:center} .choice span{font-size:12px;color:#695e43;margin-top:6px;line-height:1.35} .arrow{color:var(--gold);font-weight:1000;font-size:24px} .control{margin-top:18px;background:linear-gradient(90deg,#f6e5ae,#fff8de);border:1px solid rgba(193,154,50,.45);border-radius:18px;text-align:center;padding:16px;font-weight:900}
 .benefits{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px} .benefit{background:#fff;border:1px solid #eadbad;border-radius:18px;padding:15px} .benefit b{display:block;font-size:14px;margin-bottom:6px} .benefit span{display:block;font-size:12px;color:#6a6048;line-height:1.4}
 .footer{text-align:center;color:#91876f;font-size:12px;margin-top:28px;line-height:1.5}
@@ -42,9 +56,6 @@ h1{font-size:clamp(38px,7vw,78px);line-height:.95;margin:0;letter-spacing:-.055e
 .form-grid .wide{grid-column:1/-1}.send-btn{margin-top:14px;width:100%;border:0;border-radius:14px;padding:13px 16px;font-weight:1000;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#120d04;cursor:pointer}
 .form-note{font-size:12px;color:#6a6048;line-height:1.45;margin:12px 0 0}.status-note{font-size:12px;color:#6a6048;margin-top:8px;min-height:16px}
 @media(max-width:560px){.form-grid{grid-template-columns:1fr}.top-actions{width:100%}}
-
-.aim-details-link{display:inline-block;margin-top:6px;padding:5px 10px;border:1px solid #c8a24a;border-radius:999px;background:#171717;color:#e1bd67!important;text-decoration:none!important;font-weight:800;font-size:12px;letter-spacing:.2px}
-.aim-details-link:hover,.aim-details-link:focus{background:#c8a24a;color:#111!important;outline:none}
 
 </style>
 </head>
@@ -243,52 +254,84 @@ function renderTicker(){
     track.appendChild(pill);
   });
 }
-function makeBoardChip(item){
-  const chip=document.createElement("div");
-  chip.className="chip";
-  const countyLine=item.county ? `<small>${item.county} County · ${signalText(item)}</small>` : `<small>${signalText(item)}</small>`;
-  chip.innerHTML=`<b>${item.board_name}</b>${countyLine}<small><a class="aim-details-link" href="aim_dashboard.html?board=${encodeURIComponent(item.board_id)}">AIM Details →</a></small>`;
-  return chip;
+function normalizedBoardName(item){
+  const raw=String(item.board_name || item.county || "NC ABC Board").trim();
+  return /ABC Board$/i.test(raw) ? raw : `${raw} ABC Board`;
+}
+function uniqueBoardCards(){
+  const byId=new Map();
+  countySignals.forEach(item=>{
+    const key=item.board_id || item.board_name || item.county;
+    if(!byId.has(key)){
+      byId.set(key,{
+        board_id:item.board_id,
+        board_name:normalizedBoardName(item),
+        county:item.county || "",
+        activity:null,
+        capability:null
+      });
+    }
+    const board=byId.get(key);
+    if(item.status==="blue") board.capability=item;
+    else board.activity=item;
+  });
+  return [...byId.values()].map(board=>{
+    if(!board.activity){
+      board.activity={
+        status:"gray",
+        headline:"No Current Allocation Signal",
+        updated:""
+      };
+    }
+    return board;
+  }).sort((a,b)=>{
+    const order={green:0,yellow:1,gray:2};
+    return (order[a.activity.status]??9)-(order[b.activity.status]??9) ||
+      a.board_name.localeCompare(b.board_name);
+  });
+}
+function makeBoardCard(board){
+  const card=document.createElement("article");
+  card.className="board-card";
+  const signals=[];
+  signals.push(`<div class="board-card-signal ${board.activity.status}"><span class="signal-dot" aria-hidden="true"></span><span>${signalText(board.activity)}</span></div>`);
+  if(board.capability){
+    signals.push(`<div class="board-card-signal blue"><span class="signal-dot" aria-hidden="true"></span><span>${signalText(board.capability)}</span></div>`);
+  }
+  card.innerHTML=`
+    <h3 class="board-card-name">${board.board_name}</h3>
+    <div class="board-card-signals">${signals.join("")}</div>
+    <a class="board-card-details" href="aim_dashboard.html?board=${encodeURIComponent(board.board_id)}">Details →</a>`;
+  return card;
 }
 function renderStatusBoard(){
   const board=document.getElementById("statusBoard");
   board.innerHTML="";
-  ["blue","green","yellow","gray"].forEach(status=>{
-    const meta=statusMeta[status];
-    const items=countySignals
-      .filter(x=>x.status===status)
-      .sort((a,b)=>boardDisplay(a).localeCompare(boardDisplay(b)));
-    if(!items.length)return;
+  const cards=uniqueBoardCards();
+  const active=cards.filter(x=>x.activity.status!=="gray");
+  const quiet=cards.filter(x=>x.activity.status==="gray");
+  const initialGray=15;
 
-    const card=document.createElement("div");
-    card.className=`card ${status}`;
-    const countLabel=status==="gray" ? ` (${items.length} Boards)` : "";
-    card.innerHTML=`<h2>${meta.icon} ${meta.label}${countLabel}</h2><div class="desc">${meta.desc}</div><div class="chips"></div>`;
-    const chips=card.querySelector(".chips");
+  active.forEach(item=>board.appendChild(makeBoardCard(item)));
+  quiet.slice(0,initialGray).forEach(item=>board.appendChild(makeBoardCard(item)));
 
-    const initialLimit=status==="gray" ? 15 : items.length;
-    items.slice(0,initialLimit).forEach(item=>chips.appendChild(makeBoardChip(item)));
+  if(quiet.length>initialGray){
+    const more=document.createElement("div");
+    more.style.display="contents";
+    more.hidden=true;
+    quiet.slice(initialGray).forEach(item=>more.appendChild(makeBoardCard(item)));
+    board.appendChild(more);
 
-    if(status==="gray" && items.length>initialLimit){
-      const more=document.createElement("div");
-      more.className="chips";
-      more.hidden=true;
-      items.slice(initialLimit).forEach(item=>more.appendChild(makeBoardChip(item)));
-      card.appendChild(more);
-
-      const button=document.createElement("button");
-      button.type="button";
-      button.className="send-btn";
-      button.style.marginTop="14px";
-      button.textContent=`Show ${items.length-initialLimit} More Boards`;
-      button.addEventListener("click",()=>{
-        more.hidden=!more.hidden;
-        button.textContent=more.hidden ? `Show ${items.length-initialLimit} More Boards` : "Show Fewer Boards";
-      });
-      card.appendChild(button);
-    }
-    board.appendChild(card);
-  });
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="board-expand";
+    button.textContent=`Show ${quiet.length-initialGray} More Boards`;
+    button.addEventListener("click",()=>{
+      more.hidden=!more.hidden;
+      button.textContent=more.hidden ? `Show ${quiet.length-initialGray} More Boards` : "Show Fewer Boards";
+    });
+    board.appendChild(button);
+  }
 }
 function openModal(){document.getElementById("requestModal").classList.add("open");}
 function closeModal(){document.getElementById("requestModal").classList.remove("open");}
