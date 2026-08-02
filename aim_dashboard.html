@@ -9,12 +9,13 @@ select,input{padding:11px;border:1px solid #bbb;border-radius:9px;background:#ff
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.sub{background:#fafafa;border-radius:12px;padding:14px}
 table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;border-bottom:1px solid #e5e5e5;padding:8px}
 .note{font-size:13px;color:#666}.empty{color:#777;font-style:italic}.back{color:#e1bd67}.official-link{color:#8a6819;font-weight:700}.powered{margin:28px 0 8px;text-align:center;color:#555;font-size:13px}.powered b{color:#111}
-</style></head><body><div class="wrap">
+</style><link rel="stylesheet" href="product_details.css"></head><body><div class="wrap">
 <div class="hero"><a class="back" href="county_allocation_status.html">← County Allocation Status</a>
 <h1>AIM Details <b>Beta</b></h1>
 <p>Explore the AIM Status and AIM Evidence Bourbon Pourcast currently has for each NC ABC Board, including Board policy/mechanism, official retail store locations, recent allocation activity, and NC ABC shipment intelligence.</p>
 </div>
+<p><a class="aim-products-link" href="brands_tracked.html">Browse Brands Tracked by AIM →</a></p>
 <div class="controls"><select id="board"></select><input id="q" placeholder="Filter stores or products"></div>
 <div id="view"></div>
 <p class="note">Shipment intelligence reports products shipped to a Board and does not by itself mean a product is currently available at a retail store. AIM Status remains governed separately.</p><div class="powered"><b>Powered by AIM™ (Allocation Intelligence Model)</b><br>Analyzing public allocation evidence across North Carolina ABC Boards.</div>
-</div><script src="aim_dashboard.js?v=1"></script></body></html>
+</div><script src="product_details.js"></script><script src="aim_dashboard.js?v=2"></script></body></html>

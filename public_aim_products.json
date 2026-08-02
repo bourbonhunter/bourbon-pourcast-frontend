@@ -1,0 +1,779 @@
+{
+  "generated_at": "2026-08-02T19:53:23.290878+00:00",
+  "source": "AIM Product Master (sanitized public fields)",
+  "product_count": 54,
+  "products": [
+    {
+      "product_id": "1792_12y",
+      "name": "1792 12Y",
+      "official_ncabc_name": "1792 12 Year",
+      "supplier": "Sazerac Co.",
+      "proof": "96.6",
+      "bottle_size": ".75L",
+      "nc_abc_price": 52.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "1792 12Y"
+      ]
+    },
+    {
+      "product_id": "1792_full_proof_barr_sel",
+      "name": "1792 FULL PROOF BARR SEL",
+      "official_ncabc_name": "1792 Full Proof",
+      "supplier": "Sazerac Co.",
+      "proof": "125",
+      "bottle_size": ".75L",
+      "nc_abc_price": 47.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "1792 FULL PROOF BARR SEL"
+      ]
+    },
+    {
+      "product_id": "bernheim_original_wheat_20th_anniversary",
+      "name": "BERNHEIM ORIGINAL WHEAT 20TH ANNIVERSARY",
+      "official_ncabc_name": "Bernheim Original Wheat",
+      "supplier": "Heaven Hill",
+      "proof": "90",
+      "bottle_size": ".75L",
+      "nc_abc_price": 34.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "BERNHEIM ORIGINAL WHEAT 20TH ANNIVERSARY"
+      ]
+    },
+    {
+      "product_id": "blanton",
+      "name": "BLANTON",
+      "official_ncabc_name": "Blanton's Single Barrel",
+      "supplier": "Sazerac Co.",
+      "proof": "93",
+      "bottle_size": ".75L",
+      "nc_abc_price": 81.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "BLANTON",
+        "BLANTON'S",
+        "BLANTON'S SINGLE BARREL"
+      ]
+    },
+    {
+      "product_id": "bomberger_s",
+      "name": "BOMBERGER'S",
+      "official_ncabc_name": "Bomberger's Declaration KSB",
+      "supplier": "Chatham Imports",
+      "proof": "108",
+      "bottle_size": ".75L",
+      "nc_abc_price": 119.95,
+      "classification": "Allocated / Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "BOMBERGER'S"
+      ]
+    },
+    {
+      "product_id": "brook_hill_13y_rye_whiskey_pear",
+      "name": "BROOK HILL 13Y RYE WHISKEY PEAR",
+      "official_ncabc_name": "Brook Hill 13Y Rye Whiskey Pear",
+      "supplier": "Helmsman Imports",
+      "proof": "132.26",
+      "bottle_size": ".75L",
+      "nc_abc_price": 349.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "BROOK HILL 13Y RYE WHISKEY PEAR"
+      ]
+    },
+    {
+      "product_id": "brook_hill_15y_kentucky_bourbon_the_infamous",
+      "name": "BROOK HILL 15Y KENTUCKY BOURBON THE INFAMOUS",
+      "official_ncabc_name": "Brook Hill 15Y Kentucky Bourbon The Infamous",
+      "supplier": "Helmsman Imports",
+      "proof": "140.58",
+      "bottle_size": ".75L",
+      "nc_abc_price": 599.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "BROOK HILL 15Y KENTUCKY BOURBON THE INFAMOUS"
+      ]
+    },
+    {
+      "product_id": "buffalo_trace_bourbon_whiskey",
+      "name": "BUFFALO TRACE BOURBON WHISKEY",
+      "official_ncabc_name": "Buffalo Trace KY Straight Bourbon",
+      "supplier": "Sazerac Co.",
+      "proof": "90",
+      "bottle_size": "1.00L",
+      "nc_abc_price": 33.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "BUFFALO TRACE BOURBON WHISKEY",
+        "BUFFALO TRACE KY STRAIGHT BOURBON"
+      ]
+    },
+    {
+      "product_id": "e_h_taylor",
+      "name": "E.H. TAYLOR",
+      "official_ncabc_name": "E.H. Taylor Jr. Small Batch",
+      "supplier": "Sazerac Co.",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 54.95,
+      "classification": "Allocated / Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "E.H. TAYLOR",
+        "EH TAYLOR",
+        "E H TAYLOR",
+        "E.H. TAYLOR JR. SMALL BATCH"
+      ]
+    },
+    {
+      "product_id": "eagle_rare",
+      "name": "EAGLE RARE",
+      "official_ncabc_name": "Eagle Rare 10Y",
+      "supplier": "Sazerac Co.",
+      "proof": "90",
+      "bottle_size": ".75L",
+      "nc_abc_price": 44.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "EAGLE RARE",
+        "EAGLE RARE 10Y"
+      ]
+    },
+    {
+      "product_id": "eagle_rare_17y",
+      "name": "EAGLE RARE 17Y",
+      "official_ncabc_name": "Eagle Rare 17 Year",
+      "supplier": "Sazerac Co.",
+      "proof": "90",
+      "bottle_size": ".75L",
+      "nc_abc_price": 149.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "EAGLE RARE 17Y"
+      ]
+    },
+    {
+      "product_id": "elijah_craig_18y",
+      "name": "ELIJAH CRAIG 18Y",
+      "official_ncabc_name": null,
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "ELIJAH CRAIG 18Y"
+      ]
+    },
+    {
+      "product_id": "elmer_t_lee_single_barrel",
+      "name": "ELMER T LEE SINGLE BARREL",
+      "official_ncabc_name": "Elmer T. Lee Single Barrel",
+      "supplier": "Sazerac Co.",
+      "proof": "90",
+      "bottle_size": ".75L",
+      "nc_abc_price": 89.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "ELMER T LEE SINGLE BARREL",
+        "ELMER T. LEE"
+      ]
+    },
+    {
+      "product_id": "heaven_hill_grain_to_glass_bourbon",
+      "name": "HEAVEN HILL GRAIN TO GLASS BOURBON",
+      "official_ncabc_name": "Heaven Hill Grain to Glass Specialty Ser. Bourbon",
+      "supplier": "Heaven Hill",
+      "proof": "105",
+      "bottle_size": "700ML",
+      "nc_abc_price": 129.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "HEAVEN HILL GRAIN TO GLASS BOURBON"
+      ]
+    },
+    {
+      "product_id": "jack_daniel_s_10y",
+      "name": "JACK DANIEL'S 10Y",
+      "official_ncabc_name": null,
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "JACK DANIEL'S 10Y"
+      ]
+    },
+    {
+      "product_id": "jack_daniel_s_single_barrel_heritage",
+      "name": "JACK DANIEL'S SINGLE BARREL HERITAGE",
+      "official_ncabc_name": "Jack Daniel's Single Barrel Heritage",
+      "supplier": "Brown - Forman",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 69.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "JACK DANIEL'S SINGLE BARREL HERITAGE"
+      ]
+    },
+    {
+      "product_id": "king_of_kentucky",
+      "name": "KING OF KENTUCKY",
+      "official_ncabc_name": "King of Kentucky Small Batch 1",
+      "supplier": "Brown - Forman",
+      "proof": "105",
+      "bottle_size": "700ML",
+      "nc_abc_price": 299.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "KING OF KENTUCKY"
+      ]
+    },
+    {
+      "product_id": "little_book_chapter_10",
+      "name": "LITTLE BOOK CHAPTER 10",
+      "official_ncabc_name": "Little Book Chapter 10",
+      "supplier": "Beam Suntory",
+      "proof": "122.6",
+      "bottle_size": ".75L",
+      "nc_abc_price": 159.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "LITTLE BOOK CHAPTER 10"
+      ]
+    },
+    {
+      "product_id": "michters_barrel_strength_sour_mash_whiskey",
+      "name": "MICHTER'S BARREL STRENGTH SOUR MASH",
+      "official_ncabc_name": null,
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "MICHTER'S BARREL STRENGTH SOUR MASH",
+        "MICHTER'S BARREL STRENGTH SOUR MASH WHISKEY",
+        "MICHTERS BARREL STRENGTH SOUR MASH WHISKEY"
+      ]
+    },
+    {
+      "product_id": "michter_s_toasted",
+      "name": "MICHTER'S TOASTED",
+      "official_ncabc_name": "Michter's Toasted Finished US1 Bourbon",
+      "supplier": "Chatham Imports",
+      "proof": "91.4",
+      "bottle_size": ".75L",
+      "nc_abc_price": 119.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "MICHTER'S TOASTED"
+      ]
+    },
+    {
+      "product_id": "old_carter_sb_bourbon",
+      "name": "OLD CARTER SB BOURBON",
+      "official_ncabc_name": null,
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "OLD CARTER SB BOURBON"
+      ]
+    },
+    {
+      "product_id": "old_fitzgerald_7y",
+      "name": "OLD FITZGERALD 7Y",
+      "official_ncabc_name": "Old Fitzgerald 7Y BIB",
+      "supplier": "Heaven Hill",
+      "proof": "100",
+      "bottle_size": "700ML",
+      "nc_abc_price": 59.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "OLD FITZGERALD 7Y"
+      ]
+    },
+    {
+      "product_id": "old_fitzgerald_bib_10y",
+      "name": "OLD FITZGERALD BIB 10Y DECANTER",
+      "official_ncabc_name": "Old Fitzgerald BIB 10Y Decanter",
+      "supplier": "Heaven Hill",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 139.95,
+      "classification": "Allocated / Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "OLD FITZGERALD BIB 10Y DECANTER",
+        "OLD FITZGERALD BIB 10Y"
+      ]
+    },
+    {
+      "product_id": "old_forester_1924",
+      "name": "OLD FORESTER 1924",
+      "official_ncabc_name": "Old Forester 1924",
+      "supplier": "Brown - Forman",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 114.95,
+      "classification": "Allocated / Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "OLD FORESTER 1924"
+      ]
+    },
+    {
+      "product_id": "old_forester_birthday_bourbon",
+      "name": "OLD FORESTER BIRTHDAY BOURBON",
+      "official_ncabc_name": "Old Forester Birthday Bourbon 2025",
+      "supplier": "Brown - Forman",
+      "proof": "92",
+      "bottle_size": "700ML",
+      "nc_abc_price": 199.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "OLD FORESTER BIRTHDAY BOURBON"
+      ]
+    },
+    {
+      "product_id": "old_forester_president_s_choice",
+      "name": "OLD FORESTER PRESIDENT'S CHOICE",
+      "official_ncabc_name": "Old Forester President's Choice",
+      "supplier": "Brown - Forman",
+      "proof": "125",
+      "bottle_size": "700ML",
+      "nc_abc_price": 224.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "OLD FORESTER PRESIDENT'S CHOICE"
+      ]
+    },
+    {
+      "product_id": "old_forester_single_barrel",
+      "name": "OLD FORESTER SINGLE BARREL",
+      "official_ncabc_name": "Old Forester Single Barrel (NCABC BTB)",
+      "supplier": "Brown - Forman",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 69.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "OLD FORESTER SINGLE BARREL",
+        "OLD FORESTER SINGLE BARREL NCABC BTB"
+      ]
+    },
+    {
+      "product_id": "parker_s_heritage_collection",
+      "name": "PARKER'S HERITAGE COLLECTION",
+      "official_ncabc_name": "Parker's Heritage Collection 19th Edition",
+      "supplier": "Heaven Hill",
+      "proof": "122.5",
+      "bottle_size": ".75L",
+      "nc_abc_price": 179.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "PARKER'S HERITAGE COLLECTION"
+      ]
+    },
+    {
+      "product_id": "peerless_double_oak_bourbon",
+      "name": "PEERLESS DOUBLE OAK BOURBON",
+      "official_ncabc_name": "Peerless Double Oak Bourbon",
+      "supplier": "Peerless Distilling",
+      "proof": "102",
+      "bottle_size": ".75L",
+      "nc_abc_price": 99.95,
+      "classification": "Allocated / Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "PEERLESS DOUBLE OAK BOURBON"
+      ]
+    },
+    {
+      "product_id": "peerless_double_oak_rye",
+      "name": "PEERLESS DOUBLE OAK RYE",
+      "official_ncabc_name": "Peerless Double Oak Rye",
+      "supplier": "Peerless Distilling",
+      "proof": "102",
+      "bottle_size": ".75L",
+      "nc_abc_price": 109.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "PEERLESS DOUBLE OAK RYE"
+      ]
+    },
+    {
+      "product_id": "peerless_high_rye_bourbon",
+      "name": "PEERLESS HIGH RYE BOURBON",
+      "official_ncabc_name": "Peerless High Rye Bourbon",
+      "supplier": "Peerless Distilling",
+      "proof": "102",
+      "bottle_size": ".75L",
+      "nc_abc_price": 144.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "PEERLESS HIGH RYE BOURBON"
+      ]
+    },
+    {
+      "product_id": "peerless_toasted_bourbon",
+      "name": "PEERLESS TOASTED BOURBON",
+      "official_ncabc_name": "Peerless Toasted Bourbon",
+      "supplier": "Peerless Distilling",
+      "proof": "102",
+      "bottle_size": ".75L",
+      "nc_abc_price": 94.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "PEERLESS TOASTED BOURBON"
+      ]
+    },
+    {
+      "product_id": "peerless_toasted_rye",
+      "name": "PEERLESS TOASTED RYE",
+      "official_ncabc_name": "Peerless Toasted Rye",
+      "supplier": "Peerless Distilling",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 104.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "PEERLESS TOASTED RYE"
+      ]
+    },
+    {
+      "product_id": "penelope_cigar_sessions_chapter_01",
+      "name": "PENELOPE CIGAR SESSIONS CHAPTER 01",
+      "official_ncabc_name": "Penelope Cigar Sessions Chapter 02",
+      "supplier": "Luxco",
+      "proof": "117.4",
+      "bottle_size": ".75L",
+      "nc_abc_price": 79.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "PENELOPE CIGAR SESSIONS CHAPTER 01"
+      ]
+    },
+    {
+      "product_id": "penelope_cooper_series_havana",
+      "name": "PENELOPE COOPER SERIES HAVANA",
+      "official_ncabc_name": null,
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "PENELOPE COOPER SERIES HAVANA"
+      ]
+    },
+    {
+      "product_id": "penelope_private_sel_9y",
+      "name": "PENELOPE PRIVATE SEL 9Y",
+      "official_ncabc_name": "Penelope Private Select 9Y",
+      "supplier": "Luxco",
+      "proof": "109",
+      "bottle_size": ".75L",
+      "nc_abc_price": 89.95,
+      "classification": "Allocated / Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "PENELOPE PRIVATE SEL 9Y"
+      ]
+    },
+    {
+      "product_id": "penelope_rio_cask_finish",
+      "name": "PENELOPE RIO CASK FINISH",
+      "official_ncabc_name": null,
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "PENELOPE RIO CASK FINISH"
+      ]
+    },
+    {
+      "product_id": "penelope_riviera_cask_finish",
+      "name": "PENELOPE RIVIERA CASK FINISH",
+      "official_ncabc_name": null,
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "PENELOPE RIVIERA CASK FINISH"
+      ]
+    },
+    {
+      "product_id": "penelope_valencia",
+      "name": "PENELOPE VALENCIA",
+      "official_ncabc_name": null,
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "PENELOPE VALENCIA"
+      ]
+    },
+    {
+      "product_id": "rebel_10y_sb_bourbon",
+      "name": "REBEL 10Y S.B. BOURBON",
+      "official_ncabc_name": "Rebel 10Y S.B. Bourbon",
+      "supplier": "Luxco",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 99.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "REBEL 10Y S.B. BOURBON",
+        "REBEL 10Y SB BOURBON"
+      ]
+    },
+    {
+      "product_id": "rittenhouse_rye_america_250th_ed",
+      "name": "RITTENHOUSE RYE AMERICA 250TH ED.",
+      "official_ncabc_name": "Rittenhouse Rye America 250th Ed.",
+      "supplier": "Heaven Hill",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 99.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "RITTENHOUSE RYE AMERICA 250TH ED.",
+        "RITTENHOUSE RYE AMERICA 250TH ED"
+      ]
+    },
+    {
+      "product_id": "russell_s_reserve_15y",
+      "name": "RUSSELL'S RESERVE 15Y",
+      "official_ncabc_name": "Russell's Reserve 15Y Bourbon",
+      "supplier": "Campari America",
+      "proof": "117.2",
+      "bottle_size": ".75L",
+      "nc_abc_price": 249.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "RUSSELL'S RESERVE 15Y"
+      ]
+    },
+    {
+      "product_id": "russell_s_reserve_single_rickhouse_4_cn_e",
+      "name": "RUSSELL'S RESERVE SINGLE RICKHOUSE 4 CN E",
+      "official_ncabc_name": "Russell's Reserve Single Rickhouse 4 CN E",
+      "supplier": "Campari America",
+      "proof": "128",
+      "bottle_size": ".75L",
+      "nc_abc_price": 299.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "RUSSELL'S RESERVE SINGLE RICKHOUSE 4 CN E"
+      ]
+    },
+    {
+      "product_id": "sagamore_10y_barrel_selection_ncabc_btb",
+      "name": "SAGAMORE 10Y BARREL SELECTION (NCABC BTB)",
+      "official_ncabc_name": "Sagamore 10Y Barrel Selection (NCABC BTB)",
+      "supplier": "Sagamore Spirit",
+      "proof": "110",
+      "bottle_size": ".75L",
+      "nc_abc_price": 79.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "SAGAMORE 10Y BARREL SELECTION (NCABC BTB)",
+        "SAGAMORE 10Y BARREL SELECTION",
+        "SAGAMORE 10Y BARREL SELECTION NCABC BTB"
+      ]
+    },
+    {
+      "product_id": "sazerac_rye_18_year",
+      "name": "SAZERAC RYE 18 YEAR",
+      "official_ncabc_name": "Sazerac Rye 18 Year",
+      "supplier": "Sazerac Co.",
+      "proof": "90",
+      "bottle_size": ".75L",
+      "nc_abc_price": 149.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "SAZERAC RYE 18 YEAR"
+      ]
+    },
+    {
+      "product_id": "stagg",
+      "name": "STAGG",
+      "official_ncabc_name": "Stagg Single Barrel Select (BTB)",
+      "supplier": "Sazerac Co.",
+      "proof": "128.7",
+      "bottle_size": ".75L",
+      "nc_abc_price": 66.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "STAGG"
+      ]
+    },
+    {
+      "product_id": "thomas_h_handy",
+      "name": "THOMAS H. HANDY",
+      "official_ncabc_name": "Thomas H. Handy",
+      "supplier": "Sazerac Co.",
+      "proof": "124.9",
+      "bottle_size": ".75L",
+      "nc_abc_price": 149.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "THOMAS H. HANDY"
+      ]
+    },
+    {
+      "product_id": "very_old_barton",
+      "name": "VERY OLD BARTON",
+      "official_ncabc_name": "Very Old Barton",
+      "supplier": "Sazerac Co.",
+      "proof": "86",
+      "bottle_size": ".75L",
+      "nc_abc_price": 15.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "VERY OLD BARTON"
+      ]
+    },
+    {
+      "product_id": "weller",
+      "name": "WELLER",
+      "official_ncabc_name": "Weller Special Reserve",
+      "supplier": "Sazerac Co.",
+      "proof": "90",
+      "bottle_size": "1.00L",
+      "nc_abc_price": 36.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "WELLER"
+      ]
+    },
+    {
+      "product_id": "wild_turkey_101_8y",
+      "name": "WILD TURKEY 101 8Y",
+      "official_ncabc_name": "Wild Turkey 101 8Y",
+      "supplier": "Campari America",
+      "proof": "101",
+      "bottle_size": ".75L",
+      "nc_abc_price": 44.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "WILD TURKEY 101 8Y"
+      ]
+    },
+    {
+      "product_id": "willett_family_estate_13y_btb",
+      "name": "WILLETT FAMILY ESTATE 13Y (BTB)",
+      "official_ncabc_name": "Willett Family Estate Bourbon 13Y (BTB)",
+      "supplier": "Willett Distillery",
+      "proof": "115",
+      "bottle_size": ".75L",
+      "nc_abc_price": 599.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "WILLETT FAMILY ESTATE 13Y (BTB)"
+      ]
+    },
+    {
+      "product_id": "willett_family_estate_bourbon",
+      "name": "WILLETT FAMILY ESTATE BOURBON",
+      "official_ncabc_name": "Willett Family Estate Bourbon 6Y (BTB)",
+      "supplier": "Willett Distillery",
+      "proof": "115",
+      "bottle_size": ".75L",
+      "nc_abc_price": 135.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "WILLETT FAMILY ESTATE BOURBON"
+      ]
+    },
+    {
+      "product_id": "willett_family_estate_rye_12y_btb",
+      "name": "WILLETT FAMILY ESTATE RYE 12Y (BTB)",
+      "official_ncabc_name": "Willett Family Estate Rye 12Y (BTB)",
+      "supplier": "Willett Distillery",
+      "proof": "115",
+      "bottle_size": ".75L",
+      "nc_abc_price": 524.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "WILLETT FAMILY ESTATE RYE 12Y (BTB)"
+      ]
+    },
+    {
+      "product_id": "woodford_reserve_masters",
+      "name": "WOODFORD RESERVE MASTERS",
+      "official_ncabc_name": "Woodford Reserve",
+      "supplier": "Brown - Forman",
+      "proof": "90.4",
+      "bottle_size": "200ML",
+      "nc_abc_price": 12.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "WOODFORD RESERVE MASTERS"
+      ]
+    }
+  ]
+}
