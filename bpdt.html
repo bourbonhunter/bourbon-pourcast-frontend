@@ -50,9 +50,9 @@
           <div class="card-head">
             <div>
               <p class="eyebrow">Drop Tracker</p>
-              <h3>Recent Announcements</h3>
+              <h3>Recent Drops</h3>
             </div>
-            <button class="small-link" data-section-jump="allocation" data-status-filter="announced" data-date-filter="30">View Drop Tracker</button>
+            <button class="small-link" data-section-jump="allocation" data-status-filter="dropped" data-date-filter="30">View Drop Tracker</button>
           </div>
           <div id="homeRecentAllocations" class="compact-list"></div>
         </article>
@@ -90,8 +90,8 @@
       <div class="section-title">
         <div>
           <p class="eyebrow">Drop Tracker</p>
-          <h2>Expected, Announced & Confirmed Drops</h2>
-          <p>Track expected, announced, and future confirmed allocation activity as Wake reporting changes.</p>
+          <h2>Expected & Dropped Activity</h2>
+          <p>Track expected and dropped allocation activity while reserving Confirmed for future human verification.</p>
         </div>
         <span class="pill" id="allocationCount">0 results</span>
       </div>
@@ -107,7 +107,7 @@
           <select id="trackerStatusFilter">
             <option value="">All statuses</option>
             <option value="expected">Expected</option>
-            <option value="announced">Announced</option>
+            <option value="dropped">Dropped</option>
             <option value="confirmed">Confirmed</option>
           </select>
         </label>
@@ -122,13 +122,13 @@
           </select>
         </label>
       </div>
-      <div class="hint">Expected = known store drop day within the selected window and no logged drop in at least 27 days. Announced = detected through Wake ABC search and daily delta tracking. Confirmed = manually or independently verified; this can stay behind the scenes until ready.</div>
+      <div class="hint">Expected = AIM watch date preserved before the drop when available. Dropped = effective drop date recorded in history. Confirmed = future manual or trusted-source verification.</div>
 
       <div class="stats-grid tracker-stats-grid">
         <div class="stat-card"><span>Expected Next 7 Days</span><strong id="statExpectedTomorrow">0</strong></div>
         <div class="stat-card"><span>Stores</span><strong id="statStores">0</strong></div>
         <div class="stat-card"><span>Brands</span><strong id="statBrands">0</strong></div>
-        <div class="stat-card"><span>Latest Announced</span><strong id="statLatest">—</strong></div>
+        <div class="stat-card"><span>Latest Drop</span><strong id="statLatest">—</strong></div>
       </div>
 
       <article class="card table-card"><div id="allocationTable"></div></article>
@@ -224,6 +224,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="bp-test-app.js?v=3.15"></script>
+  <script src="bp-test-app.js?v=3.16"></script>
 </body>
 </html>

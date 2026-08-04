@@ -184,7 +184,7 @@ function normalizedDropTrackerRows(rows) {
     const expectedDate = asDate(expectedRaw);
     const announcedDate = asDate(announcedRaw);
     const confirmedDate = asDate(confirmedRaw);
-    const status = normalizeStatus(statusRaw || (confirmedDate ? 'confirmed' : announcedDate ? 'announced' : 'expected'));
+    const status = normalizeStatus(statusRaw || (confirmedDate ? 'confirmed' : announcedDate ? 'dropped' : 'expected'));
     const daysSinceLast = /^new$/i.test(daysSinceLastRaw) ? 'New' : (Number(daysSinceLastRaw || 0) || null);
     return { expectedRaw, announcedRaw, confirmedRaw, expectedDate, announcedDate, confirmedDate, store, brand, board, status, daysSinceLast, source, raw: row };
   }).filter(r => r.store || r.brand || r.expectedDate || r.announcedDate || r.confirmedDate);
@@ -194,29 +194,29 @@ function normalizeStatus(value) {
   const v = String(value || '').trim().toLowerCase();
   if (v === 'verified') return 'confirmed';
   if (v === 'confirm' || v === 'confirmed') return 'confirmed';
-  if (v === 'announce' || v === 'announced') return 'announced';
+  if (v === 'announce' || v === 'announced' || v === 'drop' || v === 'dropped') return 'dropped';
   if (v === 'expected' || v === 'watch') return 'expected';
-  return v || 'announced';
+  return v || 'dropped';
 }
 
 function statusLabel(status) {
   if (status === 'expected') return 'Expected';
   if (status === 'confirmed') return 'Confirmed';
-  if (status === 'announced') return 'Announced';
-  return status ? status.charAt(0).toUpperCase() + status.slice(1) : 'Announced';
+  if (status === 'dropped') return 'Dropped';
+  return status ? status.charAt(0).toUpperCase() + status.slice(1) : 'Dropped';
 }
 
 function statusIcon(status) {
   if (status === 'expected') return '🟡';
   if (status === 'confirmed') return '🟢';
-  if (status === 'announced') return '🔵';
+  if (status === 'dropped') return '🔵';
   return '⚪';
 }
 
 function statusClass(status) {
   if (status === 'expected') return 'status-expected';
   if (status === 'confirmed') return 'status-confirmed';
-  if (status === 'announced') return 'status-announced';
+  if (status === 'dropped') return 'status-announced';
   return 'status-neutral';
 }
 
@@ -299,10 +299,10 @@ function handleTrackerDateWindowChange() {
   const days = $('allocationDays')?.value;
   const status = $('trackerStatusFilter');
 
-  // If a user arrives from Recent Announcements, the Status filter is Announced.
+  // If a user arrives from Recent Drops, the Status filter is Dropped.
   // Switching the Date Window to Next 7 days should show the Watch List, so
   // automatically switch to Expected instead of returning a confusing zero-result view.
-  if (days === 'next7' && status && status.value === 'announced') {
+  if (days === 'next7' && status && status.value === 'dropped') {
     status.value = 'expected';
   }
 
@@ -327,15 +327,15 @@ function renderAllocation() {
 
   const expectedNext7 = dropTrackerRows.filter(r => r.status === 'expected' && withinWindow(r, 'next7')).length;
   const visibleBrands = uniqueSorted(rows.map(r => r.brand));
-  const latestAnnounced = dropTrackerRows
-    .filter(r => r.status === 'announced' && r.announcedDate)
+  const latestDropped = dropTrackerRows
+    .filter(r => r.status === 'dropped' && r.announcedDate)
     .sort((a, b) => b.announcedDate - a.announcedDate)[0];
 
   $('allocationCount').textContent = `${rows.length} result${rows.length === 1 ? '' : 's'}`;
   $('statExpectedTomorrow').textContent = expectedNext7;
   $('statStores').textContent = uniqueSorted(rows.map(r => r.store)).length;
   $('statBrands').textContent = visibleBrands.length;
-  $('statLatest').textContent = fmtDate(latestAnnounced?.announcedDate);
+  $('statLatest').textContent = fmtDate(latestDropped?.announcedDate);
 
   if (!dropTrackerRows.length) {
     $('allocationTable').innerHTML = `<div class="empty">Drop Tracker data is not loaded yet. Add <strong>drop_tracker.csv</strong> beside this file.</div>`;
@@ -347,7 +347,7 @@ function renderAllocation() {
     return;
   }
 
-  $('allocationTable').innerHTML = `<table><thead><tr><th>Expected</th><th>Announced</th><th>Store</th><th>Brand / Product</th><th>Board</th><th>Status</th></tr></thead><tbody>${rows.map(r => `
+  $('allocationTable').innerHTML = `<table><thead><tr><th>Expected</th><th>Drop Date</th><th>Store</th><th>Brand / Product</th><th>Board</th><th>Status</th></tr></thead><tbody>${rows.map(r => `
     <tr>
       <td>${fmtDate(r.expectedDate)}</td>
       <td>${fmtDate(r.announcedDate)}</td>
@@ -423,14 +423,14 @@ function renderShipments() {
 }
 
 function renderHome() {
-  const recentAnnounced = dropTrackerRows
-    .filter(r => r.status === 'announced' && r.announcedDate)
+  const recentDropped = dropTrackerRows
+    .filter(r => r.status === 'dropped' && r.announcedDate)
     .sort((a, b) => (b.announcedDate?.getTime() || 0) - (a.announcedDate?.getTime() || 0))
     .slice(0, 5);
 
-  $('homeRecentAllocations').innerHTML = recentAnnounced.length
-    ? recentAnnounced.map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.brand || 'Unknown Brand')}</strong><small>${escapeHtml(r.store || 'Unknown Store')}</small></div><span>${fmtShortDate(r.announcedDate)}</span></div>`).join('')
-    : `<div class="empty">No announced drops loaded yet.</div>`;
+  $('homeRecentAllocations').innerHTML = recentDropped.length
+    ? recentDropped.map(r => `<div class="compact-item"><div><strong>${escapeHtml(r.brand || 'Unknown Brand')}</strong><small>${escapeHtml(r.store || 'Unknown Store')}</small></div><span>${fmtShortDate(r.announcedDate)}</span></div>`).join('')
+    : `<div class="empty">No recent drops loaded yet.</div>`;
 
   const watch = dropTrackerRows
     .filter(r => r.status === 'expected' && withinWindow(r, 'next7'))

@@ -65,9 +65,9 @@
           <div class="card-head">
             <div>
               <p class="eyebrow">Drop Tracker</p>
-              <h3>Recent Announcements</h3>
+              <h3>Recent Drops</h3>
             </div>
-            <button class="small-link" data-section-jump="allocation" data-status-filter="announced" data-date-filter="30">View Drop Tracker</button>
+            <button class="small-link" data-section-jump="allocation" data-status-filter="dropped" data-date-filter="30">View Drop Tracker</button>
           </div>
           <div id="homeRecentAllocations" class="compact-list"></div>
         </article>
@@ -126,7 +126,7 @@
         <div>
           <p class="eyebrow">Drop Tracker</p>
           <h2>Allocation Activity Tracker</h2>
-          <p>Follow expected and announced allocation activity across North Carolina ABC systems.</p>
+          <p>Follow expected and dropped allocation activity across North Carolina ABC systems.</p>
         </div>
         <span class="pill" id="allocationCount">0 results</span>
       </div>
@@ -142,7 +142,7 @@
           <select id="trackerStatusFilter">
             <option value="" selected>All statuses</option>
             <option value="expected">Expected</option>
-            <option value="announced">Announced</option>
+            <option value="dropped">Dropped</option>
             <option value="confirmed">Confirmed</option>
           </select>
         </label>
@@ -157,13 +157,13 @@
           </select>
         </label>
       </div>
-      <div class="hint">Expected dates are based on historical patterns and are intended as informational guidance only. Announced activity is detected through Wake ABC search and daily delta tracking. Confirmed activity may be added later as independent verification becomes available.</div>
+      <div class="hint">Expected dates are preserved from AIM watch snapshots when available. Dropped uses the effective drop date recorded in history. Confirmed is reserved for future human or trusted-source verification.</div>
 
       <div class="stats-grid tracker-stats-grid">
         <div class="stat-card"><span>Expected Next 7 Days</span><strong id="statExpectedTomorrow">0</strong></div>
         <div class="stat-card"><span>Stores</span><strong id="statStores">0</strong></div>
         <div class="stat-card"><span>Brands</span><strong id="statBrands">0</strong></div>
-        <div class="stat-card"><span>Latest Announced</span><strong id="statLatest">—</strong></div>
+        <div class="stat-card"><span>Latest Drop</span><strong id="statLatest">—</strong></div>
       </div>
 
       <article class="card table-card"><div id="allocationTable"></div></article>
@@ -372,6 +372,6 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="bp-test-app.js?v=3.18"></script>
+  <script src="bp-test-app.js?v=3.19"></script>
 </body>
 </html>
