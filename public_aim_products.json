@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-04T12:28:39.025321+00:00",
+  "generated_at": "2026-08-04T18:17:01.793474+00:00",
   "source": "AIM Product Master (sanitized public fields)",
-  "product_count": 54,
+  "product_count": 60,
   "products": [
     {
       "product_id": "1792_12y",
@@ -191,6 +191,90 @@
       "aliases": [
         "ELMER T LEE SINGLE BARREL",
         "ELMER T. LEE"
+      ]
+    },
+    {
+      "product_id": "four_roses_single_barrel_obsf",
+      "name": "FOUR ROSES SINGLE BARREL OBSF",
+      "official_ncabc_name": "Four Roses Single Barrel OBSF",
+      "supplier": "E & J Gallo Winery",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 47.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "FOUR ROSES SINGLE BARREL OBSF"
+      ]
+    },
+    {
+      "product_id": "four_roses_single_barrel_obsk",
+      "name": "FOUR ROSES SINGLE BARREL OBSK",
+      "official_ncabc_name": "Four Roses Single Barrel OBSK",
+      "supplier": "E & J Gallo Winery",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 47.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "FOUR ROSES SINGLE BARREL OBSK"
+      ]
+    },
+    {
+      "product_id": "four_roses_single_barrel_oesf",
+      "name": "FOUR ROSES SINGLE BARREL OESF",
+      "official_ncabc_name": "Four Roses Single Barrel OESF",
+      "supplier": "E & J Gallo Winery",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 47.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "FOUR ROSES SINGLE BARREL OESF"
+      ]
+    },
+    {
+      "product_id": "four_roses_single_barrel_oesk",
+      "name": "FOUR ROSES SINGLE BARREL OESK",
+      "official_ncabc_name": "Four Roses Single Barrel OESK",
+      "supplier": "E & J Gallo Winery",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 47.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "FOUR ROSES SINGLE BARREL OESK"
+      ]
+    },
+    {
+      "product_id": "four_roses_single_barrel_oeso",
+      "name": "FOUR ROSES SINGLE BARREL OESO",
+      "official_ncabc_name": "Four Roses Single Barrel OESO",
+      "supplier": "E & J Gallo Winery",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 47.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "FOUR ROSES SINGLE BARREL OESO"
+      ]
+    },
+    {
+      "product_id": "four_roses_single_barrel_oesq",
+      "name": "FOUR ROSES SINGLE BARREL OESQ",
+      "official_ncabc_name": "Four Roses Single Barrel OESQ",
+      "supplier": "E & J Gallo Winery",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 47.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "FOUR ROSES SINGLE BARREL OESQ"
       ]
     },
     {
