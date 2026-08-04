@@ -352,7 +352,7 @@ function renderAllocation() {
       <td>${fmtDate(r.expectedDate)}</td>
       <td>${fmtDate(r.announcedDate)}</td>
       <td>${escapeHtml(r.store || '—')}</td>
-      <td>${escapeHtml(r.brand || '—')}</td>
+      <td>${escapeHtml(r.brand || (r.status === 'expected' ? 'Expected Drop' : '—'))}</td>
       <td>${escapeHtml(r.board || '—')}</td>
       <td>${statusPill(r.status)}</td>
     </tr>`).join('')}</tbody></table>`;
