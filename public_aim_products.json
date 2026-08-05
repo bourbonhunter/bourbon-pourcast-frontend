@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-04T18:17:01.793474+00:00",
+  "generated_at": "2026-08-05T11:22:45.541180+00:00",
   "source": "AIM Product Master (sanitized public fields)",
-  "product_count": 60,
+  "product_count": 58,
   "products": [
     {
       "product_id": "1792_12y",
@@ -705,22 +705,6 @@
       ]
     },
     {
-      "product_id": "sagamore_10y_barrel_selection_ncabc_btb",
-      "name": "SAGAMORE 10Y BARREL SELECTION (NCABC BTB)",
-      "official_ncabc_name": "Sagamore 10Y Barrel Selection (NCABC BTB)",
-      "supplier": "Sagamore Spirit",
-      "proof": "110",
-      "bottle_size": ".75L",
-      "nc_abc_price": 79.95,
-      "classification": null,
-      "tracked_by_aim": true,
-      "aliases": [
-        "SAGAMORE 10Y BARREL SELECTION (NCABC BTB)",
-        "SAGAMORE 10Y BARREL SELECTION",
-        "SAGAMORE 10Y BARREL SELECTION NCABC BTB"
-      ]
-    },
-    {
       "product_id": "sazerac_rye_18_year",
       "name": "SAZERAC RYE 18 YEAR",
       "official_ncabc_name": "Sazerac Rye 18 Year",
@@ -844,20 +828,6 @@
       "tracked_by_aim": true,
       "aliases": [
         "WILLETT FAMILY ESTATE RYE 12Y (BTB)"
-      ]
-    },
-    {
-      "product_id": "woodford_reserve_masters",
-      "name": "WOODFORD RESERVE MASTERS",
-      "official_ncabc_name": "Woodford Reserve",
-      "supplier": "Brown - Forman",
-      "proof": "90.4",
-      "bottle_size": "200ML",
-      "nc_abc_price": 12.95,
-      "classification": null,
-      "tracked_by_aim": true,
-      "aliases": [
-        "WOODFORD RESERVE MASTERS"
       ]
     }
   ]
