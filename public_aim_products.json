@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-05T11:22:45.541180+00:00",
+  "generated_at": "2026-08-05T19:55:13.229063+00:00",
   "source": "AIM Product Master (sanitized public fields)",
-  "product_count": 58,
+  "product_count": 65,
   "products": [
     {
       "product_id": "1792_12y",
@@ -29,6 +29,34 @@
       "tracked_by_aim": true,
       "aliases": [
         "1792 FULL PROOF BARR SEL"
+      ]
+    },
+    {
+      "product_id": "1792_sweet_wheat_bourbon",
+      "name": "1792 SWEET WHEAT BOURBON",
+      "official_ncabc_name": "1792 Sweet Wheat Bourbon",
+      "supplier": "Sazerac Co.",
+      "proof": "91.2",
+      "bottle_size": ".75L",
+      "nc_abc_price": 41.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "1792 SWEET WHEAT BOURBON"
+      ]
+    },
+    {
+      "product_id": "ben_holladay_8y_mo_whiskey_bourbon",
+      "name": "BEN HOLLADAY 8Y MO WHISKEY BOURBON",
+      "official_ncabc_name": "Ben Holladay 8Y MO Whiskey Bourbon",
+      "supplier": "McCormick Distilling Co.",
+      "proof": "120",
+      "bottle_size": ".75L",
+      "nc_abc_price": 89.95,
+      "classification": "Allocated",
+      "tracked_by_aim": true,
+      "aliases": [
+        "BEN HOLLADAY 8Y MO WHISKEY BOURBON"
       ]
     },
     {
@@ -208,20 +236,6 @@
       ]
     },
     {
-      "product_id": "four_roses_single_barrel_obsk",
-      "name": "FOUR ROSES SINGLE BARREL OBSK",
-      "official_ncabc_name": "Four Roses Single Barrel OBSK",
-      "supplier": "E & J Gallo Winery",
-      "proof": "100",
-      "bottle_size": ".75L",
-      "nc_abc_price": 47.95,
-      "classification": null,
-      "tracked_by_aim": true,
-      "aliases": [
-        "FOUR ROSES SINGLE BARREL OBSK"
-      ]
-    },
-    {
       "product_id": "four_roses_single_barrel_oesf",
       "name": "FOUR ROSES SINGLE BARREL OESF",
       "official_ncabc_name": "Four Roses Single Barrel OESF",
@@ -275,6 +289,90 @@
       "tracked_by_aim": true,
       "aliases": [
         "FOUR ROSES SINGLE BARREL OESQ"
+      ]
+    },
+    {
+      "product_id": "hardin_s_creek_kentucky_series_boston",
+      "name": "Hardin's Creek Kentucky Series Boston",
+      "official_ncabc_name": "Hardin's Creek Kentucky Series Boston",
+      "supplier": "Beam Suntory",
+      "proof": "110",
+      "bottle_size": ".75L",
+      "nc_abc_price": 169.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "Hardin's Creek Kentucky Series Boston"
+      ]
+    },
+    {
+      "product_id": "hardin_s_creek_kentucky_series_frankfort",
+      "name": "Hardin's Creek Kentucky Series Frankfort",
+      "official_ncabc_name": "Hardin's Creek Kentucky Series Frankfort",
+      "supplier": "Beam Suntory",
+      "proof": "110",
+      "bottle_size": ".75L",
+      "nc_abc_price": 169.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "Hardin's Creek Kentucky Series Frankfort"
+      ]
+    },
+    {
+      "product_id": "hardin_s_creek_kentucky_series_tri_pack",
+      "name": "Hardin's Creek Kentucky Series Tri-Pack",
+      "official_ncabc_name": "Hardin's Creek Kentucky Series Tri-Pack",
+      "supplier": "Beam Suntory",
+      "proof": "110",
+      "bottle_size": "600ML",
+      "nc_abc_price": 169.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "Hardin's Creek Kentucky Series Tri-Pack"
+      ]
+    },
+    {
+      "product_id": "hardin_s_creek_warehouse_series_release_1",
+      "name": "Hardin's Creek Warehouse Series Release 1",
+      "official_ncabc_name": "Hardin's Creek Warehouse Series Release 1",
+      "supplier": "Beam Suntory",
+      "proof": "110",
+      "bottle_size": "700ML",
+      "nc_abc_price": 149.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "Hardin's Creek Warehouse Series Release 1"
+      ]
+    },
+    {
+      "product_id": "hardin_s_creek_warehouse_series_release_2",
+      "name": "Hardin's Creek Warehouse Series Release 2",
+      "official_ncabc_name": "Hardin's Creek Warehouse Series Release 2",
+      "supplier": "Beam Suntory",
+      "proof": "110",
+      "bottle_size": "700ML",
+      "nc_abc_price": 149.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "Hardin's Creek Warehouse Series Release 2"
+      ]
+    },
+    {
+      "product_id": "hardin_s_creek_warehouse_series_release_3",
+      "name": "Hardin's Creek Warehouse Series Release 3",
+      "official_ncabc_name": "Hardin's Creek Warehouse Series Release 3",
+      "supplier": "Beam Suntory",
+      "proof": "110",
+      "bottle_size": "700ML",
+      "nc_abc_price": 149.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "Hardin's Creek Warehouse Series Release 3"
       ]
     },
     {

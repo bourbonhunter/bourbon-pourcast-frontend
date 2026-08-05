@@ -16076,80 +16076,80 @@
           "source": "official_board_inventory"
         },
         {
-          "effective_date": "2026-08-03",
+          "effective_date": "2026-07-31",
           "detected": "2026-08-05 07:22:44",
-          "store": "7200 Sandy Fork Rd., Raleigh, NC 27609",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
+          "store": "4009 Davis Dr., Morrisville, NC 27560",
+          "product": "HEAVEN HILL GRAIN TO GLASS BOURBON",
           "source": "official_board_inventory"
         },
         {
-          "effective_date": "2026-08-03",
+          "effective_date": "2026-07-31",
           "detected": "2026-08-05 07:22:44",
-          "store": "2645 Appliance Ct., Raleigh, NC 27604",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
+          "store": "6809 Davis Circle, Raleigh, NC 27612",
+          "product": "HEAVEN HILL GRAIN TO GLASS BOURBON",
           "source": "official_board_inventory"
         },
         {
-          "effective_date": "2026-08-03",
+          "effective_date": "2026-07-31",
           "detected": "2026-08-05 07:22:44",
-          "store": "3320 Olympia Dr., Raleigh, NC 27603",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
+          "store": "6809 Davis Circle, Raleigh, NC 27612",
+          "product": "WILD TURKEY 101 8Y",
           "source": "official_board_inventory"
         },
         {
-          "effective_date": "2026-08-03",
-          "detected": "2026-08-05 07:22:44",
+          "effective_date": "2026-07-31",
+          "detected": "2026-08-04 07:23:35",
           "store": "11360 Capital Blvd., Wake Forest, NC 27587",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
+          "product": "HEAVEN HILL GRAIN TO GLASS BOURBON",
           "source": "official_board_inventory"
         },
         {
           "effective_date": "2026-07-31",
-          "detected": "2026-08-05 07:22:44",
-          "store": "665 Cary Towne Blvd., Cary, NC 27511",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
-          "source": "official_board_inventory"
-        },
-        {
-          "effective_date": "2026-08-03",
-          "detected": "2026-08-05 07:22:44",
-          "store": "6301 Town Center Dr., Raleigh, NC 27614",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
-          "source": "official_board_inventory"
-        },
-        {
-          "effective_date": "2026-08-03",
-          "detected": "2026-08-05 07:22:44",
-          "store": "200 New Rand Road, Garner, NC 27529",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
-          "source": "official_board_inventory"
-        },
-        {
-          "effective_date": "2026-08-03",
-          "detected": "2026-08-05 07:22:44",
-          "store": "1601-61 Cross Link Rd., Raleigh, NC 27610",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
+          "detected": "2026-08-04 07:23:35",
+          "store": "209 S Salisbury St, Raleigh, NC 27601",
+          "product": "HEAVEN HILL GRAIN TO GLASS BOURBON",
           "source": "official_board_inventory"
         },
         {
           "effective_date": "2026-07-31",
-          "detected": "2026-08-05 07:22:44",
-          "store": "1415 E. Williams St., Apex, NC 27617",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
+          "detected": "2026-08-04 07:23:35",
+          "store": "420 Woodburn Rd., Raleigh, NC 27605",
+          "product": "HEAVEN HILL GRAIN TO GLASS BOURBON",
           "source": "official_board_inventory"
         },
         {
-          "effective_date": "2026-08-03",
-          "detected": "2026-08-05 07:22:44",
-          "store": "7911 ACC Blvd., Raleigh, NC 27617",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
+          "effective_date": "2026-07-31",
+          "detected": "2026-08-04 07:23:35",
+          "store": "11360 Capital Blvd., Wake Forest, NC 27587",
+          "product": "E.H. TAYLOR JR. SMALL BATCH",
           "source": "official_board_inventory"
         },
         {
-          "effective_date": "2026-08-03",
-          "detected": "2026-08-05 07:22:44",
-          "store": "100 Village Walk Dr, Holly Springs, NC 27540",
-          "product": "FOUR ROSES SINGLE BARREL OBSK",
+          "effective_date": "2026-07-31",
+          "detected": "2026-08-04 07:23:35",
+          "store": "3320 Olympia Dr., Raleigh, NC 27603",
+          "product": "BUFFALO TRACE BOURBON WHISKEY",
+          "source": "official_board_inventory"
+        },
+        {
+          "effective_date": "2026-07-31",
+          "detected": "2026-08-04 07:23:35",
+          "store": "209 S Salisbury St, Raleigh, NC 27601",
+          "product": "BUFFALO TRACE BOURBON WHISKEY",
+          "source": "official_board_inventory"
+        },
+        {
+          "effective_date": "2026-07-31",
+          "detected": "2026-08-04 07:23:35",
+          "store": "3320 Olympia Dr., Raleigh, NC 27603",
+          "product": "WILD TURKEY 101 8Y",
+          "source": "official_board_inventory"
+        },
+        {
+          "effective_date": "2026-07-31",
+          "detected": "2026-08-04 07:23:35",
+          "store": "11360 Capital Blvd., Wake Forest, NC 27587",
+          "product": "WILD TURKEY 101 8Y",
           "source": "official_board_inventory"
         }
       ]
