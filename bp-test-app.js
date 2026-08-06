@@ -181,15 +181,22 @@ async function loadFirstAvailable(files, parser) {
 
 function formatEasternUpdated(date) {
   if (!date) return 'Refresh time unavailable';
-  return new Intl.DateTimeFormat('en-US', {
+
+  const datePart = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/New_York',
     weekday: 'short',
     month: 'short',
-    day: 'numeric',
+    day: 'numeric'
+  }).format(date);
+
+  const timePart = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
     hour: 'numeric',
     minute: '2-digit',
     timeZoneName: 'short'
   }).format(date);
+
+  return `${datePart} • ${timePart}`;
 }
 
 function renderDropTrackerFreshness() {
