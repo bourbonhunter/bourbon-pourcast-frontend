@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bourbon Pourcast</title>
-  <link rel="stylesheet" href="bp-test-styles.css?v=3.17" />
+  <link rel="stylesheet" href="bp-test-styles.css?v=3.18" />
   <script defer data-domain="bourbonpourcast.com" src="https://plausible.io/js/script.js"></script>
   <style>
     /* ABC Board Spotlight banner additions.
@@ -179,7 +179,13 @@
           <h2>Allocation Activity Tracker</h2>
           <p>Follow expected and dropped allocation activity across North Carolina ABC systems.</p>
         </div>
-        <span class="pill" id="allocationCount">0 results</span>
+        <div class="section-actions allocation-title-actions">
+          <div class="data-freshness" aria-live="polite">
+            <span>AIM™ Data Current As Of</span>
+            <strong id="allocationLastUpdated">Loading…</strong>
+          </div>
+          <span class="pill" id="allocationCount">0 results</span>
+        </div>
       </div>
 
       <div class="filters card allocation-filters drop-tracker-filters">
@@ -460,6 +466,6 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="bp-test-app.js?v=3.20"></script>
+  <script src="bp-test-app.js?v=3.21"></script>
 </body>
 </html>

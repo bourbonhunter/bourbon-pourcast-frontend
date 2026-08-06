@@ -4,6 +4,7 @@ const DATA_CANDIDATES = {
 };
 
 let dropTrackerRows = [];
+let dropTrackerMeta = { file: null, lastModified: null };
 let shipmentRows = [];
 let shipmentMeta = {
   file: null,
@@ -164,10 +165,36 @@ async function loadFirstAvailable(files, parser) {
   for (const file of files) {
     try {
       const response = await fetch(file, { cache: 'no-store' });
-      if (response.ok) return { file, rows: parser(await response.text(), file) };
+      if (response.ok) {
+        const lastModifiedHeader = response.headers.get('last-modified');
+        const lastModified = lastModifiedHeader ? new Date(lastModifiedHeader) : null;
+        return {
+          file,
+          rows: parser(await response.text(), file),
+          lastModified: lastModified && !Number.isNaN(lastModified.getTime()) ? lastModified : null
+        };
+      }
     } catch (err) {}
   }
-  return { file: null, rows: [] };
+  return { file: null, rows: [], lastModified: null };
+}
+
+function formatEasternUpdated(date) {
+  if (!date) return 'Refresh time unavailable';
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZoneName: 'short'
+  }).format(date);
+}
+
+function renderDropTrackerFreshness() {
+  const target = $('allocationLastUpdated');
+  if (target) target.textContent = formatEasternUpdated(dropTrackerMeta.lastModified);
 }
 
 function normalizedDropTrackerRows(rows) {
@@ -502,6 +529,7 @@ async function init() {
     loadFirstAvailable(DATA_CANDIDATES.shipments, parseInventoryReportHTML)
   ]);
 
+  dropTrackerMeta = { file: trackerLoad.file, lastModified: trackerLoad.lastModified };
   dropTrackerRows = normalizedDropTrackerRows(trackerLoad.rows);
   shipmentRows = shipLoad.rows;
   if (!shipmentRows.length) $('shipmentLoadCard').style.display = 'block';
@@ -523,6 +551,7 @@ async function init() {
   $('allocationDays')?.addEventListener('change', handleTrackerDateWindowChange);
   ['shipmentProductFilter', 'shipmentBoardFilter'].forEach(id => $(id)?.addEventListener('change', renderShipments));
 
+  renderDropTrackerFreshness();
   renderAllocation();
   renderShipments();
   renderHome();
