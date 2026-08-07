@@ -1039,8 +1039,8 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 ,2026-07-23,,"7336 Creedmoor Rd., Raleigh, NC 27613",HEAVEN HILL GRAIN TO GLASS BOURBON,Wake County ABC,Dropped,,wake_delta
 ,2026-07-23,,"7336 Creedmoor Rd., Raleigh, NC 27613",WILD TURKEY 101 8Y,Wake County ABC,Dropped,,wake_delta
 ,2026-07-24,,"1415 E. Williams St., Apex, NC 27617",WILD TURKEY 101 8Y,Wake County ABC,Dropped,,wake_delta
-,2026-07-24,,"6494 Tryon Rd., Cary, NC 27511",HEAVEN HILL GRAIN TO GLASS BOURBON,Wake County ABC,Dropped,,wake_delta
-,2026-07-24,,"6494 Tryon Rd., Cary, NC 27511",WILD TURKEY 101 8Y,Wake County ABC,Dropped,,wake_delta
+,2026-07-24,2026-07-24,"6494 Tryon Rd., Cary, NC 27511",HEAVEN HILL GRAIN TO GLASS BOURBON,Wake County ABC,Confirmed,,wake_delta+manual_confirmation
+,2026-07-24,2026-07-24,"6494 Tryon Rd., Cary, NC 27511",WILD TURKEY 101 8Y,Wake County ABC,Confirmed,,wake_delta+manual_confirmation
 ,2026-07-27,,"200 New Rand Road, Garner, NC 27529",ELMER T LEE SINGLE BARREL,Wake County ABC,Dropped,,wake_delta
 ,2026-07-27,,"200 New Rand Road, Garner, NC 27529",HEAVEN HILL GRAIN TO GLASS BOURBON,Wake County ABC,Dropped,,wake_delta
 ,2026-07-28,,"1601-61 Cross Link Rd., Raleigh, NC 27610",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Dropped,,wake_delta
@@ -1061,10 +1061,10 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 ,2026-07-31,,"2645 Appliance Ct., Raleigh, NC 27604",OLD FORESTER SINGLE BARREL (BTB),Wake County ABC,Dropped,,wake_delta
 2026-07-31,2026-07-31,,"3320 Olympia Dr., Raleigh, NC 27603",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Dropped,,wake_delta_with_preserved_forecast
 2026-07-31,2026-07-31,,"3320 Olympia Dr., Raleigh, NC 27603",WILD TURKEY 101 8Y,Wake County ABC,Dropped,,wake_delta_with_preserved_forecast
+,2026-07-31,2026-08-07,"3615 SW Cary Parkway , Cary, NC 27513",1792 SWEET WHEAT BOURBON,Wake County ABC,Confirmed,,wake_delta+manual_confirmation
 2026-08-05,2026-07-31,,"4009 Davis Dr., Morrisville, NC 27560",HEAVEN HILL GRAIN TO GLASS BOURBON,Wake County ABC,Dropped,,wake_delta_with_preserved_forecast
 2026-07-31,2026-07-31,,"420 Woodburn Rd., Raleigh, NC 27605",HEAVEN HILL GRAIN TO GLASS BOURBON,Wake County ABC,Dropped,,wake_delta_with_preserved_forecast
 2026-07-31,2026-07-31,,"420 Woodburn Rd., Raleigh, NC 27605",WILD TURKEY 101 8Y,Wake County ABC,Dropped,,wake_delta_with_preserved_forecast
 2026-07-30,2026-07-31,,"6809 Davis Circle, Raleigh, NC 27612",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Dropped,,wake_delta_with_preserved_forecast
 2026-07-30,2026-07-31,,"6809 Davis Circle, Raleigh, NC 27612",HEAVEN HILL GRAIN TO GLASS BOURBON,Wake County ABC,Dropped,,wake_delta_with_preserved_forecast
 2026-07-30,2026-07-31,,"6809 Davis Circle, Raleigh, NC 27612",WILD TURKEY 101 8Y,Wake County ABC,Dropped,,wake_delta_with_preserved_forecast
-,2026-08-05,,"3615 SW Cary Parkway , Cary, NC 27513",1792 SWEET WHEAT BOURBON,Wake County ABC,Dropped,,wake_delta
