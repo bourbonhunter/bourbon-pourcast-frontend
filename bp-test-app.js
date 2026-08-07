@@ -381,9 +381,13 @@ function renderAllocation() {
     return;
   }
 
-  $('allocationTable').innerHTML = `<table><thead><tr><th>Expected</th><th>Drop Date</th><th>Store</th><th>Brand / Product</th><th>Board</th><th>Status</th></tr></thead><tbody>${rows.map(r => `
+  const showExpectedColumn = days === 'next7';
+  const expectedHeader = showExpectedColumn ? '<th>Expected</th>' : '';
+  const expectedCell = r => showExpectedColumn ? `<td>${fmtDate(r.expectedDate)}</td>` : '';
+
+  $('allocationTable').innerHTML = `<table><thead><tr>${expectedHeader}<th>Drop Date</th><th>Store</th><th>Brand / Product</th><th>Board</th><th>Status</th></tr></thead><tbody>${rows.map(r => `
     <tr>
-      <td>${fmtDate(r.expectedDate)}</td>
+      ${expectedCell(r)}
       <td>${fmtDate(r.announcedDate)}</td>
       <td>${escapeHtml(r.store || '—')}</td>
       <td>${escapeHtml(r.brand || (r.status === 'expected' ? 'Expected Drop' : '—'))}</td>
