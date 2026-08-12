@@ -63,16 +63,18 @@ function fmtShortDate(date) {
 }
 
 function withinWindow(row, windowValue) {
-  if (windowValue === 'all') return true;
-  const trackerDate = atMidnight(row.expectedDate || row.announcedDate || row.confirmedDate);
-  if (!trackerDate) return false;
-
   const today = atMidnight(new Date());
+
   if (windowValue === 'next7') {
+    const trackerDate = atMidnight(row.expectedDate);
+    if (!trackerDate) return false;
     const end = addDays(today, 7);
     return trackerDate >= today && trackerDate <= end;
   }
 
+  if (windowValue === 'all') return true;
+  const trackerDate = atMidnight(row.announcedDate || row.confirmedDate || row.expectedDate);
+  if (!trackerDate) return false;
   const cutoff = new Date(today);
   cutoff.setDate(cutoff.getDate() - Number(windowValue));
   return trackerDate >= cutoff && trackerDate <= today;
@@ -278,28 +280,39 @@ function fillSelect(select, values, allLabel) {
 //   - Re-enable Expected
 // ======================================================
 function syncTrackerStatusOptions() {
-  const brand = $('brandFilter')?.value || '';
+  const brandSelect = $('brandFilter');
   const status = $('trackerStatusFilter');
-
+  const days = $('allocationDays')?.value || '30';
   if (!status) return;
 
-  const expectedOption = [...status.options].find(
-    o => String(o.value).toLowerCase() === 'expected'
-  );
+  const options = [...status.options];
+  const byValue = value => options.find(o => String(o.value).toLowerCase() === value);
+  const allOption = byValue('');
+  const expectedOption = byValue('expected');
+  const droppedOption = byValue('dropped');
+  const confirmedOption = byValue('confirmed');
 
-  if (!expectedOption) return;
+  const setAvailable = (option, available) => {
+    if (!option) return;
+    option.disabled = !available;
+    option.hidden = !available;
+  };
 
-  if (brand) {
-    expectedOption.disabled = true;
-
-    // Expected does not make sense when filtering by Brand/Product
-    // because Expected rows are store-level watchlist rows.
-    if (String(status.value).toLowerCase() === 'expected') {
-      status.value = '';
-    }
-  } else {
-    expectedOption.disabled = false;
+  if (days === 'next7') {
+    setAvailable(allOption, false);
+    setAvailable(expectedOption, true);
+    setAvailable(droppedOption, false);
+    setAvailable(confirmedOption, false);
+    status.value = 'expected';
+    if (brandSelect && brandSelect.value) brandSelect.value = '';
+    return;
   }
+
+  setAvailable(allOption, true);
+  setAvailable(expectedOption, false);
+  setAvailable(droppedOption, true);
+  setAvailable(confirmedOption, true);
+  if (String(status.value).toLowerCase() === 'expected') status.value = '';
 }
 
 function groupedShipments(rows) {
@@ -330,16 +343,6 @@ function openDropTrackerPreset(statusValue = 'expected', dateWindowValue = 'next
 }
 
 function handleTrackerDateWindowChange() {
-  const days = $('allocationDays')?.value;
-  const status = $('trackerStatusFilter');
-
-  // If a user arrives from Recent Drops, the Status filter is Dropped.
-  // Switching the Date Window to Next 7 days should show the Watch List, so
-  // automatically switch to Expected instead of returning a confusing zero-result view.
-  if (days === 'next7' && status && status.value === 'dropped') {
-    status.value = 'expected';
-  }
-
   syncTrackerStatusOptions();
   renderAllocation();
 }
@@ -351,7 +354,11 @@ function renderAllocation() {
   const days = $('allocationDays').value;
 
   const rows = dropTrackerRows
-    .filter(r => (!store || r.store === store) && (!brand || r.brand === brand) && (!status || r.status === status) && withinWindow(r, days))
+    .filter(r => {
+      if (days === 'next7' && r.status !== 'expected') return false;
+      if (days !== 'next7' && r.status === 'expected') return false;
+      return (!store || r.store === store) && (!brand || r.brand === brand) && (!status || r.status === status) && withinWindow(r, days);
+    })
     .sort((a, b) => {
       const aDate = a.expectedDate || a.announcedDate || a.confirmedDate;
       const bDate = b.expectedDate || b.announcedDate || b.confirmedDate;
@@ -362,7 +369,7 @@ function renderAllocation() {
   const expectedNext7 = dropTrackerRows.filter(r => r.status === 'expected' && withinWindow(r, 'next7')).length;
   const visibleBrands = uniqueSorted(rows.map(r => r.brand));
   const latestDropped = dropTrackerRows
-    .filter(r => r.status === 'dropped' && r.announcedDate)
+    .filter(r => (r.status === 'dropped' || r.status === 'confirmed') && r.announcedDate)
     .sort((a, b) => b.announcedDate - a.announcedDate)[0];
 
   $('allocationCount').textContent = `${rows.length} result${rows.length === 1 ? '' : 's'}`;
@@ -462,7 +469,7 @@ function renderShipments() {
 
 function renderHome() {
   const recentDropped = dropTrackerRows
-    .filter(r => r.status === 'dropped' && r.announcedDate)
+    .filter(r => (r.status === 'dropped' || r.status === 'confirmed') && r.announcedDate)
     .sort((a, b) => (b.announcedDate?.getTime() || 0) - (a.announcedDate?.getTime() || 0))
     .slice(0, 5);
 
