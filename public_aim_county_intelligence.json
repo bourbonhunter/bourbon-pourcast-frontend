@@ -16073,6 +16073,7 @@
           "detected": "2026-08-11 06:53:16",
           "store": "1793 West Williams St., Apex, NC 27502",
           "product": "FOUR ROSES SINGLE BARREL OESF",
+          "status": "confirmed",
           "source": "official_board_inventory"
         },
         {
@@ -16080,6 +16081,7 @@
           "detected": "2026-08-11 06:53:16",
           "store": "1793 West Williams St., Apex, NC 27502",
           "product": "HEAVEN HILL GRAIN TO GLASS BOURBON",
+          "status": "confirmed",
           "source": "official_board_inventory"
         },
         {
@@ -16087,13 +16089,15 @@
           "detected": "2026-08-11 06:53:16",
           "store": "1793 West Williams St., Apex, NC 27502",
           "product": "WILD TURKEY 101 8Y",
+          "status": "confirmed",
           "source": "official_board_inventory"
         },
         {
-          "effective_date": "2026-08-06",
+          "effective_date": "2026-07-31",
           "detected": "2026-08-08 06:49:40",
           "store": "4009 Davis Dr., Morrisville, NC 27560",
           "product": "1792 SWEET WHEAT BOURBON",
+          "status": "confirmed",
           "source": "official_board_inventory"
         },
         {
@@ -16101,20 +16105,23 @@
           "detected": "2026-08-08 06:49:40",
           "store": "4009 Davis Dr., Morrisville, NC 27560",
           "product": "FOUR ROSES SINGLE BARREL OESF",
+          "status": "dropped",
           "source": "official_board_inventory"
         },
         {
-          "effective_date": "2026-08-06",
+          "effective_date": "2026-07-31",
           "detected": "2026-08-08 06:49:40",
           "store": "4009 Davis Dr., Morrisville, NC 27560",
           "product": "WILD TURKEY 101 8Y",
+          "status": "confirmed",
           "source": "official_board_inventory"
         },
         {
-          "effective_date": "2026-08-05",
+          "effective_date": "2026-07-31",
           "detected": "2026-08-07 06:52:37",
           "store": "3615 SW Cary Parkway , Cary, NC 27513",
           "product": "1792 SWEET WHEAT BOURBON",
+          "status": "confirmed",
           "source": "official_board_inventory"
         },
         {
@@ -16122,6 +16129,7 @@
           "detected": "2026-08-05 07:22:44",
           "store": "6809 Davis Circle, Raleigh, NC 27612",
           "product": "BUFFALO TRACE BOURBON WHISKEY",
+          "status": "dropped",
           "source": "official_board_inventory"
         },
         {
@@ -16129,6 +16137,7 @@
           "detected": "2026-08-05 07:22:44",
           "store": "4009 Davis Dr., Morrisville, NC 27560",
           "product": "HEAVEN HILL GRAIN TO GLASS BOURBON",
+          "status": "dropped",
           "source": "official_board_inventory"
         },
         {
@@ -16136,6 +16145,7 @@
           "detected": "2026-08-05 07:22:44",
           "store": "6809 Davis Circle, Raleigh, NC 27612",
           "product": "HEAVEN HILL GRAIN TO GLASS BOURBON",
+          "status": "dropped",
           "source": "official_board_inventory"
         },
         {
@@ -16143,6 +16153,7 @@
           "detected": "2026-08-05 07:22:44",
           "store": "6809 Davis Circle, Raleigh, NC 27612",
           "product": "WILD TURKEY 101 8Y",
+          "status": "dropped",
           "source": "official_board_inventory"
         },
         {
@@ -16150,6 +16161,7 @@
           "detected": "2026-08-04 07:23:35",
           "store": "11360 Capital Blvd., Wake Forest, NC 27587",
           "product": "HEAVEN HILL GRAIN TO GLASS BOURBON",
+          "status": "dropped",
           "source": "official_board_inventory"
         }
       ]
