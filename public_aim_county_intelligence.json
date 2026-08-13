@@ -6206,12 +6206,12 @@
       "inventory_capability": false,
       "updated": "2026-08-13",
       "status_source": "public_override",
-      "allocation_mechanism": "Unknown",
-      "policy_status": "unknown",
+      "allocation_mechanism": "Lottery / Special Allocation Event",
+      "policy_status": "known",
       "official_signal_participation": "not_requested",
-      "public_notes": "Board allocation policy has not yet been confirmed with Bourbon Pourcast.",
+      "public_notes": "Greensboro ABC is conducting a rare bourbon lottery with the allocation event scheduled for Aug. 29.",
       "contact": {
-        "website": "http://www.greensboroabc.com"
+        "website": "https://www.greensboroabc.com/abc-lottery-entry/"
       },
       "stores": [
         {
