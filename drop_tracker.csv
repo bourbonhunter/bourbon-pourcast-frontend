@@ -1,8 +1,8 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-08-13,,,"1940 Cinema Dr., Fuquay Varina, NC 27526",,Wake County ABC,Expected,27,aim_expected_window
-2026-08-13,,,"4501 Vineyard Pine Ln., Rolesville, NC 27571",,Wake County ABC,Expected,42,aim_overdue_watch
-2026-08-18,,,"1222 New Bern Ave., Raleigh, NC 27401",,Wake County ABC,Expected,42,aim_overdue_watch
-2026-08-18,,,"7911 ACC Blvd., Raleigh, NC 27617",,Wake County ABC,Expected,27,aim_overdue_watch
+2026-08-14,,,"7200 Sandy Fork Rd., Raleigh, NC 27609",,Wake County ABC,Expected,22,aim_expected_window
+2026-08-18,,,"1222 New Bern Ave., Raleigh, NC 27401",,Wake County ABC,Expected,43,aim_overdue_watch
+2026-08-18,,,"7911 ACC Blvd., Raleigh, NC 27617",,Wake County ABC,Expected,28,aim_overdue_watch
+2026-08-20,,,"4501 Vineyard Pine Ln., Rolesville, NC 27571",,Wake County ABC,Expected,43,aim_overdue_watch
 ,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Dropped,,legacy_drop_history
@@ -1077,3 +1077,4 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-08-12,2026-08-07,2026-08-07,"1793 West Williams St., Apex, NC 27502",HEAVEN HILL GRAIN TO GLASS BOURBON,Wake County ABC,Confirmed,,canonical_allocation_event_confirmed
 2026-08-12,2026-08-07,2026-08-07,"1793 West Williams St., Apex, NC 27502",WILD TURKEY 101 8Y,Wake County ABC,Confirmed,,canonical_allocation_event_confirmed
 2026-08-07,2026-08-11,,"3320 Olympia Dr., Raleigh, NC 27603",JACK DANIEL'S SINGLE BARREL HERITAGE,Wake County ABC,Dropped,,canonical_allocation_event
+,2026-08-12,,"100 Village Walk Dr, Holly Springs, NC 27540",1792 SWEET WHEAT BOURBON,Wake County ABC,Dropped,,canonical_allocation_event
