@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-17T10:49:18.459222+00:00",
+  "generated_at": "2026-08-18T01:43:25.342436+00:00",
   "source": "AIM Product Master (sanitized public fields)",
-  "product_count": 65,
+  "product_count": 78,
   "products": [
     {
       "product_id": "1792_12y",
@@ -74,6 +74,21 @@
       ]
     },
     {
+      "product_id": "blade_bow_solera_reserve_12y",
+      "name": "Blade Bow Solera Reserve 12Y",
+      "official_ncabc_name": "Blade Bow Solera Reserve 12Y",
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "Blade Bow Solera Reserve 12Y",
+        "BLADE"
+      ]
+    },
+    {
       "product_id": "blanton",
       "name": "BLANTON",
       "official_ncabc_name": "Blanton's Single Barrel",
@@ -87,6 +102,20 @@
         "BLANTON",
         "BLANTON'S",
         "BLANTON'S SINGLE BARREL"
+      ]
+    },
+    {
+      "product_id": "blue_run_reflection_95p_bourbon",
+      "name": "Blue Run Reflection 95P Bourbon",
+      "official_ncabc_name": "Blue Run Reflection 95P Bourbon",
+      "supplier": null,
+      "proof": null,
+      "bottle_size": null,
+      "nc_abc_price": null,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "Blue Run Reflection 95P Bourbon"
       ]
     },
     {
@@ -207,6 +236,20 @@
       ]
     },
     {
+      "product_id": "elijah_craig_barrel_proof_rye",
+      "name": "ELIJAH CRAIG BARREL PROOF RYE",
+      "official_ncabc_name": "Elijah Craig Barrel Proof Rye",
+      "supplier": "Heaven Hill",
+      "proof": "108",
+      "bottle_size": ".75L",
+      "nc_abc_price": 74.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "ELIJAH CRAIG BARREL PROOF RYE"
+      ]
+    },
+    {
       "product_id": "elmer_t_lee_single_barrel",
       "name": "ELMER T LEE SINGLE BARREL",
       "official_ncabc_name": "Elmer T. Lee Single Barrel",
@@ -233,6 +276,20 @@
       "tracked_by_aim": true,
       "aliases": [
         "FOUR ROSES SINGLE BARREL OBSF"
+      ]
+    },
+    {
+      "product_id": "four_roses_single_barrel_obsk",
+      "name": "FOUR ROSES SINGLE BARREL OBSK",
+      "official_ncabc_name": "Four Roses Single Barrel OBSK",
+      "supplier": "E & J Gallo Winery",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 47.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "FOUR ROSES SINGLE BARREL OBSK"
       ]
     },
     {
@@ -390,6 +447,20 @@
       ]
     },
     {
+      "product_id": "high_west_prisoner_s_share",
+      "name": "HIGH WEST PRISONER'S SHARE",
+      "official_ncabc_name": "High West Prisoner's Share",
+      "supplier": "Constellation Brands",
+      "proof": "102",
+      "bottle_size": ".75L",
+      "nc_abc_price": 174.95,
+      "classification": "Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "HIGH WEST PRISONER'S SHARE"
+      ]
+    },
+    {
       "product_id": "jack_daniel_s_10y",
       "name": "JACK DANIEL'S 10Y",
       "official_ncabc_name": null,
@@ -418,6 +489,21 @@
       ]
     },
     {
+      "product_id": "john_j_bowman_single_barrel_select_btb",
+      "name": "John J Bowman Single Barrel Select (BTB)",
+      "official_ncabc_name": "John J Bowman Single Barrel Select (BTB)",
+      "supplier": "Sazerac/ 375 Park Ave Spirits",
+      "proof": "100",
+      "bottle_size": ".75L",
+      "nc_abc_price": 61.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "John J Bowman Single Barrel Select (BTB)",
+        "JOHN J BOWMAN SNGL BARR SEL (BTB)"
+      ]
+    },
+    {
       "product_id": "king_of_kentucky",
       "name": "KING OF KENTUCKY",
       "official_ncabc_name": "King of Kentucky Small Batch 1",
@@ -443,6 +529,20 @@
       "tracked_by_aim": true,
       "aliases": [
         "LITTLE BOOK CHAPTER 10"
+      ]
+    },
+    {
+      "product_id": "michter_s_10y_ks_rye_whiskey",
+      "name": "MICHTER'S 10Y KS RYE WHISKEY",
+      "official_ncabc_name": "Michter's 10Y KS Rye Whiskey",
+      "supplier": "Chatham Imports",
+      "proof": "92.8",
+      "bottle_size": ".75L",
+      "nc_abc_price": 209.95,
+      "classification": "Allocated / Limited Distribution",
+      "tracked_by_aim": true,
+      "aliases": [
+        "MICHTER'S 10Y KS RYE WHISKEY"
       ]
     },
     {
@@ -703,6 +803,34 @@
       ]
     },
     {
+      "product_id": "penelope_project_x_1964_cognac",
+      "name": "PENELOPE PROJECT X 1964 COGNAC",
+      "official_ncabc_name": "Penelope Project X 1964 Cognac (BTB)",
+      "supplier": "Luxco",
+      "proof": "111",
+      "bottle_size": ".75L",
+      "nc_abc_price": 69.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "PENELOPE PROJECT X 1964 COGNAC"
+      ]
+    },
+    {
+      "product_id": "penelope_project_x_cherrywood",
+      "name": "PENELOPE PROJECT X CHERRYWOOD",
+      "official_ncabc_name": "Penelope Project X Cherrywood (BTB)",
+      "supplier": "Luxco",
+      "proof": "112",
+      "bottle_size": ".75L",
+      "nc_abc_price": 69.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "PENELOPE PROJECT X CHERRYWOOD"
+      ]
+    },
+    {
       "product_id": "penelope_rio_cask_finish",
       "name": "PENELOPE RIO CASK FINISH",
       "official_ncabc_name": null,
@@ -772,6 +900,20 @@
       "aliases": [
         "RITTENHOUSE RYE AMERICA 250TH ED.",
         "RITTENHOUSE RYE AMERICA 250TH ED"
+      ]
+    },
+    {
+      "product_id": "russell_s_reserve_13y_bourbon",
+      "name": "RUSSELL'S RESERVE 13Y BOURBON",
+      "official_ncabc_name": "Russell's Reserve 13Y Bourbon",
+      "supplier": "Campari America",
+      "proof": "121.2",
+      "bottle_size": ".75L",
+      "nc_abc_price": 199.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "RUSSELL'S RESERVE 13Y BOURBON"
       ]
     },
     {
@@ -887,6 +1029,20 @@
       ]
     },
     {
+      "product_id": "wild_turkey_austin_nichols_archives_gold_foil_edition",
+      "name": "WILD TURKEY AUSTIN NICHOLS ARCHIVES GOLD FOIL EDITION",
+      "official_ncabc_name": "Wild Turkey Austin Nichols Archives Gold Foil Ed",
+      "supplier": "Campari America",
+      "proof": "120",
+      "bottle_size": ".75L",
+      "nc_abc_price": 399.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "WILD TURKEY AUSTIN NICHOLS ARCHIVES GOLD FOIL EDITION"
+      ]
+    },
+    {
       "product_id": "willett_family_estate_13y_btb",
       "name": "WILLETT FAMILY ESTATE 13Y (BTB)",
       "official_ncabc_name": "Willett Family Estate Bourbon 13Y (BTB)",
@@ -926,6 +1082,34 @@
       "tracked_by_aim": true,
       "aliases": [
         "WILLETT FAMILY ESTATE RYE 12Y (BTB)"
+      ]
+    },
+    {
+      "product_id": "woodford_reserve_double_oaked_so_ncabc_btb",
+      "name": "WOODFORD RESERVE DOUBLE OAKED SO (NCABC BTB)",
+      "official_ncabc_name": "Woodford Reserve Double Oaked SB (NCABC BTB)",
+      "supplier": "Brown - Forman",
+      "proof": "98",
+      "bottle_size": ".75L",
+      "nc_abc_price": 99.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "WOODFORD RESERVE DOUBLE OAKED SO (NCABC BTB)"
+      ]
+    },
+    {
+      "product_id": "wyoming_whiskey_great_smoky_mountains",
+      "name": "WYOMING WHISKEY GREAT SMOKY MOUNTAINS",
+      "official_ncabc_name": "Wyoming Whiskey Great Smoky Mountains",
+      "supplier": "Edrington Americas",
+      "proof": "99",
+      "bottle_size": ".75L",
+      "nc_abc_price": 79.95,
+      "classification": null,
+      "tracked_by_aim": true,
+      "aliases": [
+        "WYOMING WHISKEY GREAT SMOKY MOUNTAINS"
       ]
     }
   ]

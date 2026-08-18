@@ -1,5 +1,5 @@
 {
-  "generated_on": "2026-08-17",
+  "generated_on": "2026-08-18",
   "source": "Bourbon Pourcast AIM Board Intelligence",
   "boards": [
     {
@@ -9,16 +9,16 @@
       "activity_status": "yellow",
       "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-08-17"
+      "updated": "2026-08-18"
     },
     {
       "board_id": "wake",
       "board_name": "Wake County ABC Board",
       "county": "Wake",
-      "activity_status": "green",
-      "activity_label": "Allocation Activity Underway",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": true,
-      "updated": "2026-08-17"
+      "updated": "2026-08-18"
     }
   ]
 }
