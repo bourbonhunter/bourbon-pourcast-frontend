@@ -70,6 +70,58 @@
       .board-spotlight-banner.aim-launch::before { animation: none; }
     }
 
+    .board-spotlight-banner.agent-teaser {
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(56, 189, 248, .85);
+      background:
+        radial-gradient(circle at 15% 35%, rgba(56, 189, 248, .24), transparent 31%),
+        radial-gradient(circle at 86% 65%, rgba(231, 201, 103, .22), transparent 34%),
+        linear-gradient(120deg, #07151c 0%, #102b34 46%, #38270e 100%);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.05),
+        0 10px 30px rgba(0,0,0,.34),
+        0 0 24px rgba(56,189,248,.22);
+    }
+    .board-spotlight-banner.agent-teaser::before {
+      content: "";
+      position: absolute;
+      inset: -130% -45%;
+      background: linear-gradient(
+        110deg,
+        transparent 39%,
+        rgba(255,255,255,.06) 46%,
+        rgba(125,220,255,.28) 50%,
+        rgba(255,224,130,.16) 54%,
+        transparent 61%
+      );
+      transform: translateX(-45%) rotate(7deg);
+      animation: agentTeaserSweep 5.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .board-spotlight-banner.agent-teaser > * {
+      position: relative;
+      z-index: 1;
+    }
+    .board-spotlight-banner.agent-teaser strong {
+      color: #d8f4ff;
+      font-size: 1.12em;
+      letter-spacing: .02em;
+      text-shadow: 0 0 14px rgba(56,189,248,.35);
+    }
+    .board-spotlight-banner.agent-teaser small {
+      color: #fff0bd;
+      font-weight: 700;
+    }
+    @keyframes agentTeaserSweep {
+      0%, 62% { transform: translateX(-48%) rotate(7deg); opacity: 0; }
+      70% { opacity: 1; }
+      92%, 100% { transform: translateX(48%) rotate(7deg); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .board-spotlight-banner.agent-teaser::before { animation: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -79,7 +131,7 @@
       <div class="logo-fallback" aria-hidden="true">BP</div>
       <div class="brand-copy">
         <h1>Bourbon Pourcast</h1>
-        <p>Your premier source of data intelligence for tracking allocated and hard-to-find bourbon across all of North Carolina.</p>
+        <p>The original and premier source of data intelligence for tracking allocated and hard-to-find bourbon across all of North Carolina. Since June 2026, every bottle leaves a trail!</p>
       </div>
     </div>
     <nav class="top-nav" aria-label="Primary navigation">
@@ -341,12 +393,13 @@
         active: false
       },
       {
-        board: "Bourbon Pourcast",
-        status: "gray",
-        headline: "We'll be watching for their return!",
-        note: "North Carolina bourbon fans are ready when some old favorites come back around!",
-        button: "Follow Bourbon Pourcast",
-        url: "https://www.facebook.com/BourbonPourcast/",
+        board: "Bourbon Pourcast AI",
+        status: "green",
+        style: "agent-teaser",
+        headline: "Every bottle leaves a trail...",
+        note: "and our new AI Agent (soon to be revealed) is following that trail behind the scenes to find more of your favorite brands! See the latest County Status updates and stay tuned for much more!",
+        button: "See Latest County Status",
+        url: "county_allocation_status.html",
         active: true
       },
       {
@@ -400,9 +453,12 @@
       setTimeout(() => {
         banner.href = item.url;
         banner.classList.toggle("aim-launch", item.style === "aim-launch");
+        banner.classList.toggle("agent-teaser", item.style === "agent-teaser");
         kicker.textContent = item.style === "aim-launch"
           ? "Bourbon Pourcast Spotlight • AIM™ Is Live"
-          : `ABC Board Spotlight • ${spotlightStatusLabels[item.status] || "Featured Board"}`;
+          : item.style === "agent-teaser"
+            ? "Bourbon Pourcast Spotlight • Something New Is Following The Trail"
+            : `ABC Board Spotlight • ${spotlightStatusLabels[item.status] || "Featured Board"}`;
         title.textContent = item.board;
         text.textContent = `${item.headline} • ${item.note} • ${item.button}`;
         banner.classList.remove("is-changing");
@@ -432,7 +488,7 @@
 
         updateBoardSpotlight(spotlightIndex);
         const current = activeSpotlights[spotlightIndex % activeSpotlights.length];
-        const displayTime = current.style === "aim-launch" ? 9000 : 7000;
+        const displayTime = current.style === "aim-launch" ? 9000 : current.style === "agent-teaser" ? 11000 : 7000;
 
         window.setTimeout(() => {
           spotlightIndex += 1;
