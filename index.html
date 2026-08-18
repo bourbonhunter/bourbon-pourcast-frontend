@@ -70,73 +70,6 @@
       .board-spotlight-banner.aim-launch::before { animation: none; }
     }
 
-
-    /*
-      OPTIONAL SPOTLIGHT IMAGE SUPPORT
-      --------------------------------
-      Any boardSpotlights item may include:
-          image: "your-image-file.jpg"
-          imageAlt: "Accessible description of the image"
-
-      If "image" is omitted (or left blank), the banner behaves exactly as it did before.
-
-      For future spotlight images:
-        1. Copy the image file into the SAME frontend folder as index.html.
-        2. Add image: "filename.jpg" to that spotlight object below.
-        3. Add a short imageAlt description.
-        4. Use active:false when the spotlight should stop rotating.
-
-      The image is intentionally a compact thumbnail so an image-based spotlight
-      stays informative without turning the banner into a giant advertisement.
-    */
-    .board-spotlight-image {
-      display: none;
-      width: 128px;
-      height: 74px;
-      object-fit: cover;
-      object-position: center;
-      flex: 0 0 128px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,.24);
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,.22);
-    }
-
-    .board-spotlight-banner.has-image {
-      display: grid;
-      grid-template-columns: 128px minmax(0, 1fr);
-      grid-template-areas:
-        "image kicker"
-        "image title"
-        "image text";
-      column-gap: 16px;
-      align-items: center;
-      text-align: left;
-    }
-
-    .board-spotlight-banner.has-image .board-spotlight-image {
-      display: block;
-      grid-area: image;
-    }
-
-    .board-spotlight-banner.has-image #boardSpotlightKicker { grid-area: kicker; }
-    .board-spotlight-banner.has-image #boardSpotlightTitle  { grid-area: title; }
-    .board-spotlight-banner.has-image #boardSpotlightText   { grid-area: text; }
-
-    @media (max-width: 700px) {
-      .board-spotlight-banner.has-image {
-        grid-template-columns: 92px minmax(0, 1fr);
-        grid-template-areas:
-          "image kicker"
-          "image title"
-          "text text";
-      }
-      .board-spotlight-banner.has-image .board-spotlight-image {
-        width: 92px;
-        height: 58px;
-      }
-    }
-
   </style>
 </head>
 <body>
@@ -160,8 +93,6 @@
 
   <main>
     <a class="sponsor-banner sponsor-top board-spotlight-banner" id="boardSpotlightBanner" href="https://www.abcgastonia.com/" target="_blank" rel="noopener noreferrer">
-      <!-- Optional rotating spotlight image. JavaScript shows/hides this automatically per spotlight item. -->
-      <img class="board-spotlight-image" id="boardSpotlightImage" src="" alt="" />
       <span id="boardSpotlightKicker">ABC Board Spotlight</span>
       <strong id="boardSpotlightTitle">Gastonia ABC</strong>
       <small id="boardSpotlightText">New store coming soon • Visit Gastonia ABC</small>
@@ -196,32 +127,13 @@
             <div>
               <p class="eyebrow">NC Allocation Intelligence</p>
               <h3>County Allocation Status</h3>
-              <p class="mini-meta" id="homeShipmentSince">Official NC ABC Shipments: June 1–29, 2026</p>
-              <p class="mini-meta" id="homeShipmentStats">172 ABC Boards • 21 tracked products • 7,884 cases shipped</p>
+              <p class="mini-meta" id="homeShipmentSince">Loading latest official NC ABC shipment report…</p>
+              <p class="mini-meta" id="homeShipmentStats"></p>
             </div>
             <a class="small-link" href="county_allocation_status.html">Open County Allocations</a>
           </div>
           <div id="homeShipmentPreview" class="compact-list">
-            <div class="compact-item ranked-item">
-              <div><strong>1. Buffalo Trace Bourbon Whiskey</strong><small>170 boards receiving</small></div>
-              <span>3,767 cases</span>
-            </div>
-            <div class="compact-item ranked-item">
-              <div><strong>2. Eagle Rare</strong><small>169 boards receiving</small></div>
-              <span>944 cases</span>
-            </div>
-            <div class="compact-item ranked-item">
-              <div><strong>3. 1792 12Y</strong><small>163 boards receiving</small></div>
-              <span>391 cases</span>
-            </div>
-            <div class="compact-item ranked-item">
-              <div><strong>4. E.H. Taylor</strong><small>171 boards receiving</small></div>
-              <span>351 cases</span>
-            </div>
-            <div class="compact-item ranked-item">
-              <div><strong>5. Michter's Barrel Strength Sour Mash Whiskey</strong><small>151 boards receiving</small></div>
-              <span>335 cases</span>
-            </div>
+            <div class="empty">Loading latest shipment intelligence…</div>
           </div>
         </article>
 
@@ -395,15 +307,7 @@
         "gray"   = General Board Spotlight / No Current Allocation Signal
 
       To feature a board, add a new object to this list.
-      To stop featuring a board, set active:false. This is safer than deleting it
-      because the entry remains here as a reusable example.
-
-      OPTIONAL IMAGE:
-        image: "filename.jpg",
-        imageAlt: "Short accessible description"
-
-      Put the image file in the same frontend folder as index.html.
-      If image/imageAlt are omitted, the spotlight displays exactly as before.
+      To stop featuring a board, remove it or set active:false.
 
       Example:
       {
@@ -417,33 +321,6 @@
       }
     */
     const boardSpotlights = [
-      /*
-        GREENSBORO ABC — AUGUST 2026 RARE BOURBON LOTTERY
-        -------------------------------------------------
-        EASY OFF SWITCH:
-          Change active:true to active:false after the lottery.
-          You do NOT need to delete this block.
-
-        IMAGE EXAMPLE FOR FUTURE SPOTLIGHTS:
-          - "image" is simply the filename placed beside index.html.
-          - "imageAlt" is the short description used by screen readers.
-          - Remove both image lines if a future spotlight should be text-only.
-
-        This is intentionally kept as a complete example so future image-based
-        spotlight banners can be created by copying this block and changing
-        board/headline/note/button/url/image/imageAlt.
-      */
-      {
-        board: "Greensboro ABC",
-        status: "yellow",
-        headline: "Rare Bourbon Lottery Is Open!",
-        note: "Greensboro ABC's August lottery will select 800 winners for its Aug. 29 allocated bourbon event.",
-        button: "Enter the Greensboro Lottery",
-        url: "https://www.greensboroabc.com/abc-lottery-entry/",
-        image: "gboro_lottery.jpg",
-        imageAlt: "Greensboro ABC Rare Bourbon Lottery graphic",
-        active: true
-      },
       {
         board: "Bourbon Pourcast AIM™",
         status: "green",
@@ -517,31 +394,12 @@
       const kicker = document.getElementById("boardSpotlightKicker");
       const title = document.getElementById("boardSpotlightTitle");
       const text = document.getElementById("boardSpotlightText");
-      const image = document.getElementById("boardSpotlightImage");
-      if (!banner || !kicker || !title || !text || !image) return;
+      if (!banner || !kicker || !title || !text) return;
 
       banner.classList.add("is-changing");
       setTimeout(() => {
         banner.href = item.url;
         banner.classList.toggle("aim-launch", item.style === "aim-launch");
-
-        /*
-          OPTIONAL IMAGE HANDLING
-          -----------------------
-          A spotlight with item.image gets the thumbnail layout above.
-          A spotlight without item.image automatically returns to the original
-          text-only banner, so existing spotlight entries require no changes.
-        */
-        const hasImage = Boolean(item.image);
-        banner.classList.toggle("has-image", hasImage);
-        if (hasImage) {
-          image.src = item.image;
-          image.alt = item.imageAlt || `${item.board} spotlight image`;
-        } else {
-          image.removeAttribute("src");
-          image.alt = "";
-        }
-
         kicker.textContent = item.style === "aim-launch"
           ? "Bourbon Pourcast Spotlight • AIM™ Is Live"
           : `ABC Board Spotlight • ${spotlightStatusLabels[item.status] || "Featured Board"}`;
@@ -588,5 +446,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="bp-test-app.js?v=3.21"></script>
+  <script src="homepage-shipment-summary.js?v=1.0"></script>
 </body>
 </html>
