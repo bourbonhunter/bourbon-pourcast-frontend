@@ -1,0 +1,55 @@
+{
+  "generated_on": "2026-08-18",
+  "source": "Official NC ABC monthly shipment report",
+  "report_id": "ncabc_2026-07_july_2026_shipping",
+  "source_file": "July 2026 Shipping.xlsx",
+  "shipment_start": "2026-07-01",
+  "shipment_end": "2026-07-28",
+  "board_count": 172,
+  "product_count": 19,
+  "total_cases": 7475,
+  "top_products": [
+    {
+      "product": "BUFFALO TRACE BOURBON WHISKEY",
+      "product_nums": [
+        "18366",
+        "20611"
+      ],
+      "cases": 3747,
+      "boards_receiving": 172
+    },
+    {
+      "product": "FOUR ROSES SINGLE BARREL OESF",
+      "product_nums": [
+        "17478"
+      ],
+      "cases": 708,
+      "boards_receiving": 145
+    },
+    {
+      "product": "Four Roses Single Barrel OBSK .75L",
+      "product_nums": [
+        "17477"
+      ],
+      "cases": 703,
+      "boards_receiving": 147
+    },
+    {
+      "product": "1792 SWEET WHEAT BOURBON",
+      "product_nums": [
+        "20529"
+      ],
+      "cases": 489,
+      "boards_receiving": 161
+    },
+    {
+      "product": "WILD TURKEY 101 8Y",
+      "product_nums": [
+        "17969"
+      ],
+      "cases": 410,
+      "boards_receiving": 153
+    }
+  ],
+  "disclaimer": "Shipment evidence indicates cases sent to an ABC Board during the report window; it does not confirm current store-level shelf availability."
+}
