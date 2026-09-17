@@ -1,5 +1,5 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-09-16,,,"7911 ACC Blvd., Raleigh, NC 27617",,Wake County ABC,Expected,22,aim_expected_window
+2026-09-18,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,23,aim_expected_window
 ,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Dropped,,legacy_drop_history
@@ -1162,3 +1162,5 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-08-06,2026-09-11,,"209 S Salisbury St, Raleigh, NC 27601",PENELOPE RIO CASK FINISH,Wake County ABC,Dropped,,canonical_allocation_event
 2026-08-31,2026-09-14,,"200 New Rand Road, Garner, NC 27529",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Dropped,,canonical_allocation_event
 2026-08-27,2026-09-14,,"4215 The Circle at North Hills Rd, Raleigh, NC 27609",1792 SWEET WHEAT BOURBON,Wake County ABC,Dropped,,canonical_allocation_event
+2026-09-08,2026-09-15,,"1222 New Bern Ave., Raleigh, NC 27401",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Dropped,,canonical_allocation_event
+2026-09-01,2026-09-15,,"7911 ACC Blvd., Raleigh, NC 27617",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Dropped,,canonical_allocation_event
