@@ -1,5 +1,5 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-09-18,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,23,aim_expected_window
+2026-09-18,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,24,aim_expected_window
 ,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Dropped,,legacy_drop_history
@@ -1164,3 +1164,7 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-08-27,2026-09-14,,"4215 The Circle at North Hills Rd, Raleigh, NC 27609",1792 SWEET WHEAT BOURBON,Wake County ABC,Dropped,,canonical_allocation_event
 2026-09-08,2026-09-15,,"1222 New Bern Ave., Raleigh, NC 27401",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Dropped,,canonical_allocation_event
 2026-09-01,2026-09-15,,"7911 ACC Blvd., Raleigh, NC 27617",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Dropped,,canonical_allocation_event
+,2026-09-16,,"100 Village Walk Dr, Holly Springs, NC 27540",1792 SWEET WHEAT BOURBON,Wake County ABC,Dropped,,canonical_allocation_event
+2026-08-26,2026-09-16,,"2109-106 Avent Ferry Rd., Raleigh, NC 27606",1792 12Y,Wake County ABC,Dropped,,canonical_allocation_event
+,2026-09-16,,"3615 SW Cary Parkway , Cary, NC 27513",BLADE BOW SOLERA RESERVE 12Y,Wake County ABC,Dropped,,canonical_allocation_event
+,2026-09-16,,"3615 SW Cary Parkway , Cary, NC 27513",JACK DANIEL'S SINGLE BARREL HERITAGE,Wake County ABC,Dropped,,canonical_allocation_event
