@@ -1,9 +1,9 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-10-01,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,36,aim_expected_window
-2026-10-01,,,"7336 Creedmoor Rd., Raleigh, NC 27613",,Wake County ABC,Expected,36,aim_overdue_watch
-2026-10-02,,,"1415 E. Williams St., Apex, NC 27617",,Wake County ABC,Expected,36,aim_overdue_watch
-2026-10-02,,,"6494 Tryon Rd., Cary, NC 27511",,Wake County ABC,Expected,36,aim_overdue_watch
-2026-10-02,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,33,aim_expected_window
+2026-10-01,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,37,aim_expected_window
+2026-10-01,,,"7336 Creedmoor Rd., Raleigh, NC 27613",,Wake County ABC,Expected,37,aim_overdue_watch
+2026-10-02,,,"1415 E. Williams St., Apex, NC 27617",,Wake County ABC,Expected,37,aim_overdue_watch
+2026-10-02,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,34,aim_expected_window
+2026-10-06,,,"1601-61 Cross Link Rd., Raleigh, NC 27610",,Wake County ABC,Expected,37,aim_overdue_watch
 ,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Dropped,,legacy_drop_history
@@ -1196,3 +1196,6 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-08-27,2026-09-23,,"6809 Davis Circle, Raleigh, NC 27612",WILD TURKEY 101 8Y,Wake County ABC,Dropped,,canonical_allocation_event
 ,2026-09-24,,"2645 Appliance Ct., Raleigh, NC 27604",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
 2026-08-25,2026-09-25,,"1505 Banyon Pl., Wendell, NC 27571",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
+2026-08-31,2026-09-28,,"200 New Rand Road, Garner, NC 27529",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
+2026-10-02,2026-09-29,,"6494 Tryon Rd., Cary, NC 27511",WILD TURKEY 101 8Y,Wake County ABC,Dropped,,canonical_allocation_event
+2026-09-16,2026-09-29,,"7911 ACC Blvd., Raleigh, NC 27617",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
