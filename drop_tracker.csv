@@ -1,8 +1,8 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-10-08,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,43,aim_overdue_watch
-2026-10-08,,,"7200 Sandy Fork Rd., Raleigh, NC 27609",,Wake County ABC,Expected,27,aim_overdue_watch
-2026-10-08,,,"7336 Creedmoor Rd., Raleigh, NC 27613",,Wake County ABC,Expected,43,aim_overdue_watch
-2026-10-09,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,40,aim_overdue_watch
+2026-10-08,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,44,aim_overdue_watch
+2026-10-08,,,"7336 Creedmoor Rd., Raleigh, NC 27613",,Wake County ABC,Expected,44,aim_overdue_watch
+2026-10-09,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,41,aim_overdue_watch
+2026-10-13,,,"11360 Capital Blvd., Wake Forest, NC 27587",,Wake County ABC,Expected,28,aim_overdue_watch
 ,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Dropped,,legacy_drop_history
@@ -1207,3 +1207,5 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-10-02,2026-10-02,,"1415 E. Williams St., Apex, NC 27617",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
 2026-10-02,2026-10-02,,"6494 Tryon Rd., Cary, NC 27511",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
 2026-09-04,2026-10-02,,"665 Cary Towne Blvd., Cary, NC 27511",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
+2026-10-06,2026-10-06,,"1601-61 Cross Link Rd., Raleigh, NC 27610",BUFFALO TRACE BOURBON WHISKEY,Wake County ABC,Dropped,,canonical_allocation_event
+2026-08-28,2026-10-06,,"7200 Sandy Fork Rd., Raleigh, NC 27609",JACK DANIEL'S SINGLE BARREL HERITAGE,Wake County ABC,Dropped,,canonical_allocation_event
