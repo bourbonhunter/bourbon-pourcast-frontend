@@ -1,8 +1,8 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-10-09,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,42,aim_overdue_watch
-2026-10-13,,,"11360 Capital Blvd., Wake Forest, NC 27587",,Wake County ABC,Expected,29,aim_overdue_watch
-2026-10-15,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,45,aim_overdue_watch
-2026-10-15,,,"7336 Creedmoor Rd., Raleigh, NC 27613",,Wake County ABC,Expected,45,aim_overdue_watch
+2026-10-13,,,"11360 Capital Blvd., Wake Forest, NC 27587",,Wake County ABC,Expected,30,aim_overdue_watch
+2026-10-15,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,46,aim_overdue_watch
+2026-10-15,,,"7336 Creedmoor Rd., Raleigh, NC 27613",,Wake County ABC,Expected,46,aim_overdue_watch
+2026-10-16,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,43,aim_overdue_watch
 ,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Dropped,,legacy_drop_history
