@@ -1,13 +1,13 @@
 {
-  "generated_on": "2026-10-12",
+  "generated_on": "2026-10-13",
   "source": "Official NC ABC monthly shipment report",
-  "report_id": "ncabc_2026-07_july_2026_shipping",
-  "source_file": "July 2026 Shipping.xlsx",
-  "shipment_start": "2026-07-01",
-  "shipment_end": "2026-07-28",
-  "board_count": 172,
-  "product_count": 19,
-  "total_cases": 7475,
+  "report_id": "ncabc_2026-09_september_2026_shipping",
+  "source_file": "September 2026 Shipping.xlsx",
+  "shipment_start": "2026-09-01",
+  "shipment_end": "2026-09-30",
+  "board_count": 170,
+  "product_count": 25,
+  "total_cases": 7063,
   "top_products": [
     {
       "product": "BUFFALO TRACE BOURBON WHISKEY",
@@ -15,40 +15,40 @@
         "18366",
         "20611"
       ],
-      "cases": 3747,
-      "boards_receiving": 172
+      "cases": 3766,
+      "boards_receiving": 169
     },
     {
-      "product": "FOUR ROSES SINGLE BARREL OESF",
+      "product": "BOMBERGER'S",
       "product_nums": [
-        "17478"
+        "20371"
       ],
-      "cases": 708,
-      "boards_receiving": 145
+      "cases": 340,
+      "boards_receiving": 155
     },
     {
-      "product": "Four Roses Single Barrel OBSK .75L",
+      "product": "ALL* Penelope Cigar Sessions Chapter 02 .75L",
       "product_nums": [
-        "17477"
+        "17164"
       ],
-      "cases": 703,
-      "boards_receiving": 147
+      "cases": 331,
+      "boards_receiving": 128
     },
     {
-      "product": "1792 SWEET WHEAT BOURBON",
+      "product": "ALL* Penelope Estate Collection Single Barrel .75L_2",
       "product_nums": [
-        "20529"
+        "17167"
       ],
-      "cases": 489,
-      "boards_receiving": 161
+      "cases": 323,
+      "boards_receiving": 123
     },
     {
-      "product": "WILD TURKEY 101 8Y",
+      "product": "Penelope Estate Collection Private Select .75L_2",
       "product_nums": [
-        "17969"
+        "17166"
       ],
-      "cases": 410,
-      "boards_receiving": 153
+      "cases": 322,
+      "boards_receiving": 126
     }
   ],
   "disclaimer": "Shipment evidence indicates cases sent to an ABC Board during the report window; it does not confirm current store-level shelf availability."
