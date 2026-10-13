@@ -1,5 +1,5 @@
 {
-  "generated_on": "2026-10-12",
+  "generated_on": "2026-10-13",
   "source": "Bourbon Pourcast AIM Board Intelligence",
   "boards": [
     {
@@ -9,16 +9,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "albemarle",
       "board_name": "Albemarle ABC Board",
       "county": "Stanly",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "alexander_county",
@@ -27,16 +27,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "andrews",
       "board_name": "Andrews ABC Board",
       "county": "Cherokee",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "angier",
@@ -45,16 +45,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "asheboro",
       "board_name": "Asheboro ABC Board",
       "county": "Randolph",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "asheville",
@@ -63,16 +63,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "beaufort_county",
       "board_name": "Beaufort County ABC Board",
       "county": "Beaufort",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "belmont",
@@ -81,16 +81,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "belville",
       "board_name": "Belville ABC Board",
       "county": "Brunswick",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "bertie_county",
@@ -99,16 +99,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "bessemer_city",
       "board_name": "Bessemer City ABC Board",
       "county": "Gaston",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "black_mountain",
@@ -117,16 +117,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "blowing_rock",
       "board_name": "Blowing Rock ABC Board",
       "county": "Watauga",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "blue_ridge",
@@ -135,34 +135,34 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "boiling_spring_lakes",
       "board_name": "Boiling Spring Lakes ABC Board",
       "county": "Brunswick",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "boone",
       "board_name": "Boone ABC Board",
       "county": "Watauga",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "brevard",
       "board_name": "Brevard ABC Board",
       "county": "Transylvania",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "brunswick",
@@ -171,7 +171,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "brunswick_county",
@@ -180,16 +180,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "bryson_city",
       "board_name": "Bryson City ABC Board",
       "county": "Swain",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "bunn",
@@ -198,25 +198,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "burnsville",
       "board_name": "Burnsville ABC Board",
       "county": "Yancey",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "calabash",
       "board_name": "Calabash ABC Board",
       "county": "Brunswick",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "camden_county",
@@ -225,16 +225,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "canton",
       "board_name": "Canton ABC Board",
       "county": "Haywood",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "carteret_county",
@@ -243,16 +243,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "caswell_county",
       "board_name": "Caswell County ABC Board",
       "county": "Caswell",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "catawba_county",
@@ -261,7 +261,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "catawba_tribal",
@@ -270,7 +270,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "chatham",
@@ -279,25 +279,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "cherokee_tribal",
       "board_name": "Cherokee Tribal ABC Commission",
       "county": "Swain",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "cherryville",
       "board_name": "Cherryville ABC Board",
       "county": "Gaston",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "chowan_county",
@@ -306,43 +306,43 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "clay_county",
       "board_name": "Clay County ABC Board",
       "county": "Clay",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "clinton",
       "board_name": "Clinton ABC Board",
       "county": "Sampson",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "columbus",
       "board_name": "Columbus ABC Board",
       "county": "Polk",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "concord",
       "board_name": "Concord ABC Board",
       "county": "Cabarrus",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "cramerton",
@@ -351,7 +351,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "craven_county",
@@ -360,34 +360,34 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "cumberland_county",
       "board_name": "Cumberland County ABC Board",
       "county": "Cumberland",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "currituck_county",
       "board_name": "Currituck County ABC Board",
       "county": "Currituck",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "dare_county",
       "board_name": "Dare County ABC Board",
       "county": "Dare",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "davidson_county",
@@ -396,7 +396,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "dobson",
@@ -405,7 +405,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "dunn",
@@ -414,7 +414,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "durham",
@@ -423,7 +423,7 @@
       "activity_status": "yellow",
       "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "eden",
@@ -432,7 +432,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "edgecombe_county",
@@ -441,7 +441,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "elizabethtown",
@@ -450,7 +450,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "fairmont",
@@ -459,7 +459,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "fletcher",
@@ -468,25 +468,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "forest_city",
       "board_name": "Forest City ABC Board",
       "county": "Rutherford",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "franklin",
       "board_name": "Franklin ABC Board",
       "county": "Macon",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "franklinton",
@@ -495,7 +495,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "gastonia",
@@ -504,7 +504,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "gates_county",
@@ -513,7 +513,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "gibsonville",
@@ -522,25 +522,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "granite_falls",
       "board_name": "Granite Falls ABC Board",
       "county": "Caldwell",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "granville_county",
       "board_name": "Granville County ABC Board",
       "county": "Granville",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "greene_county",
@@ -549,7 +549,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "greensboro",
@@ -558,7 +558,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "halifax_county",
@@ -567,25 +567,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "hamlet",
       "board_name": "Hamlet ABC Board",
       "county": "Richmond",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "hertford",
       "board_name": "Hertford ABC Board",
       "county": "Perquimans",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "hertford_county",
@@ -594,16 +594,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "high_country",
       "board_name": "High Country ABC Board",
       "county": "Avery",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "high_point",
@@ -612,34 +612,34 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "highlands",
       "board_name": "Highlands ABC Board",
       "county": "Macon",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "hoke_county",
       "board_name": "Hoke County ABC Board",
       "county": "Hoke",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "hyde_county",
       "board_name": "Hyde County ABC Board",
       "county": "Hyde",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "indian_trail",
@@ -648,16 +648,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "jackson_county",
       "board_name": "Jackson County ABC Board",
       "county": "Jackson",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "johnston",
@@ -666,7 +666,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "jones_county",
@@ -675,34 +675,34 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "kenansville",
       "board_name": "Kenansville ABC Board",
       "county": "Duplin",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "kings_mountain",
       "board_name": "Kings Mountain ABC Board",
       "county": "Cleveland",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "lake_lure",
       "board_name": "Lake Lure ABC Board",
       "county": "Rutherford",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "lake_waccamaw",
@@ -711,43 +711,43 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "lenoir_city",
       "board_name": "Lenoir City ABC Board",
       "county": "Caldwell",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "lenoir_county",
       "board_name": "Lenoir County ABC Board",
       "county": "Lenoir",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "lexington",
       "board_name": "Lexington ABC Board",
       "county": "Davidson",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "liberty",
       "board_name": "Liberty ABC Board",
       "county": "Randolph",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "lillington",
@@ -756,7 +756,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "lincoln_county",
@@ -765,16 +765,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "lincolnton",
       "board_name": "Lincolnton ABC Board",
       "county": "Lincoln",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "locust",
@@ -783,7 +783,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "louisburg",
@@ -792,7 +792,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "lumberton",
@@ -801,25 +801,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "madison",
       "board_name": "Madison ABC Board",
       "county": "Rockingham",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "maggie_valley",
       "board_name": "Maggie Valley ABC Board",
       "county": "Haywood",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "marion",
@@ -828,16 +828,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "marshville",
       "board_name": "Marshville ABC Board",
       "county": "Union",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "martin_county",
@@ -846,7 +846,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "maxton",
@@ -855,7 +855,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "mecklenburg_county",
@@ -864,7 +864,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "mocksville_cooleemee",
@@ -873,7 +873,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "monroe",
@@ -882,16 +882,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "montgomery",
       "board_name": "Montgomery ABC Board",
       "county": "Montgomery",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "moore_county",
@@ -900,7 +900,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "mooresville",
@@ -909,16 +909,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "morganton",
       "board_name": "Morganton ABC Board",
       "county": "Burke",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "mount_airy",
@@ -927,7 +927,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "mount_holly",
@@ -936,25 +936,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "mount_pleasant",
       "board_name": "Mount Pleasant ABC Board",
       "county": "Cabarrus",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "murphy",
       "board_name": "Murphy ABC Board",
       "county": "Cherokee",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "nash_county",
@@ -963,25 +963,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "new_hanover_county",
       "board_name": "New Hanover County ABC Board",
       "county": "New Hanover",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "newton_grove",
       "board_name": "Newton Grove ABC Board",
       "county": "Sampson",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "north_wilkesboro",
@@ -990,7 +990,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "northampton_county",
@@ -999,34 +999,34 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "norwood",
       "board_name": "Norwood ABC Board",
       "county": "Stanly",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "oak_island",
       "board_name": "Oak Island ABC Board",
       "county": "Brunswick",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "ocean_isle_beach",
       "board_name": "Ocean Isle Beach ABC Board",
       "county": "Brunswick",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "onslow_county",
@@ -1035,7 +1035,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "orange",
@@ -1044,7 +1044,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "pamlico_county",
@@ -1053,7 +1053,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "pasquotank_county",
@@ -1062,7 +1062,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "pembroke",
@@ -1071,7 +1071,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "pender_county",
@@ -1080,7 +1080,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "person_county",
@@ -1089,16 +1089,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "pilot_mountain",
       "board_name": "Pilot Mountain ABC Board",
       "county": "Surry",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "pitt_county",
@@ -1107,61 +1107,61 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "pittsboro",
       "board_name": "Pittsboro ABC Board",
       "county": "Chatham",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "ramseur",
       "board_name": "Ramseur ABC Board",
       "county": "Randolph",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "randleman",
       "board_name": "Randleman ABC Board",
       "county": "Randolph",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "red_springs",
       "board_name": "Red Springs ABC Board",
       "county": "Robeson",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "reidsville",
       "board_name": "Reidsville ABC Board",
       "county": "Rockingham",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "rockingham",
       "board_name": "Rockingham ABC Board",
       "county": "Richmond",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "roseboro",
@@ -1170,7 +1170,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "rowan_kannapolis",
@@ -1179,25 +1179,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "rowland",
       "board_name": "Rowland ABC Board",
       "county": "Robeson",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "rutherfordton",
       "board_name": "Rutherfordton ABC Board",
       "county": "Rutherford",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "saint_pauls",
@@ -1206,7 +1206,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "sanford",
@@ -1215,16 +1215,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "scotland_county",
       "board_name": "Scotland County ABC Board",
       "county": "Scotland",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "shallotte",
@@ -1233,25 +1233,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "shelby",
       "board_name": "Shelby ABC Board",
       "county": "Cleveland",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "siler_city",
       "board_name": "Siler City ABC Board",
       "county": "Chatham",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "southport",
@@ -1260,7 +1260,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "sparta",
@@ -1269,7 +1269,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "spruce_pine",
@@ -1278,7 +1278,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "statesville",
@@ -1287,25 +1287,25 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "stokes_municipal",
       "board_name": "Stokes Municipal ABC Board",
       "county": "Stokes",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "sunset_beach",
       "board_name": "Sunset Beach ABC Board",
       "county": "Brunswick",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "tabor_city",
@@ -1314,52 +1314,52 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "taylorsville",
       "board_name": "Taylorsville ABC Board",
       "county": "Alexander",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "thomasville",
       "board_name": "Thomasville ABC Board",
       "county": "Davidson",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "triad_municipal",
       "board_name": "Triad Municipal ABC Board",
       "county": "Forsyth",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "troutman",
       "board_name": "Troutman ABC Board",
       "county": "Iredell",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "tryon",
       "board_name": "Tryon ABC Board",
       "county": "Polk",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "tyrrell_county",
@@ -1368,7 +1368,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "valdese",
@@ -1377,16 +1377,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "vance_county",
       "board_name": "Vance County ABC Board",
       "county": "Vance",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "wadesboro",
@@ -1395,7 +1395,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "wake",
@@ -1404,16 +1404,16 @@
       "activity_status": "green",
       "activity_label": "Allocation Activity Underway",
       "inventory_capability": true,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "wallace",
       "board_name": "Wallace ABC Board",
       "county": "Duplin",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "warren_county",
@@ -1422,16 +1422,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "warsaw",
       "board_name": "Warsaw ABC Board",
       "county": "Duplin",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "washington_county",
@@ -1440,16 +1440,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "waxhaw",
       "board_name": "Waxhaw ABC Board",
       "county": "Union",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "wayne",
@@ -1458,16 +1458,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "waynesville",
       "board_name": "Waynesville ABC Board",
       "county": "Haywood",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "weaverville",
@@ -1476,7 +1476,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "west_columbus",
@@ -1485,16 +1485,16 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "west_jefferson",
       "board_name": "West Jefferson ABC Board",
       "county": "Ashe",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "whiteville",
@@ -1503,7 +1503,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "wilkesboro",
@@ -1512,43 +1512,43 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "wilson_county",
       "board_name": "Wilson County ABC Board",
       "county": "Wilson",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "wingate",
       "board_name": "Wingate ABC Board",
       "county": "Union",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "woodfin",
       "board_name": "Woodfin ABC Board",
       "county": "Buncombe",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "yadkin_valley",
       "board_name": "Yadkin Valley ABC Board",
       "county": "Surry",
-      "activity_status": "gray",
-      "activity_label": "No Current Signal",
+      "activity_status": "yellow",
+      "activity_label": "Allocation Activity Expected Soon",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     },
     {
       "board_id": "youngsville",
@@ -1557,7 +1557,7 @@
       "activity_status": "gray",
       "activity_label": "No Current Signal",
       "inventory_capability": false,
-      "updated": "2026-10-12"
+      "updated": "2026-10-13"
     }
   ]
 }
