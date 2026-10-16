@@ -1,15 +1,18 @@
-MYSTIC FEATURED DISTILLERY — FRONTEND PATCH
+MYSTIC PLAUSIBLE ANALYTICS PATCH
 
-Upload the three files preserving paths to the PUBLIC frontend repo:
- index.html
- images/mystic-feature-bottles.webp
- images/mystic-feature-barrel.webp
+Based on bourbon-pourcast-frontend-main (25).zip.
 
-Replaces index.html from frontend ZIP (24). No backend changes.
-Mystic occupies every other existing spotlight slot, alternating the two supplied images.
-12 seconds per Mystic slot; other existing spotlight timings preserved.
-Active from Oct 16 through Nov 14, 2026 (America/New_York), then automatically removed from rotation Nov 15.
-Entire Mystic slide links to https://www.whatismystic.com/
-To change campaign dates, edit mysticFeature start/end in index.html.
-Verify on mobile and desktop after publishing; check image loading and banner rotation.
-Please obtain permission to use Mystic marketing images before publishing.
+Replace ONLY index.html in the public frontend repository. Do not replace the image files.
+
+Plausible goals already created:
+- Featured Distillery Impression
+- Featured Distillery Click
+
+Custom properties sent: campaign=mystic-2026-oct; creative=bottles or barrel.
+Impression recorded when a Mystic slide is displayed and at least 50% of the banner is visible in the active tab; once per slide appearance. Click recorded on a Mystic slide.
+
+No changes to visuals, images, dates, rotation, links, or other site components.
+
+TEST: deploy, open site without content blocker, scroll banner into view and wait for Mystic; click Mystic; inspect Plausible Goals with Today selected. Data can take a short time to appear.
+
+NOTE: impressions are slide appearances, not unique visitors. Clicks and impressions are separate goals; do not sum them. Plausible can be blocked by browser privacy settings.

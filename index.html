@@ -490,6 +490,23 @@
       gray: "ABC Board Spotlight"
     };
 
+    // Plausible Featured Distillery analytics. Never blocks navigation or rotation.
+    const featuredCampaign = "mystic-2026-oct";
+    let featuredCurrent = null;
+    let featuredImpressionSent = false;
+    let featuredInViewport = false;
+    function sendFeaturedEvent(name, creative) {
+      if (typeof window.plausible !== "function") return;
+      try {
+        window.plausible(name, { props: { campaign: featuredCampaign, creative: creative } });
+      } catch (_) { /* Analytics must never interrupt the visitor. */ }
+    }
+    function maybeRecordFeaturedImpression() {
+      if (!featuredCurrent || featuredImpressionSent || document.hidden || !featuredInViewport) return;
+      featuredImpressionSent = true;
+      sendFeaturedEvent("Featured Distillery Impression", featuredCurrent);
+    }
+
     function updateBoardSpotlight(index) {
       const activeSpotlights = getActiveSpotlights();
       if (!activeSpotlights.length) return;
@@ -520,6 +537,10 @@
         title.textContent = item.board;
         text.textContent = `${item.headline} • ${item.note} • ${item.button}`;
         banner.classList.remove("is-changing");
+        featuredCurrent = item.style === "featured-distillery"
+          ? (item.photo && item.photo.includes("barrel") ? "barrel" : "bottles") : null;
+        featuredImpressionSent = false;
+        maybeRecordFeaturedImpression();
       }, 250);
     }
 
@@ -538,6 +559,29 @@
     });
 
     document.addEventListener("DOMContentLoaded", () => {
+      const featuredBanner = document.getElementById("boardSpotlightBanner");
+      if (featuredBanner && "IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(entries => {
+          featuredInViewport = entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.5);
+          maybeRecordFeaturedImpression();
+        }, { threshold: [0, 0.5, 1] });
+        observer.observe(featuredBanner);
+      } else if (featuredBanner) {
+        // Conservative fallback for older browsers.
+        const checkVisible = () => {
+          const rect = featuredBanner.getBoundingClientRect();
+          featuredInViewport = rect.height > 0 && rect.width > 0 &&
+            rect.top < window.innerHeight && rect.bottom > 0;
+          maybeRecordFeaturedImpression();
+        };
+        window.addEventListener("scroll", checkVisible, { passive: true });
+        window.addEventListener("resize", checkVisible);
+        checkVisible();
+      }
+      document.addEventListener("visibilitychange", maybeRecordFeaturedImpression);
+      featuredBanner?.addEventListener("click", () => {
+        if (featuredCurrent) sendFeaturedEvent("Featured Distillery Click", featuredCurrent);
+      });
       let spotlightIndex = 0;
       let spotlightTimer;
       let spotlightPaused = false;
