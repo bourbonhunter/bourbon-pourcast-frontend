@@ -122,6 +122,30 @@
       .board-spotlight-banner.agent-teaser::before { animation: none; }
     }
 
+
+    /* Featured Distillery: existing spotlight footprint, photographic treatment. */
+    .board-spotlight-banner.featured-distillery {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border: 2px solid #c89447;
+      background-color: #20140e;
+      background-image: linear-gradient(90deg, rgba(12,9,7,.82), rgba(12,9,7,.53), rgba(12,9,7,.76)), var(--distillery-photo);
+      background-size: cover;
+      background-position: center 52%;
+      box-shadow: 0 10px 28px rgba(0,0,0,.29);
+    }
+    .board-spotlight-banner.featured-distillery span,
+    .board-spotlight-banner.featured-distillery strong,
+    .board-spotlight-banner.featured-distillery small {
+      position: relative; z-index: 1;
+      text-shadow: 0 2px 7px rgba(0,0,0,.95);
+    }
+    .board-spotlight-banner.featured-distillery strong { color: #fff7df; font-size: clamp(1.15rem, 3.4vw, 1.65rem); }
+    .board-spotlight-banner.featured-distillery small { color: #fff5df; }
+    @media (max-width: 600px) {
+      .board-spotlight-banner.featured-distillery { background-position: center; }
+    }
   </style>
 </head>
 <body>
@@ -431,6 +455,34 @@
       }
     ];
 
+    // Complimentary Mystic feature: 30 days, two approved temporary photographs.
+    // Change dates or set active:false to stop. No changes to other spotlight content.
+    const mysticFeature = {
+      active: true,
+      start: "2026-10-16",
+      end: "2026-11-15", // exclusive end: 30 days from October 16
+      board: "Mystic Farm & Distillery",
+      style: "featured-distillery",
+      headline: "Discover North Carolina Craft Spirits",
+      note: "Meet Mystic's bourbon and distillery",
+      button: "Explore Mystic →",
+      url: "https://www.whatismystic.com/",
+      photos: ["images/mystic-feature-bottles.webp", "images/mystic-feature-barrel.webp"]
+    };
+
+    function getActiveSpotlights() {
+      const regular = boardSpotlights.filter(item => item.active !== false);
+      const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" });
+      if (!mysticFeature.active || today < mysticFeature.start || today >= mysticFeature.end) return regular;
+      // Alternate one Mystic slide with one existing slide: 50% of rotation.
+      const slides = [];
+      regular.forEach((item, index) => {
+        slides.push({ ...mysticFeature, photo: mysticFeature.photos[index % mysticFeature.photos.length] });
+        slides.push(item);
+      });
+      return slides;
+    }
+
     const spotlightStatusLabels = {
       blue: "Store-Level Inventory Available",
       green: "Allocation Activity Underway",
@@ -439,7 +491,7 @@
     };
 
     function updateBoardSpotlight(index) {
-      const activeSpotlights = boardSpotlights.filter(item => item.active !== false);
+      const activeSpotlights = getActiveSpotlights();
       if (!activeSpotlights.length) return;
 
       const item = activeSpotlights[index % activeSpotlights.length];
@@ -452,9 +504,15 @@
       banner.classList.add("is-changing");
       setTimeout(() => {
         banner.href = item.url;
+        banner.target = item.style === "featured-distillery" ? "_blank" : "_blank";
+        banner.setAttribute("aria-label", item.style === "featured-distillery" ? "Explore Mystic Farm and Distillery (opens in new tab)" : item.board);
         banner.classList.toggle("aim-launch", item.style === "aim-launch");
         banner.classList.toggle("agent-teaser", item.style === "agent-teaser");
-        kicker.textContent = item.style === "aim-launch"
+        banner.classList.toggle("featured-distillery", item.style === "featured-distillery");
+        banner.style.setProperty("--distillery-photo", item.photo ? `url("${item.photo}")` : "none");
+        kicker.textContent = item.style === "featured-distillery"
+          ? "Featured NC Distillery • Complimentary Spotlight"
+          : item.style === "aim-launch"
           ? "Bourbon Pourcast Spotlight • AIM™ Is Live"
           : item.style === "agent-teaser"
             ? "Bourbon Pourcast Spotlight • Something New Is Following The Trail"
@@ -481,16 +539,26 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       let spotlightIndex = 0;
+      let spotlightTimer;
+      let spotlightPaused = false;
+      const spotlightBanner = document.getElementById("boardSpotlightBanner");
+      ["mouseenter", "focusin", "touchstart"].forEach(type => spotlightBanner?.addEventListener(type, () => { spotlightPaused = true; }));
+      ["mouseleave", "focusout", "touchend", "touchcancel"].forEach(type => spotlightBanner?.addEventListener(type, () => { spotlightPaused = false; }));
 
       function rotateSpotlight() {
-        const activeSpotlights = boardSpotlights.filter(item => item.active !== false);
+        const activeSpotlights = getActiveSpotlights();
         if (!activeSpotlights.length) return;
 
         updateBoardSpotlight(spotlightIndex);
         const current = activeSpotlights[spotlightIndex % activeSpotlights.length];
-        const displayTime = current.style === "aim-launch" ? 9000 : current.style === "agent-teaser" ? 11000 : 7000;
+        const displayTime = current.style === "featured-distillery" ? 12000 : current.style === "aim-launch" ? 9000 : current.style === "agent-teaser" ? 11000 : 7000;
 
-        window.setTimeout(() => {
+        window.clearTimeout(spotlightTimer);
+        spotlightTimer = window.setTimeout(function advance() {
+          if (spotlightPaused || document.hidden) {
+            spotlightTimer = window.setTimeout(advance, 1000);
+            return;
+          }
           spotlightIndex += 1;
           rotateSpotlight();
         }, displayTime);

@@ -1,13 +1,15 @@
-Bourbon Pourcast – Drop Tracker Data Freshness UI Update
+MYSTIC FEATURED DISTILLERY — FRONTEND PATCH
 
-Deploy these three files to the ROOT of the frontend repo:
-- index.html
-- bp-test-app.js
-- bp-test-styles.css
+Upload the three files preserving paths to the PUBLIC frontend repo:
+ index.html
+ images/mystic-feature-bottles.webp
+ images/mystic-feature-barrel.webp
 
-Behavior:
-- Displays "AIM™ Data Current As Of" beside the Drop Tracker result count.
-- Uses the actual HTTP Last-Modified timestamp of drop_tracker.csv.
-- Formats the timestamp in America/New_York time.
-- Updates automatically whenever the public Drop Tracker CSV is synchronized.
-- Includes responsive desktop/mobile styling.
+Replaces index.html from frontend ZIP (24). No backend changes.
+Mystic occupies every other existing spotlight slot, alternating the two supplied images.
+12 seconds per Mystic slot; other existing spotlight timings preserved.
+Active from Oct 16 through Nov 14, 2026 (America/New_York), then automatically removed from rotation Nov 15.
+Entire Mystic slide links to https://www.whatismystic.com/
+To change campaign dates, edit mysticFeature start/end in index.html.
+Verify on mobile and desktop after publishing; check image loading and banner rotation.
+Please obtain permission to use Mystic marketing images before publishing.
