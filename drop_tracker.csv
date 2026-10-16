@@ -1,13 +1,13 @@
 ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,Source
-2026-10-15,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,51,aim_overdue_watch
-2026-10-15,,,"3320 Olympia Dr., Raleigh, NC 27603",,Wake County ABC,Expected,28,aim_overdue_watch
-2026-10-15,,,"7336 Creedmoor Rd., Raleigh, NC 27613",,Wake County ABC,Expected,51,aim_overdue_watch
-2026-10-16,,,"1793 West Williams St., Apex, NC 27502",,Wake County ABC,Expected,27,aim_overdue_watch
-2026-10-16,,,"3615 SW Cary Parkway, Cary, NC 27513",,Wake County ABC,Expected,22,aim_expected_window
-2026-10-16,,,"4009 Davis Dr., Morrisville, NC 27560",,Wake County ABC,Expected,35,aim_overdue_watch
-2026-10-16,,,"6809 Davis Circle, Raleigh, NC 27612",,Wake County ABC,Expected,22,aim_expected_window
-2026-10-16,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,48,aim_overdue_watch
-2026-10-21,,,"1940 Cinema Dr., Fuquay Varina, NC 27526",,Wake County ABC,Expected,28,aim_overdue_watch
+2026-10-16,,,"1793 West Williams St., Apex, NC 27502",,Wake County ABC,Expected,28,aim_overdue_watch
+2026-10-16,,,"4009 Davis Dr., Morrisville, NC 27560",,Wake County ABC,Expected,36,aim_overdue_watch
+2026-10-16,,,"6809 Davis Circle, Raleigh, NC 27612",,Wake County ABC,Expected,23,aim_expected_window
+2026-10-16,,,"704 Money Ct., Knightdale, NC 27545",,Wake County ABC,Expected,49,aim_overdue_watch
+2026-10-20,,,"1222 New Bern Ave., Raleigh, NC 27401",,Wake County ABC,Expected,31,aim_overdue_watch
+2026-10-21,,,"1940 Cinema Dr., Fuquay Varina, NC 27526",,Wake County ABC,Expected,29,aim_overdue_watch
+2026-10-22,,,"1420 N Ardendell Dr., Zebulon, NC 27597",,Wake County ABC,Expected,52,aim_overdue_watch
+2026-10-22,,,"3320 Olympia Dr., Raleigh, NC 27603",,Wake County ABC,Expected,29,aim_overdue_watch
+2026-10-22,,,"7336 Creedmoor Rd., Raleigh, NC 27613",,Wake County ABC,Expected,52,aim_overdue_watch
 ,2025-06-16,,"200 New Rand Road, Garner, NC 27529",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-22,,"1222 New Bern Ave., Raleigh, NC 27401",EAGLE RARE 10Y,Wake County ABC,Dropped,,legacy_drop_history
 ,2025-07-23,,"11360 Capital Blvd., Wake Forest, NC 27587",E.H. TAYLOR JR. SMALL BATCH,Wake County ABC,Dropped,,legacy_drop_history
@@ -1223,3 +1223,7 @@ ExpectedDate,AnnouncedDate,ConfirmedDate,Store,Brand,Board,Status,DaysSinceLast,
 2026-08-31,2026-10-12,,"200 New Rand Road, Garner, NC 27529",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
 2026-10-13,2026-10-13,,"11360 Capital Blvd., Wake Forest, NC 27587",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
 2026-08-27,2026-10-13,,"4215 The Circle at North Hills Rd, Raleigh, NC 27609",JACK DANIEL'S SINGLE BARREL HERITAGE,Wake County ABC,Dropped,,canonical_allocation_event
+,2026-10-14,,"3615 SW Cary Parkway , Cary, NC 27513",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
+,2026-10-14,,"3615 SW Cary Parkway , Cary, NC 27513",VERY OLD BARTON,Wake County ABC,Dropped,,canonical_allocation_event
+2026-10-02,2026-10-14,,"6494 Tryon Rd., Cary, NC 27511",BLADE BOW SOLERA RESERVE 12Y,Wake County ABC,Dropped,,canonical_allocation_event
+2026-10-02,2026-10-14,,"6494 Tryon Rd., Cary, NC 27511",OLD FITZGERALD 7Y BIB,Wake County ABC,Dropped,,canonical_allocation_event
