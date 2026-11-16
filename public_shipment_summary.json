@@ -1,13 +1,13 @@
 {
   "generated_on": "2026-11-16",
   "source": "Official NC ABC monthly shipment report",
-  "report_id": "ncabc_2026-09_september_2026_shipping",
-  "source_file": "September 2026 Shipping.xlsx",
-  "shipment_start": "2026-09-01",
-  "shipment_end": "2026-09-30",
-  "board_count": 170,
-  "product_count": 25,
-  "total_cases": 7063,
+  "report_id": "ncabc_2026-10_october_2026_shipping",
+  "source_file": "October 2026 Shipping.xlsx",
+  "shipment_start": "2026-10-01",
+  "shipment_end": "2026-10-27",
+  "board_count": 172,
+  "product_count": 20,
+  "total_cases": 8695,
   "top_products": [
     {
       "product": "BUFFALO TRACE BOURBON WHISKEY",
@@ -15,40 +15,41 @@
         "18366",
         "20611"
       ],
-      "cases": 3766,
-      "boards_receiving": 169
+      "cases": 3710,
+      "boards_receiving": 170
     },
     {
-      "product": "BOMBERGER'S",
+      "product": "EAGLE RARE",
       "product_nums": [
-        "20371"
+        "27169"
       ],
-      "cases": 340,
-      "boards_receiving": 155
+      "cases": 1813,
+      "boards_receiving": 171
     },
     {
-      "product": "ALL* Penelope Cigar Sessions Chapter 02 .75L",
+      "product": "BLANTON",
       "product_nums": [
-        "17164"
+        "27090"
       ],
-      "cases": 331,
-      "boards_receiving": 128
+      "cases": 732,
+      "boards_receiving": 171
     },
     {
-      "product": "ALL* Penelope Estate Collection Single Barrel .75L_2",
+      "product": "E.H. TAYLOR",
       "product_nums": [
-        "17167"
+        "20192",
+        "20581"
       ],
-      "cases": 323,
-      "boards_receiving": 123
+      "cases": 651,
+      "boards_receiving": 170
     },
     {
-      "product": "Penelope Estate Collection Private Select .75L_2",
+      "product": "ELIJAH CRAIG 18Y",
       "product_nums": [
-        "17166"
+        "20029"
       ],
-      "cases": 322,
-      "boards_receiving": 126
+      "cases": 482,
+      "boards_receiving": 163
     }
   ],
   "disclaimer": "Shipment evidence indicates cases sent to an ABC Board during the report window; it does not confirm current store-level shelf availability."
